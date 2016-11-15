@@ -6,9 +6,9 @@ url: https://www.luckycathome.com
 resume_site: http://www.hifreud.com/Resume.io/
 github: https://github.com/LuckyCat7848/
 baseurl: ""
-description: Everything is well!
+description: Everything is well !
 meta_description: 康志华;个人博客;学而不思则罔;思而不学则殆;生命不止;折腾不休
-motto: It's our wits that make us men.
+motto: Everything is well !
 banner: 学而不思则罔，思而不学则殆。
 
 #permalink: /:categories/:year/:month/:day/:title/
@@ -17,7 +17,7 @@ paginate: 10
 
 exclude: ['README.md', 'Gemfile.lock', 'Gemfile', 'Rakefile']
 
-github_username: luoyan35714
+github_username: LuckyCat7848
 highlighter: rouge
 
 # Build settings
@@ -27,7 +27,7 @@ FB:
   comments :
     provider : duoshuo
     duoshuo:
-        short_name : luoyan35714
+        short_name : LuckyCat7848
     disqus :
         short_name : LuckyCat
     # facebook :
