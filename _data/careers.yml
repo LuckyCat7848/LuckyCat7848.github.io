@@ -1,15 +1,15 @@
 
 - name:
-    detail: Netease Game
+    detail: Happy Network
     i18n: netease
   desc:
-    detail: In Netease game, I learned game service system and use Python code for ops.
+    detail: In Happy network, I learned Social contact service system and use Object-C code for iOS.
     i18n: netease_des
   date:
-    detail: Nov. 2014 -- Oct. 2016
+    detail: Oct. 2016
     i18n: nextcode_date
   job:
-    detail: Dev Ops
+    detail: Dev iOS
     i18n: netease_job
   icon: fa-gamepad
 
