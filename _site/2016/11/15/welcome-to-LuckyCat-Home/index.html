@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>使用jekyll在GitHub Pages上搭建个人博客</title>
+
+	<link rel="shortcut icon" href="/styles/images/favicon.jpg">
+	<link rel="icon" href="/styles/images/favicon.jpg">
+
+	<link rel="stylesheet" href="/styles/css/index.css">
+	<link rel="stylesheet" href="/styles/css/fontawesome/css/font-awesome.min.css">
+	<link rel="canonical" href="/2016/11/15/welcome-to-LuckyCat-Home/">
+	<link rel="alternate" type="application/rss+xml" title="LuckyCat's Blog" href="/feed.xml">
+	
+	<meta name="description" content="康志华;个人博客;学而不思则罔;思而不学则殆;生命不止;折腾不休">
+
+	<script src="/styles/js/jquery.min.js"></script>
+	<!--[if lt IE 9]>
+    	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  	<![endif]-->
+  	<script>
+		var _hmt = _hmt || [];
+		(function() {
+		  var hm = document.createElement("script");
+		  hm.src = "//hm.baidu.com/hm.js?94be4b0f9fc5d94cc0d0415ea6761ae9";
+		  var s = document.getElementsByTagName("script")[0]; 
+		  s.parentNode.insertBefore(hm, s);
+		})();
+	</script>
+  	<style type="text/css">
+	  	.docs-content{
+	  		margin-bottom: 10px;
+	  	}
+  	</style>
+</head>
+
+  <body class="index">
+
+    <header class="navbar navbar-inverse navbar-fixed-top docs-nav" role="banner">
+  <div class="container">
+    <div class="navbar-header">
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="/" class="navbar-brand">
+        <img src="/styles/images/logo.jpg">
+      </a>
+    </div>
+    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+      <ul class="nav navbar-nav">    
+        <li>
+          <a href="/">Home</a>
+        </li>
+        <li>
+          <a href="/categories/">大类分解</a>
+        </li>
+        <li>
+          <a href="/tag">小类内聚</a>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a href="/donate/"><strong>打赏</strong></a>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">关于<b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a rel="nofollow" target="_blank" href="https://github.com/LuckyCat7848/">Github</a></li>
+            <li><a rel="nofollow" target="_blank" href="http://www.hifreud.com/Resume.io/">关于作者</a></li>
+            <li><a rel="nofollow" href="/books">我的书单</a></li>
+            <li><a rel="nofollow" href="/reference">推荐博客</a></li>
+            <li><a href="/feed.xml">RSS订阅</a></li>
+            <li class="divider"></li>
+            <li><a rel="nofollow" target="_blank" href="https://github.com/luoyan35714/LessOrMore.git">本项目</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+    <div class="docs-header" id="content">
+  <div class="container">
+  	
+  		<!--
+		    <h1>使用jekyll在GitHub Pages上搭建个人博客</h1>
+		    <p>Post on Nov 15, 2016 by <a href="/about">LuckyCat</a></p>
+		-->
+		    <h1>Everything is well !</h1>
+    
+  </div>
+</div>
+    
+      
+<div class="banner">
+  <div class="container">
+  	
+    	<a href="/categories/#技术-ref">技术</a>	/
+    	<a href="/tag/#jekyll-ref">jekyll</a>
+    
+  </div>
+</div>
+
+    
+
+    <div class="container docs-container">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="sidebar hidden-print" role="complementary">
+        <div id="navigation">
+  <h1>目录</h1>
+  <ul class="nav sidenav">
+<!--
+    
+      
+      
+      
+      
+
+      
+        <li><a href="#year_2016">2016</a>
+          <ul class="nav">
+            <li><a href="#month_2016_November">November</a></li>
+      
+
+      
+            </ul>
+          </li>
+      
+    
+-->
+  </ul>
+</div> 
+      </div>
+    </div>
+    <div class="col-md-9" role="main">
+      <div class="panel docs-content">
+        <div class="wrapper">
+            <header class="post-header">
+              <h1 class="post-title">使用jekyll在GitHub Pages上搭建个人博客</h1>
+              <!--
+                <p class="post-meta">Nov 15, 2016</p>
+              -->
+              <div class="meta">Posted on <span class="postdate">Nov 15, 2016</span> By <a target="_blank" href="http://localhost:4000">LuckyCat</a></div>
+              <br />
+            </header>
+            <article class="post-content">
+              <ul id="markdown-toc">
+  <li><a href="#step-1-github" id="markdown-toc-step-1-github">Step 1. 服务器：GitHub</a></li>
+</ul>
+
+<ul>
+  <li>TOC</li>
+</ul>
+
+<table>
+  <tbody>
+    <tr>
+      <td>@[GitHub Pages</td>
+      <td>jekyll</td>
+      <td>独立域名</td>
+      <td>域名解析]</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>网上已经有足够多的相关介绍了，本人也是根据他人写的文章来做的。实践过程中发现很多文章都多少有些过时，提供的操作流程都是旧版网页的，以至于很多地方遇到障碍。还有，很多东西没有详细解释对于小白来说很是不懂。总之，磕磕绊绊的，在此整理下，希望对别人也能有所用处。</p>
+</blockquote>
+
+<blockquote>
+  <p>网上有很多搭建博客的方式，如果你不知道如何选择，可以看看<a href="http://www.slant.co/topics/329/~what-is-the-best-solution-for-a-personal-blog">《What are the best solutions for a personal blog?》</a>，文章分析了不同博客平台的优缺点和针对人群。最终，我的选择是Jekyll+Github Pages。</p>
+</blockquote>
+
+<hr />
+
+<p>[TOC]</p>
+
+<h2 id="step-1-github">Step 1. 服务器：GitHub</h2>
+
+<p>###1.1. 什么是 GitHub？
+在说GitHub之前，必须要提到Git。Git是分布式版本控制系统。GitHub可以托管各种Git版本库，并提供一个web界面。
+Github 就像是程序员们的Facebook，程序员们，写代码，做项目，在此和全世界的人们分享。
+会使用GitHub的资源，比会搭建个人博客的价值大得多。</p>
+
+<p>###1.2. 什么是GitHub Pages？</p>
+<blockquote>
+  <p>Website for you and your project.</p>
+</blockquote>
+
+<p>GitHub Pages有两种。一种是为个人或者组织的博客。一种是为项目的博客。前者一个账号只能建一个，后者，可以建很多个。
+这样的博客，免费、独立、安全。</p>
+
+<p>###1.3. 创建GitHub Pages博客</p>
+
+<ul>
+  <li>首先，注册 <a href="https://github.com/">Github</a></li>
+  <li>然后，建立一个仓库</li>
+</ul>
+
+<blockquote>
+  <p><strong>Repository name(仓库名)必须是 your_user_name.github.io</strong></p>
+</blockquote>
+
+<p>比如，我的GitHub用户名是LuckyCat7848，那么仓库名就取为 LuckyCat7848.github.io。这一点很重要，必须这么写！因为GitHub上的用户名是唯一的，所以上面说一个账号只能建一个个人博客。</p>
+
+<ul>
+  <li>然后，按照提示步骤操作</li>
+  <li>最后，新建一个index.html文件，push。</li>
+</ul>
+
+<p>打开终端，切换到本地GitHub目录下。（本人之前配置过，如果没有操作过的，自己找教程吧。）</p>
+
+<p>克隆GitHub上的这个Responsitory文件夹到本地：</p>
+
+<p>切换到该Responsitory下，并且创建一个只写着Hello World的.html文件：</p>
+
+<p>提交这些改动：</p>
+
+<p>官网上有命令行和客户端两种操作方式（<a href="https://pages.github.com/">官网教程</a>）。等一小会，网站生效，访问your_user_name.github.io，就能看见完整的网页了，此时网页上还只有一句Hello World。</p>
+
+<p>##Step 2. 安装jekyll</p>
+
+<p>###2.1. 什么是 jekyll？</p>
+<blockquote>
+  <p><a href="http://jekyllrb.com/">Jekyll</a> is a simple, blog-aware, static site generator.
+<a href="http://jekyllrb.com/">Jekyll</a> 是一个简单的博客形态的静态站点生产机器。</p>
+</blockquote>
+
+<p>解释一下，Jekyll可以将纯文本转换为静态博客网站。你整个网站的页面都是它生成的，从主页index到文章post。
+比如，文章怎么写？标准网页格式是扩展标记语言HTML。纯手写？未免太麻烦。大家，多偏爱Markdown。所以，就用它写。不过，你需要有一个能把你用Markdown格式写的文章，转化为HTML网页的东西，这里使用的就是静态网页生成器。</p>
+
+<p>###2.2. Jekyll目录</p>
+
+<p>解释一下整个jekyll的目录:
+为了之后不至于完全茫然，很值得先看一看，第一次看不懂没关系，用着用着就知道什么意思了。就像练习吉他和弦的转换，开始很难，可换着换着你就会了。</p>
+
+<p>这个很奇怪的结构是，文件目录树，_config.yml这样的代表一个文件，_drafts这样的代表一个文件夹，与它连接的文件，比如begin-with-the-crazy-ideas.textile，就在文件夹中。一开始，我没怎么看官方文档，嫌麻烦，不如直接开始干。结果是绕了不少弯路，修改主题的时候，找半天各个部分。</p>
+
+<p>先说需要了解的，其余以后依个人需求学习。</p>
+
+<blockquote>
+  <ul>
+    <li>_config.yml 是配置文件，你可以在里面配置你博客会用到的常量，比如博客名，邮件。</li>
+  </ul>
+</blockquote>
+
+<blockquote>
+  <ul>
+    <li>_includes：就是你文章各个部分的html文件，可以在布局中包含这些文件。</li>
+  </ul>
+</blockquote>
+
+<blockquote>
+  <ul>
+    <li>_layouts：存放模板。就是你网页的布局，主页布局，文章布局。当然不是指CSS那样的布局，是指，你包含哪些基本的内容到页面上。包含的内容就是includes里面的文件。</li>
+  </ul>
+</blockquote>
+
+<blockquote>
+  <ul>
+    <li>_posts: 存放博客文章。</li>
+  </ul>
+</blockquote>
+
+<blockquote>
+  <ul>
+    <li>index：博客主页。</li>
+  </ul>
+</blockquote>
+
+<blockquote>
+  <ul>
+    <li>CNAME文件：域名地址。</li>
+  </ul>
+</blockquote>
+
+<blockquote>
+  <ul>
+    <li>CSS：存放博客所用CSS。</li>
+  </ul>
+</blockquote>
+
+<blockquote>
+  <ul>
+    <li>JS: 存放博客所用JavaScript。</li>
+  </ul>
+</blockquote>
+
+<p>可以设置每个html文件的title(标题)和layout(布局)。比如index的layout一般是default。你也可以添加其他的页面，加上不同的layout。</p>
+
+<p>当你想定制博客的时候，以上目录就很有用了。</p>
+
+<p>###2.3. 安装Jekyll</p>
+
+<ul>
+  <li>安装Ruby，Mac一般默认安装了Ruby，这一步可以忽略。<a href="https://www.ruby-lang.org/zh_cn/downloads/">官网安装</a></li>
+  <li>安装Bundler，在Terminal中输入：</li>
+</ul>
+
+<blockquote>
+  <p><strong>sudo gem install bundler</strong></p>
+</blockquote>
+
+<p>如果出现以下error：（不好意思，图丢失了）
+使用命令行：</p>
+
+<blockquote>
+  <p><strong>sudo gem install -n /usr/local/bin bundler</strong></p>
+</blockquote>
+
+<ul>
+  <li>安装Jekyll：</li>
+</ul>
+
+<blockquote>
+  <p><strong>sudo gem install jekyll</strong></p>
+</blockquote>
+
+<p>如果出现以下error：（不好意思，图丢失了）</p>
+
+<p>使用命令行：</p>
+
+<blockquote>
+  <p><strong>sudo gem install -n /usr/local/bin jekyll</strong></p>
+</blockquote>
+
+<p>建议翻墙安装，墙内不知是否会出现问题。</p>
+
+<p>##Step 3. 装修博客</p>
+
+<p>###3.1. 如何选择和修改主题？</p>
+
+<ul>
+  <li>一种方式是使用他人写好的，免费开源的。
+    <blockquote>
+      <p><a href="http://jekyllthemes.org/">Jekyll 主题</a></p>
+    </blockquote>
+  </li>
+  <li>另一种是，你也可以自己写或修改，需要懂一些前端的知识。</li>
+</ul>
+
+<p>###3.2. 如何使用jekyll博客模板</p>
+
+<ul>
+  <li>首先，在<a href="http://jekyllthemes.org/">Jekyll 主题</a>找到喜欢的模板并下载下来。</li>
+  <li>
+    <p>在终端里切换到your_user_name.github.io目录下，把下载下来的<strong>文件下的全部内容</strong>转移到当前目录下，可以用命令行也可以直接到文件夹下操作，更方便。最终目录如下：</p>
+  </li>
+  <li>输入jekyll命令本地查看博客效果：</li>
+</ul>
+
+<blockquote>
+  <p><strong>jekyll serve –watch</strong></p>
+</blockquote>
+
+<p>该命令行输入后，jekyll运行起来，就可以在浏览器中输入“http://localhost:4000/”查看网页效果了，终端中按“Ctrl+C”停止运行该命令。</p>
+
+<p>此时，博客上的内容都不是自己的东西。在终端中终止运行jekyll后，编辑该目录下的_config.yml等文件就可以修改网页上的内容了，参考上述jekyll目录内容自己慢慢摸索即可。</p>
+
+<p>##Step 4. 独立域名</p>
+
+<p>###4.1. 购买独立域名</p>
+
+<ul>
+  <li>购买域名，著名的有<a href="https://uk.godaddy.com/">Godaddy</a>，支持支付宝。在网上可以搜到优惠码，优惠下来价格不高。</li>
+  <li>搜索自己想要的域名，购买时切记去搜索优惠码。
+结算的时候本人是用信用卡支付的，不同的优惠码优惠的产品和优惠多少和支持的支付方式不同，信用卡的话要用VISA全球卡。
+还有我遇到过结算的时候怎么都结算不了，也是因为优惠码的问题，多试几个就好了。</li>
+</ul>
+
+<p>###4.2. GitHub上的修改</p>
+
+<p>在终端中或GitHub上在your_user_name.github.io修改CNAME文件，在里面写入你刚刚买的域名，例如我的是“LuckyCatHome.com”。
+在终端改的话改完记得向上面那样操作，提交到GitHub上。</p>
+
+<p>###4.3. DnsPod域名解析
+<a href="https://www.dnspod.cn/">DnsPod</a>做域名解析处理可以加快博客的访问。</p>
+
+<ul>
+  <li>首先，注册DnsPods。</li>
+  <li>
+    <p>添加购买好的域名：</p>
+  </li>
+  <li>设置如下：</li>
+</ul>
+
+<blockquote>
+  <p>第2、3条是默认设置好的。
+第一条的记录值是“your_user_name.github.io.”，io后面还有一个.，有文章特注了，我也没有试过不写的后果，还是写上吧。
+最后两条的记录值是GitHub Pages的服务器地址。</p>
+</blockquote>
+
+<p>作用：</p>
+
+<blockquote>
+  <p>.com需要使用A记录进行域名解析。
+告诉所有DNS服务器，对于LuckyCat.com的访问都会被重定向到LuckyCat7848.github.io。</p>
+</blockquote>
+
+<p>###4.4. Godaddy设置NS</p>
+
+<ul>
+  <li>
+    <p>点击该域名箭头下的“Set Nameservers”</p>
+  </li>
+  <li>
+    <p>添加DnsPod的两个默认记录值，如下：</p>
+  </li>
+</ul>
+
+<p>稍等个10分钟左右，在浏览器里输入你的域名就可以看到博客内容啦！</p>
+
+<blockquote>
+  <p>不要忘记初衷，在折腾之后，表达写作，才是最重要的事情。</p>
+</blockquote>
+
+
+            </article>
+        </div>
+      </div>
+      <div class="panel docs-content">
+        <article class="post-content">
+          <div class="wrapper">
+            
+
+
+  <div class="ds-thread" data-thread-key="/2016/11/15/welcome-to-LuckyCat-Home/" data-title="使用jekyll在GitHub Pages上搭建个人博客" data-url="http://localhost:4000/2016/11/15/welcome-to-LuckyCat-Home/"></div>
+
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"LuckyCat7848"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+</script>
+
+
+ 
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+    <footer class="footer" role="contentinfo">
+	<div class="container">
+		<p class="copyright">Copyright &copy; 2014-2016 <a href="http://www.hifreud.com/Resume.io/"><code>LuckyCat</code></a>.</p>
+		<p>Powered by <a href="http://jekyllrb.com">Jekyll</a>, theme from <a href="http://lesscss.cn/">Less</a></p>
+	</div>
+</footer>
+
+<script src="/styles/js/jquery.min.js"></script>
+<script src="/styles/js/bootstrap.min.js"></script>
+<script src="/styles/js/holder.min.js"></script>
+<script src="/styles/js/application.js"></script>
+<script src="/styles/js/lessismore.js"></script>
+
+  </body>
+</html>
