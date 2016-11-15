@@ -1,9 +1,9 @@
 # Welcome to Jekyll!
 
 # Website settings
-title: "Jalpc"
+title: "LuckyCat"
 description: "Jack's blog,use Jekyll and github pages."
-keywords: "Jack,Jalpc,blog,Jekyll,github,gh-pages"
+keywords: "LuckyCat,blog,Jekyll,github,gh-pages"
 baseurl: "/"
 url: "https://www.luckycathome.com"
 # url: "http://127.0.0.1:4000"
@@ -13,11 +13,10 @@ author:
   name: 'LuckyCat'
   first_name: '张'
   last_name: '雅琼'
-  email: '1451558949@qq.com'
-  facebook_username: 'jiakunnj'
+  email: '17710167359@163.com'
   github_username: 'LuckyCat7848'
-  head_img: 'static/img/landing/Jack.jpg'
-  desc: 'I am a Full Stack engineer with website development, automation Ops and writing scripts experience. Life is a continuous learning process, so work makes me more rigorous, travel makes my life more colorful. I can make lots of friends when I coding and travel.'
+  head_img: 'static/img/landing/LuckyCat.jpg'
+  desc: 'I am a Full Stack engineer with iPhone APP development, automation Ops and writing scripts experience. Life is a continuous learning process, so work makes me more rigorous, travel makes my life more colorful. I can make lots of friends when I coding and travel.'
 
 # sections
 sections:
@@ -77,7 +76,7 @@ changyan:
   # appid: cysfY7ULn
   # conf: prod_861928934cecb7a18e15bedaed9dae29
 disqus:
-  name: jalpc
+  name: LuckyCat
   public_key: tj2MPaNlHMONwTH5bGDNSXyaBpW7q282MeUzh5CwcjJerNhK8Kxk3aWo7IckzTX7
 
 # share
