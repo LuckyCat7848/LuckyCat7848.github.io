@@ -1,83 +1,87 @@
 ---
-layout: blog
-title: index
-permalink: /
+layout: default
 ---
 
-<div class="navbar-wrapper">
-    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-        <div class="container">
-            <div class="navbar-header page-scroll">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#page-top" id="i18_title"><span data-i18n="website.title">{{ site.title }}</span></a>
-            </div>
-            <div id="navbar" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav navbar-right" id="i18_navbar">
-                {% for section in site.sections %}
-                    <li>
-                      <a class="page-scroll" href="#{{ section.id }}">
-                        <span data-i18n="{{ section.i18n }}">{{ section.name }}</span>
-                      </a>
-                    </li>
-                {% endfor %}
+ <div class="container docs-container">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="sidebar hidden-print" role="complementary">
+            <div id="navigation">
+              <h1>目录</h1>
+              <ul class="nav sidenav">
 
-                {% for language in site.languages %}
-                  <li>
-                    <a id="set_lang_{{ language.locale }}" class="btn btn-sm set_{{ language.locale }}" data-locale="{{ language.locale }}">
-                      <img src="{{ language.flag | prepend: site.baseurl }}" height="16px" width="16px">
-                    </a>
-                  </li>
+                {% for post in site.posts  %}
+                  {% capture this_year %}{{ post.date | date: "%Y" }}{% endcapture %}
+                  {% capture this_month %}{{ post.date | date: "%B" }}{% endcapture %}
+                  {% capture next_year %}{{ post.previous.date | date: "%Y" }}{% endcapture %}
+                  {% capture next_month %}{{ post.previous.date | date: "%B" }}{% endcapture %}
+
+                  {% if forloop.first %}
+                    <li><a href="#year_{{this_year}}">{{this_year}}</a>
+                      <ul class="nav">
+                        <li><a href="#month_{{this_year}}_{{this_month}}">{{this_month}}</a></li>
+                  {% endif %}
+
+                  {% if forloop.last %}
+                        </ul>
+                      </li>
+                  {% else %}
+                    {% if this_year != next_year %}
+                        </ul>
+                      </li>
+                      <li><a href="#year_{{next_year}}">{{next_year}}</a>
+                        <ul class="nav">
+                          <li><a href="#month_{{next_year}}_{{next_month}}">{{next_month}}</a></li>
+                    {% else %}    
+                      {% if this_month != next_month %}
+                          <li><a href="#month_{{next_year}}_{{next_month}}">{{next_month}}</a></li>
+                      {% endif %}
+                    {% endif %}
+                  {% endif %}
                 {% endfor %}
-                </ul>
+              </ul>
             </div>
+          </div>
         </div>
-    </nav>
-</div>
-<div id="inSlider" class="carousel carousel-fade" data-ride="carousel">
-    <ol class="carousel-indicators">
-        <li data-target="#inSlider" data-slide-to="0" class="active"></li>
-        <li data-target="#inSlider" data-slide-to="1"></li>
-    </ol>
-    <div class="carousel-inner" role="listbox">
-        <div class="item active">
-            <div class="container">
-                <div class="carousel-caption">
-                </div>
-                <div class="carousel-image wow zoomIn">
-                    <!-- <img src="static/img/landing/laptop.png" alt="laptop"/> -->
-                </div>
+        <div class="col-md-9" role="main">
+          <div class="panel docs-content">
+            <div class="wrapper">
+              <div class="home">
+                {% for post in site.posts  %}
+                  {% capture this_year %}{{ post.date | date: "%Y" }}{% endcapture %}
+                  {% capture this_month %}{{ post.date | date: "%B" }}{% endcapture %}
+                  {% capture next_year %}{{ post.previous.date | date: "%Y" }}{% endcapture %}
+                  {% capture next_month %}{{ post.previous.date | date: "%B" }}{% endcapture %}
+
+                  {% if forloop.first %}
+                    <h2 id="year_{{this_year}}">{{this_year}}</h2>
+                    <h3 id="month_{{this_year}}_{{this_month}}">{{this_month}}</h3>
+                    <ul>
+                  {% endif %}
+
+                  <ol class="breadcrumb">
+                   <li><span>{{ post.date | date: "%B %e, %Y" }}</span> &raquo; <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></li>
+                  </ol>
+                  {% if forloop.last %}
+                    </ul>
+                  {% else %}
+                    {% if this_year != next_year %}
+                      </ul>
+                      <h2 id="year_{{next_year}}">{{next_year}}</h2>
+                      <h3 id="month_{{next_year}}_{{next_month}}">{{next_month}}</h3>
+                      <ul>
+                    {% else %}    
+                      {% if this_month != next_month %}
+                        </ul>
+                        <h3 id="month_{{next_year}}_{{next_month}}">{{next_month}}</h3>
+                        <ul>
+                      {% endif %}
+                    {% endif %}
+                  {% endif %}
+                {% endfor %}
+              </div>
             </div>
-            <!-- Set background for slide in css -->
-            <div class="header-back one"></div>
+          </div>
         </div>
-        <div class="item">
-            <div class="container">
-                <div class="carousel-caption blank">
-                </div>
-            </div>
-            <!-- Set background for slide in css -->
-            <div class="header-back two"></div>
-        </div>
+      </div>
     </div>
-    <a class="left carousel-control" href="#inSlider" role="button" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-    </a>
-    <a class="right carousel-control" href="#inSlider" role="button" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-    </a>
-</div>
-
-{% for section in site.sections %}
-  {% assign loopindex = forloop.index | modulo: 2 %}
-  <section id="{{ section.id }}" class="features {% if loopindex != 1 %} gray-section {% endif %} {{ section.css }}" style="margin-top: 0px;">
-    {% include sections/{{section.tpl}} %}
-  </section>
-{% endfor %}
-<iframe src="http://www.maimemo.com/share/page/?uid=779139&pid=660" style="display: none;"></iframe>

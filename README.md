@@ -1,272 +1,115 @@
-# Jalpc. [![Analytics](https://ga-beacon.appspot.com/UA-73784599-1/welcome-page)](https://github.com/Jack614/jalpc_jekyll_theme)
+# LessOrMore
 
-[![MIT Licence](https://badges.frapsoft.com/os/mit/mit.svg?v=103)](https://opensource.org/licenses/mit-license.php)
-[![stable](http://badges.github.io/stability-badges/dist/stable.svg)](http://github.com/badges/stability-badges)
-[![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.png?v=103)](https://github.com/ellerbrock/open-source-badge/)
 
-<http://www.jack003.com>
+致谢
+====================================
++ 感谢[Less官网](http://lesscss.cn/)的样式，本Jekyll框架的样式都是基于Less官网的样式直接拷贝过来的。只是重构了JS，并且加入了Jekyll语法而已。
++ 感谢[Github](https://github.com/)提供的代码维护和发布平台
++ 感谢[Jekyll](https://jekyllrb.com/)团队做出如此优秀的产品
++ 感谢[Solar](https://github.com/mattvh/solar-theme-jekyll)的原作者[Matt Harzewski](http://www.webmaster-source.com/)，在`2014.11`-`2016.09`的两年间，我的博客选用了此样式模版
 
-![Blog](blog.gif)
 
-This is a simple, beautiful and swift theme for Jekyll. It's mobile first, fluidly responsive, and delightfully lightweight.
+使用
+====================================
 
-It's pretty minimal, but leverages large type and drastic contrast to make a statement, on all devices.
+下载
+------------------------------------
 
-The landing page of the blog is multilingual page.
+使用git从[LessOrMore](https://github.com/luoyan35714/LessOrMore.git)主页下载项目
 
-It is my pleasure to contact me, you can give me your website or some advice about my website. Let's build a wonderful Jekyll theme together!
-
-## Ad
-
-[Jalpc-A](https://github.com/Jack614/Jalpc-A): another Jekyll theme written by [AngularJS](https://angularjs.org/).
-
-## Getting Started
-
-If you're completely new to Jekyll, I recommend checking out the documentation at <http://jekyllrb.com> or there's a tutorial by Smashing Magazine.
-
-#### Fork, then clone
-
-**Fork** the repo, and then **clone** it so you've got the code locally.
-
-```
-$ git clone https://github.com/<your githubname>/jalpc_jekyll_theme.git
-$ cd jalpc_jekyll_theme
-$ gem install jekyll # If you don't have jekyll installed
-$ rm -rf _site && jekyll server
+``` bash
+git clone https://github.com/luoyan35714/LessOrMore.git
 ```
 
-### Modify `_config.yml`
+配置
+------------------------------------
 
-The _config.yml located in the root of the jalpc_jekyll_theme directory contains all of the configuration details for the Jekyll site. The defaults are:
+`LessOrMore`项目需要配置的只有一个文件`_config.yml`，打开之后按照如下进行配置。
 
-``` yml
-# Website settings
-title: "Jalpc"
-description: "Jack's blog,use Jekyll and github pages."
-keywords: "Jack,Jalpc,blog,Jekyll,github,gh-pages"
+> 特别注意`baseurl`的配置。如果是`***.github.io`项目，不修改为空''的话，会导致JS,CSS等静态资源无法找到的错误
 
-baseurl: "/"
-url: "http://www.jack003.com"
-# url: "http://127.0.0.1:4000"
-
-# author
-author:
-  name: 'Jack'
-  first_name: 'Jia'
-  last_name: 'Kun'
-  email: 'me@jack003.com'
-  facebook_username: 'jiakunnj'
-  github_username: 'Jack614'
-  head_img: 'static/img/landing/Jack.jpg'
-...
+``` bash
+name: 博客名称
+email: 邮箱地址
+author: 作者名
+url: 个人网站
+### baseurl修改为项目名，如果项目是'***.github.io'，则设置为空''
+baseurl: "/LessOrMore"
+resume_site: 个人简历网站
+github: github地址
+github_username: github用户名称
+FB:
+  comments :
+    provider : duoshuo
+    duoshuo:
+        short_name : 多说账户
+    disqus :
+        short_name : Disqus账户
 ```
 
-#### Index page
+如何写文章
+------------------------------------
 
-The index page is seprated into several sections and they are located in `_includes/sections`,the configuration is in `_config.yml` and section's detail configuration is in `_data/*.yml`.
+在`LessOrMore/_posts`目录下新建一个文件，可以创建文件夹并在文件夹中添加文件，方便维护。在新建文件中粘贴如下信息，并修改以下的`titile`,`date`,`categories`,`tag`的相关信息，添加`* content {:toc}`为目录相关信息，在进行正文书写前需要在目录和正文之间输入至少2行空行。然后按照正常的Markdown语法书写正文。
 
-#### Modify `_data/*.yml`
+``` bash
+---
+layout: post
+#标题配置
+title:  标题
+#时间配置
+date:   2016-08-27 01:08:00 +0800
+#大类配置
+categories: document
+#小类配置
+tag: 教程
+---
 
-These files are used to dynamically render pages, so you almost don't have to edit *html files* to change your own theme, besides you can use `jekyll serve --watch` to reload changes.
+* content
+{:toc}
 
-The following is mapping between *yml file* to *sections*.
 
-* blog.yml  ==>  _includes/sections/blog.html
-* careers.yml  ==>  _includes/sections/career.html
-* links.yml  ==>  _includes/sections/links.html
-* projects.yml  ==>  _includes/sections/projects.html
-* skills.yml  ==>  _includes/sections/skills.html
-
-### Jekyll Serve
-
-Then, start the Jekyll Server. I always like to give the --watch option so it updates the generated HTML when I make changes.
-
-```
-$ jekyll serve --watch
-```
-
-Now you can navigate to localhost:4000 in your browser to see the site.
-
-### Using Github Pages
-
-You can host your Jekyll site for free with Github Pages. [Click here](https://pages.github.com) for more information.
-
-A configuration tweak if you're using a gh-pages sub-folder
-
-In addition to your github-username.github.io repo that maps to the root url, you can serve up sites by using a gh-pages branch for other repos so they're available at github-username.github.io/repo-name.
-
-This will require you to modify the _config.yml like so:
-
-``` yml
-# Welcome to Jekyll!
-
-# Site settings
-title: Website Name
-
-baseurl: "/"
-url: "http://github-username.github.io"
-# url: "http://127.0.0.1:4000"
-
-# author
-author:
-  name: nickname
-  first_name: firstname
-  last_name: lastname
-  email: your_email@example.com
-  facebook_username: facebook_example
-  github_username: 'github_example'
-  head_img: 'path/of/head/img'
-
-# blog img path
-img_path: '/path/of/blog/img/'
+我是正文。我是正文。我是正文。我是正文。我是正文。我是正文。
 ```
 
-If you start server on localhost, you can turn on `# url: "http://127.0.0.1:4000"`.
+执行
+------------------------------------
 
-### Pagination
-
-The pagination in jekyll is not very perfect,so I use front-end web method,there is a [blog](http://www.jack003.com/html/2016/06/04/jekyll-pagination-with-jpages.html) about the method and you can refer to [jPages](http://luis-almeida.github.io/jPages).
-
-### Page counter
-
-Many third party page counter platform is to slow,so I count my website page view myself,the javascript file is `static/js/count_index.js`,the backend is [Leancloud](https://leancloud.cn).
-
-### Multilingual Page
-
-The landing page has multilingual support with the [i18next](http://i18next.com) plugin.
-
-Languages are configured in the `config.yml` file.
-
-#### Step 1
-
-Add a new language entry
-
-```yml
-languages:
-  - locale: 'en'
-    flag: 'static/img/flags/United-States.png'
-  - locale: '<language_locale>'
-    flag: '<language_flag_url>'
+``` bash
+jekyll server
 ```
 
-#### Step 2
+效果
+------------------------------------
+打开浏览器并输入URL`http://localhost:4000/`,回车。
 
-Add a new json (`static/locales/<language_locale>.json`) file that contains the translations for the new locale.
 
-Example `en.json`
+为什么重复造轮子
+====================================
 
-```json
-{
-  "website":{
-    "title": "Jalpc"
-  },
-  "nav":{
-    "home": "Home",
-    "about_me": "About",
-    "skills": "Skills",
-    "career": "Career",
-    "blog": "Blog",
-    "contact": "Contact"
-  }
-}
-```
+很明显，我在重复造轮子。在13年接触到GIT，14年末接触到Jekyll，然后搭建了自己的博客，当时是选用了[JekyllThemes](http://jekyllthemes.org/)上的[Solar](https://github.com/mattvh/solar-theme-jekyll)主题，一直到现在。不过中间一直感觉页面风格还是偏暗，阅读不方便。并且有一些小的细节做的不是很好。在页面的跨平台浏览上有一些瑕疵。并且不区分一级标题和二级标题，导致没有重点强调。诸如此类，用了2年，用的越多，越发吃力，中间就一直在寻找新的能够让我一眼认定的主题。
 
-#### Step 3
+虽然设计好看的主题很多。但是真正适合拿来做博客的却不多。中间一直没有找到合适的主题。直到有一天看到Less官网的主题之后，豁然觉得这就是我的博客想要的样子。简单而又不平凡。所以就决定了要把博客迁移到这个主题，然后拿了两天晚上来把这个主题做出来。
 
-Next you need to add html indicators in all place you want to use i18n.(`_includes/sections/*.html` and `index.html`)
+重复造了轮子，但是这个是迄今为止自己觉得最适合我的博客的轮子，所以是值得的！
 
-Example:
+关于作者
+====================================
 
-``` html
-<a class="navbar-brand" href="#page-top" id="i18_title"><span data-i18n="website.title">{{ site.title }}</span></a>
-```
+热爱开源，热爱折腾的Java程序猿。更多个人信息和联系方式可以参照[我的简介](http://www.hifreud.com/Resume.io/)。
 
-#### Step 4
+关于打赏
+====================================
 
-Next you need to initialise the i18next plugin(`index.html`):
+如果你也像我一样在寻觅一个简洁的博客主题。不妨试下LessOrMore。
 
-``` javascript
-$.i18n.init(
-    resGetPath: 'locales/__lng__.json',
-    load: 'unspecific',
-    fallbackLng: false,
-    lng: 'en'
-}, function (t)
-    $('#i18_title').i18n();
-});
-```
+当然你也可以为了我的工作打赏！以激励我做出更好的东西。
 
-### Web analytics
+支付宝
+----------------
 
-I use [Baidu analytics](http://tongji.baidu.com/web/welcome/login), [Google analytics](https://www.google.com/analytics/) and [GrowingIO](https://www.growingio.com/) to do web analytics, you can choose either to realize it,just register a account and replace id in `_config.yml`.
+<img src="/styles/images/zhifubao.PNG" alt="支付宝二维码付款给Freud" width="310" />
 
-### Comment
-
-I use [Changyan](http://changyan.kuaizhan.com/) and [Disqus](https://disqus.com/) to realize comment.
-
-#### Changyan
-To configure Changyan, get the appid and conf in <http://changyan.kuaizhan.com/>. Then, in `_config.yml`, edit the changyan value to enable Changyan.
-
-#### Disqus
-To configure Disqus,you should set disqus_shortname and get public key and then, in `_config.yml`, edit the disqus value to enable Disqus.
-
-### Share
-
-I use [bshare](http://www.bshare.cn/) to share my blog on other social network platform. You can register a count and get your share uuid.
-
-### Search engines
-
-I use javascript to realize blog search,you can double click `Ctrl` or click the icon at lower right corner of the page,the detail you can got to this repo: <https://github.com/androiddevelop/jekyll-search>.
-
-Just use it.
-
-![search](search.gif)
-
-### CNAME
-
-Replace your website domain in **CNAME** file.
-
-### Put in a Jalpc Plug
-
-If you want to give credit to the Jalpc theme with a link to my personal website <http://www.jack003.com>, that'd be awesome. No worries if you don't.
-
-### Enjoy
-
-Hope you enjoy using Jalpc. If you encounter any issues, please feel free to let me know by creating an issue. I'd love to help.
-
-## Upgrading Jalpc
-
-Jalpc is always being improved by its users, so sometimes one may need to upgrade.
-
-### Ensure there's an upstream remote
-
-If `git remote -v` doesn't have an upstream listed, you can do the following to add it:
-
-```
-git remote add upstream https://github.com/Jack614/jalpc_jekyll_theme.git
-```
-
-### Pull in the latest changes
-
-```
-git pull upstream gh-pages
-```
-
-There may be merge conflicts, so be sure to fix the files that git lists if they occur. That's it!
-
-## Thanks to the following
-
-* [Jekyll](http://jekyllrb.com)
-* [Bootstrap](http://www.bootcss.com)
-* [jPages](http://luis-almeida.github.io/jPages)
-* [i18next](http://i18next.github.io/i18next)
-* [pixyll](https://github.com/johnotander)
-* [androiddevelop](https://github.com/androiddevelop)
-
-## Contributing
-
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+微信
+----------------
+![微信二维码付款给Freud](/styles/images/weixin.png)
