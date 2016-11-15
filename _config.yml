@@ -13,6 +13,7 @@ banner: 学而不思则罔，思而不学则殆。
 
 #permalink: /:categories/:year/:month/:day/:title/
 permalink: /:year/:month/:day/:title/
+gems: [jekyll-paginate]
 paginate: 10
 
 exclude: ['README.md', 'Gemfile.lock', 'Gemfile', 'Rakefile']
@@ -23,9 +24,16 @@ highlighter: rouge
 # Build settings
 markdown: kramdown
 kramdown:
-  input:  GFM
-  use_coderay: true
+  input: GFM
+  extensions:
+    - autolink
+    - footnotes
+    - smart
+    - with_toc_data
+  enable_coderay: true
+  syntax_highlighter: rouge
   
+
 FB:
   comments :
     provider : duoshuo

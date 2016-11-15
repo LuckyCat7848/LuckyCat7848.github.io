@@ -150,23 +150,33 @@
             </header>
             <article class="post-content">
               <ul id="markdown-toc">
-  <li><a href="#step-1-github" id="markdown-toc-step-1-github">Step 1. 服务器：GitHub</a></li>
+  <li><a href="#step-1-github" id="markdown-toc-step-1-github">Step 1. 服务器：GitHub</a>    <ul>
+      <li><a href="#github" id="markdown-toc-github">1.1. 什么是 GitHub？</a></li>
+      <li><a href="#github-pages" id="markdown-toc-github-pages">1.2. 什么是GitHub Pages？</a></li>
+      <li><a href="#github-pages-1" id="markdown-toc-github-pages-1">1.3. 创建GitHub Pages博客</a></li>
+    </ul>
+  </li>
+  <li><a href="#step-2-jekyll" id="markdown-toc-step-2-jekyll">Step 2. 安装jekyll</a>    <ul>
+      <li><a href="#jekyll" id="markdown-toc-jekyll">2.1. 什么是 jekyll？</a></li>
+      <li><a href="#jekyll-1" id="markdown-toc-jekyll-1">2.2. Jekyll目录</a></li>
+      <li><a href="#jekyll-2" id="markdown-toc-jekyll-2">2.3. 安装Jekyll</a></li>
+    </ul>
+  </li>
+  <li><a href="#step-3-" id="markdown-toc-step-3-">Step 3. 装修博客</a>    <ul>
+      <li><a href="#section" id="markdown-toc-section">3.1. 如何选择和修改主题？</a></li>
+      <li><a href="#jekyll-3" id="markdown-toc-jekyll-3">3.2. 如何使用jekyll博客模板</a></li>
+    </ul>
+  </li>
+  <li><a href="#step-4-" id="markdown-toc-step-4-">Step 4. 独立域名</a>    <ul>
+      <li><a href="#section-1" id="markdown-toc-section-1">4.1. 购买独立域名</a></li>
+      <li><a href="#github-1" id="markdown-toc-github-1">4.2. GitHub上的修改</a></li>
+      <li><a href="#dnspod" id="markdown-toc-dnspod">4.3. DnsPod域名解析</a></li>
+      <li><a href="#godaddyns" id="markdown-toc-godaddyns">4.4. Godaddy设置NS</a></li>
+    </ul>
+  </li>
 </ul>
 
-<ul>
-  <li>TOC</li>
-</ul>
-
-<table>
-  <tbody>
-    <tr>
-      <td>@[GitHub Pages</td>
-      <td>jekyll</td>
-      <td>独立域名</td>
-      <td>域名解析]</td>
-    </tr>
-  </tbody>
-</table>
+<p><em>GitHub Pages</em> <em>jekyll</em> <em>独立域名</em> <em>域名解析</em></p>
 
 <blockquote>
   <p>网上已经有足够多的相关介绍了，本人也是根据他人写的文章来做的。实践过程中发现很多文章都多少有些过时，提供的操作流程都是旧版网页的，以至于很多地方遇到障碍。还有，很多东西没有详细解释对于小白来说很是不懂。总之，磕磕绊绊的，在此整理下，希望对别人也能有所用处。</p>
@@ -180,14 +190,16 @@
 
 <p>[TOC]</p>
 
-<h2 id="step-1-github">Step 1. 服务器：GitHub</h2>
+<h1 id="step-1-github">Step 1. 服务器：GitHub</h1>
 
-<p>###1.1. 什么是 GitHub？
-在说GitHub之前，必须要提到Git。Git是分布式版本控制系统。GitHub可以托管各种Git版本库，并提供一个web界面。
+<h2 id="github">1.1. 什么是 GitHub？</h2>
+
+<p>在说GitHub之前，必须要提到Git。Git是分布式版本控制系统。GitHub可以托管各种Git版本库，并提供一个web界面。
 Github 就像是程序员们的Facebook，程序员们，写代码，做项目，在此和全世界的人们分享。
 会使用GitHub的资源，比会搭建个人博客的价值大得多。</p>
 
-<p>###1.2. 什么是GitHub Pages？</p>
+<h2 id="github-pages">1.2. 什么是GitHub Pages？</h2>
+
 <blockquote>
   <p>Website for you and your project.</p>
 </blockquote>
@@ -195,7 +207,7 @@ Github 就像是程序员们的Facebook，程序员们，写代码，做项目�
 <p>GitHub Pages有两种。一种是为个人或者组织的博客。一种是为项目的博客。前者一个账号只能建一个，后者，可以建很多个。
 这样的博客，免费、独立、安全。</p>
 
-<p>###1.3. 创建GitHub Pages博客</p>
+<h2 id="github-pages-1">1.3. 创建GitHub Pages博客</h2>
 
 <ul>
   <li>首先，注册 <a href="https://github.com/">Github</a></li>
@@ -223,9 +235,10 @@ Github 就像是程序员们的Facebook，程序员们，写代码，做项目�
 
 <p>官网上有命令行和客户端两种操作方式（<a href="https://pages.github.com/">官网教程</a>）。等一小会，网站生效，访问your_user_name.github.io，就能看见完整的网页了，此时网页上还只有一句Hello World。</p>
 
-<p>##Step 2. 安装jekyll</p>
+<h1 id="step-2-jekyll">Step 2. 安装jekyll</h1>
 
-<p>###2.1. 什么是 jekyll？</p>
+<h2 id="jekyll">2.1. 什么是 jekyll？</h2>
+
 <blockquote>
   <p><a href="http://jekyllrb.com/">Jekyll</a> is a simple, blog-aware, static site generator.
 <a href="http://jekyllrb.com/">Jekyll</a> 是一个简单的博客形态的静态站点生产机器。</p>
@@ -234,7 +247,7 @@ Github 就像是程序员们的Facebook，程序员们，写代码，做项目�
 <p>解释一下，Jekyll可以将纯文本转换为静态博客网站。你整个网站的页面都是它生成的，从主页index到文章post。
 比如，文章怎么写？标准网页格式是扩展标记语言HTML。纯手写？未免太麻烦。大家，多偏爱Markdown。所以，就用它写。不过，你需要有一个能把你用Markdown格式写的文章，转化为HTML网页的东西，这里使用的就是静态网页生成器。</p>
 
-<p>###2.2. Jekyll目录</p>
+<h2 id="jekyll-1">2.2. Jekyll目录</h2>
 
 <p>解释一下整个jekyll的目录:
 为了之后不至于完全茫然，很值得先看一看，第一次看不懂没关系，用着用着就知道什么意思了。就像练习吉他和弦的转换，开始很难，可换着换着你就会了。</p>
@@ -246,47 +259,12 @@ Github 就像是程序员们的Facebook，程序员们，写代码，做项目�
 <blockquote>
   <ul>
     <li>_config.yml 是配置文件，你可以在里面配置你博客会用到的常量，比如博客名，邮件。</li>
-  </ul>
-</blockquote>
-
-<blockquote>
-  <ul>
     <li>_includes：就是你文章各个部分的html文件，可以在布局中包含这些文件。</li>
-  </ul>
-</blockquote>
-
-<blockquote>
-  <ul>
     <li>_layouts：存放模板。就是你网页的布局，主页布局，文章布局。当然不是指CSS那样的布局，是指，你包含哪些基本的内容到页面上。包含的内容就是includes里面的文件。</li>
-  </ul>
-</blockquote>
-
-<blockquote>
-  <ul>
     <li>_posts: 存放博客文章。</li>
-  </ul>
-</blockquote>
-
-<blockquote>
-  <ul>
     <li>index：博客主页。</li>
-  </ul>
-</blockquote>
-
-<blockquote>
-  <ul>
     <li>CNAME文件：域名地址。</li>
-  </ul>
-</blockquote>
-
-<blockquote>
-  <ul>
     <li>CSS：存放博客所用CSS。</li>
-  </ul>
-</blockquote>
-
-<blockquote>
-  <ul>
     <li>JS: 存放博客所用JavaScript。</li>
   </ul>
 </blockquote>
@@ -295,7 +273,7 @@ Github 就像是程序员们的Facebook，程序员们，写代码，做项目�
 
 <p>当你想定制博客的时候，以上目录就很有用了。</p>
 
-<p>###2.3. 安装Jekyll</p>
+<h2 id="jekyll-2">2.3. 安装Jekyll</h2>
 
 <ul>
   <li>安装Ruby，Mac一般默认安装了Ruby，这一步可以忽略。<a href="https://www.ruby-lang.org/zh_cn/downloads/">官网安装</a></li>
@@ -331,20 +309,21 @@ Github 就像是程序员们的Facebook，程序员们，写代码，做项目�
 
 <p>建议翻墙安装，墙内不知是否会出现问题。</p>
 
-<p>##Step 3. 装修博客</p>
+<h1 id="step-3-">Step 3. 装修博客</h1>
 
-<p>###3.1. 如何选择和修改主题？</p>
+<h2 id="section">3.1. 如何选择和修改主题？</h2>
 
 <ul>
-  <li>一种方式是使用他人写好的，免费开源的。
-    <blockquote>
-      <p><a href="http://jekyllthemes.org/">Jekyll 主题</a></p>
-    </blockquote>
+  <li>
+    <p>一种方式是使用他人写好的，免费开源的。
+&gt;<a href="http://jekyllthemes.org/">Jekyll 主题</a></p>
   </li>
-  <li>另一种是，你也可以自己写或修改，需要懂一些前端的知识。</li>
+  <li>
+    <p>另一种是，你也可以自己写或修改，需要懂一些前端的知识。</p>
+  </li>
 </ul>
 
-<p>###3.2. 如何使用jekyll博客模板</p>
+<h2 id="jekyll-3">3.2. 如何使用jekyll博客模板</h2>
 
 <ul>
   <li>首先，在<a href="http://jekyllthemes.org/">Jekyll 主题</a>找到喜欢的模板并下载下来。</li>
@@ -362,9 +341,9 @@ Github 就像是程序员们的Facebook，程序员们，写代码，做项目�
 
 <p>此时，博客上的内容都不是自己的东西。在终端中终止运行jekyll后，编辑该目录下的_config.yml等文件就可以修改网页上的内容了，参考上述jekyll目录内容自己慢慢摸索即可。</p>
 
-<p>##Step 4. 独立域名</p>
+<h1 id="step-4-">Step 4. 独立域名</h1>
 
-<p>###4.1. 购买独立域名</p>
+<h2 id="section-1">4.1. 购买独立域名</h2>
 
 <ul>
   <li>购买域名，著名的有<a href="https://uk.godaddy.com/">Godaddy</a>，支持支付宝。在网上可以搜到优惠码，优惠下来价格不高。</li>
@@ -373,13 +352,14 @@ Github 就像是程序员们的Facebook，程序员们，写代码，做项目�
 还有我遇到过结算的时候怎么都结算不了，也是因为优惠码的问题，多试几个就好了。</li>
 </ul>
 
-<p>###4.2. GitHub上的修改</p>
+<h2 id="github-1">4.2. GitHub上的修改</h2>
 
 <p>在终端中或GitHub上在your_user_name.github.io修改CNAME文件，在里面写入你刚刚买的域名，例如我的是“LuckyCatHome.com”。
 在终端改的话改完记得向上面那样操作，提交到GitHub上。</p>
 
-<p>###4.3. DnsPod域名解析
-<a href="https://www.dnspod.cn/">DnsPod</a>做域名解析处理可以加快博客的访问。</p>
+<h2 id="dnspod">4.3. DnsPod域名解析</h2>
+
+<p><a href="https://www.dnspod.cn/">DnsPod</a>做域名解析处理可以加快博客的访问。</p>
 
 <ul>
   <li>首先，注册DnsPods。</li>
@@ -402,7 +382,7 @@ Github 就像是程序员们的Facebook，程序员们，写代码，做项目�
 告诉所有DNS服务器，对于LuckyCat.com的访问都会被重定向到LuckyCat7848.github.io。</p>
 </blockquote>
 
-<p>###4.4. Godaddy设置NS</p>
+<h2 id="godaddyns">4.4. Godaddy设置NS</h2>
 
 <ul>
   <li>
