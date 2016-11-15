@@ -1,12 +1,12 @@
 # Site settings
-name: Less Or More
+name: LuckyCat's Blog
 email: 17710167359@163.com
-author: Freud Kang
+author: LuckyCat
 url: https://www.luckycathome.com
 resume_site: http://www.hifreud.com/Resume.io/
 github: https://github.com/LuckyCat7848/
 baseurl: ""
-description: Actually, less is more!
+description: Everything is well!
 meta_description: 康志华;个人博客;学而不思则罔;思而不学则殆;生命不止;折腾不休
 motto: It's our wits that make us men.
 banner: 学而不思则罔，思而不学则殆。
@@ -29,7 +29,7 @@ FB:
     duoshuo:
         short_name : luoyan35714
     disqus :
-        short_name : freudkang
+        short_name : LuckyCat
     # facebook :
     #   appid : 123
     #   num_posts: 5
