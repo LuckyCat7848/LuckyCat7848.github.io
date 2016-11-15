@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>LuckyCat</title>
-    <description>Jack's blog,use Jekyll and github pages.</description>
-    <link>http://localhost:4000//</link>
-    <atom:link href="http://localhost:4000//feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 15 Nov 2016 16:11:42 +0800</pubDate>
-    <lastBuildDate>Tue, 15 Nov 2016 16:11:42 +0800</lastBuildDate>
+    <title></title>
+    <description>Actually, less is more!</description>
+    <link>http://localhost:4000/LessOrMore/</link>
+    <atom:link href="http://localhost:4000/LessOrMore/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Tue, 15 Nov 2016 16:17:15 +0800</pubDate>
+    <lastBuildDate>Tue, 15 Nov 2016 16:17:15 +0800</lastBuildDate>
     <generator>Jekyll v3.3.0</generator>
     
       <item>
@@ -120,14 +120,14 @@ tag: 教程
 
 &lt;h2 id=&quot;section-10&quot;&gt;支付宝&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src=&quot;//styles/images/zhifubao.PNG&quot; alt=&quot;支付宝二维码付款给Freud&quot; width=&quot;310&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/LessOrMore/styles/images/zhifubao.PNG&quot; alt=&quot;支付宝二维码付款给Freud&quot; width=&quot;310&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;section-11&quot;&gt;微信&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&quot;//styles/images/weixin.png&quot; alt=&quot;微信二维码付款给Freud&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/LessOrMore/styles/images/weixin.png&quot; alt=&quot;微信二维码付款给Freud&quot; /&gt;&lt;/p&gt;
 </description>
         <pubDate>Sat, 27 Aug 2016 01:08:00 +0800</pubDate>
-        <link>http://localhost:4000//document/2016/08/27/how-to-use-this-jekyll-theme.html</link>
-        <guid isPermaLink="true">http://localhost:4000//document/2016/08/27/how-to-use-this-jekyll-theme.html</guid>
+        <link>http://localhost:4000/LessOrMore/2016/08/27/how-to-use-this-jekyll-theme/</link>
+        <guid isPermaLink="true">http://localhost:4000/LessOrMore/2016/08/27/how-to-use-this-jekyll-theme/</guid>
         
         <category>教程</category>
         
@@ -175,8 +175,8 @@ tag: 教程
 &lt;p&gt;深呼吸然后记住这只是一次谈话，面试官给你一个评价是很重要的，但是同样重要的是你也要给面试官一个评价，并且确认这是你想要工作的地方。&lt;/p&gt;
 </description>
         <pubDate>Sat, 20 Dec 2014 20:05:00 +0800</pubDate>
-        <link>http://localhost:4000//%E7%BF%BB%E8%AF%91%E6%96%87%E7%AB%A0/2014/12/20/I-ve-Interviewed-100s-of-Candidates-and-the-Ones-I-Hire-Always-Do-This.html</link>
-        <guid isPermaLink="true">http://localhost:4000//%E7%BF%BB%E8%AF%91%E6%96%87%E7%AB%A0/2014/12/20/I-ve-Interviewed-100s-of-Candidates-and-the-Ones-I-Hire-Always-Do-This.html</guid>
+        <link>http://localhost:4000/LessOrMore/2014/12/20/I-ve-Interviewed-100s-of-Candidates-and-the-Ones-I-Hire-Always-Do-This/</link>
+        <guid isPermaLink="true">http://localhost:4000/LessOrMore/2014/12/20/I-ve-Interviewed-100s-of-Candidates-and-the-Ones-I-Hire-Always-Do-This/</guid>
         
         <category>interview</category>
         
@@ -195,7 +195,7 @@ tag: 教程
 
 &lt;h2 id=&quot;section&quot;&gt;诫子书&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src=&quot;//styles/images/jiezishu.jpg&quot; alt=&quot;诫子书&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/LessOrMore/styles/images/jiezishu.jpg&quot; alt=&quot;诫子书&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;#&quot;&gt;诸葛亮&lt;/a&gt;&lt;/p&gt;
 
@@ -204,8 +204,8 @@ tag: 教程
 
 </description>
         <pubDate>Mon, 17 Nov 2014 13:31:01 +0800</pubDate>
-        <link>http://localhost:4000//jekyll/2014/11/17/welcome-to-jekyll.html</link>
-        <guid isPermaLink="true">http://localhost:4000//jekyll/2014/11/17/welcome-to-jekyll.html</guid>
+        <link>http://localhost:4000/LessOrMore/2014/11/17/welcome-to-jekyll/</link>
+        <guid isPermaLink="true">http://localhost:4000/LessOrMore/2014/11/17/welcome-to-jekyll/</guid>
         
         <category>jekyll</category>
         
