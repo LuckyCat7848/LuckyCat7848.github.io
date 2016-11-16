@@ -5,16 +5,68 @@
     <description>Everything is well !</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 16 Nov 2016 22:23:23 +0800</pubDate>
-    <lastBuildDate>Wed, 16 Nov 2016 22:23:23 +0800</lastBuildDate>
+    <pubDate>Wed, 16 Nov 2016 23:15:41 +0800</pubDate>
+    <lastBuildDate>Wed, 16 Nov 2016 23:15:41 +0800</lastBuildDate>
     <generator>Jekyll v3.3.0</generator>
     
       <item>
-        <title>jekyll配置有言评论插件</title>
+        <title>Xcode磁盘空间大清理</title>
+        <description>
+&lt;p&gt;&lt;strong&gt;1.移除对旧设备的支持&lt;/strong&gt;
+&lt;strong&gt;影响：&lt;/strong&gt;可重新生成；再连接旧设备调试时，会重新自动生成。我移除了4.3.2, 5.0, 5.1等版本的设备支持。
+&lt;strong&gt;路径：&lt;/strong&gt;~/Library/Developer/Xcode/iOS DeviceSupport
+&lt;strong&gt;释放空间：&lt;/strong&gt;3GB&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;2.移除旧版本的模拟器支持&lt;/strong&gt;
+&lt;strong&gt;影响：&lt;/strong&gt;不可恢复；如果需要旧版本的模拟器，就需要重新下载了。我移除了4.3.2, 5.0, 5.1等旧版本的模拟器。
+&lt;strong&gt;路径：&lt;/strong&gt;~/Library/Application Support/iPhone Simulator
+&lt;strong&gt;释放空间：&lt;/strong&gt;3GB&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;3.移除模拟器的临时文件&lt;/strong&gt;
+&lt;strong&gt;影响：&lt;/strong&gt;可重新生成；如果需要保留较新版本的模拟器，但tmp文件夹很大。放心删吧，tmp文件夹里的内容是不重要的。在iOS Device中，存储空间不足时，tmp文件夹是可能被清空的。
+&lt;strong&gt;路径：&lt;/strong&gt;~/Library/Application Support/iPhone Simulator/6.1/tmp (以iOS Simulator 6.1为例)
+&lt;strong&gt;释放空间：&lt;/strong&gt;2GB&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;4.移除模拟器中安装的Apps&lt;/strong&gt;
+&lt;strong&gt;影响：&lt;/strong&gt;不可恢复；对应的模拟器中安装的Apps被清空了，如果不需要就删了吧。
+&lt;strong&gt;路径：&lt;/strong&gt;~/Library/Application Support/iPhone Simulator/6.1/Applications (以iOS Simulator 6.1为例)
+&lt;strong&gt;释放空间：&lt;/strong&gt;1GB&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;5.移除Archives&lt;/strong&gt;
+&lt;strong&gt;影响：&lt;/strong&gt;不可恢复；Adhoc或者App Store版本会被删除。建议备份dSYM文件夹
+&lt;strong&gt;路径：&lt;/strong&gt;~/Library/Developer/Xcode/Archives
+&lt;strong&gt;释放空间：&lt;/strong&gt;6GB&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;6.移除DerivedData&lt;/strong&gt;
+&lt;strong&gt;影响：&lt;/strong&gt;可重新生成；会删除build生成的项目索引、build输出以及日志。重新打开项目时会重新生成，大的项目会耗费一些时间。
+&lt;strong&gt;路径：&lt;/strong&gt;~/Library/Developer/Xcode/DerivedData
+&lt;strong&gt;释放空间：&lt;/strong&gt;12GB&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;7.移除旧的Docsets&lt;/strong&gt;
+&lt;strong&gt;影响：&lt;/strong&gt;不可恢复；将删除旧的Docsets文档
+&lt;strong&gt;路径：&lt;/strong&gt;~/Library/Developer/Shared/Documentation/DocSets
+&lt;strong&gt;释放空间：&lt;/strong&gt;2GB&lt;/p&gt;
+
+&lt;p&gt;作者一共释放出了30GB左右的磁盘空间，这对128 GB的SSD来说可是不小的数字。如果你的磁盘空间不紧张，或者使用HDD，我建议不要进行这些操作。使用SSD的朋友酌情清理吧。&lt;/p&gt;
+
+</description>
+        <pubDate>Wed, 16 Nov 2016 23:11:25 +0800</pubDate>
+        <link>http://localhost:4000/2016/11/16/Xcode%E7%A3%81%E7%9B%98%E7%A9%BA%E9%97%B4%E5%A4%A7%E6%B8%85%E7%90%86/</link>
+        <guid isPermaLink="true">http://localhost:4000/2016/11/16/Xcode%E7%A3%81%E7%9B%98%E7%A9%BA%E9%97%B4%E5%A4%A7%E6%B8%85%E7%90%86/</guid>
+        
+        <category>MAC</category>
+        
+        
+        <category>实用技能</category>
+        
+      </item>
+    
+      <item>
+        <title>Jekyll配置有言评论插件</title>
         <description>
 &lt;p&gt;我的文件目录如下：&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/source/jekyll配置有言评论插件/01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/source/Jekyll配置有言评论插件/01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;首先在/_includes/LessOrMore/comments-providers/uyan存放友言的插件脚本。&lt;/p&gt;
 
@@ -67,10 +119,10 @@
 &lt;p&gt;不push本地预览的话可以查看页面效果但是不能评论，不是bug，push上去就可以了。&lt;/p&gt;
 </description>
         <pubDate>Wed, 16 Nov 2016 22:15:31 +0800</pubDate>
-        <link>http://localhost:4000/2016/11/16/jekyll%E9%85%8D%E7%BD%AE%E6%9C%89%E8%A8%80%E8%AF%84%E8%AE%BA%E6%8F%92%E4%BB%B6/</link>
-        <guid isPermaLink="true">http://localhost:4000/2016/11/16/jekyll%E9%85%8D%E7%BD%AE%E6%9C%89%E8%A8%80%E8%AF%84%E8%AE%BA%E6%8F%92%E4%BB%B6/</guid>
+        <link>http://localhost:4000/2016/11/16/Jekyll%E9%85%8D%E7%BD%AE%E6%9C%89%E8%A8%80%E8%AF%84%E8%AE%BA%E6%8F%92%E4%BB%B6/</link>
+        <guid isPermaLink="true">http://localhost:4000/2016/11/16/Jekyll%E9%85%8D%E7%BD%AE%E6%9C%89%E8%A8%80%E8%AF%84%E8%AE%BA%E6%8F%92%E4%BB%B6/</guid>
         
-        <category>jekyll</category>
+        <category>Jekyll</category>
         
         
         <category>技术</category>
@@ -164,7 +216,7 @@
       </item>
     
       <item>
-        <title>使用jekyll在GitHub Pages上搭建个人博客</title>
+        <title>使用Jekyll在GitHub Pages上搭建个人博客</title>
         <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#step-1-github&quot; id=&quot;markdown-toc-step-1-github&quot;&gt;Step 1. 服务器：GitHub&lt;/a&gt;    &lt;ul&gt;
       &lt;li&gt;&lt;a href=&quot;#github&quot; id=&quot;markdown-toc-github&quot;&gt;1.1. 什么是 GitHub？&lt;/a&gt;&lt;/li&gt;
@@ -172,15 +224,15 @@
       &lt;li&gt;&lt;a href=&quot;#github-pages-1&quot; id=&quot;markdown-toc-github-pages-1&quot;&gt;1.3. 创建GitHub Pages博客&lt;/a&gt;&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#step-2-jekyll&quot; id=&quot;markdown-toc-step-2-jekyll&quot;&gt;Step 2. 安装jekyll&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#jekyll&quot; id=&quot;markdown-toc-jekyll&quot;&gt;2.1. 什么是 jekyll？&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#step-2-jekyll&quot; id=&quot;markdown-toc-step-2-jekyll&quot;&gt;Step 2. 安装Jekyll&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#jekyll&quot; id=&quot;markdown-toc-jekyll&quot;&gt;2.1. 什么是 Jekyll？&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;a href=&quot;#jekyll-1&quot; id=&quot;markdown-toc-jekyll-1&quot;&gt;2.2. Jekyll目录&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;a href=&quot;#jekyll-2&quot; id=&quot;markdown-toc-jekyll-2&quot;&gt;2.3. 安装Jekyll&lt;/a&gt;&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#step-3-&quot; id=&quot;markdown-toc-step-3-&quot;&gt;Step 3. 装修博客&lt;/a&gt;    &lt;ul&gt;
       &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;3.1. 如何选择和修改主题？&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#jekyll-3&quot; id=&quot;markdown-toc-jekyll-3&quot;&gt;3.2. 如何使用jekyll博客模板&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#jekyll-3&quot; id=&quot;markdown-toc-jekyll-3&quot;&gt;3.2. 如何使用Jekyll博客模板&lt;/a&gt;&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#step-4-&quot; id=&quot;markdown-toc-step-4-&quot;&gt;Step 4. 独立域名&lt;/a&gt;    &lt;ul&gt;
@@ -197,7 +249,7 @@
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;em&gt;GitHub Pages&lt;/em&gt;  &lt;em&gt;jekyll&lt;/em&gt;  &lt;em&gt;独立域名&lt;/em&gt;  &lt;em&gt;域名解析&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;GitHub Pages&lt;/em&gt;  &lt;em&gt;Jekyll&lt;/em&gt;  &lt;em&gt;独立域名&lt;/em&gt;  &lt;em&gt;域名解析&lt;/em&gt;&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;网上已经有足够多的相关介绍了，本人也是根据他人写的文章来做的。实践过程中发现很多文章都多少有些过时，提供的操作流程都是旧版网页的，以至于很多地方遇到障碍。还有，很多东西没有详细解释对于小白来说很是不懂。总之，磕磕绊绊的，在此整理下，希望对别人也能有所用处。&lt;/p&gt;
@@ -236,7 +288,7 @@
   &lt;li&gt;然后，建立一个仓库&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&quot;/source/使用jekyll在GitHub Pages上搭建个人博客/GitHub Pages-01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/source/使用Jekyll在GitHub Pages上搭建个人博客/GitHub Pages-01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;&lt;strong&gt;Repository name(仓库名)必须是 your_user_name.github.io&lt;/strong&gt;&lt;/p&gt;
@@ -257,21 +309,21 @@
 
 &lt;p&gt;克隆GitHub上的这个Responsitory文件夹到本地：&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/source/使用jekyll在GitHub Pages上搭建个人博客/GitHub Pages-02.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/source/使用Jekyll在GitHub Pages上搭建个人博客/GitHub Pages-02.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;切换到该Responsitory下，并且创建一个只写着Hello World的.html文件：&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/source/使用jekyll在GitHub Pages上搭建个人博客/GitHub Pages-03.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/source/使用Jekyll在GitHub Pages上搭建个人博客/GitHub Pages-03.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;提交这些改动：&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/source/使用jekyll在GitHub Pages上搭建个人博客/GitHub Pages-04.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/source/使用Jekyll在GitHub Pages上搭建个人博客/GitHub Pages-04.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;官网上有命令行和客户端两种操作方式（&lt;a href=&quot;https://pages.github.com/&quot;&gt;官网教程&lt;/a&gt;）。等一小会，网站生效，访问your_user_name.github.io，就能看见完整的网页了，此时网页上还只有一句Hello World。&lt;/p&gt;
 
-&lt;h1 id=&quot;step-2-jekyll&quot;&gt;Step 2. 安装jekyll&lt;/h1&gt;
+&lt;h1 id=&quot;step-2-jekyll&quot;&gt;Step 2. 安装Jekyll&lt;/h1&gt;
 
-&lt;h2 id=&quot;jekyll&quot;&gt;2.1. 什么是 jekyll？&lt;/h2&gt;
+&lt;h2 id=&quot;jekyll&quot;&gt;2.1. 什么是 Jekyll？&lt;/h2&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;&lt;a href=&quot;http://jekyllrb.com/&quot;&gt;Jekyll&lt;/a&gt; is a simple, blog-aware, static site generator.&lt;/p&gt;
@@ -287,7 +339,7 @@
 
 &lt;h2 id=&quot;jekyll-1&quot;&gt;2.2. Jekyll目录&lt;/h2&gt;
 
-&lt;p&gt;解释一下整个jekyll的目录:
+&lt;p&gt;解释一下整个Jekyll的目录:
 为了之后不至于完全茫然，很值得先看一看，第一次看不懂没关系，用着用着就知道什么意思了。就像练习吉他和弦的转换，开始很难，可换着换着你就会了。&lt;/p&gt;
 
 &lt;p&gt;这个很奇怪的结构是，文件目录树，_config.yml这样的代表一个文件，_drafts这样的代表一个文件夹，与它连接的文件，比如begin-with-the-crazy-ideas.textile，就在文件夹中。一开始，我没怎么看官方文档，嫌麻烦，不如直接开始干。结果是绕了不少弯路，修改主题的时候，找半天各个部分。&lt;/p&gt;
@@ -364,7 +416,7 @@
   &lt;li&gt;另一种是，你也可以自己写或修改，需要懂一些前端的知识。&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;jekyll-3&quot;&gt;3.2. 如何使用jekyll博客模板&lt;/h2&gt;
+&lt;h2 id=&quot;jekyll-3&quot;&gt;3.2. 如何使用Jekyll博客模板&lt;/h2&gt;
 
 &lt;ul&gt;
   &lt;li&gt;首先，在&lt;a href=&quot;http://jekyllthemes.org/&quot;&gt;Jekyll 主题&lt;/a&gt;找到喜欢的模板并下载下来。&lt;/li&gt;
@@ -410,13 +462,13 @@
   &lt;li&gt;然后，添加购买好的域名：&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&quot;/source/使用jekyll在GitHub Pages上搭建个人博客/DnsPod-01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/source/使用Jekyll在GitHub Pages上搭建个人博客/DnsPod-01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;然后，设置如下：&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&quot;/source/使用jekyll在GitHub Pages上搭建个人博客/DnsPod-02.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/source/使用Jekyll在GitHub Pages上搭建个人博客/DnsPod-02.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;第2、3条是默认设置好的。&lt;/p&gt;
@@ -444,13 +496,13 @@
   &lt;li&gt;点击该域名箭头下的“Set Nameservers”：&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&quot;/source/使用jekyll在GitHub Pages上搭建个人博客/Godaddy-01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/source/使用Jekyll在GitHub Pages上搭建个人博客/Godaddy-01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;添加DnsPod的两个默认记录值，如下：&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&quot;/source/使用jekyll在GitHub Pages上搭建个人博客/Godaddy-02.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/source/使用Jekyll在GitHub Pages上搭建个人博客/Godaddy-02.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;稍等个10分钟左右，在浏览器里输入你的域名就可以看到博客内容啦！&lt;/p&gt;
 
@@ -468,18 +520,18 @@
 &lt;h2 id=&quot;section-3&quot;&gt;5.2. 使用“友言”&lt;/h2&gt;
 &lt;p&gt;在_config.yml文件中加上以下一段文字即可：&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/source/使用jekyll在GitHub Pages上搭建个人博客/UYan-01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/source/使用Jekyll在GitHub Pages上搭建个人博客/UYan-01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;使用&lt;a href=&quot;https://github.com/LuckyCat7848/LuckyCat7848.github.io&quot;&gt;该模板&lt;/a&gt;的话只需要在/_includes/LessOrMore/comments-providers/uyan文件中将uid改成你本人的友言uid即可。&lt;/p&gt;
 
-&lt;p&gt;如果不是使用该模板的话，可以参考&lt;a href=&quot;http://luckycathome.com/2016/11/16/jekyll%E9%85%8D%E7%BD%AE%E6%9C%89%E8%A8%80%E8%AF%84%E8%AE%BA%E6%8F%92%E4%BB%B6/&quot;&gt;jekyll配置有言评论插件&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;如果不是使用该模板的话，可以参考&lt;a href=&quot;http://luckycathome.com/2016/11/16/Jekyll%E9%85%8D%E7%BD%AE%E6%9C%89%E8%A8%80%E8%AF%84%E8%AE%BA%E6%8F%92%E4%BB%B6/&quot;&gt;Jekyll配置有言评论插件&lt;/a&gt;。&lt;/p&gt;
 
 </description>
         <pubDate>Tue, 15 Nov 2016 17:55:01 +0800</pubDate>
-        <link>http://localhost:4000/2016/11/15/%E4%BD%BF%E7%94%A8jekyll%E5%9C%A8GitHub-Pages%E4%B8%8A%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</link>
-        <guid isPermaLink="true">http://localhost:4000/2016/11/15/%E4%BD%BF%E7%94%A8jekyll%E5%9C%A8GitHub-Pages%E4%B8%8A%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</guid>
+        <link>http://localhost:4000/2016/11/15/%E4%BD%BF%E7%94%A8Jekyll%E5%9C%A8GitHub-Pages%E4%B8%8A%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</link>
+        <guid isPermaLink="true">http://localhost:4000/2016/11/15/%E4%BD%BF%E7%94%A8Jekyll%E5%9C%A8GitHub-Pages%E4%B8%8A%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</guid>
         
-        <category>jekyll</category>
+        <category>Jekyll</category>
         
         
         <category>技术</category>

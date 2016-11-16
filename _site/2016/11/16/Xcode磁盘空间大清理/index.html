@@ -5,14 +5,14 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>相关博客</title>
+	<title>Xcode磁盘空间大清理</title>
 
 	<link rel="shortcut icon" href="/styles/images/favicon.jpg">
 	<link rel="icon" href="/styles/images/favicon.jpg">
 
 	<link rel="stylesheet" href="/styles/css/index.css">
 	<link rel="stylesheet" href="/styles/css/fontawesome/css/font-awesome.min.css">
-	<link rel="canonical" href="/reference/">
+	<link rel="canonical" href="/2016/11/16/Xcode%E7%A3%81%E7%9B%98%E7%A9%BA%E9%97%B4%E5%A4%A7%E6%B8%85%E7%90%86/">
 	<link rel="alternate" type="application/rss+xml" title="LuckyCat's Blog" href="/feed.xml">
 	
 	<meta name="description" content="康志华;个人博客;学而不思则罔;思而不学则殆;生命不止;折腾不休">
@@ -87,8 +87,8 @@
   <div class="container">
   	
   		<!--
-		    <h1>相关博客</h1>
-		    <p>Post on  by <a href="/about">LuckyCat</a></p>
+		    <h1>Xcode磁盘空间大清理</h1>
+		    <p>Post on Nov 16, 2016 by <a href="/about">LuckyCat</a></p>
 		-->
 		    <h1>Everything is well !</h1>
     
@@ -99,7 +99,8 @@
 <div class="banner">
   <div class="container">
   	
-    	学而不思则罔，思而不学则殆。
+    	<a href="/categories/#实用技能-ref">实用技能</a>	/
+    	<a href="/tag/#MAC-ref">MAC</a>
     
   </div>
 </div>
@@ -179,79 +180,52 @@
       <div class="panel docs-content">
         <div class="wrapper">
             <header class="post-header">
-              <h1 class="post-title">相关博客</h1>
+              <h1 class="post-title">Xcode磁盘空间大清理</h1>
               <!--
-                <p class="post-meta"></p>
+                <p class="post-meta">Nov 16, 2016</p>
               -->
-              <div class="meta">Posted on <span class="postdate"></span> By <a target="_blank" href="http://localhost:4000">LuckyCat</a></div>
+              <div class="meta">Posted on <span class="postdate">Nov 16, 2016</span> By <a target="_blank" href="http://localhost:4000">LuckyCat</a></div>
               <br />
             </header>
             <article class="post-content">
-              <ul id="markdown-toc">
-  <li><a href="#section" id="markdown-toc-section">走向架构师之路</a></li>
-  <li><a href="#http" id="markdown-toc-http">HTTP协议详解</a></li>
-  <li><a href="#axis-20" id="markdown-toc-axis-20">Axis 2.0的入门</a></li>
-  <li><a href="#coder" id="markdown-toc-coder">高爽|Coder</a></li>
-  <li><a href="#section-1" id="markdown-toc-section-1">[一线码农]</a></li>
-  <li><a href="#section-2" id="markdown-toc-section-2">[通向架构师的道路]</a></li>
-  <li><a href="#section-3" id="markdown-toc-section-3">[冯立彬的博客]</a></li>
-  <li><a href="#section-4" id="markdown-toc-section-4">[汪海的实验室]</a></li>
-  <li><a href="#byvoid" id="markdown-toc-byvoid">[Byvoid]</a></li>
-  <li><a href="#rowen" id="markdown-toc-rowen">[rowen的专栏]</a></li>
-  <li><a href="#section-5" id="markdown-toc-section-5">[淘宝团队的博客]</a></li>
-  <li><a href="#axman" id="markdown-toc-axman">[axman]</a></li>
-  <li><a href="#section-6" id="markdown-toc-section-6">[旺仔专栏]</a></li>
-</ul>
+              
+<p><strong>1.移除对旧设备的支持</strong>
+<strong>影响：</strong>可重新生成；再连接旧设备调试时，会重新自动生成。我移除了4.3.2, 5.0, 5.1等版本的设备支持。
+<strong>路径：</strong>~/Library/Developer/Xcode/iOS DeviceSupport
+<strong>释放空间：</strong>3GB</p>
 
-<h1 id="section">走向架构师之路</h1>
-<p><a href="http://blog.csdn.net/cutesource/article/details/4901506">走向架构师之路</a></p>
+<p><strong>2.移除旧版本的模拟器支持</strong>
+<strong>影响：</strong>不可恢复；如果需要旧版本的模拟器，就需要重新下载了。我移除了4.3.2, 5.0, 5.1等旧版本的模拟器。
+<strong>路径：</strong>~/Library/Application Support/iPhone Simulator
+<strong>释放空间：</strong>3GB</p>
 
-<h1 id="http">HTTP协议详解</h1>
-<p><a href="http://www.jmarshall.com/easy/http/">HTTP协议详解</a></p>
+<p><strong>3.移除模拟器的临时文件</strong>
+<strong>影响：</strong>可重新生成；如果需要保留较新版本的模拟器，但tmp文件夹很大。放心删吧，tmp文件夹里的内容是不重要的。在iOS Device中，存储空间不足时，tmp文件夹是可能被清空的。
+<strong>路径：</strong>~/Library/Application Support/iPhone Simulator/6.1/tmp (以iOS Simulator 6.1为例)
+<strong>释放空间：</strong>2GB</p>
 
-<h1 id="axis-20">Axis 2.0的入门</h1>
-<p>[曹胜欢]<a href="http://blog.csdn.net/csh624366188/article/details/8362696">http://blog.csdn.net/csh624366188/article/details/8362696</a></p>
+<p><strong>4.移除模拟器中安装的Apps</strong>
+<strong>影响：</strong>不可恢复；对应的模拟器中安装的Apps被清空了，如果不需要就删了吧。
+<strong>路径：</strong>~/Library/Application Support/iPhone Simulator/6.1/Applications (以iOS Simulator 6.1为例)
+<strong>释放空间：</strong>1GB</p>
 
-<h1 id="coder">高爽|Coder</h1>
-<p>这个人的博客对java底层的东西研究比较深入。
-<a href="http://blog.csdn.net/ghsau/article/details/20395681">http://blog.csdn.net/ghsau/article/details/20395681</a></p>
+<p><strong>5.移除Archives</strong>
+<strong>影响：</strong>不可恢复；Adhoc或者App Store版本会被删除。建议备份dSYM文件夹
+<strong>路径：</strong>~/Library/Developer/Xcode/Archives
+<strong>释放空间：</strong>6GB</p>
 
-<h1 id="section-1">[一线码农]</h1>
-<p>算法入门和分布式缓存入门
-<a href="http://www.cnblogs.com/huangxincheng/archive/2011/11/14/2249046.html">http://www.cnblogs.com/huangxincheng/archive/2011/11/14/2249046.html</a></p>
+<p><strong>6.移除DerivedData</strong>
+<strong>影响：</strong>可重新生成；会删除build生成的项目索引、build输出以及日志。重新打开项目时会重新生成，大的项目会耗费一些时间。
+<strong>路径：</strong>~/Library/Developer/Xcode/DerivedData
+<strong>释放空间：</strong>12GB</p>
 
-<h1 id="section-2">[通向架构师的道路]</h1>
-<p>说实话没仔细看过这些博客，纯粹被标题吸引
-<a href="http://blog.csdn.net/lifetragedy">http://blog.csdn.net/lifetragedy</a>
-http://blog.csdn.net/lifetragedy</p>
+<p><strong>7.移除旧的Docsets</strong>
+<strong>影响：</strong>不可恢复；将删除旧的Docsets文档
+<strong>路径：</strong>~/Library/Developer/Shared/Documentation/DocSets
+<strong>释放空间：</strong>2GB</p>
 
-<h1 id="section-3">[冯立彬的博客]</h1>
-<p>话说这哥们是个大牛，以前看过一些文章。
-<a href="http://blog.csdn.net/fenglibing">http://blog.csdn.net/fenglibing</a></p>
+<p>作者一共释放出了30GB左右的磁盘空间，这对128 GB的SSD来说可是不小的数字。如果你的磁盘空间不紧张，或者使用HDD，我建议不要进行这些操作。使用SSD的朋友酌情清理吧。</p>
 
-<h1 id="section-4">[汪海的实验室]</h1>
-<p>一个14年毕业的学生，差距啊！
-<a href="http://blog.csdn.net/pleasecallmewhy/article/details/8923725">http://blog.csdn.net/pleasecallmewhy/article/details/8923725</a></p>
-
-<h1 id="byvoid">[Byvoid]</h1>
-<p>Linux中文输入法，node.js开发指南的原作者。14年大学本科清华毕业
-<a href="https://www.byvoid.com/">https://www.byvoid.com/</a></p>
-
-<h1 id="rowen">[rowen的专栏]</h1>
-<p>数据挖掘的基础入门
-<a href="http://blog.csdn.net/luowen3405/article/details/6331763">http://blog.csdn.net/luowen3405/article/details/6331763</a></p>
-
-<h1 id="section-5">[淘宝团队的博客]</h1>
-<p>淘宝团队的积累
-<a href="http://www.searchtb.com/">http://www.searchtb.com/</a></p>
-
-<h1 id="axman">[axman]</h1>
-<p>多线程相关写的比较好
-<a href="http://blog.csdn.net/axman/article/category/894625">http://blog.csdn.net/axman/article/category/894625</a></p>
-
-<h1 id="section-6">[旺仔专栏]</h1>
-<p>Windows下FFmpeg快速入门
-<a href="http://blog.csdn.net/hemingwang0902/article/details/4382429">http://blog.csdn.net/hemingwang0902/article/details/4382429</a></p>
 
             </article>
         </div>
