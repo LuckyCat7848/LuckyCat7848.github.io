@@ -50,7 +50,7 @@ GitHub Pages有两种。一种是为个人或者组织的博客。一种是为�
 - 首先，注册 [Github](https://github.com/)
 - 然后，建立一个仓库
 
-![]({{ '/source/使用Jekyll在GitHub Pages上搭建个人博客/GitHub Pages-01.png'}})
+![]({{ '/source/使用Jekyll在GitHub-Pages上搭建个人博客/GitHub Pages-01.png'}})
 
 >**Repository name(仓库名)必须是 your_user_name.github.io**
 
@@ -64,15 +64,15 @@ GitHub Pages有两种。一种是为个人或者组织的博客。一种是为�
 
 克隆GitHub上的这个Responsitory文件夹到本地：
 
-![]({{ '/source/使用Jekyll在GitHub Pages上搭建个人博客/GitHub Pages-02.png'}})
+![]({{ '/source/使用Jekyll在GitHub-Pages上搭建个人博客/GitHub Pages-02.png'}})
 
 切换到该Responsitory下，并且创建一个只写着Hello World的.html文件：
 
-![]({{ '/source/使用Jekyll在GitHub Pages上搭建个人博客/GitHub Pages-03.png'}})
+![]({{ '/source/使用Jekyll在GitHub-Pages上搭建个人博客/GitHub Pages-03.png'}})
 
 提交这些改动：
 
-![]({{ '/source/使用Jekyll在GitHub Pages上搭建个人博客/GitHub Pages-04.png'}})
+![]({{ '/source/使用Jekyll在GitHub-Pages上搭建个人博客/GitHub Pages-04.png'}})
 
 官网上有命令行和客户端两种操作方式（[官网教程](https://pages.github.com/)）。等一小会，网站生效，访问your_user_name.github.io，就能看见完整的网页了，此时网页上还只有一句Hello World。
 
@@ -199,11 +199,11 @@ Step 4. 独立域名
 - 首先，注册DnsPods。
 - 然后，添加购买好的域名：
 
-![]({{ '/source/使用Jekyll在GitHub Pages上搭建个人博客/DnsPod-01.png'}})
+![]({{ '/source/使用Jekyll在GitHub-Pages上搭建个人博客/DnsPod-01.png'}})
 
 - 然后，设置如下：
 
-![]({{ '/source/使用Jekyll在GitHub Pages上搭建个人博客/DnsPod-02.png'}})
+![]({{ '/source/使用Jekyll在GitHub-Pages上搭建个人博客/DnsPod-02.png'}})
 
 >第2、3条是默认设置好的。
 
@@ -222,11 +222,11 @@ Step 4. 独立域名
 
 - 点击该域名箭头下的“Set Nameservers”：
 
-![]({{ '/source/使用Jekyll在GitHub Pages上搭建个人博客/Godaddy-01.png'}})
+![]({{ '/source/使用Jekyll在GitHub-Pages上搭建个人博客/Godaddy-01.png'}})
 
 - 添加DnsPod的两个默认记录值，如下：
 
-![]({{ '/source/使用Jekyll在GitHub Pages上搭建个人博客/Godaddy-02.png'}})
+![]({{ '/source/使用Jekyll在GitHub-Pages上搭建个人博客/Godaddy-02.png'}})
 
 稍等个10分钟左右，在浏览器里输入你的域名就可以看到博客内容啦！
 
@@ -246,7 +246,7 @@ Step 5. 评论功能
 ------------------------------------
 在_config.yml文件中加上以下一段文字即可：
 
-![]({{ '/source/使用Jekyll在GitHub Pages上搭建个人博客/UYan-01.png'}})
+![]({{ '/source/使用Jekyll在GitHub-Pages上搭建个人博客/UYan-01.png'}})
 
 使用[该模板](https://github.com/LuckyCat7848/LuckyCat7848.github.io)的话只需要在/_includes/LessOrMore/comments-providers/uyan文件中将uid改成你本人的友言uid即可。
 
