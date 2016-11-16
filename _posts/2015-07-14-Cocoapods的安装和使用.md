@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  Cocoapods的安装和使用
-date:   2016-11-16 19:24:22 +0800
+date:   2015-07-14 19:24:22 +0800
 categories: 技术
 tag: 工具
 ---

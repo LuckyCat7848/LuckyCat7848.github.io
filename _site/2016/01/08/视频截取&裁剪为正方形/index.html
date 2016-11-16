@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Cocoapods的安装和使用</title>
+
+	<link rel="shortcut icon" href="/styles/images/favicon.jpg">
+	<link rel="icon" href="/styles/images/favicon.jpg">
+
+	<link rel="stylesheet" href="/styles/css/index.css">
+	<link rel="stylesheet" href="/styles/css/fontawesome/css/font-awesome.min.css">
+	<link rel="canonical" href="/2016/01/08/%E8%A7%86%E9%A2%91%E6%88%AA%E5%8F%96&%E8%A3%81%E5%89%AA%E4%B8%BA%E6%AD%A3%E6%96%B9%E5%BD%A2/">
+	<link rel="alternate" type="application/rss+xml" title="LuckyCat's Blog" href="/feed.xml">
+	
+	<meta name="description" content="康志华;个人博客;学而不思则罔;思而不学则殆;生命不止;折腾不休">
+
+	<script src="/styles/js/jquery.min.js"></script>
+	<!--[if lt IE 9]>
+    	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  	<![endif]-->
+  	<script>
+		var _hmt = _hmt || [];
+		(function() {
+		  var hm = document.createElement("script");
+		  hm.src = "//hm.baidu.com/hm.js?94be4b0f9fc5d94cc0d0415ea6761ae9";
+		  var s = document.getElementsByTagName("script")[0]; 
+		  s.parentNode.insertBefore(hm, s);
+		})();
+	</script>
+  	<style type="text/css">
+	  	.docs-content{
+	  		margin-bottom: 10px;
+	  	}
+  	</style>
+</head>
+
+  <body class="index">
+
+    <header class="navbar navbar-inverse navbar-fixed-top docs-nav" role="banner">
+  <div class="container">
+    <div class="navbar-header">
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="/" class="navbar-brand">
+        <img src="/styles/images/logo.jpg">
+      </a>
+    </div>
+    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+      <ul class="nav navbar-nav">    
+        <li>
+          <a href="/">Home</a>
+        </li>
+        <li>
+          <a href="/categories/">大类分解</a>
+        </li>
+        <li>
+          <a href="/tag">小类内聚</a>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a href="/donate/"><strong>打赏</strong></a>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">关于<b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a rel="nofollow" target="_blank" href="https://github.com/LuckyCat7848/">Github</a></li>
+            <li><a rel="nofollow" target="_blank" href="http://www.hifreud.com/Resume.io/">关于作者</a></li>
+            <li><a rel="nofollow" href="/books">我的书单</a></li>
+            <li><a rel="nofollow" href="/reference">推荐博客</a></li>
+            <li><a href="/feed.xml">RSS订阅</a></li>
+            <li class="divider"></li>
+            <li><a rel="nofollow" target="_blank" href="https://github.com/luoyan35714/LessOrMore.git">本项目</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+    <div class="docs-header" id="content">
+  <div class="container">
+  	
+  		<!--
+		    <h1>Cocoapods的安装和使用</h1>
+		    <p>Post on Jan 08, 2016 by <a href="/about">LuckyCat</a></p>
+		-->
+		    <h1>Everything is well !</h1>
+    
+  </div>
+</div>
+    
+      
+<div class="banner">
+  <div class="container">
+  	
+    	<a href="/categories/#技术-ref">技术</a>	/
+    	<a href="/tag/#Object-C-ref">Object-C</a>
+    
+  </div>
+</div>
+
+    
+
+    <div class="container docs-container">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="sidebar hidden-print" role="complementary">
+        <div id="navigation">
+  <h1>目录</h1>
+  <ul class="nav sidenav">
+<!--
+    
+      
+      
+      
+      
+
+      
+        <li><a href="#year_2016">2016</a>
+          <ul class="nav">
+            <li><a href="#month_2016_November">November</a></li>
+      
+
+      
+            
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+              <li><a href="#month_2016_September">September</a></li>
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+              <li><a href="#month_2016_February">February</a></li>
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+              <li><a href="#month_2016_January">January</a></li>
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+        
+            </ul>
+          </li>
+          <li><a href="#year_2015">2015</a>
+            <ul class="nav">
+              <li><a href="#month_2015_July">July</a></li>
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            </ul>
+          </li>
+      
+    
+-->
+  </ul>
+</div> 
+      </div>
+    </div>
+    <div class="col-md-9" role="main">
+      <div class="panel docs-content">
+        <div class="wrapper">
+            <header class="post-header">
+              <h1 class="post-title">Cocoapods的安装和使用</h1>
+              <!--
+                <p class="post-meta">Jan 8, 2016</p>
+              -->
+              <div class="meta">Posted on <span class="postdate">Jan 08, 2016</span> By <a target="_blank" href="http://localhost:4000">LuckyCat</a></div>
+              <br />
+            </header>
+            <article class="post-content">
+              
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c">#import &lt;AVFoundation/AVFoundation.h&gt;</span>
+<span class="c">#import &lt;MobileCoreServices/MobileCoreServices.h&gt;</span>
+<span class="c">#import "CJShortMovieCache.h"</span>
+
+<span class="o">//</span> <span class="err">调用本地相册选取视频（用系统方法截取视频长度）</span>
+<span class="k">if</span> <span class="p">(</span><span class="err">!</span><span class="p">[</span><span class="n">UIImagePickerController</span> <span class="n">isSourceTypeAvailable</span><span class="p">:</span><span class="n">UIImagePickerControllerSourceTypeSavedPhotosAlbum</span><span class="p">])</span>
+            <span class="p">{</span>
+                <span class="k">if</span> <span class="p">([[[</span><span class="n">UIDevice</span> <span class="n">currentDevice</span><span class="p">]</span> <span class="n">systemVersion</span><span class="p">]</span> <span class="n">floatValue</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mf">8.0</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="n">UIAlertView</span> <span class="o">*</span><span class="n">alertView</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UIAlertView</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">initWithTitle</span><span class="p">:</span><span class="err">@</span><span class="s">""</span> <span class="n">message</span><span class="p">:</span><span class="err">@</span><span class="s">"请在“设置-隐私-照片”选项中允许烈火访问你的照片"</span> <span class="n">delegate</span><span class="p">:</span><span class="bp">self</span> <span class="n">cancelButtonTitle</span><span class="p">:</span><span class="err">@</span><span class="s">"确定"</span> <span class="n">otherButtonTitles</span><span class="p">:</span><span class="n">nil</span><span class="p">];</span>
+                    <span class="n">alertView</span><span class="o">.</span><span class="n">delegate</span> <span class="o">=</span> <span class="bp">self</span><span class="p">;</span>
+                    <span class="p">[</span><span class="n">alertView</span> <span class="n">show</span><span class="p">];</span>
+
+                <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                    <span class="n">UIAlertController</span> <span class="o">*</span><span class="n">alertController</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIAlertController</span> <span class="n">alertControllerWithTitle</span><span class="p">:</span><span class="err">@</span><span class="s">""</span> <span class="n">message</span><span class="p">:</span><span class="err">@</span><span class="s">"请在“设置-隐私-照片”选项中允许烈火访问你的照片"</span> <span class="n">preferredStyle</span><span class="p">:</span><span class="n">UIAlertControllerStyleAlert</span><span class="p">];</span>
+                    <span class="n">UIAlertAction</span> <span class="o">*</span><span class="n">cancelAction</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIAlertAction</span> <span class="n">actionWithTitle</span><span class="p">:</span><span class="err">@</span><span class="s">"确定"</span> <span class="n">style</span><span class="p">:</span><span class="n">UIAlertActionStyleCancel</span> <span class="n">handler</span><span class="p">:</span><span class="n">nil</span><span class="p">];</span>
+                    <span class="p">[</span><span class="n">alertController</span> <span class="n">addAction</span><span class="p">:</span><span class="n">cancelAction</span><span class="p">];</span>
+                    <span class="p">[</span><span class="bp">self</span> <span class="n">presentViewController</span><span class="p">:</span><span class="n">alertController</span> <span class="n">animated</span><span class="p">:</span><span class="n">YES</span> <span class="n">completion</span><span class="p">:</span><span class="n">nil</span><span class="p">];</span>
+                <span class="p">}</span>
+                <span class="k">return</span> <span class="p">;</span>
+            <span class="p">}</span>
+            <span class="n">UIImagePickerController</span> <span class="o">*</span><span class="n">myImagePickerController</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UIImagePickerController</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
+            <span class="n">myImagePickerController</span><span class="o">.</span><span class="n">sourceType</span> <span class="o">=</span>  <span class="n">UIImagePickerControllerSourceTypeSavedPhotosAlbum</span><span class="p">;</span>
+            <span class="n">myImagePickerController</span><span class="o">.</span><span class="n">mediaTypes</span> <span class="o">=</span> <span class="p">[[</span><span class="n">NSArray</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">initWithObjects</span><span class="p">:(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="n">kUTTypeMovie</span><span class="p">,</span> <span class="n">nil</span><span class="p">];</span>
+            <span class="n">myImagePickerController</span><span class="o">.</span><span class="n">delegate</span> <span class="o">=</span> <span class="n">weakSelf</span><span class="p">;</span>
+            <span class="n">myImagePickerController</span><span class="o">.</span><span class="n">allowsEditing</span> <span class="o">=</span> <span class="n">YES</span><span class="p">;</span>
+            <span class="n">myImagePickerController</span><span class="o">.</span><span class="n">videoMaximumDuration</span> <span class="o">=</span> <span class="mi">12</span><span class="p">;</span>
+            <span class="n">myImagePickerController</span><span class="o">.</span><span class="n">videoQuality</span> <span class="o">=</span> <span class="n">UIImagePickerControllerQualityTypeMedium</span><span class="p">;</span>
+            <span class="p">[</span><span class="n">weakSelf</span> <span class="n">presentViewController</span><span class="p">:</span><span class="n">myImagePickerController</span> <span class="n">animated</span><span class="p">:</span><span class="n">YES</span> <span class="n">completion</span><span class="p">:</span><span class="n">nil</span><span class="p">];</span>
+
+<span class="c">#pragma mark - UIImagePickerControllerDelegate</span>
+<span class="o">-</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="n">imagePickerController</span><span class="p">:(</span><span class="n">UIImagePickerController</span> <span class="o">*</span><span class="p">)</span><span class="n">picker</span> <span class="n">didFinishPickingMediaWithInfo</span><span class="p">:(</span><span class="n">NSDictionary</span> <span class="o">*</span><span class="p">)</span><span class="n">info</span>
+<span class="p">{</span>
+    <span class="p">[</span><span class="n">picker</span> <span class="n">dismissViewControllerAnimated</span><span class="p">:</span><span class="n">YES</span> <span class="n">completion</span><span class="p">:</span><span class="n">nil</span><span class="p">];</span>
+
+    <span class="o">//</span> <span class="err">获取到视频</span><span class="p">(</span><span class="err">截取后的视频已自动保存到</span><span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="err">路径下</span><span class="p">,</span><span class="err">裁剪为正方形</span><span class="p">,</span><span class="err">转移到所有视频下的位置</span><span class="p">)</span>
+    <span class="n">NSURL</span> <span class="o">*</span><span class="n">trimUrl</span> <span class="o">=</span> <span class="p">[</span><span class="n">info</span> <span class="n">objectForKey</span><span class="p">:</span><span class="n">UIImagePickerControllerMediaURL</span><span class="p">];</span>
+
+    <span class="o">//</span> <span class="err">裁剪视频</span>
+    <span class="p">[</span><span class="bp">self</span> <span class="n">cutVideoWithFileUrl</span><span class="p">:</span><span class="n">trimUrl</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="o">-</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="n">cutVideoWithFileUrl</span><span class="p">:(</span><span class="n">NSURL</span> <span class="o">*</span><span class="p">)</span><span class="n">fileUrl</span>
+<span class="p">{</span>
+    <span class="o">//</span> <span class="err">先取</span><span class="n">assetTrack</span><span class="err">，为了取</span><span class="n">naturalSize</span>
+    <span class="n">NSMutableArray</span> <span class="o">*</span><span class="n">assetTrackArray</span> <span class="o">=</span> <span class="p">[[</span><span class="n">NSMutableArray</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
+    <span class="n">AVAsset</span> <span class="o">*</span><span class="n">asset</span> <span class="o">=</span> <span class="p">[</span><span class="n">AVAsset</span> <span class="n">assetWithURL</span><span class="p">:</span><span class="n">fileUrl</span><span class="p">];</span>
+
+    <span class="n">AVAssetTrack</span> <span class="o">*</span><span class="n">assetTrack</span> <span class="o">=</span> <span class="p">[[</span><span class="n">asset</span> <span class="n">tracksWithMediaType</span><span class="p">:</span><span class="n">AVMediaTypeVideo</span><span class="p">]</span> <span class="n">objectAtIndex</span><span class="p">:</span><span class="mi">0</span><span class="p">];</span>
+    <span class="p">[</span><span class="n">assetTrackArray</span> <span class="n">addObject</span><span class="p">:</span><span class="n">assetTrack</span><span class="p">];</span>
+
+    <span class="n">CGFloat</span> <span class="n">renderW</span> <span class="o">=</span> <span class="n">MIN</span><span class="p">(</span><span class="n">assetTrack</span><span class="o">.</span><span class="n">naturalSize</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="n">assetTrack</span><span class="o">.</span><span class="n">naturalSize</span><span class="o">.</span><span class="n">height</span><span class="p">);</span>
+
+    <span class="o">//</span> <span class="err">裁剪为正方形</span>
+    <span class="n">NSLog</span><span class="p">(</span><span class="err">@</span><span class="s">"🍎assetTrack.naturalSize：</span><span class="si">%.0</span><span class="s">f  </span><span class="si">%.0</span><span class="s">f</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">assetTrack</span><span class="o">.</span><span class="n">naturalSize</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="n">assetTrack</span><span class="o">.</span><span class="n">naturalSize</span><span class="o">.</span><span class="n">height</span><span class="p">);</span>
+
+    <span class="n">CGAffineTransform</span> <span class="n">layerTransform</span> <span class="o">=</span> <span class="n">assetTrack</span><span class="o">.</span><span class="n">preferredTransform</span><span class="p">;</span>
+    <span class="n">NSLog</span><span class="p">(</span><span class="err">@</span><span class="s">"🍎调整前: </span><span class="si">%</span><span class="s">f  </span><span class="si">%</span><span class="s">f  </span><span class="si">%</span><span class="s">f  </span><span class="si">%</span><span class="s">f"</span><span class="p">,</span> <span class="n">layerTransform</span><span class="o">.</span><span class="n">a</span><span class="p">,</span> <span class="n">layerTransform</span><span class="o">.</span><span class="n">b</span><span class="p">,</span> <span class="n">layerTransform</span><span class="o">.</span><span class="n">c</span><span class="p">,</span> <span class="n">layerTransform</span><span class="o">.</span><span class="n">d</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">assetTrack</span><span class="o">.</span><span class="n">naturalSize</span><span class="o">.</span><span class="n">width</span> <span class="o">!=</span> <span class="n">assetTrack</span><span class="o">.</span><span class="n">naturalSize</span><span class="o">.</span><span class="n">height</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nb">float</span> <span class="n">differ</span> <span class="o">=</span> <span class="n">MAX</span><span class="p">(</span><span class="n">assetTrack</span><span class="o">.</span><span class="n">naturalSize</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="n">assetTrack</span><span class="o">.</span><span class="n">naturalSize</span><span class="o">.</span><span class="n">height</span><span class="p">)</span> <span class="o">-</span> <span class="n">MIN</span><span class="p">(</span><span class="n">assetTrack</span><span class="o">.</span><span class="n">naturalSize</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="n">assetTrack</span><span class="o">.</span><span class="n">naturalSize</span><span class="o">.</span><span class="n">height</span><span class="p">);</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">layerTransform</span><span class="o">.</span><span class="n">a</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">layerTransform</span><span class="o">.</span><span class="n">b</span> <span class="o">==</span> <span class="mf">1.0</span> <span class="o">&amp;&amp;</span> <span class="n">layerTransform</span><span class="o">.</span><span class="n">c</span> <span class="o">==</span> <span class="o">-</span><span class="mf">1.0</span> <span class="o">&amp;&amp;</span> <span class="n">layerTransform</span><span class="o">.</span><span class="n">d</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="o">//</span> <span class="n">Portrait</span>  <span class="mi">90</span><span class="p">;</span> <span class="err">宽</span><span class="o">&lt;</span><span class="err">高</span>
+            <span class="n">layerTransform</span> <span class="o">=</span> <span class="n">CGAffineTransformMake</span><span class="p">(</span><span class="n">assetTrack</span><span class="o">.</span><span class="n">preferredTransform</span><span class="o">.</span><span class="n">a</span><span class="p">,</span>
+                                                   <span class="n">assetTrack</span><span class="o">.</span><span class="n">preferredTransform</span><span class="o">.</span><span class="n">b</span><span class="p">,</span>
+                                                   <span class="n">assetTrack</span><span class="o">.</span><span class="n">preferredTransform</span><span class="o">.</span><span class="n">c</span><span class="p">,</span>
+                                                   <span class="n">assetTrack</span><span class="o">.</span><span class="n">preferredTransform</span><span class="o">.</span><span class="n">d</span><span class="p">,</span>
+                                                   <span class="n">assetTrack</span><span class="o">.</span><span class="n">preferredTransform</span><span class="o">.</span><span class="n">tx</span><span class="p">,</span>
+                                                   <span class="o">-</span><span class="n">differ</span><span class="o">/</span><span class="mi">2</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">layerTransform</span><span class="o">.</span><span class="n">a</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">layerTransform</span><span class="o">.</span><span class="n">b</span> <span class="o">==</span> <span class="o">-</span><span class="mf">1.0</span> <span class="o">&amp;&amp;</span> <span class="n">layerTransform</span><span class="o">.</span><span class="n">c</span> <span class="o">==</span> <span class="mf">1.0</span> <span class="o">&amp;&amp;</span> <span class="n">layerTransform</span><span class="o">.</span><span class="n">d</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="o">//</span> <span class="n">PortraitUpsideDown</span>  <span class="mi">270</span><span class="p">;</span>
+            <span class="n">layerTransform</span> <span class="o">=</span> <span class="n">CGAffineTransformMake</span><span class="p">(</span><span class="n">assetTrack</span><span class="o">.</span><span class="n">preferredTransform</span><span class="o">.</span><span class="n">a</span><span class="p">,</span>
+                                                   <span class="n">assetTrack</span><span class="o">.</span><span class="n">preferredTransform</span><span class="o">.</span><span class="n">b</span><span class="p">,</span>
+                                                   <span class="n">assetTrack</span><span class="o">.</span><span class="n">preferredTransform</span><span class="o">.</span><span class="n">c</span><span class="p">,</span>
+                                                   <span class="n">assetTrack</span><span class="o">.</span><span class="n">preferredTransform</span><span class="o">.</span><span class="n">d</span><span class="p">,</span>
+                                                   <span class="n">assetTrack</span><span class="o">.</span><span class="n">preferredTransform</span><span class="o">.</span><span class="n">tx</span><span class="p">,</span>
+                                                   <span class="n">differ</span><span class="o">*</span><span class="mf">1.75</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">layerTransform</span><span class="o">.</span><span class="n">a</span> <span class="o">==</span> <span class="mf">1.0</span> <span class="o">&amp;&amp;</span> <span class="n">layerTransform</span><span class="o">.</span><span class="n">b</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">layerTransform</span><span class="o">.</span><span class="n">c</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">layerTransform</span><span class="o">.</span><span class="n">d</span> <span class="o">==</span> <span class="mf">1.0</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="o">//</span> <span class="n">LandscapeRight</span>  <span class="mi">0</span><span class="p">;</span> <span class="err">宽</span><span class="o">&gt;</span><span class="err">高</span>
+            <span class="n">layerTransform</span> <span class="o">=</span> <span class="n">CGAffineTransformMake</span><span class="p">(</span><span class="n">assetTrack</span><span class="o">.</span><span class="n">preferredTransform</span><span class="o">.</span><span class="n">a</span><span class="p">,</span>
+                                                   <span class="n">assetTrack</span><span class="o">.</span><span class="n">preferredTransform</span><span class="o">.</span><span class="n">b</span><span class="p">,</span>
+                                                   <span class="n">assetTrack</span><span class="o">.</span><span class="n">preferredTransform</span><span class="o">.</span><span class="n">c</span><span class="p">,</span>
+                                                   <span class="n">assetTrack</span><span class="o">.</span><span class="n">preferredTransform</span><span class="o">.</span><span class="n">d</span><span class="p">,</span>
+                                                   <span class="o">-</span><span class="n">differ</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span>
+                                                   <span class="n">assetTrack</span><span class="o">.</span><span class="n">preferredTransform</span><span class="o">.</span><span class="n">ty</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">layerTransform</span><span class="o">.</span><span class="n">a</span> <span class="o">==</span> <span class="o">-</span><span class="mf">1.0</span> <span class="o">&amp;&amp;</span> <span class="n">layerTransform</span><span class="o">.</span><span class="n">b</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">layerTransform</span><span class="o">.</span><span class="n">c</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">layerTransform</span><span class="o">.</span><span class="n">d</span> <span class="o">==</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="o">//</span> <span class="n">LandscapeLeft</span>  <span class="mi">180</span><span class="p">;</span>
+            <span class="n">layerTransform</span> <span class="o">=</span> <span class="n">CGAffineTransformMake</span><span class="p">(</span><span class="n">assetTrack</span><span class="o">.</span><span class="n">preferredTransform</span><span class="o">.</span><span class="n">a</span><span class="p">,</span>
+                                                   <span class="n">assetTrack</span><span class="o">.</span><span class="n">preferredTransform</span><span class="o">.</span><span class="n">b</span><span class="p">,</span>
+                                                   <span class="n">assetTrack</span><span class="o">.</span><span class="n">preferredTransform</span><span class="o">.</span><span class="n">c</span><span class="p">,</span>
+                                                   <span class="n">assetTrack</span><span class="o">.</span><span class="n">preferredTransform</span><span class="o">.</span><span class="n">d</span><span class="p">,</span>
+                                                   <span class="n">differ</span><span class="o">*</span><span class="mf">1.75</span><span class="p">,</span>
+                                                   <span class="n">assetTrack</span><span class="o">.</span><span class="n">preferredTransform</span><span class="o">.</span><span class="n">ty</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="n">NSLog</span><span class="p">(</span><span class="err">@</span><span class="s">"🍎调整后: </span><span class="si">%</span><span class="s">f  </span><span class="si">%</span><span class="s">f  </span><span class="si">%</span><span class="s">f  </span><span class="si">%</span><span class="s">f"</span><span class="p">,</span> <span class="n">layerTransform</span><span class="o">.</span><span class="n">a</span><span class="p">,</span> <span class="n">layerTransform</span><span class="o">.</span><span class="n">b</span><span class="p">,</span> <span class="n">layerTransform</span><span class="o">.</span><span class="n">c</span><span class="p">,</span> <span class="n">layerTransform</span><span class="o">.</span><span class="n">d</span><span class="p">);</span>
+    <span class="o">//</span> <span class="n">layerInstruciton</span> <span class="nb">set</span>
+    <span class="n">AVMutableVideoCompositionLayerInstruction</span> <span class="o">*</span><span class="n">layerInstruciton</span> <span class="o">=</span> <span class="p">[</span><span class="n">AVMutableVideoCompositionLayerInstruction</span> <span class="n">videoCompositionLayerInstructionWithAssetTrack</span><span class="p">:</span><span class="n">assetTrack</span><span class="p">];</span>
+    <span class="p">[</span><span class="n">layerInstruciton</span> <span class="n">setTransform</span><span class="p">:</span><span class="n">layerTransform</span> <span class="n">atTime</span><span class="p">:</span><span class="n">kCMTimeZero</span><span class="p">];</span>
+    <span class="p">[</span><span class="n">layerInstruciton</span> <span class="n">setOpacity</span><span class="p">:</span><span class="mf">0.0</span> <span class="n">atTime</span><span class="p">:</span><span class="n">asset</span><span class="o">.</span><span class="n">duration</span><span class="p">];</span>
+
+    <span class="o">//</span><span class="n">get</span> <span class="n">save</span> <span class="n">path</span>
+    <span class="n">NSString</span> <span class="o">*</span><span class="n">cutFilePath</span> <span class="o">=</span> <span class="p">[[</span><span class="n">CJShortMovieCache</span> <span class="n">sharedInstance</span><span class="p">]</span> <span class="n">getKeyPath</span><span class="p">];</span>
+    <span class="n">NSURL</span> <span class="o">*</span><span class="n">cutFileURL</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSURL</span> <span class="n">fileURLWithPath</span><span class="p">:</span><span class="n">cutFilePath</span><span class="p">];</span>
+
+    <span class="o">//</span><span class="n">export</span>
+    <span class="n">AVMutableVideoCompositionInstruction</span> <span class="o">*</span><span class="n">mainInstruciton</span> <span class="o">=</span> <span class="p">[</span><span class="n">AVMutableVideoCompositionInstruction</span> <span class="n">videoCompositionInstruction</span><span class="p">];</span>
+    <span class="n">mainInstruciton</span><span class="o">.</span><span class="n">timeRange</span> <span class="o">=</span> <span class="n">CMTimeRangeMake</span><span class="p">(</span><span class="n">kCMTimeZero</span><span class="p">,</span> <span class="n">asset</span><span class="o">.</span><span class="n">duration</span><span class="p">);</span>
+    <span class="n">mainInstruciton</span><span class="o">.</span><span class="n">layerInstructions</span> <span class="o">=</span> <span class="err">@</span><span class="p">[</span><span class="n">layerInstruciton</span><span class="p">];</span>
+    <span class="n">AVMutableVideoComposition</span> <span class="o">*</span><span class="n">mainCompositionInst</span> <span class="o">=</span> <span class="p">[</span><span class="n">AVMutableVideoComposition</span> <span class="n">videoComposition</span><span class="p">];</span>
+    <span class="n">mainCompositionInst</span><span class="o">.</span><span class="n">instructions</span> <span class="o">=</span> <span class="err">@</span><span class="p">[</span><span class="n">mainInstruciton</span><span class="p">];</span>
+    <span class="n">mainCompositionInst</span><span class="o">.</span><span class="n">frameDuration</span> <span class="o">=</span> <span class="n">CMTimeMake</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">30</span><span class="p">);</span>
+    <span class="n">mainCompositionInst</span><span class="o">.</span><span class="n">renderSize</span> <span class="o">=</span> <span class="n">CGSizeMake</span><span class="p">(</span><span class="n">renderW</span><span class="p">,</span> <span class="n">renderW</span><span class="p">);</span>
+
+    <span class="n">AVAssetExportSession</span> <span class="o">*</span><span class="n">exporter</span> <span class="o">=</span> <span class="p">[[</span><span class="n">AVAssetExportSession</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">initWithAsset</span><span class="p">:</span><span class="n">asset</span> <span class="n">presetName</span><span class="p">:</span><span class="n">AVAssetExportPresetMediumQuality</span><span class="p">];</span>
+    <span class="n">exporter</span><span class="o">.</span><span class="n">videoComposition</span> <span class="o">=</span> <span class="n">mainCompositionInst</span><span class="p">;</span>
+    <span class="n">exporter</span><span class="o">.</span><span class="n">outputURL</span> <span class="o">=</span> <span class="n">cutFileURL</span><span class="p">;</span>
+    <span class="n">exporter</span><span class="o">.</span><span class="n">outputFileType</span> <span class="o">=</span> <span class="n">AVFileTypeMPEG4</span><span class="p">;</span>
+    <span class="n">exporter</span><span class="o">.</span><span class="n">shouldOptimizeForNetworkUse</span> <span class="o">=</span> <span class="n">YES</span><span class="p">;</span>
+    <span class="p">[</span><span class="n">exporter</span> <span class="n">exportAsynchronouslyWithCompletionHandler</span><span class="p">:</span><span class="o">^</span><span class="p">{</span>
+        <span class="n">switch</span> <span class="p">([</span><span class="n">exporter</span> <span class="n">status</span><span class="p">])</span> <span class="p">{</span>
+            <span class="n">case</span> <span class="n">AVAssetExportSessionStatusFailed</span><span class="p">:</span>
+                <span class="n">NSLog</span><span class="p">(</span><span class="err">@</span><span class="s">"exporting failed </span><span class="si">%</span><span class="s">@"</span><span class="p">,[</span><span class="n">exporter</span> <span class="n">error</span><span class="p">]);</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="n">case</span> <span class="n">AVAssetExportSessionStatusCompleted</span><span class="p">:</span>
+            <span class="p">{</span>
+                <span class="n">NSLog</span><span class="p">(</span><span class="err">@</span><span class="s">"exporting completed"</span><span class="p">);</span>
+                <span class="n">NSRange</span> <span class="n">varRange</span> <span class="o">=</span> <span class="p">[[</span><span class="n">fileUrl</span> <span class="n">absoluteString</span><span class="p">]</span> <span class="n">rangeOfString</span><span class="p">:</span><span class="err">@</span><span class="s">"/var"</span><span class="p">];</span>
+                <span class="n">NSString</span> <span class="o">*</span><span class="n">tmpPath</span> <span class="o">=</span> <span class="p">[[</span><span class="n">fileUrl</span> <span class="n">absoluteString</span><span class="p">]</span> <span class="n">substringFromIndex</span><span class="p">:</span><span class="n">varRange</span><span class="o">.</span><span class="n">location</span><span class="p">];</span>
+                <span class="k">if</span> <span class="p">([[</span><span class="n">NSFileManager</span> <span class="n">defaultManager</span><span class="p">]</span> <span class="n">fileExistsAtPath</span><span class="p">:</span><span class="n">tmpPath</span><span class="p">])</span> <span class="p">{</span>
+                    <span class="k">if</span> <span class="p">([[</span><span class="n">NSFileManager</span> <span class="n">defaultManager</span><span class="p">]</span> <span class="n">removeItemAtPath</span><span class="p">:</span><span class="n">tmpPath</span> <span class="n">error</span><span class="p">:</span><span class="n">nil</span><span class="p">])</span>
+                    <span class="p">{</span>
+                        <span class="n">NSLog</span><span class="p">(</span><span class="err">@</span><span class="s">"Delete /tmp/ repeat video success"</span><span class="p">);</span>
+                    <span class="p">}</span>
+                    <span class="k">else</span> <span class="p">{</span>
+                        <span class="n">NSLog</span><span class="p">(</span><span class="err">@</span><span class="s">"Delete /tmp/ repeat video failed"</span><span class="p">);</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+                <span class="k">else</span> <span class="p">{</span>
+                    <span class="n">NSLog</span><span class="p">(</span><span class="err">@</span><span class="s">"No duplicate video found under /tmp/"</span><span class="p">);</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="n">case</span> <span class="n">AVAssetExportSessionStatusCancelled</span><span class="p">:</span>
+                <span class="n">NSLog</span><span class="p">(</span><span class="err">@</span><span class="s">"export cancelled"</span><span class="p">);</span>
+                <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}];</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+            </article>
+        </div>
+      </div>
+      <div class="panel docs-content">
+        <article class="post-content">
+          <div class="wrapper">
+            
+
+
+  <div id="uyan_frame"></div>
+<script type="text/javascript">
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://v2.uyan.cc/code/uyan.js?uid=2119519';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+
+
+
+
+
+ 
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+    <footer class="footer" role="contentinfo">
+	<div class="container">
+		<p class="copyright">Copyright &copy; 2016-2016 <a href="http://www.hifreud.com/Resume.io/"><code>LuckyCat</code></a>.</p>
+		<p>Powered by <a href="http://jekyllrb.com">Jekyll</a>, theme from <a href="http://lesscss.cn/">Less</a></p>
+	</div>
+</footer>
+
+<script src="/styles/js/jquery.min.js"></script>
+<script src="/styles/js/bootstrap.min.js"></script>
+<script src="/styles/js/holder.min.js"></script>
+<script src="/styles/js/application.js"></script>
+<script src="/styles/js/lessismore.js"></script>
+
+  </body>
+</html>

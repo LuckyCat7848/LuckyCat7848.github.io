@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>将Excel表格转化为plist文件（中国省份和城市信息）</title>
+
+	<link rel="shortcut icon" href="/styles/images/favicon.jpg">
+	<link rel="icon" href="/styles/images/favicon.jpg">
+
+	<link rel="stylesheet" href="/styles/css/index.css">
+	<link rel="stylesheet" href="/styles/css/fontawesome/css/font-awesome.min.css">
+	<link rel="canonical" href="/2016/02/22/%E5%B0%86Excel%E8%A1%A8%E6%A0%BC%E8%BD%AC%E5%8C%96%E4%B8%BAplist%E6%96%87%E4%BB%B6-%E4%B8%AD%E5%9B%BD%E7%9C%81%E4%BB%BD%E5%92%8C%E5%9F%8E%E5%B8%82%E4%BF%A1%E6%81%AF/">
+	<link rel="alternate" type="application/rss+xml" title="LuckyCat's Blog" href="/feed.xml">
+	
+	<meta name="description" content="康志华;个人博客;学而不思则罔;思而不学则殆;生命不止;折腾不休">
+
+	<script src="/styles/js/jquery.min.js"></script>
+	<!--[if lt IE 9]>
+    	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  	<![endif]-->
+  	<script>
+		var _hmt = _hmt || [];
+		(function() {
+		  var hm = document.createElement("script");
+		  hm.src = "//hm.baidu.com/hm.js?94be4b0f9fc5d94cc0d0415ea6761ae9";
+		  var s = document.getElementsByTagName("script")[0]; 
+		  s.parentNode.insertBefore(hm, s);
+		})();
+	</script>
+  	<style type="text/css">
+	  	.docs-content{
+	  		margin-bottom: 10px;
+	  	}
+  	</style>
+</head>
+
+  <body class="index">
+
+    <header class="navbar navbar-inverse navbar-fixed-top docs-nav" role="banner">
+  <div class="container">
+    <div class="navbar-header">
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="/" class="navbar-brand">
+        <img src="/styles/images/logo.jpg">
+      </a>
+    </div>
+    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+      <ul class="nav navbar-nav">    
+        <li>
+          <a href="/">Home</a>
+        </li>
+        <li>
+          <a href="/categories/">大类分解</a>
+        </li>
+        <li>
+          <a href="/tag">小类内聚</a>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a href="/donate/"><strong>打赏</strong></a>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">关于<b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a rel="nofollow" target="_blank" href="https://github.com/LuckyCat7848/">Github</a></li>
+            <li><a rel="nofollow" target="_blank" href="http://www.hifreud.com/Resume.io/">关于作者</a></li>
+            <li><a rel="nofollow" href="/books">我的书单</a></li>
+            <li><a rel="nofollow" href="/reference">推荐博客</a></li>
+            <li><a href="/feed.xml">RSS订阅</a></li>
+            <li class="divider"></li>
+            <li><a rel="nofollow" target="_blank" href="https://github.com/luoyan35714/LessOrMore.git">本项目</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+    <div class="docs-header" id="content">
+  <div class="container">
+  	
+  		<!--
+		    <h1>将Excel表格转化为plist文件（中国省份和城市信息）</h1>
+		    <p>Post on Feb 22, 2016 by <a href="/about">LuckyCat</a></p>
+		-->
+		    <h1>Everything is well !</h1>
+    
+  </div>
+</div>
+    
+      
+<div class="banner">
+  <div class="container">
+  	
+    	<a href="/categories/#技术-ref">技术</a>	/
+    	<a href="/tag/#Object-C-ref">Object-C</a>
+    
+  </div>
+</div>
+
+    
+
+    <div class="container docs-container">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="sidebar hidden-print" role="complementary">
+        <div id="navigation">
+  <h1>目录</h1>
+  <ul class="nav sidenav">
+<!--
+    
+      
+      
+      
+      
+
+      
+        <li><a href="#year_2016">2016</a>
+          <ul class="nav">
+            <li><a href="#month_2016_November">November</a></li>
+      
+
+      
+            
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+              <li><a href="#month_2016_September">September</a></li>
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+              <li><a href="#month_2016_February">February</a></li>
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+              <li><a href="#month_2016_January">January</a></li>
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+        
+            </ul>
+          </li>
+          <li><a href="#year_2015">2015</a>
+            <ul class="nav">
+              <li><a href="#month_2015_July">July</a></li>
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            </ul>
+          </li>
+      
+    
+-->
+  </ul>
+</div> 
+      </div>
+    </div>
+    <div class="col-md-9" role="main">
+      <div class="panel docs-content">
+        <div class="wrapper">
+            <header class="post-header">
+              <h1 class="post-title">将Excel表格转化为plist文件（中国省份和城市信息）</h1>
+              <!--
+                <p class="post-meta">Feb 22, 2016</p>
+              -->
+              <div class="meta">Posted on <span class="postdate">Feb 22, 2016</span> By <a target="_blank" href="http://localhost:4000">LuckyCat</a></div>
+              <br />
+            </header>
+            <article class="post-content">
+              
+<p>将图1的Excel表格转换成图2的.plist文件，两张图如下：</p>
+
+<p>图1：</p>
+
+<p><img src="/source/将Excel表格转化为plist文件（中国省份和城市信息）/1479312936089.png" alt="" /></p>
+
+<p>图2：</p>
+
+<p><img src="/source/将Excel表格转化为plist文件（中国省份和城市信息）/1479312949609.png" alt="" /></p>
+
+<hr />
+
+<p><strong>1.</strong> 先把Excel表格另存为.csv格式：</p>
+
+<p><img src="/source/将Excel表格转化为plist文件（中国省份和城市信息）/1479312967213.png" alt="" /></p>
+
+<p><strong>2.</strong> 将.csv文件内容复制粘贴到新的.txt文件中;</p>
+
+<p><strong>3.</strong> 将.txt文件拖拽到工程中，用代码读取.txt文件内容写入到.plist文件。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">NSString</span> <span class="o">*</span> <span class="n">path</span> <span class="o">=</span> <span class="p">[[</span><span class="n">NSBundle</span> <span class="n">mainBundle</span><span class="p">]</span> <span class="n">pathForResource</span><span class="p">:</span><span class="err">@</span><span class="s">"ProvincesAndCities"</span> <span class="n">ofType</span><span class="p">:</span><span class="err">@</span><span class="s">"txt"</span><span class="p">];</span>
+    <span class="n">NSString</span> <span class="o">*</span> <span class="n">contents</span> <span class="o">=</span> <span class="p">[[</span><span class="n">NSString</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">initWithContentsOfFile</span><span class="p">:</span><span class="n">path</span> <span class="n">encoding</span><span class="p">:</span><span class="n">NSUTF8StringEncoding</span> <span class="n">error</span><span class="p">:</span><span class="n">nil</span><span class="p">];</span>
+    <span class="o">//</span> <span class="err">获取到</span><span class="n">excel</span><span class="err">中</span><span class="n">n</span><span class="err">行的数组</span>
+    <span class="n">NSArray</span> <span class="o">*</span> <span class="n">contentsArray</span> <span class="o">=</span> <span class="p">[</span><span class="n">contents</span> <span class="n">componentsSeparatedByCharactersInSet</span><span class="p">:[</span><span class="n">NSCharacterSet</span> <span class="n">newlineCharacterSet</span><span class="p">]];</span>
+
+    <span class="n">NSString</span> <span class="o">*</span><span class="n">savePath</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSHomeDirectory</span><span class="p">()</span> <span class="n">stringByAppendingPathComponent</span><span class="p">:</span><span class="err">@</span><span class="s">"Documents/ProvincesAndCities.plist"</span><span class="p">]</span> <span class="p">;</span>
+
+    <span class="n">NSMutableArray</span> <span class="o">*</span><span class="n">allArr</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSMutableArray</span> <span class="n">array</span><span class="p">];</span>
+    <span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">contentsArray</span><span class="o">.</span><span class="n">count</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">NSString</span> <span class="o">*</span> <span class="n">lineStr</span> <span class="o">=</span> <span class="n">contentsArray</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+        <span class="o">//</span> <span class="err">将一行数据转为数组格式，对其遍历，获取单个格里的内容</span>
+        <span class="n">NSArray</span> <span class="o">*</span> <span class="n">lineArr</span> <span class="o">=</span> <span class="p">[</span><span class="n">lineStr</span> <span class="n">componentsSeparatedByCharactersInSet</span><span class="p">:[</span><span class="n">NSCharacterSet</span> <span class="n">controlCharacterSet</span><span class="p">]];</span>
+        <span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">lineArr</span><span class="o">.</span><span class="n">count</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">NSString</span> <span class="o">*</span> <span class="n">oneStr</span> <span class="o">=</span> <span class="n">lineArr</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+            <span class="k">if</span> <span class="p">(</span><span class="err">!</span><span class="p">[</span><span class="n">NSString</span> <span class="n">strIsNilOrEmpty</span><span class="p">:</span><span class="n">oneStr</span><span class="p">])</span> <span class="p">{</span>
+                <span class="n">NSMutableDictionary</span> <span class="o">*</span> <span class="n">rowDic</span> <span class="o">=</span> <span class="n">nil</span><span class="p">;</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="o">//</span> <span class="err">第一行是省份名称</span>
+                    <span class="n">rowDic</span> <span class="o">=</span> <span class="p">[[</span><span class="n">NSMutableDictionary</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
+                    <span class="p">[</span><span class="n">rowDic</span> <span class="n">setObject</span><span class="p">:</span><span class="n">lineArr</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="n">forKey</span><span class="p">:</span><span class="err">@</span><span class="s">"province"</span><span class="p">];</span>
+                    <span class="p">[</span><span class="n">allArr</span> <span class="n">addObject</span><span class="p">:</span><span class="n">rowDic</span><span class="p">];</span>
+                <span class="p">}</span>
+                <span class="k">else</span> <span class="p">{</span>
+                    <span class="o">//</span> <span class="err">城市按每列存在数组中，再保存到每列信息里</span>
+                    <span class="n">rowDic</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSMutableDictionary</span> <span class="n">dictionaryWithDictionary</span><span class="p">:</span><span class="n">allArr</span><span class="p">[</span><span class="n">j</span><span class="p">]];</span>
+                    <span class="n">NSMutableArray</span> <span class="o">*</span> <span class="n">citiesArr</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSMutableArray</span> <span class="n">arrayWithArray</span><span class="p">:</span><span class="n">rowDic</span><span class="p">[</span><span class="err">@</span><span class="s">"cities"</span><span class="p">]];</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="err">!</span><span class="p">[</span><span class="n">citiesArr</span> <span class="n">containsObject</span><span class="p">:</span><span class="n">oneStr</span><span class="p">])</span> <span class="p">{</span>
+                        <span class="p">[</span><span class="n">citiesArr</span> <span class="n">addObject</span><span class="p">:</span><span class="n">oneStr</span><span class="p">];</span>
+                    <span class="p">}</span>
+                    <span class="p">[</span><span class="n">rowDic</span> <span class="n">setObject</span><span class="p">:</span><span class="n">citiesArr</span> <span class="n">forKey</span><span class="p">:</span><span class="err">@</span><span class="s">"cities"</span><span class="p">];</span>
+                    <span class="p">[</span><span class="n">allArr</span> <span class="n">replaceObjectAtIndex</span><span class="p">:</span><span class="n">j</span> <span class="n">withObject</span><span class="p">:</span><span class="n">rowDic</span><span class="p">];</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="o">//</span> <span class="err">写入到</span><span class="n">plist</span><span class="err">文件</span>
+    <span class="p">[</span><span class="n">allArr</span> <span class="n">writeToFile</span><span class="p">:</span><span class="n">savePath</span> <span class="n">atomically</span><span class="p">:</span><span class="n">YES</span><span class="p">];</span>
+</code></pre>
+</div>
+
+<p><strong>4.</strong> 最后，就可以直接在工程里删除.txt，使用.plist文件了。</p>
+
+
+            </article>
+        </div>
+      </div>
+      <div class="panel docs-content">
+        <article class="post-content">
+          <div class="wrapper">
+            
+
+
+  <div id="uyan_frame"></div>
+<script type="text/javascript">
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://v2.uyan.cc/code/uyan.js?uid=2119519';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+
+
+
+
+
+ 
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+    <footer class="footer" role="contentinfo">
+	<div class="container">
+		<p class="copyright">Copyright &copy; 2016-2016 <a href="http://www.hifreud.com/Resume.io/"><code>LuckyCat</code></a>.</p>
+		<p>Powered by <a href="http://jekyllrb.com">Jekyll</a>, theme from <a href="http://lesscss.cn/">Less</a></p>
+	</div>
+</footer>
+
+<script src="/styles/js/jquery.min.js"></script>
+<script src="/styles/js/bootstrap.min.js"></script>
+<script src="/styles/js/holder.min.js"></script>
+<script src="/styles/js/application.js"></script>
+<script src="/styles/js/lessismore.js"></script>
+
+  </body>
+</html>

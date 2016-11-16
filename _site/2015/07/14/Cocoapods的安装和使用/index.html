@@ -5,14 +5,14 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Xcode磁盘空间大清理</title>
+	<title>Cocoapods的安装和使用</title>
 
 	<link rel="shortcut icon" href="/styles/images/favicon.jpg">
 	<link rel="icon" href="/styles/images/favicon.jpg">
 
 	<link rel="stylesheet" href="/styles/css/index.css">
 	<link rel="stylesheet" href="/styles/css/fontawesome/css/font-awesome.min.css">
-	<link rel="canonical" href="/2016/11/16/Xcode%E7%A3%81%E7%9B%98%E7%A9%BA%E9%97%B4%E5%A4%A7%E6%B8%85%E7%90%86/">
+	<link rel="canonical" href="/2015/07/14/Cocoapods%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/">
 	<link rel="alternate" type="application/rss+xml" title="LuckyCat's Blog" href="/feed.xml">
 	
 	<meta name="description" content="康志华;个人博客;学而不思则罔;思而不学则殆;生命不止;折腾不休">
@@ -87,8 +87,8 @@
   <div class="container">
   	
   		<!--
-		    <h1>Xcode磁盘空间大清理</h1>
-		    <p>Post on Nov 16, 2016 by <a href="/about">LuckyCat</a></p>
+		    <h1>Cocoapods的安装和使用</h1>
+		    <p>Post on Jul 14, 2015 by <a href="/about">LuckyCat</a></p>
 		-->
 		    <h1>Everything is well !</h1>
     
@@ -99,8 +99,8 @@
 <div class="banner">
   <div class="container">
   	
-    	<a href="/categories/#实用技能-ref">实用技能</a>	/
-    	<a href="/tag/#MAC-ref">MAC</a>
+    	<a href="/categories/#技术-ref">技术</a>	/
+    	<a href="/tag/#工具-ref">工具</a>
     
   </div>
 </div>
@@ -143,6 +143,8 @@
       
             
           
+              <li><a href="#month_2016_September">September</a></li>
+          
         
       
     
@@ -156,6 +158,40 @@
       
             
           
+              <li><a href="#month_2016_February">February</a></li>
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+              <li><a href="#month_2016_January">January</a></li>
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+        
+            </ul>
+          </li>
+          <li><a href="#year_2015">2015</a>
+            <ul class="nav">
+              <li><a href="#month_2015_July">July</a></li>
         
       
     
@@ -180,52 +216,86 @@
       <div class="panel docs-content">
         <div class="wrapper">
             <header class="post-header">
-              <h1 class="post-title">Xcode磁盘空间大清理</h1>
+              <h1 class="post-title">Cocoapods的安装和使用</h1>
               <!--
-                <p class="post-meta">Nov 16, 2016</p>
+                <p class="post-meta">Jul 14, 2015</p>
               -->
-              <div class="meta">Posted on <span class="postdate">Nov 16, 2016</span> By <a target="_blank" href="http://localhost:4000">LuckyCat</a></div>
+              <div class="meta">Posted on <span class="postdate">Jul 14, 2015</span> By <a target="_blank" href="http://localhost:4000">LuckyCat</a></div>
               <br />
             </header>
             <article class="post-content">
               
-<p><strong>1.移除对旧设备的支持</strong>
-<strong>影响：</strong>可重新生成；再连接旧设备调试时，会重新自动生成。我移除了4.3.2, 5.0, 5.1等版本的设备支持。
-<strong>路径：</strong>~/Library/Developer/Xcode/iOS DeviceSupport
-<strong>释放空间：</strong>3GB</p>
+<blockquote>
+  <p><strong>RubyGems</strong>淘宝镜像已停更，本人现在使用<strong>Ruby China</strong>提供的镜像。</p>
+</blockquote>
 
-<p><strong>2.移除旧版本的模拟器支持</strong>
-<strong>影响：</strong>不可恢复；如果需要旧版本的模拟器，就需要重新下载了。我移除了4.3.2, 5.0, 5.1等旧版本的模拟器。
-<strong>路径：</strong>~/Library/Application Support/iPhone Simulator
-<strong>释放空间：</strong>3GB</p>
+<hr />
 
-<p><strong>3.移除模拟器的临时文件</strong>
-<strong>影响：</strong>可重新生成；如果需要保留较新版本的模拟器，但tmp文件夹很大。放心删吧，tmp文件夹里的内容是不重要的。在iOS Device中，存储空间不足时，tmp文件夹是可能被清空的。
-<strong>路径：</strong>~/Library/Application Support/iPhone Simulator/6.1/tmp (以iOS Simulator 6.1为例)
-<strong>释放空间：</strong>2GB</p>
+<p><strong>Step 1.</strong> 查询现在使用的淘宝镜像：</p>
 
-<p><strong>4.移除模拟器中安装的Apps</strong>
-<strong>影响：</strong>不可恢复；对应的模拟器中安装的Apps被清空了，如果不需要就删了吧。
-<strong>路径：</strong>~/Library/Application Support/iPhone Simulator/6.1/Applications (以iOS Simulator 6.1为例)
-<strong>释放空间：</strong>1GB</p>
+<p><img src="/source/Cocoapods的安装和使用/Step1-01.png" alt="" /></p>
 
-<p><strong>5.移除Archives</strong>
-<strong>影响：</strong>不可恢复；Adhoc或者App Store版本会被删除。建议备份dSYM文件夹
-<strong>路径：</strong>~/Library/Developer/Xcode/Archives
-<strong>释放空间：</strong>6GB</p>
+<p><strong>Step 2.</strong> 删除淘宝镜像，添加Ruby China镜像：</p>
 
-<p><strong>6.移除DerivedData</strong>
-<strong>影响：</strong>可重新生成；会删除build生成的项目索引、build输出以及日志。重新打开项目时会重新生成，大的项目会耗费一些时间。
-<strong>路径：</strong>~/Library/Developer/Xcode/DerivedData
-<strong>释放空间：</strong>12GB</p>
+<p><img src="/source/Cocoapods的安装和使用/Step2-01.png" alt="" /></p>
 
-<p><strong>7.移除旧的Docsets</strong>
-<strong>影响：</strong>不可恢复；将删除旧的Docsets文档
-<strong>路径：</strong>~/Library/Developer/Shared/Documentation/DocSets
-<strong>释放空间：</strong>2GB</p>
+<blockquote>
+  <p><strong>失败原因：</strong>苹果系统升级 OS X EL Capitan后命令加上<strong>sudo</strong>（具体原因不懂）。</p>
+</blockquote>
 
-<p>作者一共释放出了30GB左右的磁盘空间，这对128 GB的SSD来说可是不小的数字。如果你的磁盘空间不紧张，或者使用HDD，我建议不要进行这些操作。使用SSD的朋友酌情清理吧。</p>
+<p><strong>加上sudo后重新操作</strong>：</p>
 
+<p><img src="/source/Cocoapods的安装和使用/Step2-02.png" alt="" /></p>
+
+<p>可以看到当前已经是Ruby China镜像。</p>
+
+<p><strong>Step 3.</strong> 使用<strong>sudo gem update –system</strong>更新RubyGems。</p>
+
+<p><strong>Step 4.</strong> 查看版本信息：</p>
+
+<p><img src="/source/Cocoapods的安装和使用/Step4-01.png" alt="" /></p>
+
+<p><strong>Step 5.</strong> 安装CocoaPods</p>
+
+<ul>
+  <li>**$ sudo gem install cocoapods **</li>
+</ul>
+
+<blockquote>
+  <p><strong>备注：</strong>苹果系统升级 OS X EL Capitan 后改为 <strong>sudo gem install -n /usr/local/bin cocoapods</strong>（我的是以前安装好了的，这次主要是更新Ruby China源，无安装Coapods截图）</p>
+</blockquote>
+
+<ul>
+  <li><strong>$ pod setup</strong></li>
+</ul>
+
+<p><strong>Step 6.</strong> 新建工程，并在终端用cd指令到文件夹内：</p>
+
+<p><img src="/source/Cocoapods的安装和使用/Step6-01.png" alt="" /></p>
+
+<p><strong>Step 7.</strong> 新建文件Podfile：</p>
+
+<p><img src="/source/Cocoapods的安装和使用/Step7-01.png" alt="" /></p>
+
+<p><strong>Step 8.</strong> 编辑Podfile文件内容：</p>
+
+<p><strong>低版本：</strong></p>
+
+<p><img src="/source/Cocoapods的安装和使用/Step8-01.png" alt="" /></p>
+
+<p><strong>高版本的cocoapods的Podfile文件必须添加target：</strong></p>
+
+<p><img src="/source/Cocoapods的安装和使用/Step8-02.png" alt="" /></p>
+
+<blockquote>
+  <p><strong>提示：</strong>编辑Podfile文件，按a或i可编辑，esc 退出编辑，“”：wq”可保存退出，“q!”直接退出不保存。</p>
+</blockquote>
+
+<p><strong>Step 9.</strong> 安装：</p>
+
+<p><img src="/source/Cocoapods的安装和使用/Step9-01.png" alt="" /></p>
+
+<p><strong>Step 10.</strong> 到<strong>.xcodeproj</strong>文件下查看，多了个<strong>.xcworkspace</strong>，之后使用这个文件打开工程，即可看到已导入的库文件。</p>
 
             </article>
         </div>
