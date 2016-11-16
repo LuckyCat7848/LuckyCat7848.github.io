@@ -5,9 +5,93 @@
     <description>Everything is well !</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 16 Nov 2016 15:21:35 +0800</pubDate>
-    <lastBuildDate>Wed, 16 Nov 2016 15:21:35 +0800</lastBuildDate>
+    <pubDate>Wed, 16 Nov 2016 19:24:29 +0800</pubDate>
+    <lastBuildDate>Wed, 16 Nov 2016 19:24:29 +0800</lastBuildDate>
     <generator>Jekyll v3.3.0</generator>
+    
+      <item>
+        <title>Cocoapods的安装和使用</title>
+        <description>
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;RubyGems&lt;/strong&gt;淘宝镜像已停更，本人现在使用&lt;strong&gt;Ruby China&lt;/strong&gt;提供的镜像。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;Step 1.&lt;/strong&gt; 查询现在使用的淘宝镜像：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/source/Cocoapods的安装和使用/Step1-01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Step 2.&lt;/strong&gt; 删除淘宝镜像，添加Ruby China镜像：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/source/Cocoapods的安装和使用/Step2-01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;失败原因：&lt;/strong&gt;苹果系统升级 OS X EL Capitan后命令加上&lt;strong&gt;sudo&lt;/strong&gt;（具体原因不懂）。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;加上sudo后重新操作&lt;/strong&gt;：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/source/Cocoapods的安装和使用/Step2-02.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;可以看到当前已经是Ruby China镜像。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Step 3.&lt;/strong&gt; 使用&lt;strong&gt;sudo gem update –system&lt;/strong&gt;更新RubyGems。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Step 4.&lt;/strong&gt; 查看版本信息：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/source/Cocoapods的安装和使用/Step4-01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Step 5.&lt;/strong&gt; 安装CocoaPods&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;**$ sudo gem install cocoapods **&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;备注：&lt;/strong&gt;苹果系统升级 OS X EL Capitan 后改为 &lt;strong&gt;sudo gem install -n /usr/local/bin cocoapods&lt;/strong&gt;（我的是以前安装好了的，这次主要是更新Ruby China源，无安装Coapods截图）&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;$ pod setup&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Step 6.&lt;/strong&gt; 新建工程，并在终端用cd指令到文件夹内：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/source/Cocoapods的安装和使用/Step6-01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Step 7.&lt;/strong&gt; 新建文件Podfile：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/source/Cocoapods的安装和使用/Step7-01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Step 8.&lt;/strong&gt; 编辑Podfile文件内容：&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;低版本：&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/source/Cocoapods的安装和使用/Step8-01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;高版本的cocoapods的Podfile文件必须添加target：&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/source/Cocoapods的安装和使用/Step8-02.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;提示：&lt;/strong&gt;编辑Podfile文件，按a或i可编辑，esc 退出编辑，“”：wq”可保存退出，“q!”直接退出不保存。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;Step 9.&lt;/strong&gt; 安装：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/source/Cocoapods的安装和使用/Step9-01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Step 10.&lt;/strong&gt; 到&lt;strong&gt;.xcodeproj&lt;/strong&gt;文件下查看，多了个&lt;strong&gt;.xcworkspace&lt;/strong&gt;，之后使用这个文件打开工程，即可看到已导入的库文件。&lt;/p&gt;
+</description>
+        <pubDate>Wed, 16 Nov 2016 19:24:22 +0800</pubDate>
+        <link>http://localhost:4000/2016/11/16/Cocoapods%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/</link>
+        <guid isPermaLink="true">http://localhost:4000/2016/11/16/Cocoapods%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/</guid>
+        
+        <category>工具</category>
+        
+        
+        <category>技术</category>
+        
+      </item>
     
       <item>
         <title>使用jekyll在GitHub Pages上搭建个人博客</title>
