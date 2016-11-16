@@ -235,22 +235,19 @@ Step 4. 独立域名
 Step 5. 评论功能
 ====================================
 
-5.1. 注册“多说”
+5.1. 注册“友言”
 ------------------------------------
 写好的博客和观看的人交流是必不可少的，互动可以让我们知道自己的不足之处加以改动。
-这里我使用的是免费的[多说](http://duoshuo.com/)。
-不用注册，直接用第三方登录即可。
 
-5.2. 使用“多说”
+这里我使用的是免费的[友言](http://www.uyan.cc/)。
+
+5.2. 使用“友言”
 ------------------------------------
 在_config.yml文件中加上以下一段文字即可：
 
-![]({{ '/source/使用jekyll在GitHub Pages上搭建个人博客/Duoshuo-01.png'}})
+![]({{ '/source/使用jekyll在GitHub Pages上搭建个人博客/UYan-01.png'}})
 
+使用[该模板](https://github.com/LuckyCat7848/LuckyCat7848.github.io)的话只需要在/_includes/LessOrMore/comments-providers/uyan文件中将uid改成你本人的友言uid即可。
 
-duoshuo，short_name：多说账户上的用户名。
-
-disqus，short_name：在评论区里显示的名称。
-
-
+如果不是使用该模板的话，可以参考[jekyll配置有言评论插件](http://www.zoneky.com/blog/2014/06/15/jekyll-youyan/?utm_source=tuicool&utm_medium=referral)。
 

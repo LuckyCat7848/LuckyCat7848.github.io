@@ -5,9 +5,77 @@
     <description>Everything is well !</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 16 Nov 2016 21:31:24 +0800</pubDate>
-    <lastBuildDate>Wed, 16 Nov 2016 21:31:24 +0800</lastBuildDate>
+    <pubDate>Wed, 16 Nov 2016 22:21:09 +0800</pubDate>
+    <lastBuildDate>Wed, 16 Nov 2016 22:21:09 +0800</lastBuildDate>
     <generator>Jekyll v3.3.0</generator>
+    
+      <item>
+        <title>jekyll配置有言评论插件</title>
+        <description>
+&lt;p&gt;我的文件目录如下：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/source/jekyll配置有言评论插件/01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;首先在/_includes/LessOrMore/comments-providers/uyan存放友言的插件脚本。&lt;/p&gt;
+
+&lt;p&gt;去&lt;a href=&quot;http://www.uyan.cc/&quot;&gt;友言&lt;/a&gt;官网去注册一个账号，查看自己的id，然后把下列代码放在uyan这个文件中：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;uyan_frame&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;div&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;script&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;text/javascript&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dsq&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;createElement&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'script'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dsq&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'text/javascript'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dsq&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;dsq&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;src&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'http://v2.uyan.cc/code/uyan.js?uid=你的ID'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getElementsByTagName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'head'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getElementsByTagName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'body'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;appendChild&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dsq&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;})();&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;script&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;接下来再编辑/_includes/LessOrMore/comments文件，加上uyan的条件判断，我的该文件代码如下：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+
+
+  &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;uyan_frame&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;div&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;script&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;text/javascript&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dsq&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;createElement&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'script'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dsq&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'text/javascript'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dsq&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;dsq&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;src&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'http://v2.uyan.cc/code/uyan.js?uid=2119519'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getElementsByTagName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'head'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getElementsByTagName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'body'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;appendChild&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dsq&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;})();&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;script&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+
+
+
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;最后在站点的配置文件_config.yml中指定用youyan作为评论插件就行了&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;c&quot;&gt;# Settings for comments helper&lt;/span&gt;
+  &lt;span class=&quot;c&quot;&gt;# Set 'provider' to the comment provider you want to use.&lt;/span&gt;
+  &lt;span class=&quot;c&quot;&gt;# Set 'provider' to false to turn commenting off globally.&lt;/span&gt;
+  &lt;span class=&quot;c&quot;&gt;#&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;comments&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;provider&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;uyan&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;至此评论插件就配置好了，可以push到Github上看看效果。分享插件的配置也是类似的。&lt;/p&gt;
+
+&lt;p&gt;不push本地预览的话可以查看页面效果但是不能评论，不是bug，push上去就可以了。&lt;/p&gt;
+</description>
+        <pubDate>Wed, 16 Nov 2016 22:15:31 +0800</pubDate>
+        <link>http://localhost:4000/2016/11/16/jekyll%E9%85%8D%E7%BD%AE%E6%9C%89%E8%A8%80%E8%AF%84%E8%AE%BA%E6%8F%92%E4%BB%B6/</link>
+        <guid isPermaLink="true">http://localhost:4000/2016/11/16/jekyll%E9%85%8D%E7%BD%AE%E6%9C%89%E8%A8%80%E8%AF%84%E8%AE%BA%E6%8F%92%E4%BB%B6/</guid>
+        
+        <category>jekyll</category>
+        
+        
+        <category>技术</category>
+        
+      </item>
     
       <item>
         <title>Cocoapods的安装和使用</title>
@@ -15,6 +83,8 @@
 &lt;blockquote&gt;
   &lt;p&gt;&lt;strong&gt;RubyGems&lt;/strong&gt;淘宝镜像已停更，本人现在使用&lt;strong&gt;Ruby China&lt;/strong&gt;提供的镜像。&lt;/p&gt;
 &lt;/blockquote&gt;
+
+&lt;hr /&gt;
 
 &lt;p&gt;&lt;strong&gt;Step 1.&lt;/strong&gt; 查询现在使用的淘宝镜像：&lt;/p&gt;
 
@@ -121,8 +191,8 @@
     &lt;/ul&gt;
   &lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#step-5-&quot; id=&quot;markdown-toc-step-5-&quot;&gt;Step 5. 评论功能&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-2&quot; id=&quot;markdown-toc-section-2&quot;&gt;5.1. 注册“多说”&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-3&quot; id=&quot;markdown-toc-section-3&quot;&gt;5.2. 使用“多说”&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-2&quot; id=&quot;markdown-toc-section-2&quot;&gt;5.1. 注册“友言”&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-3&quot; id=&quot;markdown-toc-section-3&quot;&gt;5.2. 使用“友言”&lt;/a&gt;&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
@@ -390,19 +460,19 @@
 
 &lt;h1 id=&quot;step-5-&quot;&gt;Step 5. 评论功能&lt;/h1&gt;
 
-&lt;h2 id=&quot;section-2&quot;&gt;5.1. 注册“多说”&lt;/h2&gt;
-&lt;p&gt;写好的博客和观看的人交流是必不可少的，互动可以让我们知道自己的不足之处加以改动。
-这里我使用的是免费的&lt;a href=&quot;http://duoshuo.com/&quot;&gt;多说&lt;/a&gt;。
-不用注册，直接用第三方登录即可。&lt;/p&gt;
+&lt;h2 id=&quot;section-2&quot;&gt;5.1. 注册“友言”&lt;/h2&gt;
+&lt;p&gt;写好的博客和观看的人交流是必不可少的，互动可以让我们知道自己的不足之处加以改动。&lt;/p&gt;
 
-&lt;h2 id=&quot;section-3&quot;&gt;5.2. 使用“多说”&lt;/h2&gt;
+&lt;p&gt;这里我使用的是免费的&lt;a href=&quot;http://www.uyan.cc/&quot;&gt;友言&lt;/a&gt;。&lt;/p&gt;
+
+&lt;h2 id=&quot;section-3&quot;&gt;5.2. 使用“友言”&lt;/h2&gt;
 &lt;p&gt;在_config.yml文件中加上以下一段文字即可：&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/source/使用jekyll在GitHub Pages上搭建个人博客/Duoshuo-01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/source/使用jekyll在GitHub Pages上搭建个人博客/UYan-01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;duoshuo，short_name：多说账户上的用户名。&lt;/p&gt;
+&lt;p&gt;使用&lt;a href=&quot;https://github.com/LuckyCat7848/LuckyCat7848.github.io&quot;&gt;该模板&lt;/a&gt;的话只需要在/_includes/LessOrMore/comments-providers/uyan文件中将uid改成你本人的友言uid即可。&lt;/p&gt;
 
-&lt;p&gt;disqus，short_name：在评论区里显示的名称。&lt;/p&gt;
+&lt;p&gt;如果不是使用该模板的话，可以参考&lt;a href=&quot;http://www.zoneky.com/blog/2014/06/15/jekyll-youyan/?utm_source=tuicool&amp;amp;utm_medium=referral&quot;&gt;jekyll配置有言评论插件&lt;/a&gt;。&lt;/p&gt;
 
 </description>
         <pubDate>Tue, 15 Nov 2016 17:55:01 +0800</pubDate>
