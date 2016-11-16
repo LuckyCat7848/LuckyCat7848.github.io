@@ -5,8 +5,8 @@
     <description>Everything is well !</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 16 Nov 2016 23:31:52 +0800</pubDate>
-    <lastBuildDate>Wed, 16 Nov 2016 23:31:52 +0800</lastBuildDate>
+    <pubDate>Wed, 16 Nov 2016 23:46:51 +0800</pubDate>
+    <lastBuildDate>Wed, 16 Nov 2016 23:46:51 +0800</lastBuildDate>
     <generator>Jekyll v3.3.0</generator>
     
       <item>
@@ -528,8 +528,8 @@
 
 </description>
         <pubDate>Tue, 15 Nov 2016 17:55:01 +0800</pubDate>
-        <link>http://localhost:4000/2016/11/15/%E4%BD%BF%E7%94%A8Jekyll%E5%9C%A8GitHub-Pages%E4%B8%8A%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</link>
-        <guid isPermaLink="true">http://localhost:4000/2016/11/15/%E4%BD%BF%E7%94%A8Jekyll%E5%9C%A8GitHub-Pages%E4%B8%8A%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</guid>
+        <link>http://localhost:4000/2016/11/15/%E4%BD%BF%E7%94%A8jekyll%E5%9C%A8GitHub-Pages%E4%B8%8A%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</link>
+        <guid isPermaLink="true">http://localhost:4000/2016/11/15/%E4%BD%BF%E7%94%A8jekyll%E5%9C%A8GitHub-Pages%E4%B8%8A%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</guid>
         
         <category>Jekyll</category>
         
