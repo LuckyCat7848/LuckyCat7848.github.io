@@ -45,11 +45,13 @@ kramdown:
 
 FB:
   comments :
-    provider : duoshuo
-    duoshuo:
-        short_name : LCat78480 
-    disqus :
-        short_name : LuckyCat 
+    provider : uyan #duoshuo
+    # duoshuo:
+    #     short_name : LCat78480 
+    # disqus :
+    #     short_name : LuckyCat 
+
+
     # facebook :
     #   appid : 123
     #   num_posts: 5
