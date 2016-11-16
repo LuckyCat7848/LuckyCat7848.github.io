@@ -5,8 +5,8 @@
     <description>Everything is well !</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 15 Nov 2016 23:36:43 +0800</pubDate>
-    <lastBuildDate>Tue, 15 Nov 2016 23:36:43 +0800</lastBuildDate>
+    <pubDate>Wed, 16 Nov 2016 15:21:35 +0800</pubDate>
+    <lastBuildDate>Wed, 16 Nov 2016 15:21:35 +0800</lastBuildDate>
     <generator>Jekyll v3.3.0</generator>
     
       <item>
@@ -36,9 +36,14 @@
       &lt;li&gt;&lt;a href=&quot;#godaddyns&quot; id=&quot;markdown-toc-godaddyns&quot;&gt;4.4. Godaddy设置NS&lt;/a&gt;&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#step-5-&quot; id=&quot;markdown-toc-step-5-&quot;&gt;Step 5. 评论功能&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-2&quot; id=&quot;markdown-toc-section-2&quot;&gt;5.1. 注册“多说”&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-3&quot; id=&quot;markdown-toc-section-3&quot;&gt;5.2. 使用“多说”&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;em&gt;GitHub Pages&lt;/em&gt; &lt;em&gt;jekyll&lt;/em&gt; &lt;em&gt;独立域名&lt;/em&gt; &lt;em&gt;域名解析&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;GitHub Pages&lt;/em&gt;  &lt;em&gt;jekyll&lt;/em&gt;  &lt;em&gt;独立域名&lt;/em&gt;  &lt;em&gt;域名解析&lt;/em&gt;&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;网上已经有足够多的相关介绍了，本人也是根据他人写的文章来做的。实践过程中发现很多文章都多少有些过时，提供的操作流程都是旧版网页的，以至于很多地方遇到障碍。还有，很多东西没有详细解释对于小白来说很是不懂。总之，磕磕绊绊的，在此整理下，希望对别人也能有所用处。&lt;/p&gt;
@@ -50,15 +55,15 @@
 
 &lt;hr /&gt;
 
-&lt;p&gt;[TOC]&lt;/p&gt;
-
 &lt;h1 id=&quot;step-1-github&quot;&gt;Step 1. 服务器：GitHub&lt;/h1&gt;
 
 &lt;h2 id=&quot;github&quot;&gt;1.1. 什么是 GitHub？&lt;/h2&gt;
 
-&lt;p&gt;在说GitHub之前，必须要提到Git。Git是分布式版本控制系统。GitHub可以托管各种Git版本库，并提供一个web界面。
-Github 就像是程序员们的Facebook，程序员们，写代码，做项目，在此和全世界的人们分享。
-会使用GitHub的资源，比会搭建个人博客的价值大得多。&lt;/p&gt;
+&lt;p&gt;在说GitHub之前，必须要提到Git。Git是分布式版本控制系统。GitHub可以托管各种Git版本库，并提供一个web界面。&lt;/p&gt;
+
+&lt;p&gt;Github 就像是程序员们的Facebook，程序员们，写代码，做项目，在此和全世界的人们分享。&lt;/p&gt;
+
+&lt;p&gt;会使用GitHub的资源，比会搭建个人博客的价值大得多。&lt;/p&gt;
 
 &lt;h2 id=&quot;github-pages&quot;&gt;1.2. 什么是GitHub Pages？&lt;/h2&gt;
 
@@ -66,8 +71,9 @@ Github 就像是程序员们的Facebook，程序员们，写代码，做项目�
   &lt;p&gt;Website for you and your project.&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;GitHub Pages有两种。一种是为个人或者组织的博客。一种是为项目的博客。前者一个账号只能建一个，后者，可以建很多个。
-这样的博客，免费、独立、安全。&lt;/p&gt;
+&lt;p&gt;GitHub Pages有两种。一种是为个人或者组织的博客。一种是为项目的博客。前者一个账号只能建一个，后者，可以建很多个。&lt;/p&gt;
+
+&lt;p&gt;这样的博客，免费、独立、安全。&lt;/p&gt;
 
 &lt;h2 id=&quot;github-pages-1&quot;&gt;1.3. 创建GitHub Pages博客&lt;/h2&gt;
 
@@ -76,6 +82,8 @@ Github 就像是程序员们的Facebook，程序员们，写代码，做项目�
   &lt;li&gt;然后，建立一个仓库&lt;/li&gt;
 &lt;/ul&gt;
 
+&lt;p&gt;&lt;img src=&quot;/source/使用jekyll在GitHub Pages上搭建个人博客/GitHub Pages-01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
 &lt;blockquote&gt;
   &lt;p&gt;&lt;strong&gt;Repository name(仓库名)必须是 your_user_name.github.io&lt;/strong&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -83,17 +91,27 @@ Github 就像是程序员们的Facebook，程序员们，写代码，做项目�
 &lt;p&gt;比如，我的GitHub用户名是LuckyCat7848，那么仓库名就取为 LuckyCat7848.github.io。这一点很重要，必须这么写！因为GitHub上的用户名是唯一的，所以上面说一个账号只能建一个个人博客。&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;然后，按照提示步骤操作&lt;/li&gt;
-  &lt;li&gt;最后，新建一个index.html文件，push。&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;然后，按照提示步骤操作&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;最后，新建一个index.html文件，push。&lt;/p&gt;
+  &lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;打开终端，切换到本地GitHub目录下。（本人之前配置过，如果没有操作过的，自己找教程吧。）&lt;/p&gt;
 
 &lt;p&gt;克隆GitHub上的这个Responsitory文件夹到本地：&lt;/p&gt;
 
+&lt;p&gt;&lt;img src=&quot;/source/使用jekyll在GitHub Pages上搭建个人博客/GitHub Pages-02.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
 &lt;p&gt;切换到该Responsitory下，并且创建一个只写着Hello World的.html文件：&lt;/p&gt;
 
+&lt;p&gt;&lt;img src=&quot;/source/使用jekyll在GitHub Pages上搭建个人博客/GitHub Pages-03.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
 &lt;p&gt;提交这些改动：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/source/使用jekyll在GitHub Pages上搭建个人博客/GitHub Pages-04.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;官网上有命令行和客户端两种操作方式（&lt;a href=&quot;https://pages.github.com/&quot;&gt;官网教程&lt;/a&gt;）。等一小会，网站生效，访问your_user_name.github.io，就能看见完整的网页了，此时网页上还只有一句Hello World。&lt;/p&gt;
 
@@ -102,12 +120,16 @@ Github 就像是程序员们的Facebook，程序员们，写代码，做项目�
 &lt;h2 id=&quot;jekyll&quot;&gt;2.1. 什么是 jekyll？&lt;/h2&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;&lt;a href=&quot;http://jekyllrb.com/&quot;&gt;Jekyll&lt;/a&gt; is a simple, blog-aware, static site generator.
-&lt;a href=&quot;http://jekyllrb.com/&quot;&gt;Jekyll&lt;/a&gt; 是一个简单的博客形态的静态站点生产机器。&lt;/p&gt;
+  &lt;p&gt;&lt;a href=&quot;http://jekyllrb.com/&quot;&gt;Jekyll&lt;/a&gt; is a simple, blog-aware, static site generator.&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;解释一下，Jekyll可以将纯文本转换为静态博客网站。你整个网站的页面都是它生成的，从主页index到文章post。
-比如，文章怎么写？标准网页格式是扩展标记语言HTML。纯手写？未免太麻烦。大家，多偏爱Markdown。所以，就用它写。不过，你需要有一个能把你用Markdown格式写的文章，转化为HTML网页的东西，这里使用的就是静态网页生成器。&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;a href=&quot;http://jekyllrb.com/&quot;&gt;Jekyll&lt;/a&gt; 是一个简单的博客形态的静态站点生产机器。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;解释一下，Jekyll可以将纯文本转换为静态博客网站。你整个网站的页面都是它生成的，从主页index到文章post。&lt;/p&gt;
+
+&lt;p&gt;比如，文章怎么写？标准网页格式是扩展标记语言HTML。纯手写？未免太麻烦。大家，多偏爱Markdown。所以，就用它写。不过，你需要有一个能把你用Markdown格式写的文章，转化为HTML网页的东西，这里使用的就是静态网页生成器。&lt;/p&gt;
 
 &lt;h2 id=&quot;jekyll-1&quot;&gt;2.2. Jekyll目录&lt;/h2&gt;
 
@@ -146,8 +168,9 @@ Github 就像是程序员们的Facebook，程序员们，写代码，做项目�
   &lt;p&gt;&lt;strong&gt;sudo gem install bundler&lt;/strong&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;如果出现以下error：（不好意思，图丢失了）
-使用命令行：&lt;/p&gt;
+&lt;p&gt;如果出现以下error：（不好意思，图丢失了）&lt;/p&gt;
+
+&lt;p&gt;使用命令行：&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;&lt;strong&gt;sudo gem install -n /usr/local/bin bundler&lt;/strong&gt;&lt;/p&gt;
@@ -176,13 +199,15 @@ Github 就像是程序员们的Facebook，程序员们，写代码，做项目�
 &lt;h2 id=&quot;section&quot;&gt;3.1. 如何选择和修改主题？&lt;/h2&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;一种方式是使用他人写好的，免费开源的。
-&amp;gt;&lt;a href=&quot;http://jekyllthemes.org/&quot;&gt;Jekyll 主题&lt;/a&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;另一种是，你也可以自己写或修改，需要懂一些前端的知识。&lt;/p&gt;
-  &lt;/li&gt;
+  &lt;li&gt;一种方式是使用他人写好的，免费开源的。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;a href=&quot;http://jekyllthemes.org/&quot;&gt;Jekyll 主题&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;另一种是，你也可以自己写或修改，需要懂一些前端的知识。&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2 id=&quot;jekyll-3&quot;&gt;3.2. 如何使用jekyll博客模板&lt;/h2&gt;
@@ -209,15 +234,18 @@ Github 就像是程序员们的Facebook，程序员们，写代码，做项目�
 
 &lt;ul&gt;
   &lt;li&gt;购买域名，著名的有&lt;a href=&quot;https://uk.godaddy.com/&quot;&gt;Godaddy&lt;/a&gt;，支持支付宝。在网上可以搜到优惠码，优惠下来价格不高。&lt;/li&gt;
-  &lt;li&gt;搜索自己想要的域名，购买时切记去搜索优惠码。
-结算的时候本人是用信用卡支付的，不同的优惠码优惠的产品和优惠多少和支持的支付方式不同，信用卡的话要用VISA全球卡。
-还有我遇到过结算的时候怎么都结算不了，也是因为优惠码的问题，多试几个就好了。&lt;/li&gt;
+  &lt;li&gt;搜索自己想要的域名，购买时切记去搜索优惠码。&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;p&gt;结算的时候本人是用信用卡支付的，不同的优惠码优惠的产品和优惠多少和支持的支付方式不同，信用卡的话要用VISA全球卡。&lt;/p&gt;
+
+&lt;p&gt;还有我遇到过结算的时候怎么都结算不了，也是因为优惠码的问题，多试几个就好了。&lt;/p&gt;
 
 &lt;h2 id=&quot;github-1&quot;&gt;4.2. GitHub上的修改&lt;/h2&gt;
 
-&lt;p&gt;在终端中或GitHub上在your_user_name.github.io修改CNAME文件，在里面写入你刚刚买的域名，例如我的是“LuckyCatHome.com”。
-在终端改的话改完记得向上面那样操作，提交到GitHub上。&lt;/p&gt;
+&lt;p&gt;在终端中或GitHub上在your_user_name.github.io下修改CNAME文件，在里面写入你刚刚买的域名，例如我的是“LuckyCatHome.com”。&lt;/p&gt;
+
+&lt;p&gt;在终端改的话改完记得向上面那样操作，提交到GitHub上。&lt;/p&gt;
 
 &lt;h2 id=&quot;dnspod&quot;&gt;4.3. DnsPod域名解析&lt;/h2&gt;
 
@@ -225,35 +253,50 @@ Github 就像是程序员们的Facebook，程序员们，写代码，做项目�
 
 &lt;ul&gt;
   &lt;li&gt;首先，注册DnsPods。&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;添加购买好的域名：&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;设置如下：&lt;/li&gt;
+  &lt;li&gt;然后，添加购买好的域名：&lt;/li&gt;
 &lt;/ul&gt;
 
+&lt;p&gt;&lt;img src=&quot;/source/使用jekyll在GitHub Pages上搭建个人博客/DnsPod-01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;然后，设置如下：&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/source/使用jekyll在GitHub Pages上搭建个人博客/DnsPod-02.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
 &lt;blockquote&gt;
-  &lt;p&gt;第2、3条是默认设置好的。
-第一条的记录值是“your_user_name.github.io.”，io后面还有一个.，有文章特注了，我也没有试过不写的后果，还是写上吧。
-最后两条的记录值是GitHub Pages的服务器地址。&lt;/p&gt;
+  &lt;p&gt;第2、3条是默认设置好的。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;第一条的记录值是“your_user_name.github.io.”，io后面还有一个.，有文章特注了，我也没有试过不写的后果，还是写上吧。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;最后两条的记录值是GitHub Pages的服务器地址。&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;作用：&lt;/p&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;.com需要使用A记录进行域名解析。
-告诉所有DNS服务器，对于LuckyCat.com的访问都会被重定向到LuckyCat7848.github.io。&lt;/p&gt;
+  &lt;p&gt;.com需要使用A记录进行域名解析。&lt;/p&gt;
 &lt;/blockquote&gt;
+
+&lt;p&gt;告诉所有DNS服务器，对于LuckyCat.com的访问都会被重定向到LuckyCat7848.github.io。&lt;/p&gt;
 
 &lt;h2 id=&quot;godaddyns&quot;&gt;4.4. Godaddy设置NS&lt;/h2&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;点击该域名箭头下的“Set Nameservers”&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;添加DnsPod的两个默认记录值，如下：&lt;/p&gt;
-  &lt;/li&gt;
+  &lt;li&gt;点击该域名箭头下的“Set Nameservers”：&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/source/使用jekyll在GitHub Pages上搭建个人博客/Godaddy-01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;添加DnsPod的两个默认记录值，如下：&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/source/使用jekyll在GitHub Pages上搭建个人博客/Godaddy-02.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;稍等个10分钟左右，在浏览器里输入你的域名就可以看到博客内容啦！&lt;/p&gt;
 
@@ -261,10 +304,26 @@ Github 就像是程序员们的Facebook，程序员们，写代码，做项目�
   &lt;p&gt;不要忘记初衷，在折腾之后，表达写作，才是最重要的事情。&lt;/p&gt;
 &lt;/blockquote&gt;
 
+&lt;h1 id=&quot;step-5-&quot;&gt;Step 5. 评论功能&lt;/h1&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;5.1. 注册“多说”&lt;/h2&gt;
+&lt;p&gt;写好的博客和观看的人交流是必不可少的，互动可以让我们知道自己的不足之处加以改动。
+这里我使用的是免费的&lt;a href=&quot;http://duoshuo.com/&quot;&gt;多说&lt;/a&gt;。
+不用注册，直接用第三方登录即可。&lt;/p&gt;
+
+&lt;h2 id=&quot;section-3&quot;&gt;5.2. 使用“多说”&lt;/h2&gt;
+&lt;p&gt;在_config.yml文件中加上以下一段文字即可：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/source/使用jekyll在GitHub Pages上搭建个人博客/Duoshuo-01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;duoshuo，short_name：多说账户上的用户名。&lt;/p&gt;
+
+&lt;p&gt;disqus，short_name：在评论区里显示的名称。&lt;/p&gt;
+
 </description>
         <pubDate>Tue, 15 Nov 2016 17:55:01 +0800</pubDate>
-        <link>http://localhost:4000/2016/11/15/welcome-to-LuckyCat-Home/</link>
-        <guid isPermaLink="true">http://localhost:4000/2016/11/15/welcome-to-LuckyCat-Home/</guid>
+        <link>http://localhost:4000/2016/11/15/%E4%BD%BF%E7%94%A8jekyll%E5%9C%A8GitHub-Pages%E4%B8%8A%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</link>
+        <guid isPermaLink="true">http://localhost:4000/2016/11/15/%E4%BD%BF%E7%94%A8jekyll%E5%9C%A8GitHub-Pages%E4%B8%8A%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</guid>
         
         <category>jekyll</category>
         

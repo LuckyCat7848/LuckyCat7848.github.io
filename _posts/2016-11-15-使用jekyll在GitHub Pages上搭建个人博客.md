@@ -6,14 +6,13 @@ categories: 技术
 tag: jekyll
 ---
 
+
 * TOC
 {:toc}
 
 
 
-
-
-*GitHub Pages* *jekyll* *独立域名* *域名解析*
+*GitHub Pages*  *jekyll*  *独立域名*  *域名解析*
 
 
 >网上已经有足够多的相关介绍了，本人也是根据他人写的文章来做的。实践过程中发现很多文章都多少有些过时，提供的操作流程都是旧版网页的，以至于很多地方遇到障碍。还有，很多东西没有详细解释对于小白来说很是不懂。总之，磕磕绊绊的，在此整理下，希望对别人也能有所用处。
@@ -21,8 +20,6 @@ tag: jekyll
 >网上有很多搭建博客的方式，如果你不知道如何选择，可以看看[《What are the best solutions for a personal blog?》](http://www.slant.co/topics/329/~what-is-the-best-solution-for-a-personal-blog)，文章分析了不同博客平台的优缺点和针对人群。最终，我的选择是Jekyll+Github Pages。
 
 -------------------
-
-[TOC]
 
 
 Step 1. 服务器：GitHub
@@ -32,7 +29,9 @@ Step 1. 服务器：GitHub
 ------------------------------------
 
 在说GitHub之前，必须要提到Git。Git是分布式版本控制系统。GitHub可以托管各种Git版本库，并提供一个web界面。
+
 Github 就像是程序员们的Facebook，程序员们，写代码，做项目，在此和全世界的人们分享。
+
 会使用GitHub的资源，比会搭建个人博客的价值大得多。
 
 1.2. 什么是GitHub Pages？
@@ -41,6 +40,7 @@ Github 就像是程序员们的Facebook，程序员们，写代码，做项目�
 >Website for you and your project.
 
 GitHub Pages有两种。一种是为个人或者组织的博客。一种是为项目的博客。前者一个账号只能建一个，后者，可以建很多个。
+
 这样的博客，免费、独立、安全。
 
 1.3. 创建GitHub Pages博客
@@ -49,22 +49,32 @@ GitHub Pages有两种。一种是为个人或者组织的博客。一种是为�
 - 首先，注册 [Github](https://github.com/)
 - 然后，建立一个仓库
 
+![]({{ '/source/使用jekyll在GitHub Pages上搭建个人博客/GitHub Pages-01.png'}})
+
 >**Repository name(仓库名)必须是 your_user_name.github.io**
 
 比如，我的GitHub用户名是LuckyCat7848，那么仓库名就取为 LuckyCat7848.github.io。这一点很重要，必须这么写！因为GitHub上的用户名是唯一的，所以上面说一个账号只能建一个个人博客。
 
 - 然后，按照提示步骤操作
+
 - 最后，新建一个index.html文件，push。
 
 打开终端，切换到本地GitHub目录下。（本人之前配置过，如果没有操作过的，自己找教程吧。）
 
 克隆GitHub上的这个Responsitory文件夹到本地：
 
+![]({{ '/source/使用jekyll在GitHub Pages上搭建个人博客/GitHub Pages-02.png'}})
+
 切换到该Responsitory下，并且创建一个只写着Hello World的.html文件：
+
+![]({{ '/source/使用jekyll在GitHub Pages上搭建个人博客/GitHub Pages-03.png'}})
 
 提交这些改动：
 
+![]({{ '/source/使用jekyll在GitHub Pages上搭建个人博客/GitHub Pages-04.png'}})
+
 官网上有命令行和客户端两种操作方式（[官网教程](https://pages.github.com/)）。等一小会，网站生效，访问your_user_name.github.io，就能看见完整的网页了，此时网页上还只有一句Hello World。
+
 
 
 
@@ -75,9 +85,11 @@ Step 2. 安装jekyll
 ------------------------------------
 
 >[Jekyll](http://jekyllrb.com/) is a simple, blog-aware, static site generator.
-[Jekyll](http://jekyllrb.com/) 是一个简单的博客形态的静态站点生产机器。
+
+>[Jekyll](http://jekyllrb.com/) 是一个简单的博客形态的静态站点生产机器。
 
 解释一下，Jekyll可以将纯文本转换为静态博客网站。你整个网站的页面都是它生成的，从主页index到文章post。
+
 比如，文章怎么写？标准网页格式是扩展标记语言HTML。纯手写？未免太麻烦。大家，多偏爱Markdown。所以，就用它写。不过，你需要有一个能把你用Markdown格式写的文章，转化为HTML网页的东西，这里使用的就是静态网页生成器。
 
 2.2. Jekyll目录
@@ -112,6 +124,7 @@ Step 2. 安装jekyll
 >**sudo gem install bundler**
 
 如果出现以下error：（不好意思，图丢失了）
+
 使用命令行：
 
 >**sudo gem install -n /usr/local/bin bundler**
@@ -137,6 +150,7 @@ Step 3. 装修博客
 ------------------------------------
 
 - 一种方式是使用他人写好的，免费开源的。
+
 >[Jekyll 主题](http://jekyllthemes.org/)
 
 - 另一种是，你也可以自己写或修改，需要懂一些前端的知识。
@@ -164,13 +178,16 @@ Step 4. 独立域名
 
 - 购买域名，著名的有[Godaddy](https://uk.godaddy.com/)，支持支付宝。在网上可以搜到优惠码，优惠下来价格不高。
 - 搜索自己想要的域名，购买时切记去搜索优惠码。
+
 结算的时候本人是用信用卡支付的，不同的优惠码优惠的产品和优惠多少和支持的支付方式不同，信用卡的话要用VISA全球卡。
+
 还有我遇到过结算的时候怎么都结算不了，也是因为优惠码的问题，多试几个就好了。
 
 4.2. GitHub上的修改
 ------------------------------------
 
-在终端中或GitHub上在your_user_name.github.io修改CNAME文件，在里面写入你刚刚买的域名，例如我的是“LuckyCatHome.com”。
+在终端中或GitHub上在your_user_name.github.io下修改CNAME文件，在里面写入你刚刚买的域名，例如我的是“LuckyCatHome.com”。
+
 在终端改的话改完记得向上面那样操作，提交到GitHub上。
 
 4.3. DnsPod域名解析
@@ -179,29 +196,61 @@ Step 4. 独立域名
 [DnsPod](https://www.dnspod.cn/)做域名解析处理可以加快博客的访问。
 
 - 首先，注册DnsPods。
-- 添加购买好的域名：
+- 然后，添加购买好的域名：
 
-- 设置如下：
+![]({{ '/source/使用jekyll在GitHub Pages上搭建个人博客/DnsPod-01.png'}})
+
+- 然后，设置如下：
+
+![]({{ '/source/使用jekyll在GitHub Pages上搭建个人博客/DnsPod-02.png'}})
 
 >第2、3条是默认设置好的。
-第一条的记录值是“your_user_name.github.io.”，io后面还有一个.，有文章特注了，我也没有试过不写的后果，还是写上吧。
-最后两条的记录值是GitHub Pages的服务器地址。
+
+>第一条的记录值是“your_user_name.github.io.”，io后面还有一个.，有文章特注了，我也没有试过不写的后果，还是写上吧。
+
+>最后两条的记录值是GitHub Pages的服务器地址。
 
 作用：
 
 >.com需要使用A记录进行域名解析。
+
 告诉所有DNS服务器，对于LuckyCat.com的访问都会被重定向到LuckyCat7848.github.io。
 
 4.4. Godaddy设置NS
 ------------------------------------
 
-- 点击该域名箭头下的“Set Nameservers”
+- 点击该域名箭头下的“Set Nameservers”：
+
+![]({{ '/source/使用jekyll在GitHub Pages上搭建个人博客/Godaddy-01.png'}})
 
 - 添加DnsPod的两个默认记录值，如下：
+
+![]({{ '/source/使用jekyll在GitHub Pages上搭建个人博客/Godaddy-02.png'}})
 
 稍等个10分钟左右，在浏览器里输入你的域名就可以看到博客内容啦！
 
 >不要忘记初衷，在折腾之后，表达写作，才是最重要的事情。
+
+
+Step 5. 评论功能
+====================================
+
+5.1. 注册“多说”
+------------------------------------
+写好的博客和观看的人交流是必不可少的，互动可以让我们知道自己的不足之处加以改动。
+这里我使用的是免费的[多说](http://duoshuo.com/)。
+不用注册，直接用第三方登录即可。
+
+5.2. 使用“多说”
+------------------------------------
+在_config.yml文件中加上以下一段文字即可：
+
+![]({{ '/source/使用jekyll在GitHub Pages上搭建个人博客/Duoshuo-01.png'}})
+
+
+duoshuo，short_name：多说账户上的用户名。
+
+disqus，short_name：在评论区里显示的名称。
 
 
 

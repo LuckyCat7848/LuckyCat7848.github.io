@@ -25,11 +25,20 @@ highlighter: rouge
 markdown: kramdown
 kramdown:
   input: GFM
+  toc_levels: 1..6
   extensions:
     - autolink
     - footnotes
     - smart
     - with_toc_data
+    - fenced_code_blocks
+    - hard_wrap
+    - tables
+    - strikethrough
+    - superscript
+    - highlight
+    - prettify
+    - no_intra_emphasis
   enable_coderay: true
   syntax_highlighter: rouge
   
@@ -38,9 +47,9 @@ FB:
   comments :
     provider : duoshuo
     duoshuo:
-        short_name : LuckyCat7848
+        short_name : LuckyCat 
     disqus :
-        short_name : LuckyCat
+        short_name : LuckyCat 
     # facebook :
     #   appid : 123
     #   num_posts: 5
