@@ -250,5 +250,5 @@ Step 5. 评论功能
 
 使用[该模板](https://github.com/LuckyCat7848/LuckyCat7848.github.io)的话只需要在/_includes/LessOrMore/comments-providers/uyan文件中将uid改成你本人的友言uid即可。
 
-如果不是使用该模板的话，可以参考[Jekyll配置有言评论插件](http://luckycathome.com/2016/11/16/Jekyll%E9%85%8D%E7%BD%AE%E6%9C%89%E8%A8%80%E8%AF%84%E8%AE%BA%E6%8F%92%E4%BB%B6/)。
+如果不是使用该模板的话，可以参考[Jekyll配置有言评论插件](http://luckycathome.com/2016/11/16/Jekyll%E9%85%8D%E7%BD%AE%E5%8F%8B%E8%A8%80%E8%AF%84%E8%AE%BA%E6%8F%92%E4%BB%B6/)。
 
