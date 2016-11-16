@@ -5,8 +5,8 @@
     <description>Everything is well !</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 16 Nov 2016 23:15:41 +0800</pubDate>
-    <lastBuildDate>Wed, 16 Nov 2016 23:15:41 +0800</lastBuildDate>
+    <pubDate>Wed, 16 Nov 2016 23:28:17 +0800</pubDate>
+    <lastBuildDate>Wed, 16 Nov 2016 23:28:17 +0800</lastBuildDate>
     <generator>Jekyll v3.3.0</generator>
     
       <item>
@@ -62,11 +62,11 @@
       </item>
     
       <item>
-        <title>Jekyll配置有言评论插件</title>
+        <title>Jekyll配置友言评论插件</title>
         <description>
 &lt;p&gt;我的文件目录如下：&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/source/Jekyll配置有言评论插件/01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/source/Jekyll配置友言评论插件/01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;首先在/_includes/LessOrMore/comments-providers/uyan存放友言的插件脚本。&lt;/p&gt;
 
@@ -119,8 +119,8 @@
 &lt;p&gt;不push本地预览的话可以查看页面效果但是不能评论，不是bug，push上去就可以了。&lt;/p&gt;
 </description>
         <pubDate>Wed, 16 Nov 2016 22:15:31 +0800</pubDate>
-        <link>http://localhost:4000/2016/11/16/Jekyll%E9%85%8D%E7%BD%AE%E6%9C%89%E8%A8%80%E8%AF%84%E8%AE%BA%E6%8F%92%E4%BB%B6/</link>
-        <guid isPermaLink="true">http://localhost:4000/2016/11/16/Jekyll%E9%85%8D%E7%BD%AE%E6%9C%89%E8%A8%80%E8%AF%84%E8%AE%BA%E6%8F%92%E4%BB%B6/</guid>
+        <link>http://localhost:4000/2016/11/16/Jekyll%E9%85%8D%E7%BD%AE%E5%8F%8B%E8%A8%80%E8%AF%84%E8%AE%BA%E6%8F%92%E4%BB%B6/</link>
+        <guid isPermaLink="true">http://localhost:4000/2016/11/16/Jekyll%E9%85%8D%E7%BD%AE%E5%8F%8B%E8%A8%80%E8%AF%84%E8%AE%BA%E6%8F%92%E4%BB%B6/</guid>
         
         <category>Jekyll</category>
         
