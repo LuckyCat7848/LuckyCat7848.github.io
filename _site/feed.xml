@@ -5,9 +5,144 @@
     <description>Everything is well !</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 17 Nov 2016 00:35:37 +0800</pubDate>
-    <lastBuildDate>Thu, 17 Nov 2016 00:35:37 +0800</lastBuildDate>
+    <pubDate>Thu, 17 Nov 2016 15:32:47 +0800</pubDate>
+    <lastBuildDate>Thu, 17 Nov 2016 15:32:47 +0800</lastBuildDate>
     <generator>Jekyll v3.3.0</generator>
+    
+      <item>
+        <title>如何使用我的博客作为Jekyll模版</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;致谢&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;使用&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-2&quot; id=&quot;markdown-toc-section-2&quot;&gt;下载&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-3&quot; id=&quot;markdown-toc-section-3&quot;&gt;配置&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-4&quot; id=&quot;markdown-toc-section-4&quot;&gt;如何写文章&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-5&quot; id=&quot;markdown-toc-section-5&quot;&gt;执行&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-6&quot; id=&quot;markdown-toc-section-6&quot;&gt;效果&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#section-7&quot; id=&quot;markdown-toc-section-7&quot;&gt;关于重复造轮子&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#section-8&quot; id=&quot;markdown-toc-section-8&quot;&gt;关于作者&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;section&quot;&gt;致谢&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;感谢&lt;a href=&quot;https://github.com/&quot;&gt;Github&lt;/a&gt;提供的代码维护和发布平台。&lt;/li&gt;
+  &lt;li&gt;感谢&lt;a href=&quot;https://jekyllrb.com/&quot;&gt;Jekyll&lt;/a&gt;团队做出如此优秀的产品&lt;/li&gt;
+  &lt;li&gt;感谢原作者&lt;a href=&quot;https://github.com/luoyan35714/LessOrMore&quot;&gt;Freud Kang&lt;/a&gt;，从&lt;code class=&quot;highlighter-rouge&quot;&gt;2016.11&lt;/code&gt;起，我的博客选用了此样式模版。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;section-1&quot;&gt;使用&lt;/h1&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;下载&lt;/h2&gt;
+
+&lt;p&gt;使用git从&lt;a href=&quot;https://github.com/LuckyCat7848/LuckyCat7848.github.io&quot;&gt;LessOrMore&lt;/a&gt;主页下载项目&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git clone https://github.com/LuckyCat7848/LuckyCat7848.github.io.git
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;section-3&quot;&gt;配置&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;下载下来后需要配置的文件&lt;code class=&quot;highlighter-rouge&quot;&gt;_config.yml&lt;/code&gt;，打开之后按照如下进行配置。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;特别注意&lt;code class=&quot;highlighter-rouge&quot;&gt;baseurl&lt;/code&gt;的配置。如果是&lt;code class=&quot;highlighter-rouge&quot;&gt;***.github.io&lt;/code&gt;项目，不修改为空’‘的话，会导致JS,CSS等静态资源无法找到的错误&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;name: 博客名称
+email: 邮箱地址
+author: 作者名
+url: 个人网站
+&lt;span class=&quot;c&quot;&gt;### baseurl修改为项目名，如果项目是'***.github.io'，则设置为空''&lt;/span&gt;
+baseurl: &lt;span class=&quot;s2&quot;&gt;&quot;/LessOrMore&quot;&lt;/span&gt;
+resume_site: 个人简历网站
+github: github地址
+github_username: github用户名称
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  toc_levels: 1..6
+  enable_coderay: &lt;span class=&quot;nb&quot;&gt;true
+  &lt;/span&gt;syntax_highlighter: rouge
+  
+FB:
+  comments :
+    provider : uyan 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;因为我的博客使用的是&lt;a href=&quot;http://www.uyan.cc/&quot;&gt;友言&lt;/a&gt;实现评论功能，所以要在&lt;code class=&quot;highlighter-rouge&quot;&gt;/_includes/LessOrMore/comments-providers/uyan&lt;/code&gt;文件中把友言的用户id改成你注册友言的账号id。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section-4&quot;&gt;如何写文章&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;/_posts/&lt;/code&gt;目录下是所有发布的博客文件夹。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;/source/&lt;/code&gt;目录下是所有发布的博客的资源文件，如博客中用到的图片。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;在&lt;code class=&quot;highlighter-rouge&quot;&gt;/_posts/&lt;/code&gt;目录下新建一个文件，可以创建文件夹并在文件夹中添加文件，方便维护。在新建文件中粘贴如下信息，并修改以下的&lt;code class=&quot;highlighter-rouge&quot;&gt;titile&lt;/code&gt;,&lt;code class=&quot;highlighter-rouge&quot;&gt;date&lt;/code&gt;,&lt;code class=&quot;highlighter-rouge&quot;&gt;categories&lt;/code&gt;,&lt;code class=&quot;highlighter-rouge&quot;&gt;tag&lt;/code&gt;的相关信息，添加&lt;code class=&quot;highlighter-rouge&quot;&gt;* content {:toc}&lt;/code&gt;为目录相关信息，在进行正文书写前需要在目录和正文之间输入至少2行空行。然后按照正常的Markdown语法书写正文。&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;---
+layout: post
+&lt;span class=&quot;c&quot;&gt;#标题配置&lt;/span&gt;
+title:  标题
+&lt;span class=&quot;c&quot;&gt;#时间配置&lt;/span&gt;
+date:   2016-08-27 01:08:00 +0800
+&lt;span class=&quot;c&quot;&gt;#大类配置&lt;/span&gt;
+categories: document
+&lt;span class=&quot;c&quot;&gt;#小类配置&lt;/span&gt;
+tag: 教程
+---
+
+&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; content
+&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;:toc&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+
+我是正文。我是正文。我是正文。我是正文。我是正文。我是正文。
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;section-5&quot;&gt;执行&lt;/h2&gt;
+
+&lt;p&gt;在终端中输入下列命令：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;jekyll server
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;section-6&quot;&gt;效果&lt;/h2&gt;
+&lt;p&gt;打开浏览器并输入URL&lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost:4000/&lt;/code&gt;，回车，即可看到博客运行效果。&lt;/p&gt;
+
+&lt;p&gt;这只是本地查看的效果，真正的博客还是要push到git上。具体不懂的问题可以查看&lt;a href=&quot;http://luckycathome.com/2016/11/15/%E4%BD%BF%E7%94%A8Jekyll%E5%9C%A8GitHub-Pages%E4%B8%8A%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/&quot;&gt;使用Jekyll在GitHub Pages上搭建个人博客&lt;/a&gt;。&lt;/p&gt;
+
+&lt;h1 id=&quot;section-7&quot;&gt;关于重复造轮子&lt;/h1&gt;
+
+&lt;p&gt;很明显，我在重复造轮子。对于造轮子这个事情，我的想法很简单，不是觉得我一定做得比别人好，只是想按照自己的想法尽量写的细一点，或许适合一些人。当然，这个过程更是可以让自己有所长进。&lt;/p&gt;
+
+&lt;h1 id=&quot;section-8&quot;&gt;关于作者&lt;/h1&gt;
+
+&lt;p&gt;热爱开源，热爱折腾的iOS程序猿。更多个人信息和联系方式可以参照&lt;a href=&quot;http://www.LuckyCatHome.com/Resume.io/&quot;&gt;我的简介&lt;/a&gt;。&lt;/p&gt;
+
+</description>
+        <pubDate>Thu, 17 Nov 2016 15:22:09 +0800</pubDate>
+        <link>http://localhost:4000/2016/11/17/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%E4%BD%9C%E4%B8%BAJekyll%E6%A8%A1%E7%89%88/</link>
+        <guid isPermaLink="true">http://localhost:4000/2016/11/17/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%E4%BD%9C%E4%B8%BAJekyll%E6%A8%A1%E7%89%88/</guid>
+        
+        <category>Jekyll</category>
+        
+        
+        <category>文档</category>
+        
+      </item>
     
       <item>
         <title>Jekyll配置友言评论插件</title>
@@ -73,7 +208,7 @@
         <category>Jekyll</category>
         
         
-        <category>技术</category>
+        <category>文档</category>
         
       </item>
     
@@ -396,7 +531,7 @@
         <category>Jekyll</category>
         
         
-        <category>技术</category>
+        <category>文档</category>
         
       </item>
     
@@ -532,7 +667,7 @@
       </item>
     
       <item>
-        <title>Cocoapods的安装和使用</title>
+        <title>视频截取&amp;裁剪为正方形</title>
         <description>
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#import &amp;lt;AVFoundation/AVFoundation.h&amp;gt;&lt;/span&gt;
 &lt;span class=&quot;c&quot;&gt;#import &amp;lt;MobileCoreServices/MobileCoreServices.h&amp;gt;&lt;/span&gt;
@@ -787,7 +922,7 @@
         <category>工具</category>
         
         
-        <category>技术</category>
+        <category>文档</category>
         
       </item>
     

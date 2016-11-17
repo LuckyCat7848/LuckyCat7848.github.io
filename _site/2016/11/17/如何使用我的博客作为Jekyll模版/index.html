@@ -5,14 +5,14 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Jekyll配置友言评论插件</title>
+	<title>如何使用我的博客作为Jekyll模版</title>
 
 	<link rel="shortcut icon" href="/styles/images/favicon.jpg">
 	<link rel="icon" href="/styles/images/favicon.jpg">
 
 	<link rel="stylesheet" href="/styles/css/index.css">
 	<link rel="stylesheet" href="/styles/css/fontawesome/css/font-awesome.min.css">
-	<link rel="canonical" href="/2016/11/16/Jekyll%E9%85%8D%E7%BD%AE%E5%8F%8B%E8%A8%80%E8%AF%84%E8%AE%BA%E6%8F%92%E4%BB%B6/">
+	<link rel="canonical" href="/2016/11/17/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%E4%BD%9C%E4%B8%BAJekyll%E6%A8%A1%E7%89%88/">
 	<link rel="alternate" type="application/rss+xml" title="LuckyCat's Blog" href="/feed.xml">
 	
 	<meta name="description" content="康志华;个人博客;学而不思则罔;思而不学则殆;生命不止;折腾不休">
@@ -87,8 +87,8 @@
   <div class="container">
   	
   		<!--
-		    <h1>Jekyll配置友言评论插件</h1>
-		    <p>Post on Nov 16, 2016 by <a href="/about">LuckyCat</a></p>
+		    <h1>如何使用我的博客作为Jekyll模版</h1>
+		    <p>Post on Nov 17, 2016 by <a href="/about">LuckyCat</a></p>
 		-->
 		    <h1>Everything is well !</h1>
     
@@ -229,68 +229,135 @@
       <div class="panel docs-content">
         <div class="wrapper">
             <header class="post-header">
-              <h1 class="post-title">Jekyll配置友言评论插件</h1>
+              <h1 class="post-title">如何使用我的博客作为Jekyll模版</h1>
               <!--
-                <p class="post-meta">Nov 16, 2016</p>
+                <p class="post-meta">Nov 17, 2016</p>
               -->
-              <div class="meta">Posted on <span class="postdate">Nov 16, 2016</span> By <a target="_blank" href="http://localhost:4000">LuckyCat</a></div>
+              <div class="meta">Posted on <span class="postdate">Nov 17, 2016</span> By <a target="_blank" href="http://localhost:4000">LuckyCat</a></div>
               <br />
             </header>
             <article class="post-content">
-              
-<p>我的文件目录如下：</p>
+              <ul id="markdown-toc">
+  <li><a href="#section" id="markdown-toc-section">致谢</a></li>
+  <li><a href="#section-1" id="markdown-toc-section-1">使用</a>    <ul>
+      <li><a href="#section-2" id="markdown-toc-section-2">下载</a></li>
+      <li><a href="#section-3" id="markdown-toc-section-3">配置</a></li>
+      <li><a href="#section-4" id="markdown-toc-section-4">如何写文章</a></li>
+      <li><a href="#section-5" id="markdown-toc-section-5">执行</a></li>
+      <li><a href="#section-6" id="markdown-toc-section-6">效果</a></li>
+    </ul>
+  </li>
+  <li><a href="#section-7" id="markdown-toc-section-7">关于重复造轮子</a></li>
+  <li><a href="#section-8" id="markdown-toc-section-8">关于作者</a></li>
+</ul>
 
-<p><img src="/source/Jekyll配置友言评论插件/01.png" alt="" /></p>
+<h1 id="section">致谢</h1>
+<ul>
+  <li>感谢<a href="https://github.com/">Github</a>提供的代码维护和发布平台。</li>
+  <li>感谢<a href="https://jekyllrb.com/">Jekyll</a>团队做出如此优秀的产品</li>
+  <li>感谢原作者<a href="https://github.com/luoyan35714/LessOrMore">Freud Kang</a>，从<code class="highlighter-rouge">2016.11</code>起，我的博客选用了此样式模版。</li>
+</ul>
 
-<p>首先在/_includes/LessOrMore/comments-providers/uyan存放友言的插件脚本。</p>
+<h1 id="section-1">使用</h1>
 
-<p>去<a href="http://www.uyan.cc/">友言</a>官网去注册一个账号，查看自己的id，然后把下列代码放在uyan这个文件中：</p>
+<h2 id="section-2">下载</h2>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="o">&lt;</span><span class="n">div</span> <span class="nb">id</span><span class="o">=</span><span class="s">"uyan_frame"</span><span class="o">&gt;&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
-<span class="o">&lt;</span><span class="n">script</span> <span class="nb">type</span><span class="o">=</span><span class="s">"text/javascript"</span><span class="o">&gt;</span>
-    <span class="p">(</span><span class="n">function</span><span class="p">()</span> <span class="p">{</span>
-        <span class="n">var</span> <span class="n">dsq</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="n">createElement</span><span class="p">(</span><span class="s">'script'</span><span class="p">);</span> <span class="n">dsq</span><span class="o">.</span><span class="nb">type</span> <span class="o">=</span> <span class="s">'text/javascript'</span><span class="p">;</span> <span class="n">dsq</span><span class="o">.</span><span class="n">async</span> <span class="o">=</span> <span class="n">true</span><span class="p">;</span>
-        <span class="n">dsq</span><span class="o">.</span><span class="n">src</span> <span class="o">=</span> <span class="s">'http://v2.uyan.cc/code/uyan.js?uid=你的ID'</span><span class="p">;</span>
-        <span class="p">(</span><span class="n">document</span><span class="o">.</span><span class="n">getElementsByTagName</span><span class="p">(</span><span class="s">'head'</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">||</span> <span class="n">document</span><span class="o">.</span><span class="n">getElementsByTagName</span><span class="p">(</span><span class="s">'body'</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">appendChild</span><span class="p">(</span><span class="n">dsq</span><span class="p">);</span>
-    <span class="p">})();</span>
-<span class="o">&lt;/</span><span class="n">script</span><span class="o">&gt;</span>
+<p>使用git从<a href="https://github.com/LuckyCat7848/LuckyCat7848.github.io">LessOrMore</a>主页下载项目</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>git clone https://github.com/LuckyCat7848/LuckyCat7848.github.io.git
 </code></pre>
 </div>
 
-<p>接下来再编辑/_includes/LessOrMore/comments文件，加上uyan的条件判断，我的该文件代码如下：</p>
+<h2 id="section-3">配置</h2>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
+<ul>
+  <li>下载下来后需要配置的文件<code class="highlighter-rouge">_config.yml</code>，打开之后按照如下进行配置。</li>
+</ul>
 
+<blockquote>
+  <p>特别注意<code class="highlighter-rouge">baseurl</code>的配置。如果是<code class="highlighter-rouge">***.github.io</code>项目，不修改为空’‘的话，会导致JS,CSS等静态资源无法找到的错误</p>
+</blockquote>
 
-  <span class="o">&lt;</span><span class="n">div</span> <span class="nb">id</span><span class="o">=</span><span class="s">"uyan_frame"</span><span class="o">&gt;&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
-<span class="o">&lt;</span><span class="n">script</span> <span class="nb">type</span><span class="o">=</span><span class="s">"text/javascript"</span><span class="o">&gt;</span>
-    <span class="p">(</span><span class="n">function</span><span class="p">()</span> <span class="p">{</span>
-        <span class="n">var</span> <span class="n">dsq</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="n">createElement</span><span class="p">(</span><span class="s">'script'</span><span class="p">);</span> <span class="n">dsq</span><span class="o">.</span><span class="nb">type</span> <span class="o">=</span> <span class="s">'text/javascript'</span><span class="p">;</span> <span class="n">dsq</span><span class="o">.</span><span class="n">async</span> <span class="o">=</span> <span class="n">true</span><span class="p">;</span>
-        <span class="n">dsq</span><span class="o">.</span><span class="n">src</span> <span class="o">=</span> <span class="s">'http://v2.uyan.cc/code/uyan.js?uid=2119519'</span><span class="p">;</span>
-        <span class="p">(</span><span class="n">document</span><span class="o">.</span><span class="n">getElementsByTagName</span><span class="p">(</span><span class="s">'head'</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">||</span> <span class="n">document</span><span class="o">.</span><span class="n">getElementsByTagName</span><span class="p">(</span><span class="s">'body'</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">appendChild</span><span class="p">(</span><span class="n">dsq</span><span class="p">);</span>
-    <span class="p">})();</span>
-<span class="o">&lt;/</span><span class="n">script</span><span class="o">&gt;</span>
+<div class="highlighter-rouge"><pre class="highlight"><code>name: 博客名称
+email: 邮箱地址
+author: 作者名
+url: 个人网站
+<span class="c">### baseurl修改为项目名，如果项目是'***.github.io'，则设置为空''</span>
+baseurl: <span class="s2">"/LessOrMore"</span>
+resume_site: 个人简历网站
+github: github地址
+github_username: github用户名称
 
-
-
-
+markdown: kramdown
+kramdown:
+  input: GFM
+  toc_levels: 1..6
+  enable_coderay: <span class="nb">true
+  </span>syntax_highlighter: rouge
+  
+FB:
+  comments :
+    provider : uyan 
 </code></pre>
 </div>
 
-<p>最后在站点的配置文件_config.yml中指定用youyan作为评论插件就行了</p>
+<ul>
+  <li>因为我的博客使用的是<a href="http://www.uyan.cc/">友言</a>实现评论功能，所以要在<code class="highlighter-rouge">/_includes/LessOrMore/comments-providers/uyan</code>文件中把友言的用户id改成你注册友言的账号id。</li>
+</ul>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>  <span class="c"># Settings for comments helper</span>
-  <span class="c"># Set 'provider' to the comment provider you want to use.</span>
-  <span class="c"># Set 'provider' to false to turn commenting off globally.</span>
-  <span class="c">#</span>
-  <span class="n">comments</span> <span class="p">:</span>
-    <span class="n">provider</span> <span class="p">:</span> <span class="n">uyan</span>
+<h2 id="section-4">如何写文章</h2>
+
+<blockquote>
+  <p><code class="highlighter-rouge">/_posts/</code>目录下是所有发布的博客文件夹。</p>
+</blockquote>
+
+<blockquote>
+  <p><code class="highlighter-rouge">/source/</code>目录下是所有发布的博客的资源文件，如博客中用到的图片。</p>
+</blockquote>
+
+<p>在<code class="highlighter-rouge">/_posts/</code>目录下新建一个文件，可以创建文件夹并在文件夹中添加文件，方便维护。在新建文件中粘贴如下信息，并修改以下的<code class="highlighter-rouge">titile</code>,<code class="highlighter-rouge">date</code>,<code class="highlighter-rouge">categories</code>,<code class="highlighter-rouge">tag</code>的相关信息，添加<code class="highlighter-rouge">* content {:toc}</code>为目录相关信息，在进行正文书写前需要在目录和正文之间输入至少2行空行。然后按照正常的Markdown语法书写正文。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>---
+layout: post
+<span class="c">#标题配置</span>
+title:  标题
+<span class="c">#时间配置</span>
+date:   2016-08-27 01:08:00 +0800
+<span class="c">#大类配置</span>
+categories: document
+<span class="c">#小类配置</span>
+tag: 教程
+---
+
+<span class="k">*</span> content
+<span class="o">{</span>:toc<span class="o">}</span>
+
+
+我是正文。我是正文。我是正文。我是正文。我是正文。我是正文。
 </code></pre>
 </div>
 
-<p>至此评论插件就配置好了，可以push到Github上看看效果。分享插件的配置也是类似的。</p>
+<h2 id="section-5">执行</h2>
 
-<p>不push本地预览的话可以查看页面效果但是不能评论，不是bug，push上去就可以了。</p>
+<p>在终端中输入下列命令：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>jekyll server
+</code></pre>
+</div>
+
+<h2 id="section-6">效果</h2>
+<p>打开浏览器并输入URL<code class="highlighter-rouge">http://localhost:4000/</code>，回车，即可看到博客运行效果。</p>
+
+<p>这只是本地查看的效果，真正的博客还是要push到git上。具体不懂的问题可以查看<a href="http://luckycathome.com/2016/11/15/%E4%BD%BF%E7%94%A8Jekyll%E5%9C%A8GitHub-Pages%E4%B8%8A%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">使用Jekyll在GitHub Pages上搭建个人博客</a>。</p>
+
+<h1 id="section-7">关于重复造轮子</h1>
+
+<p>很明显，我在重复造轮子。对于造轮子这个事情，我的想法很简单，不是觉得我一定做得比别人好，只是想按照自己的想法尽量写的细一点，或许适合一些人。当然，这个过程更是可以让自己有所长进。</p>
+
+<h1 id="section-8">关于作者</h1>
+
+<p>热爱开源，热爱折腾的iOS程序猿。更多个人信息和联系方式可以参照<a href="http://www.LuckyCatHome.com/Resume.io/">我的简介</a>。</p>
+
 
             </article>
         </div>
