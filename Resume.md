@@ -10,6 +10,7 @@ permalink: /Resume/
 
 
 
-![]({{ '/source/Resume/Resume.pdf'}})
+![]({{ '/source/Resume/Resume-01.png'}})
+![]({{ '/source/Resume/Resume-02.png'}})
 
 
