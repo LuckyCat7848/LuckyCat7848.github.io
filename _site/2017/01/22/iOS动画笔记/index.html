@@ -5,14 +5,14 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>赞助方式</title>
+	<title>iOS动画笔记</title>
 
 	<link rel="shortcut icon" href="/styles/images/favicon.jpg">
 	<link rel="icon" href="/styles/images/favicon.jpg">
 
 	<link rel="stylesheet" href="/styles/css/index.css">
 	<link rel="stylesheet" href="/styles/css/fontawesome/css/font-awesome.min.css">
-	<link rel="canonical" href="/donate/method/">
+	<link rel="canonical" href="/2017/01/22/iOS%E5%8A%A8%E7%94%BB%E7%AC%94%E8%AE%B0/">
 	<link rel="alternate" type="application/rss+xml" title="LuckyCat's Blog" href="/feed.xml">
 	
 	<meta name="description" content="康志华;个人博客;学而不思则罔;思而不学则殆;生命不止;折腾不休">
@@ -87,8 +87,8 @@
   <div class="container">
   	
   		<!--
-		    <h1>赞助方式</h1>
-		    <p>Post on  by <a href="/about">LuckyCat</a></p>
+		    <h1>iOS动画笔记</h1>
+		    <p>Post on Jan 22, 2017 by <a href="/about">LuckyCat</a></p>
 		-->
 		    <h1>Everything is well !</h1>
     
@@ -99,7 +99,8 @@
 <div class="banner">
   <div class="container">
   	
-    	学而不思则罔，思而不学则殆。
+    	<a href="/categories/#技术-ref">技术</a>	/
+    	<a href="/tag/#Object-C-ref">Object-C</a>
     
   </div>
 </div>
@@ -359,41 +360,89 @@
       <div class="panel docs-content">
         <div class="wrapper">
             <header class="post-header">
-              <h1 class="post-title">赞助方式</h1>
+              <h1 class="post-title">iOS动画笔记</h1>
               <!--
-                <p class="post-meta"></p>
+                <p class="post-meta">Jan 22, 2017</p>
               -->
-              <div class="meta">Posted on <span class="postdate"></span> By <a target="_blank" href="http://localhost:4000">LuckyCat</a></div>
+              <div class="meta">Posted on <span class="postdate">Jan 22, 2017</span> By <a target="_blank" href="http://localhost:4000">LuckyCat</a></div>
               <br />
             </header>
             <article class="post-content">
-              <h1 id="section">您的支持是作者写作最大的动力！</h1>
+              <ul id="markdown-toc">
+  <li><a href="#uiviewanimationoptions" id="markdown-toc-uiviewanimationoptions">一、UIViewAnimationOptions枚举</a></li>
+  <li><a href="#coreanimation" id="markdown-toc-coreanimation">二、CoreAnimation</a></li>
+</ul>
 
 <hr />
 
-<h2 id="section-1">赞助方式一：<code class="highlighter-rouge">支付宝二维码付款</code></h2>
+<h1 id="uiviewanimationoptions">一、UIViewAnimationOptions枚举</h1>
 
-<hr />
+<div class="highlighter-rouge"><pre class="highlight"><code>
+enum <span class="o">{</span>
+   //这部分是基础属性的设置
+   UIViewAnimationOptionLayoutSubviews            <span class="o">=</span> 1 <span class="sh">&lt;&lt;  0,//设置子视图随父视图展示动画
+   UIViewAnimationOptionAllowUserInteraction      = 1 &lt;&lt;  1,//允许在动画执行时用户与其进行交互
+   UIViewAnimationOptionBeginFromCurrentState     = 1 &lt;&lt;  2,//允许在动画执行时执行新的动画
+   UIViewAnimationOptionRepeat                    = 1 &lt;&lt;  3,//设置动画循环执行
+   UIViewAnimationOptionAutoreverse               = 1 &lt;&lt;  4,//设置动画反向执行，必须和重复执行一起使用
+   UIViewAnimationOptionOverrideInheritedDuration = 1 &lt;&lt;  5,//强制动画使用内层动画的时间值
+   UIViewAnimationOptionOverrideInheritedCurve    = 1 &lt;&lt;  6,//强制动画使用内层动画曲线值
+   UIViewAnimationOptionAllowAnimatedContent      = 1 &lt;&lt;  7,//设置动画视图实时刷新
+   UIViewAnimationOptionShowHideTransitionViews   = 1 &lt;&lt;  8,//设置视图切换时隐藏，而不是移除
+   UIViewAnimationOptionOverrideInheritedOptions  = 1 &lt;&lt;  9,//
+   //这部分属性设置动画播放的线性效果
+   UIViewAnimationOptionCurveEaseInOut            = 0 &lt;&lt; 16,//淡入淡出 首末减速
+   UIViewAnimationOptionCurveEaseIn               = 1 &lt;&lt; 16,//淡入 初始减速
+   UIViewAnimationOptionCurveEaseOut              = 2 &lt;&lt; 16,//淡出 末尾减速
+   UIViewAnimationOptionCurveLinear               = 3 &lt;&lt; 16,//线性 匀速执行   
+   //这部分设置UIView切换效果
+   UIViewAnimationOptionTransitionNone            = 0 &lt;&lt; 20,
+   UIViewAnimationOptionTransitionFlipFromLeft    = 1 &lt;&lt; 20,//从左边切入
+   UIViewAnimationOptionTransitionFlipFromRight   = 2 &lt;&lt; 20,//从右边切入
+   UIViewAnimationOptionTransitionCurlUp          = 3 &lt;&lt; 20,//从上面立体进入
+   UIViewAnimationOptionTransitionCurlDown        = 4 &lt;&lt; 20,//从下面立体进入
+   UIViewAnimationOptionTransitionCrossDissolve   = 5 &lt;&lt; 20,//溶解效果
+   UIViewAnimationOptionTransitionFlipFromTop     = 6 &lt;&lt; 20,//从上面切入
+   UIViewAnimationOptionTransitionFlipFromBottom  = 7 &lt;&lt; 20,//从下面切入
+};
 
-<p>您可以选择手机支付宝扫一扫</p>
+</span></code></pre>
+</div>
 
-<p><img src="/styles/images/zhifubao.PNG" alt="支付宝二维码付款给Freud" width="310" /></p>
+<p>提示：</p>
 
-<p><br />
-<br /></p>
+<ol>
+  <li>
+    <p>属性可以使用（Shift+\）(PS：因为格式问题输不出来就这样写了)进行多项合并。</p>
+  </li>
+  <li>
+    <p>这类的动画可以进行嵌套，其中有一点需要注意，内层动画的执行时间和曲线模式会默认继承外层动的，若要强制使用新的参数，使用如下的两个参数：</p>
+  </li>
+</ol>
 
-<h2 id="section-2">赞助方式二：<code class="highlighter-rouge">微信扫一扫</code></h2>
+<div class="highlighter-rouge"><pre class="highlight"><code>
+UIViewAnimationOptionOverrideInheritedDuration <span class="o">=</span> 1 <span class="sh">&lt;&lt;  5,//强制动画使用内层动画的时间值
 
-<hr />
+UIViewAnimationOptionOverrideInheritedCurve    = 1 &lt;&lt;  6,//强制动画使用内层动画曲线值
+   
+</span></code></pre>
+</div>
 
-<p>您可以选择手机微信扫一扫</p>
+<h1 id="coreanimation">二、CoreAnimation</h1>
 
-<p><img src="/styles/images/weixin.png" alt="微信二维码付款给Freud" /></p>
+<p><img src="/source/iOS动画笔记/01.png" alt="" /></p>
 
-<p><br />
-<br /></p>
+<p>接受的类型是 CAAnimation 类型，有下面这些子类：</p>
 
-<hr />
+<p><strong>CABasicAnimation</strong>：可设定起始结束两个关键帧的信息。</p>
+
+<p><strong>CAKeyframeAnimation</strong>：除首尾外，还可添加多个中间关键点。</p>
+
+<p>**CAAnimationGroup **：可组合多个动画，因为上面两种动画一次只能设置一个属性值。</p>
+
+<p><strong>CATransition</strong>：图层过渡动画，默认是淡入。比如修改一个 CALayer的背景色时，是从初始色慢慢淡入过渡到结束色。</p>
+
+<p>可修改为新颜色把旧颜色顶出去等效果。还可使用 CIFilter 滤镜做过渡效果，一些开源 UIViewController 的过渡动画使用了这种方式。</p>
 
 
             </article>

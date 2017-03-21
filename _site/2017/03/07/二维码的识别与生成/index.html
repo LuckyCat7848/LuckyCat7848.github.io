@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>二维码的识别与生成</title>
+
+	<link rel="shortcut icon" href="/styles/images/favicon.jpg">
+	<link rel="icon" href="/styles/images/favicon.jpg">
+
+	<link rel="stylesheet" href="/styles/css/index.css">
+	<link rel="stylesheet" href="/styles/css/fontawesome/css/font-awesome.min.css">
+	<link rel="canonical" href="/2017/03/07/%E4%BA%8C%E7%BB%B4%E7%A0%81%E7%9A%84%E8%AF%86%E5%88%AB%E4%B8%8E%E7%94%9F%E6%88%90/">
+	<link rel="alternate" type="application/rss+xml" title="LuckyCat's Blog" href="/feed.xml">
+	
+	<meta name="description" content="康志华;个人博客;学而不思则罔;思而不学则殆;生命不止;折腾不休">
+
+	<script src="/styles/js/jquery.min.js"></script>
+	<!--[if lt IE 9]>
+    	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  	<![endif]-->
+  	<script>
+		var _hmt = _hmt || [];
+		(function() {
+		  var hm = document.createElement("script");
+		  hm.src = "//hm.baidu.com/hm.js?94be4b0f9fc5d94cc0d0415ea6761ae9";
+		  var s = document.getElementsByTagName("script")[0]; 
+		  s.parentNode.insertBefore(hm, s);
+		})();
+	</script>
+  	<style type="text/css">
+	  	.docs-content{
+	  		margin-bottom: 10px;
+	  	}
+  	</style>
+</head>
+
+  <body class="index">
+
+    <header class="navbar navbar-inverse navbar-fixed-top docs-nav" role="banner">
+  <div class="container">
+    <div class="navbar-header">
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="/" class="navbar-brand">
+        <img src="/styles/images/logo.jpg">
+      </a>
+    </div>
+    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+      <ul class="nav navbar-nav">    
+        <li>
+          <a href="/">Home</a>
+        </li>
+        <li>
+          <a href="/categories/">大类分解</a>
+        </li>
+        <li>
+          <a href="/tag">小类内聚</a>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <!-- <li>
+          <a href="/donate/"><strong>打赏</strong></a>
+        </li> -->
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">关于<b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a rel="nofollow" target="_blank" href="https://github.com/LuckyCat7848/">Github</a></li>
+            <li><a rel="nofollow" target="_blank" href="http://www.luckycathome.com/Resume/">关于作者</a></li>
+            <li><a rel="nofollow" href="/books">我的书单</a></li>
+            <li><a rel="nofollow" href="/reference">推荐博客</a></li>
+            <!-- <li><a href="/feed.xml">RSS订阅</a></li> -->
+            <li class="divider"></li>
+            <li><a rel="nofollow" target="_blank" href="https://github.com/LuckyCat7848/LuckyCat7848.github.io">本项目</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+    <div class="docs-header" id="content">
+  <div class="container">
+  	
+  		<!--
+		    <h1>二维码的识别与生成</h1>
+		    <p>Post on Mar 07, 2017 by <a href="/about">LuckyCat</a></p>
+		-->
+		    <h1>Everything is well !</h1>
+    
+  </div>
+</div>
+    
+      
+<div class="banner">
+  <div class="container">
+  	
+    	<a href="/categories/#技术-ref">技术</a>	/
+    	<a href="/tag/#Object-C-ref">Object-C</a>
+    
+  </div>
+</div>
+
+    
+
+    <div class="container docs-container">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="sidebar hidden-print" role="complementary">
+        <div id="navigation">
+  <h1>目录</h1>
+  <ul class="nav sidenav">
+<!--
+    
+      
+      
+      
+      
+
+      
+        <li><a href="#year_2017">2017</a>
+          <ul class="nav">
+            <li><a href="#month_2017_March">March</a></li>
+      
+
+      
+            
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+              <li><a href="#month_2017_January">January</a></li>
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+        
+            </ul>
+          </li>
+          <li><a href="#year_2016">2016</a>
+            <ul class="nav">
+              <li><a href="#month_2016_November">November</a></li>
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+              <li><a href="#month_2016_September">September</a></li>
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+              <li><a href="#month_2016_February">February</a></li>
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+              <li><a href="#month_2016_January">January</a></li>
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+        
+            </ul>
+          </li>
+          <li><a href="#year_2015">2015</a>
+            <ul class="nav">
+              <li><a href="#month_2015_August">August</a></li>
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+              <li><a href="#month_2015_July">July</a></li>
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+              <li><a href="#month_2015_June">June</a></li>
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+              <li><a href="#month_2015_February">February</a></li>
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+              <li><a href="#month_2015_January">January</a></li>
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            </ul>
+          </li>
+      
+    
+-->
+  </ul>
+</div> 
+      </div>
+    </div>
+    <div class="col-md-9" role="main">
+      <div class="panel docs-content">
+        <div class="wrapper">
+            <header class="post-header">
+              <h1 class="post-title">二维码的识别与生成</h1>
+              <!--
+                <p class="post-meta">Mar 7, 2017</p>
+              -->
+              <div class="meta">Posted on <span class="postdate">Mar 07, 2017</span> By <a target="_blank" href="http://localhost:4000">LuckyCat</a></div>
+              <br />
+            </header>
+            <article class="post-content">
+              <ul id="markdown-toc">
+  <li><a href="#iossdk" id="markdown-toc-iossdk">一、iOS原生SDK识别图片中的二维码</a>    <ul>
+      <li><a href="#section" id="markdown-toc-section">1.1 识别二维码的方法比较</a></li>
+      <li><a href="#avfoundation" id="markdown-toc-avfoundation">1.2 AVFoundation基本知识点</a></li>
+      <li><a href="#avfoundation-1" id="markdown-toc-avfoundation-1">1.3 用AVFoundation识别二维码实现</a></li>
+    </ul>
+  </li>
+  <li><a href="#section-1" id="markdown-toc-section-1">二、生成二维码</a></li>
+</ul>
+
+<h1 id="iossdk">一、iOS原生SDK识别图片中的二维码</h1>
+
+<h2 id="section">1.1 识别二维码的方法比较</h2>
+
+<p>在iOS中实现二维码和条形码扫描，我们所知的有，两大开源组件ZBar与ZXing. 这两大组件我们都有用过，这里总结下各自的缺点：
+- <strong>ZBar</strong>
+ZBar在扫描的灵敏度上，和内存的使用上相对于ZXing上都是较优的，但是对于 “圆角二维码” 的扫描确很困难。</p>
+
+<ul>
+  <li>
+    <p><strong>ZXing</strong>
+ZXing 是 Google Code上的一个开源的条形码扫描库，是用java设计的，连Google Glass 都在使用的。但有人为了追求更高效率以及可移植性，出现了c++ port. Github上的Objectivc-C port，其实就是用OC代码封装了一下而已，而且已经停止维护。这样效率非常低，在instrument下面可以看到CPU和内存疯涨，在内存小的机器上很容易崩溃。</p>
+  </li>
+  <li>
+    <p><strong>AVFoundation</strong>
+AVFoundation无论在扫描灵敏度和性能上来说都是最优的，所以毫无疑问我们应该切换到AVFoundation，需要兼容iOS 7或之前的版本可以用zbar或zxing代替。</p>
+  </li>
+</ul>
+
+<h2 id="avfoundation">1.2 AVFoundation基本知识点</h2>
+
+<ol>
+  <li>
+    <p>AVCaptureDevice必须要引入AVFoundation.framework。</p>
+  </li>
+  <li>
+    <p>若是要检测装置是否提供该功能，可以透过下面方法来取得：</p>
+  </li>
+</ol>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>   -<span class="o">(</span>BOOL<span class="o">)</span>hasMediaType:<span class="o">(</span>NSString <span class="k">*</span><span class="o">)</span>mediaType
+</code></pre>
+</div>
+
+<ol>
+  <li>取得摄像头后，我们可以透过下面属性来判断该摄像头是否有提供闪光灯：</li>
+</ol>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+property<span class="o">(</span>nonatomic, <span class="nb">readonly</span><span class="o">)</span> BOOL hasTorch；
+property<span class="o">(</span>nonatomic, <span class="nb">readonly</span><span class="o">)</span> BOOL hasFlash；
+
+</code></pre>
+</div>
+
+<ol>
+  <li>
+    <p>闪光灯模式：使用Torch Mode。</p>
+  </li>
+  <li>
+    <p>相机设备在改变某些参数前必须先锁定，直到改变结束才能解锁:</p>
+  </li>
+</ol>
+
+<blockquote>
+  <p><strong>lockForConfiguration跟unlockForConfiguration是配对的API。</strong></p>
+</blockquote>
+
+<h2 id="avfoundation-1">1.3 用AVFoundation识别二维码实现</h2>
+
+<p>先保留着：<a href="https://blog.cnbluebox.com/blog/2014/08/26/ioser-wei-ma-sao-miao/">iOS二维码扫描,你需要注意的两件事</a></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>    //1.获取选择的图片
+    UIImage <span class="k">*</span>image <span class="o">=</span> info[UIImagePickerControllerOriginalImage];
+    //2.初始化一个监测器
+    CIDetector<span class="k">*</span>detector <span class="o">=</span> <span class="o">[</span>CIDetector detectorOfType:CIDetectorTypeQRCode context:nil options:@<span class="o">{</span> CIDetectorAccuracy : CIDetectorAccuracyHigh <span class="o">}]</span>;
+    
+    <span class="o">[</span>picker dismissViewControllerAnimated:YES completion:^<span class="o">{</span>
+        //监测到的结果数组
+        NSArray <span class="k">*</span>features <span class="o">=</span> <span class="o">[</span>detector featuresInImage:[CIImage imageWithCGImage:image.CGImage]];
+        <span class="k">if</span> <span class="o">(</span>features.count &gt;<span class="o">=</span>1<span class="o">)</span> <span class="o">{</span>
+            /<span class="k">**</span>结果对象 <span class="k">*</span>/
+            CIQRCodeFeature <span class="k">*</span>feature <span class="o">=</span> <span class="o">[</span>features objectAtIndex:0];
+            NSString <span class="k">*</span>scannedResult <span class="o">=</span> feature.messageString;
+            UIAlertView <span class="k">*</span> alertView <span class="o">=</span> <span class="o">[[</span>UIAlertView alloc]initWithTitle:@<span class="s2">"扫描结果"</span> message:scannedResult delegate:nil cancelButtonTitle:@<span class="s2">"确定"</span> otherButtonTitles:nil, nil];
+            <span class="o">[</span>alertView show];
+          
+        <span class="o">}</span>
+        <span class="k">else</span><span class="o">{</span>
+            UIAlertView <span class="k">*</span> alertView <span class="o">=</span> <span class="o">[[</span>UIAlertView alloc]initWithTitle:@<span class="s2">"提示"</span> message:@<span class="s2">"该图片没有包含一个二维码！"</span> delegate:nil cancelButtonTitle:@<span class="s2">"确定"</span> otherButtonTitles:nil, nil];
+            <span class="o">[</span>alertView show];
+            
+        <span class="o">}</span>
+    <span class="o">}]</span>;
+</code></pre>
+</div>
+
+<h1 id="section-1">二、生成二维码</h1>
+
+<ul>
+  <li>
+    <ol>
+      <li>导入CoreImage框架：</li>
+    </ol>
+  </li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c">#import &lt;CoreImage/CoreImage.h&gt;</span>
+</code></pre>
+</div>
+
+<ul>
+  <li>
+    <ol>
+      <li>通过滤镜CIFilter生成二维码：</li>
+    </ol>
+  </li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>/<span class="k">**</span>
+ <span class="k">*</span>  生成二维码
+ <span class="k">*</span>/
+- <span class="o">(</span>void<span class="o">)</span>creatCIQRCodeImage
+<span class="o">{</span>
+    // 1.创建过滤器，这里的@<span class="s2">"CIQRCodeGenerator"</span>是固定的
+    CIFilter <span class="k">*</span>filter <span class="o">=</span> <span class="o">[</span>CIFilter filterWithName:@<span class="s2">"CIQRCodeGenerator"</span><span class="o">]</span>;
+
+    // 2.恢复默认设置
+    <span class="o">[</span>filter setDefaults];
+
+    // 3. 给过滤器添加数据
+    NSString <span class="k">*</span>dataString <span class="o">=</span> @<span class="s2">"二维码测试数据"</span>;
+    NSData <span class="k">*</span>data <span class="o">=</span> <span class="o">[</span>dataString dataUsingEncoding:NSUTF8StringEncoding];
+    // 注意，这里的value必须是NSData类型
+    <span class="o">[</span>filter setValue:data forKeyPath:@<span class="s2">"inputMessage"</span><span class="o">]</span>;
+
+    // 4. 生成二维码
+    CIImage <span class="k">*</span>outputImage <span class="o">=</span> <span class="o">[</span>filter outputImage];
+
+    // 5. 显示二维码
+    self.imageView.image <span class="o">=</span> <span class="o">[</span>UIImage imageWithCIImage:outputImage];
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>通过上述方法生成的二维码图片比较模糊，第5步显示二维码的时候可以调用以下方法生成比较清晰的二维码。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>/<span class="k">**</span>
+ <span class="k">*</span>  根据CIImage生成指定大小的UIImage
+ <span class="k">*</span>
+ <span class="k">*</span>  @param image CIImage
+ <span class="k">*</span>  @param size  图片宽度
+ <span class="k">*</span>
+ <span class="k">*</span>  @return 生成高清的UIImage
+ <span class="k">*</span>/
+- <span class="o">(</span>UIImage <span class="k">*</span><span class="o">)</span>creatNonInterpolatedUIImageFormCIImage:<span class="o">(</span>CIImage <span class="k">*</span><span class="o">)</span>image withSize:<span class="o">(</span>CGFloat<span class="o">)</span>size
+<span class="o">{</span>
+    CGRect extent <span class="o">=</span> CGRectIntegral<span class="o">(</span>image.extent<span class="o">)</span>;
+    CGFloat scale <span class="o">=</span> MIN<span class="o">(</span>size/CGRectGetWidth<span class="o">(</span>extent<span class="o">)</span>, size/CGRectGetHeight<span class="o">(</span>extent<span class="o">))</span>;
+
+    // 1. 创建bitmap
+    size_t width <span class="o">=</span> CGRectGetWidth<span class="o">(</span>extent<span class="o">)</span> <span class="k">*</span> scale;
+    size_t height <span class="o">=</span> CGRectGetHeight<span class="o">(</span>extent<span class="o">)</span> <span class="k">*</span> scale;
+    CGColorSpaceRef cs <span class="o">=</span> CGColorSpaceCreateDeviceGray<span class="o">()</span>;
+    CGContextRef bitmapRef <span class="o">=</span> CGBitmapContextCreate<span class="o">(</span>nil, width, height, 8, 0, cs, <span class="o">(</span>CGBitmapInfo<span class="o">)</span>kCGImageAlphaNone<span class="o">)</span>;
+    CIContext <span class="k">*</span>context <span class="o">=</span> <span class="o">[</span>CIContext contextWithOptions:nil];
+    CGImageRef bitmapImage <span class="o">=</span> <span class="o">[</span>context createCGImage:image fromRect:extent];
+    CGContextSetInterpolationQuality<span class="o">(</span>bitmapRef, kCGInterpolationNone<span class="o">)</span>;
+    CGContextScaleCTM<span class="o">(</span>bitmapRef, scale, scale<span class="o">)</span>;
+    CGContextDrawImage<span class="o">(</span>bitmapRef, extent, bitmapImage<span class="o">)</span>;
+
+    // 2.保存bitmap图片
+    CGImageRef scaledImage <span class="o">=</span> CGBitmapContextCreateImage<span class="o">(</span>bitmapRef<span class="o">)</span>;
+    CGContextRelease<span class="o">(</span>bitmapRef<span class="o">)</span>;
+    CGImageRelease<span class="o">(</span>bitmapImage<span class="o">)</span>;
+    <span class="k">return</span> <span class="o">[</span>UIImage imageWithCGImage:scaledImage];
+<span class="o">}</span>
+</code></pre>
+</div>
+
+            </article>
+        </div>
+      </div>
+      <div class="panel docs-content">
+        <article class="post-content">
+          <div class="wrapper">
+            
+
+
+  <div id="uyan_frame"></div>
+<script type="text/javascript">
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://v2.uyan.cc/code/uyan.js?uid=2119519';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+
+
+
+
+
+ 
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+    <footer class="footer" role="contentinfo">
+	<div class="container">
+		<p class="copyright">Copyright &copy; 2016-2017 <a href="http://www.luckycathome.com/Resume/"><code>LuckyCat</code></a>.</p>
+		<p>Powered by <a href="http://jekyllrb.com">Jekyll</a>, theme from <a href="https://github.com/luoyan35714/LessOrMore">LessOrMore</a></p>
+	</div>
+</footer>
+
+<script src="/styles/js/jquery.min.js"></script>
+<script src="/styles/js/bootstrap.min.js"></script>
+<script src="/styles/js/holder.min.js"></script>
+<script src="/styles/js/application.js"></script>
+<script src="/styles/js/lessismore.js"></script>
+
+  </body>
+</html>

@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>GPUImage学习总结</title>
+
+	<link rel="shortcut icon" href="/styles/images/favicon.jpg">
+	<link rel="icon" href="/styles/images/favicon.jpg">
+
+	<link rel="stylesheet" href="/styles/css/index.css">
+	<link rel="stylesheet" href="/styles/css/fontawesome/css/font-awesome.min.css">
+	<link rel="canonical" href="/2017/03/18/GPUImage%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/">
+	<link rel="alternate" type="application/rss+xml" title="LuckyCat's Blog" href="/feed.xml">
+	
+	<meta name="description" content="康志华;个人博客;学而不思则罔;思而不学则殆;生命不止;折腾不休">
+
+	<script src="/styles/js/jquery.min.js"></script>
+	<!--[if lt IE 9]>
+    	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  	<![endif]-->
+  	<script>
+		var _hmt = _hmt || [];
+		(function() {
+		  var hm = document.createElement("script");
+		  hm.src = "//hm.baidu.com/hm.js?94be4b0f9fc5d94cc0d0415ea6761ae9";
+		  var s = document.getElementsByTagName("script")[0]; 
+		  s.parentNode.insertBefore(hm, s);
+		})();
+	</script>
+  	<style type="text/css">
+	  	.docs-content{
+	  		margin-bottom: 10px;
+	  	}
+  	</style>
+</head>
+
+  <body class="index">
+
+    <header class="navbar navbar-inverse navbar-fixed-top docs-nav" role="banner">
+  <div class="container">
+    <div class="navbar-header">
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="/" class="navbar-brand">
+        <img src="/styles/images/logo.jpg">
+      </a>
+    </div>
+    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+      <ul class="nav navbar-nav">    
+        <li>
+          <a href="/">Home</a>
+        </li>
+        <li>
+          <a href="/categories/">大类分解</a>
+        </li>
+        <li>
+          <a href="/tag">小类内聚</a>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <!-- <li>
+          <a href="/donate/"><strong>打赏</strong></a>
+        </li> -->
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">关于<b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a rel="nofollow" target="_blank" href="https://github.com/LuckyCat7848/">Github</a></li>
+            <li><a rel="nofollow" target="_blank" href="http://www.luckycathome.com/Resume/">关于作者</a></li>
+            <li><a rel="nofollow" href="/books">我的书单</a></li>
+            <li><a rel="nofollow" href="/reference">推荐博客</a></li>
+            <!-- <li><a href="/feed.xml">RSS订阅</a></li> -->
+            <li class="divider"></li>
+            <li><a rel="nofollow" target="_blank" href="https://github.com/LuckyCat7848/LuckyCat7848.github.io">本项目</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+    <div class="docs-header" id="content">
+  <div class="container">
+  	
+  		<!--
+		    <h1>GPUImage学习总结</h1>
+		    <p>Post on Mar 18, 2017 by <a href="/about">LuckyCat</a></p>
+		-->
+		    <h1>Everything is well !</h1>
+    
+  </div>
+</div>
+    
+      
+<div class="banner">
+  <div class="container">
+  	
+    	<a href="/categories/#技术-ref">技术</a>	/
+    	<a href="/tag/#Object-C-ref">Object-C</a>
+    
+  </div>
+</div>
+
+    
+
+    <div class="container docs-container">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="sidebar hidden-print" role="complementary">
+        <div id="navigation">
+  <h1>目录</h1>
+  <ul class="nav sidenav">
+<!--
+    
+      
+      
+      
+      
+
+      
+        <li><a href="#year_2017">2017</a>
+          <ul class="nav">
+            <li><a href="#month_2017_March">March</a></li>
+      
+
+      
+            
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+              <li><a href="#month_2017_January">January</a></li>
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+        
+            </ul>
+          </li>
+          <li><a href="#year_2016">2016</a>
+            <ul class="nav">
+              <li><a href="#month_2016_November">November</a></li>
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+              <li><a href="#month_2016_September">September</a></li>
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+              <li><a href="#month_2016_February">February</a></li>
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+              <li><a href="#month_2016_January">January</a></li>
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+        
+            </ul>
+          </li>
+          <li><a href="#year_2015">2015</a>
+            <ul class="nav">
+              <li><a href="#month_2015_August">August</a></li>
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+              <li><a href="#month_2015_July">July</a></li>
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+              <li><a href="#month_2015_June">June</a></li>
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+              <li><a href="#month_2015_February">February</a></li>
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+              <li><a href="#month_2015_January">January</a></li>
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            </ul>
+          </li>
+      
+    
+-->
+  </ul>
+</div> 
+      </div>
+    </div>
+    <div class="col-md-9" role="main">
+      <div class="panel docs-content">
+        <div class="wrapper">
+            <header class="post-header">
+              <h1 class="post-title">GPUImage学习总结</h1>
+              <!--
+                <p class="post-meta">Mar 18, 2017</p>
+              -->
+              <div class="meta">Posted on <span class="postdate">Mar 18, 2017</span> By <a target="_blank" href="http://localhost:4000">LuckyCat</a></div>
+              <br />
+            </header>
+            <article class="post-content">
+              <ul id="markdown-toc">
+  <li><a href="#section" id="markdown-toc-section">一、介绍</a></li>
+  <li><a href="#section-1" id="markdown-toc-section-1">二、内置滤镜</a></li>
+  <li><a href="#section-2" id="markdown-toc-section-2">三、分段录制</a></li>
+  <li><a href="#gpuimage" id="markdown-toc-gpuimage">四、 GPUImage录制视频</a>    <ul>
+      <li><a href="#section-3" id="markdown-toc-section-3">4.1 基本设置</a></li>
+      <li><a href="#section-4" id="markdown-toc-section-4">4.2 开始录制</a></li>
+      <li><a href="#section-5" id="markdown-toc-section-5">4.3 停止录制</a></li>
+      <li><a href="#section-6" id="markdown-toc-section-6">4.4 视频拼接</a></li>
+    </ul>
+  </li>
+  <li><a href="#section-7" id="markdown-toc-section-7">五、视频加滤镜功能</a>    <ul>
+      <li><a href="#section-8" id="markdown-toc-section-8">5.1 单个滤镜</a></li>
+      <li><a href="#section-9" id="markdown-toc-section-9">5.2 组合滤镜</a></li>
+      <li><a href="#section-10" id="markdown-toc-section-10">5.3 添加滤镜</a></li>
+    </ul>
+  </li>
+  <li><a href="#mv" id="markdown-toc-mv">六、视频加MV功能</a></li>
+  <li><a href="#section-11" id="markdown-toc-section-11">七、学习</a></li>
+</ul>
+
+<h1 id="section">一、介绍</h1>
+<p>GPUImage是Brad Larson在github托管的开源项目。</p>
+
+<p>GPUImage是一个基于GPU图像和视频处理的开源iOS框架，提供各种各样的图像处理滤镜，并且支持照相机和摄像机的实时滤镜； 基于GPU的图像加速，因此可以加速对实时摄像头视频、电影以及image的滤镜和其它效果处理，并且能够自定义图像滤镜。另外， GPUImage支持ARC。</p>
+
+<p>使用GPUImage处理图片比Core Image更简单，只需要将过滤器赋给图片对象即可，不用考虑context或者设备等其他问题。GPUImage提供了除高斯模糊外的其他几种不同效果的模糊，虽然Core Image也提供了几种模糊效果，但目前在iOS上能用的就只有高斯模糊，而GPUImage可用的有FastBlur, GaussianBlur, GaussianSelectiveBlur 和 BoxBlur。此外，作为开源框架的GPUImage还支持自定义的过滤器。</p>
+
+<h1 id="section-1">二、内置滤镜</h1>
+<p>共125个滤镜, 分为四类
+Color adjustments: 31 filters, 颜色处理相关
+Image processing: 40 filters, 图像处理相关.
+Blending modes: 29 filters, 混合模式相关.
+Visual effects: 25 filters, 视觉效果相关.</p>
+
+<h1 id="section-2">三、分段录制</h1>
+<p>参考<a href="http://www.tuicool.com/articles/FVnumu">AVFoundation和GPUImage初探</a>。</p>
+
+<p>分段录制，每次录制都要创建一个movieWriter，每次都会在重新创建movieWriter并将它设置为videoCamera的 audioEncodingTarget 时候，界面都会卡顿一下，这是因为videoCamera默认是不录制声音的，而每次创建movieWriter的时候都用到了 movieWriter.hasAudioTrack = YES，调用这个之后videoCamera会自动去添加声音输入源，准备一些数据，所以这个过程会导致界面卡顿一下，下面这句代码很重要：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>– <span class="o">(</span>BOOL<span class="o">)</span>addAudioInputsAndOutputs;
+</code></pre>
+</div>
+
+<p>videoCamera的头文件的注释是：录制的时候添加声音，添加输入源和输出源会暂时会使录制暂时卡住，所以在要使用声音的情况下要<code class="highlighter-rouge">先</code>调用该方法来防止录制被卡住。</p>
+
+<h1 id="gpuimage">四、 GPUImage录制视频</h1>
+<p>转自<a href="http://blog.sina.com.cn/s/blog_d0c0c80c0102xbo0.html">GPUImage 录制视频注意事项</a>，感谢<a href="http://blog.sina.com.cn/u/3502295052">我的个神啊</a>的分享。</p>
+
+<h2 id="section-3">4.1 基本设置</h2>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>// 创建摄像头
+self.videoCamera <span class="o">=</span> <span class="o">[[</span>GPUImageVideoCamera alloc] initWithSessionPreset:AVCaptureSessionPreset640x480 cameraPosition:AVCaptureDevicePositionBack];
+
+self.videoCamera.outputImageOrientation <span class="o">=</span> UIInterfaceOrientationPortrait; // 输出图像旋转方式
+self.videoCamera.horizontallyMirrorFrontFacingCamera <span class="o">=</span> YES;
+
+// 创建界面显示摄像内容
+self.gpuImageView <span class="o">=</span> <span class="o">[[</span>GPUImageView alloc] initWithFrame:frame];
+self.gpuImageView.fillMode <span class="o">=</span> kGPUImageFillModePreserveAspectRatioAndFill; // 显示模式充满整个边框
+self.gpuImageView.clipsToBounds <span class="o">=</span> YES;
+<span class="o">[</span>self.gpuImageView.layer setMasksToBounds:YES];
+
+// 滤镜
+self.filter <span class="o">=</span> <span class="o">[[</span>GPUImageBrightnessFilter alloc] init];
+self.filter.brightness <span class="o">=</span> 0.1f;
+</code></pre>
+</div>
+
+<h2 id="section-4">4.2 开始录制</h2>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>// 该句可防止允许声音通过的情况下，避免录制第一帧黑屏闪屏卡顿现象（分段录制里有详解）
+<span class="o">[</span>_camera addAudioInputsAndOutputs];
+
+// 配置录制器
+NSURL <span class="k">*</span> saveURL <span class="o">=</span> <span class="o">[</span>self fileURLForTempMovieByName:[NSString stringWithFormat:@<span class="s2">"%d"</span>, videoFileNum]]; // 分段录制,videoFileNum:第几段
+self.movieWriter <span class="o">=</span> <span class="o">[[</span>GPUImageMovieWriter alloc] initWithMovieURL:saveURL  size:CGSizeMake<span class="o">(</span>480.0f, 640.0f<span class="o">)]</span>;
+
+self.movieWriter.assetWriter.movieFragmentInterval <span class="o">=</span> kCMTimeInvalid;
+self.movieWriter.encodingLiveVideo <span class="o">=</span> YES; // 影响其实是expectsMediaDataInRealTime属性，YES时用于输入流是实时的,比如说摄像头
+self.movieWriter.hasAudioTrack <span class="o">=</span> YES; // 开启声音采集
+self.movieWriter.shouldPassthroughAudio <span class="o">=</span> YES; // 是否使用源音源
+
+<span class="o">[</span>self.filter addTarget:self.movieWriter]; // 滤镜添加至moviewrite
+<span class="o">[</span>self.filter addTarget:self.gpuImageView]; // 滤镜添加gpuimageview
+self.videoCamera.audioEncodingTarget <span class="o">=</span> self.movieWriter; // 音频来源是文件
+
+// 开始录制
+<span class="o">[</span>self.videoCamera startCameraCapture];
+<span class="o">[</span>self.movieWriter startRecording];
+</code></pre>
+</div>
+
+<h2 id="section-5">4.3 停止录制</h2>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="o">[</span>self.filter removeTarget:self.movieWriter];
+<span class="o">[</span>self.movieWriter finishRecording];
+self.videoCamera.audioEncodingTarget <span class="o">=</span> nil;
+</code></pre>
+</div>
+
+<h2 id="section-6">4.4 视频拼接</h2>
+
+<ul>
+  <li>4.4.1 AVFoundation基本知识点</li>
+</ul>
+
+<p>AVAsset：媒体。</p>
+
+<p>AVAssetTrack：媒体轨道。</p>
+
+<p>AVMutableComposition ：包含了一个或多个给定类型的媒体轨道的容器。</p>
+
+<p>AVMutableCompositionTrack ：工程文件中的轨道，有音频轨、视频轨等，里面可以插入各种对应的素材。</p>
+
+<p>AVMutableVideoComposition：用来生成video的组合指令，包含多段instruction，可以决定最终视频的尺寸。</p>
+
+<p>AVMutableVideoCompositionInstruction：决定一个timeRange内每个轨道的状态，包含多个layerInstruction。</p>
+
+<p>AVMutableVideoCompositionLayerInstruction：决定视频轨道的效果:模糊、变形、裁剪,可创建出过渡效果。</p>
+
+<ul>
+  <li>4.4.2 分段视频的拼接</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c">#pragma mark -</span>
+<span class="c">#pragma mark 视频拼接,视频和音频合成 存储为:MergerMovie</span>
+- <span class="o">(</span>void<span class="o">)</span>mergeAndSaveMovieWithFirstAsset:<span class="o">(</span>AVAsset <span class="k">*</span> <span class="o">)</span>firstAsset secondAsset:<span class="o">(</span>AVAsset <span class="k">*</span><span class="o">)</span>secondAsset <span class="o">{</span>
+    
+    static int mergerFileNum <span class="o">=</span> 1; // 合成后的视频文件个数<span class="o">(</span>因为是递归合成,不便删除上一个,所以有多个文件<span class="o">)</span>
+    
+    <span class="k">if</span> <span class="o">(</span>firstAsset !<span class="o">=</span>nil <span class="o">&amp;&amp;</span> secondAsset!<span class="o">=</span>nil<span class="o">)</span> <span class="o">{</span>
+        // 1.创建组合mixComposition,用于合成视频,和声音<span class="o">(</span>要分别创建组合轨道<span class="o">)</span>
+        AVMutableComposition <span class="k">*</span>mixComposition <span class="o">=</span> <span class="o">[[</span>AVMutableComposition alloc] init];
+        // 2.创建1和2的视频轨道、音频轨道,都加入组合中mixComposition
+        AVMutableCompositionTrack <span class="k">*</span>firstVideoTrack <span class="o">=</span> <span class="o">[</span>mixComposition addMutableTrackWithMediaType:AVMediaTypeVideo
+                                                                                 preferredTrackID:kCMPersistentTrackID_Invalid];
+        <span class="o">[</span>firstVideoTrack insertTimeRange:CMTimeRangeMake<span class="o">(</span>kCMTimeZero, firstAsset.duration<span class="o">)</span>
+                                 ofTrack:[[firstAsset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0]
+                                  atTime:kCMTimeZero
+                                   error:nil];
+        AVMutableCompositionTrack <span class="k">*</span>firstAudioTrack <span class="o">=</span> <span class="o">[</span>mixComposition addMutableTrackWithMediaType:AVMediaTypeAudio
+                                                                                 preferredTrackID:kCMPersistentTrackID_Invalid];
+        <span class="o">[</span>firstAudioTrack insertTimeRange:CMTimeRangeMake<span class="o">(</span>kCMTimeZero, firstAsset.duration<span class="o">)</span>
+                                 ofTrack:[[firstAsset tracksWithMediaType:AVMediaTypeAudio] objectAtIndex:0]
+                                  atTime:kCMTimeZero
+                                   error:nil];
+        
+        
+        AVMutableCompositionTrack <span class="k">*</span>secondVideoTrack <span class="o">=</span> <span class="o">[</span>mixComposition addMutableTrackWithMediaType:AVMediaTypeVideo
+                                                                                  preferredTrackID:kCMPersistentTrackID_Invalid];
+        <span class="o">[</span>secondVideoTrack insertTimeRange:CMTimeRangeMake<span class="o">(</span>kCMTimeZero, secondAsset.duration<span class="o">)</span>
+                                  ofTrack:[[secondAsset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0]
+                                   atTime:firstAsset.duration
+                                    error:nil];
+        AVMutableCompositionTrack <span class="k">*</span>secondAudioTrack <span class="o">=</span> <span class="o">[</span>mixComposition addMutableTrackWithMediaType:AVMediaTypeAudio
+                                                                                  preferredTrackID:kCMPersistentTrackID_Invalid];
+        <span class="o">[</span>secondAudioTrack insertTimeRange:CMTimeRangeMake<span class="o">(</span>kCMTimeZero, secondAsset.duration<span class="o">)</span>
+                                  ofTrack:[[secondAsset tracksWithMediaType:AVMediaTypeAudio] objectAtIndex:0]
+                                   atTime:firstAsset.duration
+                                    error:nil];
+        
+        // 3.创建AVMutableVideoCompositionInstruction:一个指令，决定一个timeRange内每个轨道的状态，包含多个layerInstruction
+        AVMutableVideoCompositionInstruction <span class="k">*</span>mainInstruction <span class="o">=</span> <span class="o">[</span>AVMutableVideoCompositionInstruction videoCompositionInstruction];
+        mainInstruction.timeRange <span class="o">=</span> CMTimeRangeMake<span class="o">(</span>kCMTimeZero, CMTimeAdd<span class="o">(</span>firstAsset.duration, secondAsset.duration<span class="o">))</span>;
+        
+        // 3-1.创建第一个AVMutableVideoCompositionLayerInstruction:决定视频轨道的效果:模糊、变形、裁剪,可创建出过渡效果
+        AVMutableVideoCompositionLayerInstruction <span class="k">*</span>firstlayerInstruction <span class="o">=</span> <span class="o">[</span>AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:firstVideoTrack];
+        AVAssetTrack <span class="k">*</span>firstAssetTrack <span class="o">=</span> <span class="o">[[</span>firstAsset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0];
+        UIImageOrientation firstAssetOrientation_  <span class="o">=</span> UIImageOrientationUp;
+        BOOL isFirstAssetPortrait_  <span class="o">=</span> NO;
+        CGAffineTransform firstTransform <span class="o">=</span> firstAssetTrack.preferredTransform;
+        <span class="k">if</span> <span class="o">(</span>firstTransform.a <span class="o">==</span> 0 <span class="o">&amp;&amp;</span> firstTransform.b <span class="o">==</span> 1.0 <span class="o">&amp;&amp;</span> firstTransform.c <span class="o">==</span> -1.0 <span class="o">&amp;&amp;</span> firstTransform.d <span class="o">==</span> 0<span class="o">)</span> <span class="o">{</span>
+            firstAssetOrientation_ <span class="o">=</span> UIImageOrientationRight;
+            isFirstAssetPortrait_ <span class="o">=</span> YES;
+        <span class="o">}</span>
+        <span class="k">if</span> <span class="o">(</span>firstTransform.a <span class="o">==</span> 0 <span class="o">&amp;&amp;</span> firstTransform.b <span class="o">==</span> -1.0 <span class="o">&amp;&amp;</span> firstTransform.c <span class="o">==</span> 1.0 <span class="o">&amp;&amp;</span> firstTransform.d <span class="o">==</span> 0<span class="o">)</span> <span class="o">{</span>
+            firstAssetOrientation_ <span class="o">=</span>  UIImageOrientationLeft;
+            isFirstAssetPortrait_ <span class="o">=</span> YES;
+        <span class="o">}</span>
+        <span class="k">if</span> <span class="o">(</span>firstTransform.a <span class="o">==</span> 1.0 <span class="o">&amp;&amp;</span> firstTransform.b <span class="o">==</span> 0 <span class="o">&amp;&amp;</span> firstTransform.c <span class="o">==</span> 0 <span class="o">&amp;&amp;</span> firstTransform.d <span class="o">==</span> 1.0<span class="o">)</span> <span class="o">{</span>
+            firstAssetOrientation_ <span class="o">=</span>  UIImageOrientationUp;
+        <span class="o">}</span>
+        <span class="k">if</span> <span class="o">(</span>firstTransform.a <span class="o">==</span> -1.0 <span class="o">&amp;&amp;</span> firstTransform.b <span class="o">==</span> 0 <span class="o">&amp;&amp;</span> firstTransform.c <span class="o">==</span> 0 <span class="o">&amp;&amp;</span> firstTransform.d <span class="o">==</span> -1.0<span class="o">)</span> <span class="o">{</span>
+            firstAssetOrientation_ <span class="o">=</span> UIImageOrientationDown;
+        <span class="o">}</span>
+        <span class="o">[</span>firstlayerInstruction setTransform:firstAsset.preferredTransform atTime:kCMTimeZero];
+        <span class="o">[</span>firstlayerInstruction setOpacity:0.0 atTime:firstAsset.duration];
+        
+        // 3-2.创建第二个AVMutableVideoCompositionLayerInstruction
+        AVMutableVideoCompositionLayerInstruction <span class="k">*</span>secondlayerInstruction <span class="o">=</span> <span class="o">[</span>AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:secondVideoTrack];
+        AVAssetTrack <span class="k">*</span>secondAssetTrack <span class="o">=</span> <span class="o">[[</span>secondAsset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0];
+        UIImageOrientation secondAssetOrientation_  <span class="o">=</span> UIImageOrientationUp;
+        BOOL isSecondAssetPortrait_ <span class="o">=</span> NO;
+        CGAffineTransform secondTransform <span class="o">=</span> secondAssetTrack.preferredTransform;
+        <span class="k">if</span> <span class="o">(</span>secondTransform.a <span class="o">==</span> 0 <span class="o">&amp;&amp;</span> secondTransform.b <span class="o">==</span> 1.0 <span class="o">&amp;&amp;</span> secondTransform.c <span class="o">==</span> -1.0 <span class="o">&amp;&amp;</span> secondTransform.d <span class="o">==</span> 0<span class="o">)</span> <span class="o">{</span>
+            <span class="nv">secondAssetOrientation_</span><span class="o">=</span> UIImageOrientationRight;
+            isSecondAssetPortrait_ <span class="o">=</span> YES;
+        <span class="o">}</span>
+        <span class="k">if</span> <span class="o">(</span>secondTransform.a <span class="o">==</span> 0 <span class="o">&amp;&amp;</span> secondTransform.b <span class="o">==</span> -1.0 <span class="o">&amp;&amp;</span> secondTransform.c <span class="o">==</span> 1.0 <span class="o">&amp;&amp;</span> secondTransform.d <span class="o">==</span> 0<span class="o">)</span> <span class="o">{</span>
+            secondAssetOrientation_ <span class="o">=</span>  UIImageOrientationLeft;
+            isSecondAssetPortrait_ <span class="o">=</span> YES;
+        <span class="o">}</span>
+        <span class="k">if</span> <span class="o">(</span>secondTransform.a <span class="o">==</span> 1.0 <span class="o">&amp;&amp;</span> secondTransform.b <span class="o">==</span> 0 <span class="o">&amp;&amp;</span> secondTransform.c <span class="o">==</span> 0 <span class="o">&amp;&amp;</span> secondTransform.d <span class="o">==</span> 1.0<span class="o">)</span> <span class="o">{</span>
+            secondAssetOrientation_ <span class="o">=</span>  UIImageOrientationUp;
+        <span class="o">}</span>
+        <span class="k">if</span> <span class="o">(</span>secondTransform.a <span class="o">==</span> -1.0 <span class="o">&amp;&amp;</span> secondTransform.b <span class="o">==</span> 0 <span class="o">&amp;&amp;</span> secondTransform.c <span class="o">==</span> 0 <span class="o">&amp;&amp;</span> secondTransform.d <span class="o">==</span> -1.0<span class="o">)</span> <span class="o">{</span>
+            secondAssetOrientation_ <span class="o">=</span> UIImageOrientationDown;
+        <span class="o">}</span>
+        <span class="o">[</span>secondlayerInstruction setTransform:secondAsset.preferredTransform atTime:firstAsset.duration];
+        
+        // AVMutableVideoComposition:用来生成video的组合指令,包含多段instruction,可以决定最终视频的尺寸
+        // 3-3.AVMutableVideoComposition添加instructions
+        mainInstruction.layerInstructions <span class="o">=</span> <span class="o">[</span>NSArray arrayWithObjects:firstlayerInstruction, secondlayerInstruction,nil];
+        AVMutableVideoComposition <span class="k">*</span>mainCompositionInst <span class="o">=</span> <span class="o">[</span>AVMutableVideoComposition videoComposition];
+        mainCompositionInst.instructions <span class="o">=</span> <span class="o">[</span>NSArray arrayWithObject:mainInstruction];
+        mainCompositionInst.frameDuration <span class="o">=</span> CMTimeMake<span class="o">(</span>1, 30<span class="o">)</span>;
+        
+        CGSize naturalSizeFirst, naturalSizeSecond;
+        <span class="k">if</span><span class="o">(</span>isFirstAssetPortrait_<span class="o">){</span>
+            naturalSizeFirst <span class="o">=</span> CGSizeMake<span class="o">(</span>firstAssetTrack.naturalSize.height, firstAssetTrack.naturalSize.width<span class="o">)</span>;
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            naturalSizeFirst <span class="o">=</span> firstAssetTrack.naturalSize;
+        <span class="o">}</span>
+        <span class="k">if</span><span class="o">(</span>isSecondAssetPortrait_<span class="o">){</span>
+            naturalSizeSecond <span class="o">=</span> CGSizeMake<span class="o">(</span>secondAssetTrack.naturalSize.height, secondAssetTrack.naturalSize.width<span class="o">)</span>;
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            naturalSizeSecond <span class="o">=</span> secondAssetTrack.naturalSize;
+        <span class="o">}</span>
+        
+        float renderWidth, renderHeight;
+        renderWidth <span class="o">=</span> naturalSizeFirst.width &gt; naturalSizeSecond.width ? naturalSizeFirst.width : naturalSizeSecond.width;
+        renderHeight <span class="o">=</span> naturalSizeFirst.height &gt; naturalSizeSecond.height ? naturalSizeFirst.height : naturalSizeSecond.height;
+        mainCompositionInst.renderSize <span class="o">=</span> CGSizeMake<span class="o">(</span>renderWidth, renderHeight<span class="o">)</span>;
+        
+        // 4.获取路径
+        NSURL <span class="k">*</span>url <span class="o">=</span> <span class="o">[</span>self fileURLForTempMovieByName:[NSString stringWithFormat:@<span class="s2">"MergerMovie%d"</span>, mergerFileNum]];
+        
+        // 5.创建AVAssetExportSession,用于导出合成好的视频
+        AVAssetExportSession <span class="k">*</span>exporter <span class="o">=</span> <span class="o">[[</span>AVAssetExportSession alloc] initWithAsset:mixComposition
+                                                                          presetName:AVAssetExportPresetHighestQuality];
+        exporter.outputURL<span class="o">=</span>url;
+        exporter.outputFileType <span class="o">=</span> AVFileTypeMPEG4;//AVFileTypeQuickTimeMovie;
+        exporter.shouldOptimizeForNetworkUse <span class="o">=</span> YES;
+        exporter.videoComposition <span class="o">=</span> mainCompositionInst;
+        __weak __typeof<span class="o">(</span>self<span class="o">)</span>weakSelf <span class="o">=</span> self;
+        <span class="o">[</span>exporter exportAsynchronouslyWithCompletionHandler:^<span class="o">{</span>
+            dispatch_async<span class="o">(</span>dispatch_get_main_queue<span class="o">()</span>, ^<span class="o">{</span>
+                mergerFileNum ++;
+                <span class="k">if</span> <span class="o">(</span>mergerFileNum &lt; <span class="o">[</span>_videoArray count]<span class="o">)</span> <span class="o">{</span>
+                    // 取合成好的视频和下一个,递归进行视频拼接,拼接后和音频合成
+                    AVAsset <span class="k">*</span> nextAsset <span class="o">=</span> <span class="o">[</span>AVAsset assetWithURL:[_videoArray objectAtIndex:mergerFileNum]];
+                    AVAsset <span class="k">*</span> mergerVideo <span class="o">=</span> <span class="o">[</span>AVAsset assetWithURL:[weakSelf fileURLForTempMovieByName:[NSString stringWithFormat:@<span class="s2">"MergerMovie%d"</span>, mergerFileNum - 1]]];
+                    <span class="o">[</span>weakSelf mergeAndSaveMovieWithFirstAsset:mergerVideo secondAsset:nextAsset];
+                <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+                    // 合成完成,导出
+                    mergerFileFinally <span class="o">=</span> <span class="o">[</span>NSString stringWithFormat:@<span class="s2">"MergerMovie%d"</span>, mergerFileNum - 1];
+                    mergerFileNum <span class="o">=</span> 1;
+                    <span class="o">[</span>weakSelf exportDidFinish:exporter];
+                <span class="o">}</span>
+            <span class="o">})</span>;
+        <span class="o">}]</span>;
+    <span class="o">}</span>
+<span class="o">}</span>
+- <span class="o">(</span>void<span class="o">)</span>exportDidFinish:<span class="o">(</span>AVAssetExportSession<span class="k">*</span><span class="o">)</span>session <span class="o">{</span>
+    __weak __typeof<span class="o">(</span>self<span class="o">)</span>weakSelf <span class="o">=</span> self;
+    dispatch_async<span class="o">(</span>dispatch_get_main_queue<span class="o">()</span>, ^<span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span>session.status <span class="o">==</span> AVAssetExportSessionStatusCompleted<span class="o">)</span> <span class="o">{</span>
+            // 视频拼接成功,取出视频中的音频
+            <span class="o">[</span>weakSelf getAudioSound];
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            UIAlertView <span class="k">*</span>alert <span class="o">=</span> <span class="o">[[</span>UIAlertView alloc] initWithTitle:@<span class="s2">"Video Saved"</span> message:[NSString stringWithFormat:@<span class="s2">"Saved To File Failed -- %d"</span>, session.status]
+                                                           delegate:self cancelButtonTitle:@<span class="s2">"OK"</span> otherButtonTitles:nil];
+            <span class="o">[</span>alert show];
+        <span class="o">}</span>
+    <span class="o">})</span>;
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<ul>
+  <li>4.4.3 从合成的视频取出音频轨道</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>// 从合成好的视频中获取音频
+- <span class="o">(</span>void<span class="o">)</span>getAudioSound <span class="o">{</span>
+    AVURLAsset <span class="k">*</span>videoAsset <span class="o">=</span> <span class="o">[</span>AVURLAsset URLAssetWithURL:[self fileURLForTempMovieByName:mergerFileFinally] options:nil];
+    AVMutableComposition <span class="k">*</span>mixComposition <span class="o">=</span> <span class="o">[[</span>AVMutableComposition alloc] init];
+    //创建一个组合轨道,类型是AVMediaTypeAudio
+    AVMutableCompositionTrack <span class="k">*</span>audioTrack <span class="o">=</span> <span class="o">[</span>mixComposition addMutableTrackWithMediaType:AVMediaTypeAudio
+                                                                        preferredTrackID:kCMPersistentTrackID_Invalid];
+    
+    //获取videoAsset中的音频轨道,插入组合轨道
+    <span class="o">[</span>audioTrack insertTimeRange:CMTimeRangeMake<span class="o">(</span>kCMTimeZero, videoAsset.duration<span class="o">)</span>
+                        ofTrack:[[videoAsset tracksWithMediaType:AVMediaTypeAudio] objectAtIndex:0] atTime:kCMTimeZero error:nil];
+    
+    NSString <span class="k">*</span>outFilePath <span class="o">=</span> <span class="o">[[</span>self fileURLForTempSoundByName:@<span class="s2">"MergerSound"</span><span class="o">]</span> path];
+    <span class="o">[</span>self exportAudioAsset:audioTrack.asset toFilePath:outFilePath];
+<span class="o">}</span>
+- <span class="o">(</span>BOOL<span class="o">)</span>exportAudioAsset:<span class="o">(</span>AVAsset <span class="k">*</span><span class="o">)</span>avAsset toFilePath:<span class="o">(</span>NSString <span class="k">*</span><span class="o">)</span>filePath <span class="o">{</span>
+    AVAssetExportSession <span class="k">*</span>exportSession <span class="o">=</span> <span class="o">[</span>AVAssetExportSession
+                                           exportSessionWithAsset:avAsset
+                                           presetName:AVAssetExportPresetAppleM4A];
+    <span class="k">if</span> <span class="o">(</span>nil <span class="o">==</span> exportSession<span class="o">)</span> <span class="k">return </span>NO;//创建失败，则跳出
+    
+    exportSession.outputURL <span class="o">=</span> <span class="o">[</span>NSURL fileURLWithPath:filePath]; // output path 新文件路径
+    exportSession.outputFileType <span class="o">=</span> AVFileTypeAppleM4A; // output file <span class="nb">type </span>新文件类型
+    
+    __weak __typeof<span class="o">(</span>self<span class="o">)</span>weakSelf <span class="o">=</span> self;
+    <span class="o">[</span>exportSession exportAsynchronouslyWithCompletionHandler:^<span class="o">{</span> //block
+        <span class="k">if</span> <span class="o">(</span>exportSession.status <span class="o">==</span> AVAssetExportSessionStatusCompleted<span class="o">)</span> <span class="o">{</span>
+            dispatch_async<span class="o">(</span>dispatch_get_main_queue<span class="o">()</span>, ^<span class="o">{</span>
+                // 1.根据 Main.storyboard 的前缀 <span class="s2">"Main"</span> 取到storyBoard 的地址
+                UIStoryboard <span class="k">*</span>storyBoard <span class="o">=</span> <span class="o">[</span>UIStoryboard storyboardWithName:@<span class="s2">"Recording"</span> bundle:[NSBundle mainBundle]];
+                // 2.根据事先在storyBoard中设置的 storyBoard ID 来获取相应的 ViewController
+                VideoPlayViewController <span class="k">*</span> videoPlay <span class="o">=</span> <span class="o">[</span>storyBoard instantiateViewControllerWithIdentifier:@<span class="s2">"VideoPlayViewController"</span><span class="o">]</span>;
+                videoPlay.playUrl <span class="o">=</span> <span class="o">[</span>weakSelf fileURLForTempMovieByName:mergerFileFinally];
+                videoPlay.playSoundUrl <span class="o">=</span> <span class="o">[</span>weakSelf fileURLForTempSoundByName:@<span class="s2">"MergerSound"</span><span class="o">]</span>;
+                <span class="o">[</span>weakSelf.navigationController pushViewController:videoPlay animated:YES];
+            <span class="o">})</span>;
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            dispatch_async<span class="o">(</span>dispatch_get_main_queue<span class="o">()</span>, ^<span class="o">{</span>
+                UIAlertView <span class="k">*</span>alert <span class="o">=</span> <span class="o">[[</span>UIAlertView alloc] initWithTitle:@<span class="s2">"Audio Saved"</span> message:@<span class="s2">"Saved To File Failed"</span>
+                                                               delegate:self cancelButtonTitle:@<span class="s2">"OK"</span> otherButtonTitles:nil];
+                <span class="o">[</span>alert show];
+            <span class="o">})</span>;
+        <span class="o">}</span>
+    <span class="o">}]</span>;
+    <span class="k">return </span>YES;
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<ul>
+  <li>4.4.4 调用合成视频方法：</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>// 取第1,2段,进行视频拼接,拼接后取出完整音频,传界面
+AVAsset <span class="k">*</span>firstAsset <span class="o">=</span> <span class="o">[</span>AVAsset assetWithURL:_videoArray[0]];
+AVAsset <span class="k">*</span>secondAsset <span class="o">=</span> <span class="o">[</span>AVAsset assetWithURL:_videoArray[1]];
+<span class="o">[</span>self mergeAndSaveMovieWithFirstAsset:firstAsset secondAsset:secondAsset];
+</code></pre>
+</div>
+
+<h1 id="section-7">五、视频加滤镜功能</h1>
+
+<h2 id="section-8">5.1 单个滤镜</h2>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>// 素描滤镜
+GPUImageBrightnessFilter <span class="k">*</span>newFilter <span class="o">=</span> <span class="o">[[</span>GPUImageBrightnessFilter alloc] init];
+newFilter.brightness <span class="o">=</span> 0.4f;
+self.filter <span class="o">=</span> newFilter;
+</code></pre>
+</div>
+
+<h2 id="section-9">5.2 组合滤镜</h2>
+<div class="highlighter-rouge"><pre class="highlight"><code>GPUImageRGBFilter <span class="k">*</span>filter1         <span class="o">=</span> <span class="o">[[</span>GPUImageRGBFilter alloc] init];
+GPUImageToonFilter <span class="k">*</span>filter2        <span class="o">=</span> <span class="o">[[</span>GPUImageToonFilter alloc] init];
+GPUImageColorInvertFilter <span class="k">*</span>filter3 <span class="o">=</span> <span class="o">[[</span>GPUImageColorInvertFilter alloc] init];
+GPUImageSepiaFilter       <span class="k">*</span>filter4 <span class="o">=</span> <span class="o">[[</span>GPUImageSepiaFilter alloc] init];
+<span class="o">[(</span>GPUImageFilterGroup <span class="k">*</span><span class="o">)</span>_filter addFilter:filter1];
+<span class="o">[(</span>GPUImageFilterGroup <span class="k">*</span><span class="o">)</span>_filter addFilter:filter2];
+<span class="o">[(</span>GPUImageFilterGroup <span class="k">*</span><span class="o">)</span>_filter addFilter:filter3];
+<span class="o">[(</span>GPUImageFilterGroup <span class="k">*</span><span class="o">)</span>_filter addFilter:filter4];
+
+<span class="o">[</span>filter1 addTarget:filter2];
+<span class="o">[</span>filter2 addTarget:filter3];
+<span class="o">[</span>filter3 addTarget:filter4];
+              
+<span class="o">[(</span>GPUImageFilterGroup <span class="k">*</span><span class="o">)</span>_filter setInitialFilters:[NSArray arrayWithObject:filter1]];
+<span class="o">[(</span>GPUImageFilterGroup <span class="k">*</span><span class="o">)</span>_filter setTerminalFilter:filter4];
+</code></pre>
+</div>
+
+<h2 id="section-10">5.3 添加滤镜</h2>
+<div class="highlighter-rouge"><pre class="highlight"><code>// imageMovie
+self.movieFile <span class="o">=</span> <span class="o">[[</span>GPUImageMovie alloc] initWithURL:_playUrl];
+_movieFile.runBenchmark <span class="o">=</span> YES;
+_movieFile.playAtActualSpeed <span class="o">=</span> NO;
+// 滤镜
+<span class="o">[</span>_movieFile addTarget:_filter];
+// GPUImageView
+GPUImageView <span class="k">*</span>filterView <span class="o">=</span> <span class="o">[[</span>GPUImageView alloc] init];
+<span class="o">[</span>_filter addTarget:filterView];
+     
+// MovieWriter
+self.movieWriter <span class="o">=</span> <span class="o">[[</span>GPUImageMovieWriter alloc] initWithMovieURL:_currentMovieUrl size:CGSizeMake<span class="o">(</span>480.0, 640.0<span class="o">)]</span>;
+<span class="o">[</span>_filter addTarget:_movieWriter];
+        
+_movieWriter.shouldPassthroughAudio <span class="o">=</span> YES;
+_movieFile.audioEncodingTarget <span class="o">=</span> _movieWriter;
+<span class="o">[</span>_movieFile enableSynchronizedEncodingUsingMovieWriter:_movieWriter];
+
+// 开始处理
+<span class="o">[</span>_movieWriter startRecording];
+<span class="o">[</span>_movieFile startProcessing];
+
+<span class="o">[</span>self.player pause];
+ _processing.hidden <span class="o">=</span> NO;
+ <span class="o">[</span>_movieWriter setCompletionBlock:^<span class="o">{</span>
+	 <span class="o">[</span>_filter removeTarget:_movieWriter];
+	 <span class="o">[</span>_movieWriter finishRecording];
+	 dispatch_async<span class="o">(</span>dispatch_get_main_queue<span class="o">()</span>, ^<span class="o">{</span>
+		 _processing.hidden <span class="o">=</span> YES;
+     <span class="o">})</span>;
+<span class="o">}]</span>;
+</code></pre>
+</div>
+
+<h1 id="mv">六、视频加MV功能</h1>
+<ul>
+  <li>代码有点乱，累了，不想整理了，大多同理吧。</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c">#pragma mark -</span>
+<span class="c">#pragma mark - 🍎mv处理 1314</span>
+// 加mv处理
+- <span class="o">(</span>void<span class="o">)</span>processMovieByMVUrl:<span class="o">(</span>NSURL <span class="k">*</span><span class="o">)</span>mvUrl <span class="o">{</span>
+
+    AVURLAsset <span class="k">*</span>firstAsset <span class="o">=</span> <span class="o">[</span>AVURLAsset URLAssetWithURL:_playUrl options:nil];
+    AVURLAsset <span class="k">*</span>secondAsset <span class="o">=</span> <span class="o">[</span>AVURLAsset URLAssetWithURL:mvUrl options:nil];
+ 
+    <span class="k">if</span> <span class="o">(</span>firstAsset.duration.value !<span class="o">=</span> 0 <span class="o">&amp;&amp;</span> secondAsset.duration.value !<span class="o">=</span> 0<span class="o">)</span> <span class="o">{</span>
+        // 1 - Create AVMutableComposition object. This object will hold your AVMutableCompositionTrack instances.
+        AVMutableComposition <span class="k">*</span>mixComposition <span class="o">=</span> <span class="o">[[</span>AVMutableComposition alloc] init];
+        // 2 - Create two video tracks
+        AVMutableCompositionTrack <span class="k">*</span>firstTrack <span class="o">=</span> <span class="o">[</span>mixComposition addMutableTrackWithMediaType:AVMediaTypeVideo
+                                                                            preferredTrackID:kCMPersistentTrackID_Invalid];
+        <span class="o">[</span>firstTrack insertTimeRange:CMTimeRangeMake<span class="o">(</span>kCMTimeZero, firstAsset.duration<span class="o">)</span>
+                            ofTrack:[[firstAsset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0]
+                             atTime:kCMTimeZero
+                              error:nil];
+        AVMutableCompositionTrack <span class="k">*</span>secondTrack <span class="o">=</span> <span class="o">[</span>mixComposition addMutableTrackWithMediaType:AVMediaTypeVideo
+                                                                             preferredTrackID:kCMPersistentTrackID_Invalid];
+        <span class="o">[</span>secondTrack insertTimeRange:CMTimeRangeMake<span class="o">(</span>kCMTimeZero, firstAsset.duration<span class="o">)</span>
+                             ofTrack:[[secondAsset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0]
+                              atTime:kCMTimeZero // 🌲改
+                               error:nil];
+        
+        // 2.1 - Create AVMutableVideoCompositionInstruction
+        AVMutableVideoCompositionInstruction <span class="k">*</span>mainInstruction <span class="o">=</span> <span class="o">[</span>AVMutableVideoCompositionInstruction videoCompositionInstruction];
+        mainInstruction.timeRange <span class="o">=</span> CMTimeRangeMake<span class="o">(</span>kCMTimeZero,
+                                                    firstAsset.duration<span class="o">)</span>;
+        
+        // 2.2 - Create an AVMutableVideoCompositionLayerInstruction <span class="k">for </span>the first track
+        AVMutableVideoCompositionLayerInstruction <span class="k">*</span>firstlayerInstruction <span class="o">=</span> <span class="o">[</span>AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:firstTrack];
+        AVAssetTrack <span class="k">*</span>firstAssetTrack <span class="o">=</span> <span class="o">[[</span>firstAsset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0];
+        UIImageOrientation firstAssetOrientation_  <span class="o">=</span> UIImageOrientationUp;
+        BOOL isFirstAssetPortrait_  <span class="o">=</span> NO;
+        CGAffineTransform firstTransform <span class="o">=</span> firstAssetTrack.preferredTransform;
+        <span class="k">if</span> <span class="o">(</span>firstTransform.a <span class="o">==</span> 0 <span class="o">&amp;&amp;</span> firstTransform.b <span class="o">==</span> 1.0 <span class="o">&amp;&amp;</span> firstTransform.c <span class="o">==</span> -1.0 <span class="o">&amp;&amp;</span> firstTransform.d <span class="o">==</span> 0<span class="o">)</span> <span class="o">{</span>
+            firstAssetOrientation_ <span class="o">=</span> UIImageOrientationRight;
+            isFirstAssetPortrait_ <span class="o">=</span> YES;
+        <span class="o">}</span>
+        <span class="k">if</span> <span class="o">(</span>firstTransform.a <span class="o">==</span> 0 <span class="o">&amp;&amp;</span> firstTransform.b <span class="o">==</span> -1.0 <span class="o">&amp;&amp;</span> firstTransform.c <span class="o">==</span> 1.0 <span class="o">&amp;&amp;</span> firstTransform.d <span class="o">==</span> 0<span class="o">)</span> <span class="o">{</span>
+            firstAssetOrientation_ <span class="o">=</span>  UIImageOrientationLeft;
+            isFirstAssetPortrait_ <span class="o">=</span> YES;
+        <span class="o">}</span>
+        <span class="k">if</span> <span class="o">(</span>firstTransform.a <span class="o">==</span> 1.0 <span class="o">&amp;&amp;</span> firstTransform.b <span class="o">==</span> 0 <span class="o">&amp;&amp;</span> firstTransform.c <span class="o">==</span> 0 <span class="o">&amp;&amp;</span> firstTransform.d <span class="o">==</span> 1.0<span class="o">)</span> <span class="o">{</span>
+            firstAssetOrientation_ <span class="o">=</span>  UIImageOrientationUp;
+        <span class="o">}</span>
+        <span class="k">if</span> <span class="o">(</span>firstTransform.a <span class="o">==</span> -1.0 <span class="o">&amp;&amp;</span> firstTransform.b <span class="o">==</span> 0 <span class="o">&amp;&amp;</span> firstTransform.c <span class="o">==</span> 0 <span class="o">&amp;&amp;</span> firstTransform.d <span class="o">==</span> -1.0<span class="o">)</span> <span class="o">{</span>
+            firstAssetOrientation_ <span class="o">=</span> UIImageOrientationDown;
+        <span class="o">}</span>
+        <span class="o">[</span>firstlayerInstruction setTransform:firstAsset.preferredTransform atTime:kCMTimeZero];
+       
+        // 2.3 - Create an AVMutableVideoCompositionLayerInstruction <span class="k">for </span>the second track
+        AVMutableVideoCompositionLayerInstruction <span class="k">*</span>secondlayerInstruction <span class="o">=</span> <span class="o">[</span>AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:secondTrack];
+        AVAssetTrack <span class="k">*</span>secondAssetTrack <span class="o">=</span> <span class="o">[[</span>secondAsset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0];
+
+        UIImageOrientation secondAssetOrientation_  <span class="o">=</span> UIImageOrientationUp;
+        BOOL isSecondAssetPortrait_ <span class="o">=</span> NO;
+        CGAffineTransform secondTransform <span class="o">=</span> secondAssetTrack.preferredTransform;
+        <span class="k">if</span> <span class="o">(</span>secondTransform.a <span class="o">==</span> 0 <span class="o">&amp;&amp;</span> secondTransform.b <span class="o">==</span> 1.0 <span class="o">&amp;&amp;</span> secondTransform.c <span class="o">==</span> -1.0 <span class="o">&amp;&amp;</span> secondTransform.d <span class="o">==</span> 0<span class="o">)</span> <span class="o">{</span>
+            <span class="nv">secondAssetOrientation_</span><span class="o">=</span> UIImageOrientationRight;
+            isSecondAssetPortrait_ <span class="o">=</span> YES;
+        <span class="o">}</span>
+        <span class="k">if</span> <span class="o">(</span>secondTransform.a <span class="o">==</span> 0 <span class="o">&amp;&amp;</span> secondTransform.b <span class="o">==</span> -1.0 <span class="o">&amp;&amp;</span> secondTransform.c <span class="o">==</span> 1.0 <span class="o">&amp;&amp;</span> secondTransform.d <span class="o">==</span> 0<span class="o">)</span> <span class="o">{</span>
+            secondAssetOrientation_ <span class="o">=</span>  UIImageOrientationLeft;
+            isSecondAssetPortrait_ <span class="o">=</span> YES;
+        <span class="o">}</span>
+        <span class="k">if</span> <span class="o">(</span>secondTransform.a <span class="o">==</span> 1.0 <span class="o">&amp;&amp;</span> secondTransform.b <span class="o">==</span> 0 <span class="o">&amp;&amp;</span> secondTransform.c <span class="o">==</span> 0 <span class="o">&amp;&amp;</span> secondTransform.d <span class="o">==</span> 1.0<span class="o">)</span> <span class="o">{</span>
+            secondAssetOrientation_ <span class="o">=</span>  UIImageOrientationUp;
+        <span class="o">}</span>
+        <span class="k">if</span> <span class="o">(</span>secondTransform.a <span class="o">==</span> -1.0 <span class="o">&amp;&amp;</span> secondTransform.b <span class="o">==</span> 0 <span class="o">&amp;&amp;</span> secondTransform.c <span class="o">==</span> 0 <span class="o">&amp;&amp;</span> secondTransform.d <span class="o">==</span> -1.0<span class="o">)</span> <span class="o">{</span>
+            secondAssetOrientation_ <span class="o">=</span> UIImageOrientationDown;
+        <span class="o">}</span>
+//        <span class="o">[</span>secondlayerInstruction setTransform:secondAsset.preferredTransform atTime:firstAsset.duration];
+        <span class="o">[</span>secondlayerInstruction setTransform:secondAsset.preferredTransform atTime:kCMTimeZero];
+        
+        // 2.4 - Add instructions
+        mainInstruction.layerInstructions <span class="o">=</span> <span class="o">[</span>NSArray arrayWithObjects:firstlayerInstruction, secondlayerInstruction,nil];
+        AVMutableVideoComposition <span class="k">*</span>mainCompositionInst <span class="o">=</span> <span class="o">[</span>AVMutableVideoComposition videoComposition];
+        mainCompositionInst.instructions <span class="o">=</span> <span class="o">[</span>NSArray arrayWithObject:mainInstruction];
+        mainCompositionInst.frameDuration <span class="o">=</span> CMTimeMake<span class="o">(</span>1, firstAsset.duration.value/firstAsset.duration.timescale<span class="o">)</span>;
+        
+        CGSize naturalSizeFirst, naturalSizeSecond;
+        <span class="k">if</span><span class="o">(</span>isFirstAssetPortrait_<span class="o">){</span>
+            naturalSizeFirst <span class="o">=</span> CGSizeMake<span class="o">(</span>firstAssetTrack.naturalSize.height, firstAssetTrack.naturalSize.width<span class="o">)</span>;
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            naturalSizeFirst <span class="o">=</span> firstAssetTrack.naturalSize;
+        <span class="o">}</span>
+        <span class="k">if</span><span class="o">(</span>isSecondAssetPortrait_<span class="o">){</span>
+            naturalSizeSecond <span class="o">=</span> CGSizeMake<span class="o">(</span>secondAssetTrack.naturalSize.height, secondAssetTrack.naturalSize.width<span class="o">)</span>;
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            naturalSizeSecond <span class="o">=</span> secondAssetTrack.naturalSize;
+        <span class="o">}</span>
+        
+        float renderWidth, renderHeight;
+        <span class="k">if</span><span class="o">(</span>naturalSizeFirst.width &gt; naturalSizeSecond.width<span class="o">)</span> <span class="o">{</span>
+            renderWidth <span class="o">=</span> naturalSizeFirst.width;
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            renderWidth <span class="o">=</span> naturalSizeSecond.width;
+        <span class="o">}</span>
+        <span class="k">if</span><span class="o">(</span>naturalSizeFirst.height &gt; naturalSizeSecond.height<span class="o">)</span> <span class="o">{</span>
+            renderHeight <span class="o">=</span> naturalSizeFirst.height;
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            renderHeight <span class="o">=</span> naturalSizeSecond.height;
+        <span class="o">}</span>
+//        <span class="o">[</span>secondAsset increaseSize:[NSValue valueWithCGSize:CGSizeMake<span class="o">(</span>480, 640<span class="o">)]]</span>;
+        <span class="o">[</span>firstlayerInstruction setOpacity:0.5 atTime:kCMTimeZero]; //r34645🍎
+//        <span class="o">[</span>secondlayerInstruction setOpacity:0.5 atTime:kCMTimeZero]; //r34645🍎
+        
+        // 480, 640
+        CGFloat result <span class="o">=</span> renderWidth &lt; renderHeight ? renderWidth : renderHeight;
+        mainCompositionInst.renderSize <span class="o">=</span> CGSizeMake<span class="o">(</span>result, result<span class="o">)</span>;
+
+        // 3 - Audio track
+        AVAsset <span class="k">*</span>audioAsset <span class="o">=</span> <span class="o">[</span>AVAsset assetWithURL:_currentSoundUrl];
+        <span class="k">if</span> <span class="o">(</span>audioAsset!<span class="o">=</span>nil<span class="o">)</span> <span class="o">{</span>
+            AVMutableCompositionTrack <span class="k">*</span>AudioTrack <span class="o">=</span> <span class="o">[</span>mixComposition addMutableTrackWithMediaType:AVMediaTypeAudio preferredTrackID:kCMPersistentTrackID_Invalid];
+            <span class="o">[</span>AudioTrack insertTimeRange:CMTimeRangeMake<span class="o">(</span>kCMTimeZero, firstAsset.duration<span class="o">)</span> ofTrack:[[audioAsset tracksWithMediaType:AVMediaTypeAudio] objectAtIndex:0] atTime:kCMTimeZero error:nil];
+        <span class="o">}</span>
+        
+        // 4 - Get path
+        NSURL <span class="k">*</span>url <span class="o">=</span> <span class="o">[</span>self fileURLForFilterMovieByName:mvFile];
+        <span class="o">[</span>self removeFile:url];
+        mvFile ++;
+        // 5 - Create exporter
+        AVAssetExportSession <span class="k">*</span>exporter <span class="o">=</span> <span class="o">[[</span>AVAssetExportSession alloc] initWithAsset:mixComposition
+                                                                          presetName:AVAssetExportPresetHighestQuality];
+        exporter.outputURL<span class="o">=</span>url;
+        exporter.outputFileType <span class="o">=</span> AVFileTypeQuickTimeMovie;
+        exporter.shouldOptimizeForNetworkUse <span class="o">=</span> YES;
+        exporter.videoComposition <span class="o">=</span> mainCompositionInst; // 加
+        <span class="o">[</span>exporter exportAsynchronouslyWithCompletionHandler:^<span class="o">{</span>
+            dispatch_async<span class="o">(</span>dispatch_get_main_queue<span class="o">()</span>, ^<span class="o">{</span>
+                <span class="o">[</span>self exportDidFinish:exporter];
+            <span class="o">})</span>;
+        <span class="o">}]</span>;
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<h1 id="section-11">七、学习</h1>
+<ul>
+  <li><a href="http://www.jianshu.com/p/722d65bac58d">GPUImage详细解析（六）-用视频做视频水印</a></li>
+  <li><a href="http://blog.csdn.net/xiaolinyeyi/article/details/50878996">AVAsset、AVMutableComposition系列类的理解及视频裁剪示例
+</a></li>
+  <li><a href="http://blog.csdn.net/merrygoot/article/details/51804906">iOS GPUImage之GPUImageFilterGroup组合滤镜（5）</a></li>
+  <li><a href="http://www.tuicool.com/articles/FVnumu">AVFoundation和GPUImage初探</a></li>
+  <li><a href="http://blog.csdn.net/think_ma/article/details/43093331">GPUImage.h简单说明</a></li>
+</ul>
+
+
+            </article>
+        </div>
+      </div>
+      <div class="panel docs-content">
+        <article class="post-content">
+          <div class="wrapper">
+            
+
+
+  <div id="uyan_frame"></div>
+<script type="text/javascript">
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://v2.uyan.cc/code/uyan.js?uid=2119519';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+
+
+
+
+
+ 
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+    <footer class="footer" role="contentinfo">
+	<div class="container">
+		<p class="copyright">Copyright &copy; 2016-2017 <a href="http://www.luckycathome.com/Resume/"><code>LuckyCat</code></a>.</p>
+		<p>Powered by <a href="http://jekyllrb.com">Jekyll</a>, theme from <a href="https://github.com/luoyan35714/LessOrMore">LessOrMore</a></p>
+	</div>
+</footer>
+
+<script src="/styles/js/jquery.min.js"></script>
+<script src="/styles/js/bootstrap.min.js"></script>
+<script src="/styles/js/holder.min.js"></script>
+<script src="/styles/js/application.js"></script>
+<script src="/styles/js/lessismore.js"></script>
+
+  </body>
+</html>

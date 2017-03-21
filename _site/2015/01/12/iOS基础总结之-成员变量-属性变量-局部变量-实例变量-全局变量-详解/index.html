@@ -5,14 +5,14 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>赞助方式</title>
+	<title>iOS基础总结之：成员变量、属性变量、局部变量、实例变量、全局变量，详解</title>
 
 	<link rel="shortcut icon" href="/styles/images/favicon.jpg">
 	<link rel="icon" href="/styles/images/favicon.jpg">
 
 	<link rel="stylesheet" href="/styles/css/index.css">
 	<link rel="stylesheet" href="/styles/css/fontawesome/css/font-awesome.min.css">
-	<link rel="canonical" href="/donate/method/">
+	<link rel="canonical" href="/2015/01/12/iOS%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%B9%8B-%E6%88%90%E5%91%98%E5%8F%98%E9%87%8F-%E5%B1%9E%E6%80%A7%E5%8F%98%E9%87%8F-%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F-%E5%AE%9E%E4%BE%8B%E5%8F%98%E9%87%8F-%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F-%E8%AF%A6%E8%A7%A3/">
 	<link rel="alternate" type="application/rss+xml" title="LuckyCat's Blog" href="/feed.xml">
 	
 	<meta name="description" content="康志华;个人博客;学而不思则罔;思而不学则殆;生命不止;折腾不休">
@@ -87,8 +87,8 @@
   <div class="container">
   	
   		<!--
-		    <h1>赞助方式</h1>
-		    <p>Post on  by <a href="/about">LuckyCat</a></p>
+		    <h1>iOS基础总结之：成员变量、属性变量、局部变量、实例变量、全局变量，详解</h1>
+		    <p>Post on Jan 12, 2015 by <a href="/about">LuckyCat</a></p>
 		-->
 		    <h1>Everything is well !</h1>
     
@@ -99,7 +99,8 @@
 <div class="banner">
   <div class="container">
   	
-    	学而不思则罔，思而不学则殆。
+    	<a href="/categories/#技术-ref">技术</a>	/
+    	<a href="/tag/#Object-C-ref">Object-C</a>
     
   </div>
 </div>
@@ -359,41 +360,78 @@
       <div class="panel docs-content">
         <div class="wrapper">
             <header class="post-header">
-              <h1 class="post-title">赞助方式</h1>
+              <h1 class="post-title">iOS基础总结之：成员变量、属性变量、局部变量、实例变量、全局变量，详解</h1>
               <!--
-                <p class="post-meta"></p>
+                <p class="post-meta">Jan 12, 2015</p>
               -->
-              <div class="meta">Posted on <span class="postdate"></span> By <a target="_blank" href="http://localhost:4000">LuckyCat</a></div>
+              <div class="meta">Posted on <span class="postdate">Jan 12, 2015</span> By <a target="_blank" href="http://localhost:4000">LuckyCat</a></div>
               <br />
             </header>
             <article class="post-content">
-              <h1 id="section">您的支持是作者写作最大的动力！</h1>
+              <ul id="markdown-toc">
+  <li><a href="#section" id="markdown-toc-section">一、成员变量</a></li>
+  <li><a href="#section-1" id="markdown-toc-section-1">二、属性变量</a></li>
+  <li><a href="#section-2" id="markdown-toc-section-2">三、实例变量</a></li>
+  <li><a href="#section-3" id="markdown-toc-section-3">四、全局变量</a></li>
+  <li><a href="#section-4" id="markdown-toc-section-4">五、局部变量</a></li>
+</ul>
 
 <hr />
 
-<h2 id="section-1">赞助方式一：<code class="highlighter-rouge">支付宝二维码付款</code></h2>
+<h1 id="section">一、成员变量</h1>
 
-<hr />
+<div class="highlighter-rouge"><pre class="highlight"><code>interface MyViewController :UIViewControlle
+<span class="o">{</span>
+    UIButton <span class="k">*</span>yourButton;
+    int count;
+    id data；
+<span class="o">}</span>
+</code></pre>
+</div>
 
-<p>您可以选择手机支付宝扫一扫</p>
+<p><strong>成员变量用于类内部，无需与外界接触的变量。</strong>成员变量默认是protected，一般情况下，非子类对象无法访问因为成员变量不会生成set、get方法，所以外界无法与成员变量接触。成员变量是定义在｛｝号中的变量，<strong>如果变量的数据类型是一个类则称这个变量为实例变量。</strong> 因为实例变量是成员变量的一种特殊情况，所以实例变量也是类内部使用的，无需与外部接触的变量，这个也就是所谓的类私有变量。</p>
 
-<p><img src="/styles/images/zhifubao.PNG" alt="支付宝二维码付款给Freud" width="310" /></p>
+<h1 id="section-1">二、属性变量</h1>
 
-<p><br />
-<br /></p>
+<div class="highlighter-rouge"><pre class="highlight"><code>interface MyViewController :UIViewControlle
+property <span class="o">(</span>nonatomic, strong<span class="o">)</span> UIButton <span class="k">*</span>myButton;
+@end
+</code></pre>
+</div>
 
-<h2 id="section-2">赞助方式二：<code class="highlighter-rouge">微信扫一扫</code></h2>
+<p><strong>属性变量是用于与其他对象交互的变量。</strong> 属性变量的好处就是允许让其他对象访问到该变量（因为属性创建过程中自动产生了set 和get方法）。 当然，你可以设置只读或者可写等，设置方法也可自定义。 现在大家似乎都不怎么喜欢用成员变量来定义类的变量， 都喜欢用属性变量来定义类的变量。把需要与外部接触的变量定义在.h文件中，只在本类中使用的变量定义在.m文件中</p>
 
-<hr />
+<h1 id="section-2">三、实例变量</h1>
 
-<p>您可以选择手机微信扫一扫</p>
+<p><strong>实例变量本质上就是成员变量，只是实例是针对类而言， 编译器会自动为你生成以下划线开头的实例变量 _myButton，也会自动为你生成setter，getter方法。</strong> 如果.m文件中写了@synthesize myButton，那么生成的实例变量就是myButton；如果没写@synthesize myButton，那么生成的实例变量就是_myButton。</p>
 
-<p><img src="/styles/images/weixin.png" alt="微信二维码付款给Freud" /></p>
+<h1 id="section-3">四、全局变量</h1>
 
-<p><br />
-<br /></p>
+<p><strong>全局变量是指在@implementation外定义的变量（在@implementation中定义也是可以但是一般不这么干） 。</strong></p>
 
-<hr />
+<p>举例：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>// 规范的
+
+static int <span class="nv">hu</span><span class="o">=</span>3;// 全局变量
+NSString <span class="k">*</span><span class="nv">str1</span><span class="o">=</span> @<span class="s2">"S1ViewController"</span>;// 全局变量
+
+@implementation S1ViewController
+@end
+</code></pre>
+</div>
+
+<h1 id="section-4">五、局部变量</h1>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>-（void）viewDidLoad
+<span class="o">{</span>
+    // 局部变量
+    NSArray <span class="k">*</span>array <span class="o">=</span> <span class="o">[[</span>NSArray alloc] initWithObject:@“123”,nil];
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p><strong>局部变量是根据其生存周期定义的。</strong>在源文件中的array，其生命周期是在以“{ }”为界限的代码块中，虽然它的名称与成员变量相同，但不是同一个变量。</p>
 
 
             </article>

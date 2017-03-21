@@ -5,9 +5,871 @@
     <description>Everything is well !</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 20 Nov 2016 23:40:38 +0800</pubDate>
-    <lastBuildDate>Sun, 20 Nov 2016 23:40:38 +0800</lastBuildDate>
+    <pubDate>Tue, 21 Mar 2017 23:33:52 +0800</pubDate>
+    <lastBuildDate>Tue, 21 Mar 2017 23:33:52 +0800</lastBuildDate>
     <generator>Jekyll v3.3.0</generator>
+    
+      <item>
+        <title>GPUImage学习总结</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;一、介绍&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;二、内置滤镜&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#section-2&quot; id=&quot;markdown-toc-section-2&quot;&gt;三、分段录制&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#gpuimage&quot; id=&quot;markdown-toc-gpuimage&quot;&gt;四、 GPUImage录制视频&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-3&quot; id=&quot;markdown-toc-section-3&quot;&gt;4.1 基本设置&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-4&quot; id=&quot;markdown-toc-section-4&quot;&gt;4.2 开始录制&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-5&quot; id=&quot;markdown-toc-section-5&quot;&gt;4.3 停止录制&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-6&quot; id=&quot;markdown-toc-section-6&quot;&gt;4.4 视频拼接&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#section-7&quot; id=&quot;markdown-toc-section-7&quot;&gt;五、视频加滤镜功能&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-8&quot; id=&quot;markdown-toc-section-8&quot;&gt;5.1 单个滤镜&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-9&quot; id=&quot;markdown-toc-section-9&quot;&gt;5.2 组合滤镜&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-10&quot; id=&quot;markdown-toc-section-10&quot;&gt;5.3 添加滤镜&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#mv&quot; id=&quot;markdown-toc-mv&quot;&gt;六、视频加MV功能&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#section-11&quot; id=&quot;markdown-toc-section-11&quot;&gt;七、学习&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;section&quot;&gt;一、介绍&lt;/h1&gt;
+&lt;p&gt;GPUImage是Brad Larson在github托管的开源项目。&lt;/p&gt;
+
+&lt;p&gt;GPUImage是一个基于GPU图像和视频处理的开源iOS框架，提供各种各样的图像处理滤镜，并且支持照相机和摄像机的实时滤镜； 基于GPU的图像加速，因此可以加速对实时摄像头视频、电影以及image的滤镜和其它效果处理，并且能够自定义图像滤镜。另外， GPUImage支持ARC。&lt;/p&gt;
+
+&lt;p&gt;使用GPUImage处理图片比Core Image更简单，只需要将过滤器赋给图片对象即可，不用考虑context或者设备等其他问题。GPUImage提供了除高斯模糊外的其他几种不同效果的模糊，虽然Core Image也提供了几种模糊效果，但目前在iOS上能用的就只有高斯模糊，而GPUImage可用的有FastBlur, GaussianBlur, GaussianSelectiveBlur 和 BoxBlur。此外，作为开源框架的GPUImage还支持自定义的过滤器。&lt;/p&gt;
+
+&lt;h1 id=&quot;section-1&quot;&gt;二、内置滤镜&lt;/h1&gt;
+&lt;p&gt;共125个滤镜, 分为四类
+Color adjustments: 31 filters, 颜色处理相关
+Image processing: 40 filters, 图像处理相关.
+Blending modes: 29 filters, 混合模式相关.
+Visual effects: 25 filters, 视觉效果相关.&lt;/p&gt;
+
+&lt;h1 id=&quot;section-2&quot;&gt;三、分段录制&lt;/h1&gt;
+&lt;p&gt;参考&lt;a href=&quot;http://www.tuicool.com/articles/FVnumu&quot;&gt;AVFoundation和GPUImage初探&lt;/a&gt;。&lt;/p&gt;
+
+&lt;p&gt;分段录制，每次录制都要创建一个movieWriter，每次都会在重新创建movieWriter并将它设置为videoCamera的 audioEncodingTarget 时候，界面都会卡顿一下，这是因为videoCamera默认是不录制声音的，而每次创建movieWriter的时候都用到了 movieWriter.hasAudioTrack = YES，调用这个之后videoCamera会自动去添加声音输入源，准备一些数据，所以这个过程会导致界面卡顿一下，下面这句代码很重要：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;– &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;BOOL&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;addAudioInputsAndOutputs;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;videoCamera的头文件的注释是：录制的时候添加声音，添加输入源和输出源会暂时会使录制暂时卡住，所以在要使用声音的情况下要&lt;code class=&quot;highlighter-rouge&quot;&gt;先&lt;/code&gt;调用该方法来防止录制被卡住。&lt;/p&gt;
+
+&lt;h1 id=&quot;gpuimage&quot;&gt;四、 GPUImage录制视频&lt;/h1&gt;
+&lt;p&gt;转自&lt;a href=&quot;http://blog.sina.com.cn/s/blog_d0c0c80c0102xbo0.html&quot;&gt;GPUImage 录制视频注意事项&lt;/a&gt;，感谢&lt;a href=&quot;http://blog.sina.com.cn/u/3502295052&quot;&gt;我的个神啊&lt;/a&gt;的分享。&lt;/p&gt;
+
+&lt;h2 id=&quot;section-3&quot;&gt;4.1 基本设置&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;// 创建摄像头
+self.videoCamera &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[[&lt;/span&gt;GPUImageVideoCamera alloc] initWithSessionPreset:AVCaptureSessionPreset640x480 cameraPosition:AVCaptureDevicePositionBack];
+
+self.videoCamera.outputImageOrientation &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; UIInterfaceOrientationPortrait; // 输出图像旋转方式
+self.videoCamera.horizontallyMirrorFrontFacingCamera &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; YES;
+
+// 创建界面显示摄像内容
+self.gpuImageView &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[[&lt;/span&gt;GPUImageView alloc] initWithFrame:frame];
+self.gpuImageView.fillMode &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; kGPUImageFillModePreserveAspectRatioAndFill; // 显示模式充满整个边框
+self.gpuImageView.clipsToBounds &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; YES;
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;self.gpuImageView.layer setMasksToBounds:YES];
+
+// 滤镜
+self.filter &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[[&lt;/span&gt;GPUImageBrightnessFilter alloc] init];
+self.filter.brightness &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 0.1f;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;section-4&quot;&gt;4.2 开始录制&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;// 该句可防止允许声音通过的情况下，避免录制第一帧黑屏闪屏卡顿现象（分段录制里有详解）
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;_camera addAudioInputsAndOutputs];
+
+// 配置录制器
+NSURL &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; saveURL &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;self fileURLForTempMovieByName:[NSString stringWithFormat:@&lt;span class=&quot;s2&quot;&gt;&quot;%d&quot;&lt;/span&gt;, videoFileNum]]; // 分段录制,videoFileNum:第几段
+self.movieWriter &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[[&lt;/span&gt;GPUImageMovieWriter alloc] initWithMovieURL:saveURL  size:CGSizeMake&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;480.0f, 640.0f&lt;span class=&quot;o&quot;&gt;)]&lt;/span&gt;;
+
+self.movieWriter.assetWriter.movieFragmentInterval &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; kCMTimeInvalid;
+self.movieWriter.encodingLiveVideo &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; YES; // 影响其实是expectsMediaDataInRealTime属性，YES时用于输入流是实时的,比如说摄像头
+self.movieWriter.hasAudioTrack &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; YES; // 开启声音采集
+self.movieWriter.shouldPassthroughAudio &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; YES; // 是否使用源音源
+
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;self.filter addTarget:self.movieWriter]; // 滤镜添加至moviewrite
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;self.filter addTarget:self.gpuImageView]; // 滤镜添加gpuimageview
+self.videoCamera.audioEncodingTarget &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; self.movieWriter; // 音频来源是文件
+
+// 开始录制
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;self.videoCamera startCameraCapture];
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;self.movieWriter startRecording];
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;section-5&quot;&gt;4.3 停止录制&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;self.filter removeTarget:self.movieWriter];
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;self.movieWriter finishRecording];
+self.videoCamera.audioEncodingTarget &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; nil;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;section-6&quot;&gt;4.4 视频拼接&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;4.4.1 AVFoundation基本知识点&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;AVAsset：媒体。&lt;/p&gt;
+
+&lt;p&gt;AVAssetTrack：媒体轨道。&lt;/p&gt;
+
+&lt;p&gt;AVMutableComposition ：包含了一个或多个给定类型的媒体轨道的容器。&lt;/p&gt;
+
+&lt;p&gt;AVMutableCompositionTrack ：工程文件中的轨道，有音频轨、视频轨等，里面可以插入各种对应的素材。&lt;/p&gt;
+
+&lt;p&gt;AVMutableVideoComposition：用来生成video的组合指令，包含多段instruction，可以决定最终视频的尺寸。&lt;/p&gt;
+
+&lt;p&gt;AVMutableVideoCompositionInstruction：决定一个timeRange内每个轨道的状态，包含多个layerInstruction。&lt;/p&gt;
+
+&lt;p&gt;AVMutableVideoCompositionLayerInstruction：决定视频轨道的效果:模糊、变形、裁剪,可创建出过渡效果。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;4.4.2 分段视频的拼接&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#pragma mark -&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#pragma mark 视频拼接,视频和音频合成 存储为:MergerMovie&lt;/span&gt;
+- &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;void&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;mergeAndSaveMovieWithFirstAsset:&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;AVAsset &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;firstAsset secondAsset:&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;AVAsset &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;secondAsset &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    
+    static int mergerFileNum &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 1; // 合成后的视频文件个数&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;因为是递归合成,不便删除上一个,所以有多个文件&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+    
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;firstAsset !&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;nil &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; secondAsset!&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;nil&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        // 1.创建组合mixComposition,用于合成视频,和声音&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;要分别创建组合轨道&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+        AVMutableComposition &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;mixComposition &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[[&lt;/span&gt;AVMutableComposition alloc] init];
+        // 2.创建1和2的视频轨道、音频轨道,都加入组合中mixComposition
+        AVMutableCompositionTrack &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;firstVideoTrack &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;mixComposition addMutableTrackWithMediaType:AVMediaTypeVideo
+                                                                                 preferredTrackID:kCMPersistentTrackID_Invalid];
+        &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;firstVideoTrack insertTimeRange:CMTimeRangeMake&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;kCMTimeZero, firstAsset.duration&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+                                 ofTrack:[[firstAsset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0]
+                                  atTime:kCMTimeZero
+                                   error:nil];
+        AVMutableCompositionTrack &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;firstAudioTrack &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;mixComposition addMutableTrackWithMediaType:AVMediaTypeAudio
+                                                                                 preferredTrackID:kCMPersistentTrackID_Invalid];
+        &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;firstAudioTrack insertTimeRange:CMTimeRangeMake&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;kCMTimeZero, firstAsset.duration&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+                                 ofTrack:[[firstAsset tracksWithMediaType:AVMediaTypeAudio] objectAtIndex:0]
+                                  atTime:kCMTimeZero
+                                   error:nil];
+        
+        
+        AVMutableCompositionTrack &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;secondVideoTrack &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;mixComposition addMutableTrackWithMediaType:AVMediaTypeVideo
+                                                                                  preferredTrackID:kCMPersistentTrackID_Invalid];
+        &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;secondVideoTrack insertTimeRange:CMTimeRangeMake&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;kCMTimeZero, secondAsset.duration&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+                                  ofTrack:[[secondAsset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0]
+                                   atTime:firstAsset.duration
+                                    error:nil];
+        AVMutableCompositionTrack &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;secondAudioTrack &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;mixComposition addMutableTrackWithMediaType:AVMediaTypeAudio
+                                                                                  preferredTrackID:kCMPersistentTrackID_Invalid];
+        &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;secondAudioTrack insertTimeRange:CMTimeRangeMake&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;kCMTimeZero, secondAsset.duration&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+                                  ofTrack:[[secondAsset tracksWithMediaType:AVMediaTypeAudio] objectAtIndex:0]
+                                   atTime:firstAsset.duration
+                                    error:nil];
+        
+        // 3.创建AVMutableVideoCompositionInstruction:一个指令，决定一个timeRange内每个轨道的状态，包含多个layerInstruction
+        AVMutableVideoCompositionInstruction &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;mainInstruction &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;AVMutableVideoCompositionInstruction videoCompositionInstruction];
+        mainInstruction.timeRange &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; CMTimeRangeMake&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;kCMTimeZero, CMTimeAdd&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;firstAsset.duration, secondAsset.duration&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;;
+        
+        // 3-1.创建第一个AVMutableVideoCompositionLayerInstruction:决定视频轨道的效果:模糊、变形、裁剪,可创建出过渡效果
+        AVMutableVideoCompositionLayerInstruction &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;firstlayerInstruction &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:firstVideoTrack];
+        AVAssetTrack &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;firstAssetTrack &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[[&lt;/span&gt;firstAsset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0];
+        UIImageOrientation firstAssetOrientation_  &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; UIImageOrientationUp;
+        BOOL isFirstAssetPortrait_  &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; NO;
+        CGAffineTransform firstTransform &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; firstAssetTrack.preferredTransform;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;firstTransform.a &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; 0 &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; firstTransform.b &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; 1.0 &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; firstTransform.c &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; -1.0 &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; firstTransform.d &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; 0&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            firstAssetOrientation_ &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; UIImageOrientationRight;
+            isFirstAssetPortrait_ &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; YES;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;firstTransform.a &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; 0 &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; firstTransform.b &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; -1.0 &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; firstTransform.c &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; 1.0 &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; firstTransform.d &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; 0&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            firstAssetOrientation_ &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;  UIImageOrientationLeft;
+            isFirstAssetPortrait_ &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; YES;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;firstTransform.a &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; 1.0 &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; firstTransform.b &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; 0 &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; firstTransform.c &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; 0 &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; firstTransform.d &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; 1.0&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            firstAssetOrientation_ &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;  UIImageOrientationUp;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;firstTransform.a &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; -1.0 &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; firstTransform.b &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; 0 &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; firstTransform.c &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; 0 &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; firstTransform.d &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; -1.0&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            firstAssetOrientation_ &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; UIImageOrientationDown;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;firstlayerInstruction setTransform:firstAsset.preferredTransform atTime:kCMTimeZero];
+        &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;firstlayerInstruction setOpacity:0.0 atTime:firstAsset.duration];
+        
+        // 3-2.创建第二个AVMutableVideoCompositionLayerInstruction
+        AVMutableVideoCompositionLayerInstruction &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;secondlayerInstruction &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:secondVideoTrack];
+        AVAssetTrack &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;secondAssetTrack &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[[&lt;/span&gt;secondAsset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0];
+        UIImageOrientation secondAssetOrientation_  &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; UIImageOrientationUp;
+        BOOL isSecondAssetPortrait_ &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; NO;
+        CGAffineTransform secondTransform &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; secondAssetTrack.preferredTransform;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;secondTransform.a &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; 0 &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; secondTransform.b &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; 1.0 &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; secondTransform.c &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; -1.0 &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; secondTransform.d &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; 0&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;nv&quot;&gt;secondAssetOrientation_&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; UIImageOrientationRight;
+            isSecondAssetPortrait_ &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; YES;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;secondTransform.a &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; 0 &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; secondTransform.b &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; -1.0 &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; secondTransform.c &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; 1.0 &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; secondTransform.d &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; 0&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            secondAssetOrientation_ &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;  UIImageOrientationLeft;
+            isSecondAssetPortrait_ &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; YES;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;secondTransform.a &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; 1.0 &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; secondTransform.b &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; 0 &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; secondTransform.c &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; 0 &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; secondTransform.d &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; 1.0&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            secondAssetOrientation_ &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;  UIImageOrientationUp;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;secondTransform.a &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; -1.0 &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; secondTransform.b &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; 0 &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; secondTransform.c &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; 0 &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; secondTransform.d &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; -1.0&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            secondAssetOrientation_ &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; UIImageOrientationDown;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;secondlayerInstruction setTransform:secondAsset.preferredTransform atTime:firstAsset.duration];
+        
+        // AVMutableVideoComposition:用来生成video的组合指令,包含多段instruction,可以决定最终视频的尺寸
+        // 3-3.AVMutableVideoComposition添加instructions
+        mainInstruction.layerInstructions &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;NSArray arrayWithObjects:firstlayerInstruction, secondlayerInstruction,nil];
+        AVMutableVideoComposition &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;mainCompositionInst &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;AVMutableVideoComposition videoComposition];
+        mainCompositionInst.instructions &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;NSArray arrayWithObject:mainInstruction];
+        mainCompositionInst.frameDuration &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; CMTimeMake&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;1, 30&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;;
+        
+        CGSize naturalSizeFirst, naturalSizeSecond;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;isFirstAssetPortrait_&lt;span class=&quot;o&quot;&gt;){&lt;/span&gt;
+            naturalSizeFirst &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; CGSizeMake&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;firstAssetTrack.naturalSize.height, firstAssetTrack.naturalSize.width&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            naturalSizeFirst &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; firstAssetTrack.naturalSize;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;isSecondAssetPortrait_&lt;span class=&quot;o&quot;&gt;){&lt;/span&gt;
+            naturalSizeSecond &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; CGSizeMake&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;secondAssetTrack.naturalSize.height, secondAssetTrack.naturalSize.width&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            naturalSizeSecond &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; secondAssetTrack.naturalSize;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        
+        float renderWidth, renderHeight;
+        renderWidth &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; naturalSizeFirst.width &amp;gt; naturalSizeSecond.width ? naturalSizeFirst.width : naturalSizeSecond.width;
+        renderHeight &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; naturalSizeFirst.height &amp;gt; naturalSizeSecond.height ? naturalSizeFirst.height : naturalSizeSecond.height;
+        mainCompositionInst.renderSize &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; CGSizeMake&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;renderWidth, renderHeight&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;;
+        
+        // 4.获取路径
+        NSURL &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;url &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;self fileURLForTempMovieByName:[NSString stringWithFormat:@&lt;span class=&quot;s2&quot;&gt;&quot;MergerMovie%d&quot;&lt;/span&gt;, mergerFileNum]];
+        
+        // 5.创建AVAssetExportSession,用于导出合成好的视频
+        AVAssetExportSession &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;exporter &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[[&lt;/span&gt;AVAssetExportSession alloc] initWithAsset:mixComposition
+                                                                          presetName:AVAssetExportPresetHighestQuality];
+        exporter.outputURL&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;url;
+        exporter.outputFileType &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; AVFileTypeMPEG4;//AVFileTypeQuickTimeMovie;
+        exporter.shouldOptimizeForNetworkUse &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; YES;
+        exporter.videoComposition &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; mainCompositionInst;
+        __weak __typeof&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;self&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;weakSelf &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; self;
+        &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;exporter exportAsynchronouslyWithCompletionHandler:^&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            dispatch_async&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;dispatch_get_main_queue&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;, ^&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                mergerFileNum ++;
+                &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;mergerFileNum &amp;lt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;_videoArray count]&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                    // 取合成好的视频和下一个,递归进行视频拼接,拼接后和音频合成
+                    AVAsset &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; nextAsset &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;AVAsset assetWithURL:[_videoArray objectAtIndex:mergerFileNum]];
+                    AVAsset &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; mergerVideo &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;AVAsset assetWithURL:[weakSelf fileURLForTempMovieByName:[NSString stringWithFormat:@&lt;span class=&quot;s2&quot;&gt;&quot;MergerMovie%d&quot;&lt;/span&gt;, mergerFileNum - 1]]];
+                    &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;weakSelf mergeAndSaveMovieWithFirstAsset:mergerVideo secondAsset:nextAsset];
+                &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                    // 合成完成,导出
+                    mergerFileFinally &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;NSString stringWithFormat:@&lt;span class=&quot;s2&quot;&gt;&quot;MergerMovie%d&quot;&lt;/span&gt;, mergerFileNum - 1];
+                    mergerFileNum &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 1;
+                    &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;weakSelf exportDidFinish:exporter];
+                &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;})&lt;/span&gt;;
+        &lt;span class=&quot;o&quot;&gt;}]&lt;/span&gt;;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+- &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;void&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;exportDidFinish:&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;AVAssetExportSession&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;session &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    __weak __typeof&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;self&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;weakSelf &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; self;
+    dispatch_async&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;dispatch_get_main_queue&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;, ^&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;session.status &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; AVAssetExportSessionStatusCompleted&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            // 视频拼接成功,取出视频中的音频
+            &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;weakSelf getAudioSound];
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            UIAlertView &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;alert &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[[&lt;/span&gt;UIAlertView alloc] initWithTitle:@&lt;span class=&quot;s2&quot;&gt;&quot;Video Saved&quot;&lt;/span&gt; message:[NSString stringWithFormat:@&lt;span class=&quot;s2&quot;&gt;&quot;Saved To File Failed -- %d&quot;&lt;/span&gt;, session.status]
+                                                           delegate:self cancelButtonTitle:@&lt;span class=&quot;s2&quot;&gt;&quot;OK&quot;&lt;/span&gt; otherButtonTitles:nil];
+            &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;alert show];
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;})&lt;/span&gt;;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;4.4.3 从合成的视频取出音频轨道&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;// 从合成好的视频中获取音频
+- &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;void&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;getAudioSound &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    AVURLAsset &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;videoAsset &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;AVURLAsset URLAssetWithURL:[self fileURLForTempMovieByName:mergerFileFinally] options:nil];
+    AVMutableComposition &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;mixComposition &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[[&lt;/span&gt;AVMutableComposition alloc] init];
+    //创建一个组合轨道,类型是AVMediaTypeAudio
+    AVMutableCompositionTrack &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;audioTrack &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;mixComposition addMutableTrackWithMediaType:AVMediaTypeAudio
+                                                                        preferredTrackID:kCMPersistentTrackID_Invalid];
+    
+    //获取videoAsset中的音频轨道,插入组合轨道
+    &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;audioTrack insertTimeRange:CMTimeRangeMake&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;kCMTimeZero, videoAsset.duration&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+                        ofTrack:[[videoAsset tracksWithMediaType:AVMediaTypeAudio] objectAtIndex:0] atTime:kCMTimeZero error:nil];
+    
+    NSString &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;outFilePath &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[[&lt;/span&gt;self fileURLForTempSoundByName:@&lt;span class=&quot;s2&quot;&gt;&quot;MergerSound&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; path];
+    &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;self exportAudioAsset:audioTrack.asset toFilePath:outFilePath];
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+- &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;BOOL&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;exportAudioAsset:&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;AVAsset &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;avAsset toFilePath:&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;NSString &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;filePath &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    AVAssetExportSession &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;exportSession &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;AVAssetExportSession
+                                           exportSessionWithAsset:avAsset
+                                           presetName:AVAssetExportPresetAppleM4A];
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;nil &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; exportSession&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return &lt;/span&gt;NO;//创建失败，则跳出
+    
+    exportSession.outputURL &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;NSURL fileURLWithPath:filePath]; // output path 新文件路径
+    exportSession.outputFileType &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; AVFileTypeAppleM4A; // output file &lt;span class=&quot;nb&quot;&gt;type &lt;/span&gt;新文件类型
+    
+    __weak __typeof&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;self&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;weakSelf &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; self;
+    &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;exportSession exportAsynchronouslyWithCompletionHandler:^&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; //block
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;exportSession.status &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; AVAssetExportSessionStatusCompleted&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            dispatch_async&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;dispatch_get_main_queue&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;, ^&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                // 1.根据 Main.storyboard 的前缀 &lt;span class=&quot;s2&quot;&gt;&quot;Main&quot;&lt;/span&gt; 取到storyBoard 的地址
+                UIStoryboard &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;storyBoard &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;UIStoryboard storyboardWithName:@&lt;span class=&quot;s2&quot;&gt;&quot;Recording&quot;&lt;/span&gt; bundle:[NSBundle mainBundle]];
+                // 2.根据事先在storyBoard中设置的 storyBoard ID 来获取相应的 ViewController
+                VideoPlayViewController &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; videoPlay &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;storyBoard instantiateViewControllerWithIdentifier:@&lt;span class=&quot;s2&quot;&gt;&quot;VideoPlayViewController&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;;
+                videoPlay.playUrl &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;weakSelf fileURLForTempMovieByName:mergerFileFinally];
+                videoPlay.playSoundUrl &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;weakSelf fileURLForTempSoundByName:@&lt;span class=&quot;s2&quot;&gt;&quot;MergerSound&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;;
+                &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;weakSelf.navigationController pushViewController:videoPlay animated:YES];
+            &lt;span class=&quot;o&quot;&gt;})&lt;/span&gt;;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            dispatch_async&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;dispatch_get_main_queue&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;, ^&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                UIAlertView &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;alert &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[[&lt;/span&gt;UIAlertView alloc] initWithTitle:@&lt;span class=&quot;s2&quot;&gt;&quot;Audio Saved&quot;&lt;/span&gt; message:@&lt;span class=&quot;s2&quot;&gt;&quot;Saved To File Failed&quot;&lt;/span&gt;
+                                                               delegate:self cancelButtonTitle:@&lt;span class=&quot;s2&quot;&gt;&quot;OK&quot;&lt;/span&gt; otherButtonTitles:nil];
+                &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;alert show];
+            &lt;span class=&quot;o&quot;&gt;})&lt;/span&gt;;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}]&lt;/span&gt;;
+    &lt;span class=&quot;k&quot;&gt;return &lt;/span&gt;YES;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;4.4.4 调用合成视频方法：&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;// 取第1,2段,进行视频拼接,拼接后取出完整音频,传界面
+AVAsset &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;firstAsset &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;AVAsset assetWithURL:_videoArray[0]];
+AVAsset &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;secondAsset &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;AVAsset assetWithURL:_videoArray[1]];
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;self mergeAndSaveMovieWithFirstAsset:firstAsset secondAsset:secondAsset];
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h1 id=&quot;section-7&quot;&gt;五、视频加滤镜功能&lt;/h1&gt;
+
+&lt;h2 id=&quot;section-8&quot;&gt;5.1 单个滤镜&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;// 素描滤镜
+GPUImageBrightnessFilter &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;newFilter &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[[&lt;/span&gt;GPUImageBrightnessFilter alloc] init];
+newFilter.brightness &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 0.4f;
+self.filter &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; newFilter;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;section-9&quot;&gt;5.2 组合滤镜&lt;/h2&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;GPUImageRGBFilter &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;filter1         &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[[&lt;/span&gt;GPUImageRGBFilter alloc] init];
+GPUImageToonFilter &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;filter2        &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[[&lt;/span&gt;GPUImageToonFilter alloc] init];
+GPUImageColorInvertFilter &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;filter3 &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[[&lt;/span&gt;GPUImageColorInvertFilter alloc] init];
+GPUImageSepiaFilter       &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;filter4 &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[[&lt;/span&gt;GPUImageSepiaFilter alloc] init];
+&lt;span class=&quot;o&quot;&gt;[(&lt;/span&gt;GPUImageFilterGroup &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;_filter addFilter:filter1];
+&lt;span class=&quot;o&quot;&gt;[(&lt;/span&gt;GPUImageFilterGroup &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;_filter addFilter:filter2];
+&lt;span class=&quot;o&quot;&gt;[(&lt;/span&gt;GPUImageFilterGroup &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;_filter addFilter:filter3];
+&lt;span class=&quot;o&quot;&gt;[(&lt;/span&gt;GPUImageFilterGroup &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;_filter addFilter:filter4];
+
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;filter1 addTarget:filter2];
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;filter2 addTarget:filter3];
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;filter3 addTarget:filter4];
+              
+&lt;span class=&quot;o&quot;&gt;[(&lt;/span&gt;GPUImageFilterGroup &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;_filter setInitialFilters:[NSArray arrayWithObject:filter1]];
+&lt;span class=&quot;o&quot;&gt;[(&lt;/span&gt;GPUImageFilterGroup &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;_filter setTerminalFilter:filter4];
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;section-10&quot;&gt;5.3 添加滤镜&lt;/h2&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;// imageMovie
+self.movieFile &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[[&lt;/span&gt;GPUImageMovie alloc] initWithURL:_playUrl];
+_movieFile.runBenchmark &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; YES;
+_movieFile.playAtActualSpeed &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; NO;
+// 滤镜
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;_movieFile addTarget:_filter];
+// GPUImageView
+GPUImageView &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;filterView &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[[&lt;/span&gt;GPUImageView alloc] init];
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;_filter addTarget:filterView];
+     
+// MovieWriter
+self.movieWriter &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[[&lt;/span&gt;GPUImageMovieWriter alloc] initWithMovieURL:_currentMovieUrl size:CGSizeMake&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;480.0, 640.0&lt;span class=&quot;o&quot;&gt;)]&lt;/span&gt;;
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;_filter addTarget:_movieWriter];
+        
+_movieWriter.shouldPassthroughAudio &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; YES;
+_movieFile.audioEncodingTarget &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; _movieWriter;
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;_movieFile enableSynchronizedEncodingUsingMovieWriter:_movieWriter];
+
+// 开始处理
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;_movieWriter startRecording];
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;_movieFile startProcessing];
+
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;self.player pause];
+ _processing.hidden &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; NO;
+ &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;_movieWriter setCompletionBlock:^&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+	 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;_filter removeTarget:_movieWriter];
+	 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;_movieWriter finishRecording];
+	 dispatch_async&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;dispatch_get_main_queue&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;, ^&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+		 _processing.hidden &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; YES;
+     &lt;span class=&quot;o&quot;&gt;})&lt;/span&gt;;
+&lt;span class=&quot;o&quot;&gt;}]&lt;/span&gt;;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h1 id=&quot;mv&quot;&gt;六、视频加MV功能&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;代码有点乱，累了，不想整理了，大多同理吧。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#pragma mark -&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#pragma mark - 🍎mv处理 1314&lt;/span&gt;
+// 加mv处理
+- &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;void&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;processMovieByMVUrl:&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;NSURL &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;mvUrl &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+    AVURLAsset &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;firstAsset &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;AVURLAsset URLAssetWithURL:_playUrl options:nil];
+    AVURLAsset &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;secondAsset &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;AVURLAsset URLAssetWithURL:mvUrl options:nil];
+ 
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;firstAsset.duration.value !&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 0 &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; secondAsset.duration.value !&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 0&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        // 1 - Create AVMutableComposition object. This object will hold your AVMutableCompositionTrack instances.
+        AVMutableComposition &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;mixComposition &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[[&lt;/span&gt;AVMutableComposition alloc] init];
+        // 2 - Create two video tracks
+        AVMutableCompositionTrack &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;firstTrack &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;mixComposition addMutableTrackWithMediaType:AVMediaTypeVideo
+                                                                            preferredTrackID:kCMPersistentTrackID_Invalid];
+        &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;firstTrack insertTimeRange:CMTimeRangeMake&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;kCMTimeZero, firstAsset.duration&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+                            ofTrack:[[firstAsset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0]
+                             atTime:kCMTimeZero
+                              error:nil];
+        AVMutableCompositionTrack &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;secondTrack &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;mixComposition addMutableTrackWithMediaType:AVMediaTypeVideo
+                                                                             preferredTrackID:kCMPersistentTrackID_Invalid];
+        &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;secondTrack insertTimeRange:CMTimeRangeMake&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;kCMTimeZero, firstAsset.duration&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+                             ofTrack:[[secondAsset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0]
+                              atTime:kCMTimeZero // 🌲改
+                               error:nil];
+        
+        // 2.1 - Create AVMutableVideoCompositionInstruction
+        AVMutableVideoCompositionInstruction &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;mainInstruction &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;AVMutableVideoCompositionInstruction videoCompositionInstruction];
+        mainInstruction.timeRange &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; CMTimeRangeMake&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;kCMTimeZero,
+                                                    firstAsset.duration&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;;
+        
+        // 2.2 - Create an AVMutableVideoCompositionLayerInstruction &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;the first track
+        AVMutableVideoCompositionLayerInstruction &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;firstlayerInstruction &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:firstTrack];
+        AVAssetTrack &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;firstAssetTrack &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[[&lt;/span&gt;firstAsset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0];
+        UIImageOrientation firstAssetOrientation_  &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; UIImageOrientationUp;
+        BOOL isFirstAssetPortrait_  &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; NO;
+        CGAffineTransform firstTransform &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; firstAssetTrack.preferredTransform;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;firstTransform.a &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; 0 &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; firstTransform.b &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; 1.0 &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; firstTransform.c &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; -1.0 &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; firstTransform.d &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; 0&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            firstAssetOrientation_ &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; UIImageOrientationRight;
+            isFirstAssetPortrait_ &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; YES;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;firstTransform.a &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; 0 &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; firstTransform.b &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; -1.0 &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; firstTransform.c &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; 1.0 &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; firstTransform.d &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; 0&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            firstAssetOrientation_ &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;  UIImageOrientationLeft;
+            isFirstAssetPortrait_ &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; YES;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;firstTransform.a &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; 1.0 &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; firstTransform.b &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; 0 &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; firstTransform.c &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; 0 &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; firstTransform.d &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; 1.0&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            firstAssetOrientation_ &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;  UIImageOrientationUp;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;firstTransform.a &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; -1.0 &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; firstTransform.b &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; 0 &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; firstTransform.c &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; 0 &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; firstTransform.d &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; -1.0&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            firstAssetOrientation_ &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; UIImageOrientationDown;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;firstlayerInstruction setTransform:firstAsset.preferredTransform atTime:kCMTimeZero];
+       
+        // 2.3 - Create an AVMutableVideoCompositionLayerInstruction &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;the second track
+        AVMutableVideoCompositionLayerInstruction &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;secondlayerInstruction &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:secondTrack];
+        AVAssetTrack &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;secondAssetTrack &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[[&lt;/span&gt;secondAsset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0];
+
+        UIImageOrientation secondAssetOrientation_  &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; UIImageOrientationUp;
+        BOOL isSecondAssetPortrait_ &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; NO;
+        CGAffineTransform secondTransform &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; secondAssetTrack.preferredTransform;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;secondTransform.a &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; 0 &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; secondTransform.b &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; 1.0 &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; secondTransform.c &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; -1.0 &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; secondTransform.d &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; 0&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;nv&quot;&gt;secondAssetOrientation_&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; UIImageOrientationRight;
+            isSecondAssetPortrait_ &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; YES;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;secondTransform.a &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; 0 &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; secondTransform.b &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; -1.0 &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; secondTransform.c &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; 1.0 &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; secondTransform.d &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; 0&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            secondAssetOrientation_ &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;  UIImageOrientationLeft;
+            isSecondAssetPortrait_ &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; YES;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;secondTransform.a &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; 1.0 &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; secondTransform.b &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; 0 &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; secondTransform.c &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; 0 &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; secondTransform.d &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; 1.0&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            secondAssetOrientation_ &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;  UIImageOrientationUp;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;secondTransform.a &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; -1.0 &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; secondTransform.b &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; 0 &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; secondTransform.c &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; 0 &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; secondTransform.d &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; -1.0&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            secondAssetOrientation_ &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; UIImageOrientationDown;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+//        &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;secondlayerInstruction setTransform:secondAsset.preferredTransform atTime:firstAsset.duration];
+        &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;secondlayerInstruction setTransform:secondAsset.preferredTransform atTime:kCMTimeZero];
+        
+        // 2.4 - Add instructions
+        mainInstruction.layerInstructions &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;NSArray arrayWithObjects:firstlayerInstruction, secondlayerInstruction,nil];
+        AVMutableVideoComposition &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;mainCompositionInst &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;AVMutableVideoComposition videoComposition];
+        mainCompositionInst.instructions &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;NSArray arrayWithObject:mainInstruction];
+        mainCompositionInst.frameDuration &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; CMTimeMake&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;1, firstAsset.duration.value/firstAsset.duration.timescale&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;;
+        
+        CGSize naturalSizeFirst, naturalSizeSecond;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;isFirstAssetPortrait_&lt;span class=&quot;o&quot;&gt;){&lt;/span&gt;
+            naturalSizeFirst &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; CGSizeMake&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;firstAssetTrack.naturalSize.height, firstAssetTrack.naturalSize.width&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            naturalSizeFirst &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; firstAssetTrack.naturalSize;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;isSecondAssetPortrait_&lt;span class=&quot;o&quot;&gt;){&lt;/span&gt;
+            naturalSizeSecond &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; CGSizeMake&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;secondAssetTrack.naturalSize.height, secondAssetTrack.naturalSize.width&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            naturalSizeSecond &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; secondAssetTrack.naturalSize;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        
+        float renderWidth, renderHeight;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;naturalSizeFirst.width &amp;gt; naturalSizeSecond.width&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            renderWidth &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; naturalSizeFirst.width;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            renderWidth &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; naturalSizeSecond.width;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;naturalSizeFirst.height &amp;gt; naturalSizeSecond.height&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            renderHeight &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; naturalSizeFirst.height;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            renderHeight &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; naturalSizeSecond.height;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+//        &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;secondAsset increaseSize:[NSValue valueWithCGSize:CGSizeMake&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;480, 640&lt;span class=&quot;o&quot;&gt;)]]&lt;/span&gt;;
+        &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;firstlayerInstruction setOpacity:0.5 atTime:kCMTimeZero]; //r34645🍎
+//        &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;secondlayerInstruction setOpacity:0.5 atTime:kCMTimeZero]; //r34645🍎
+        
+        // 480, 640
+        CGFloat result &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; renderWidth &amp;lt; renderHeight ? renderWidth : renderHeight;
+        mainCompositionInst.renderSize &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; CGSizeMake&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;result, result&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;;
+
+        // 3 - Audio track
+        AVAsset &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;audioAsset &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;AVAsset assetWithURL:_currentSoundUrl];
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;audioAsset!&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;nil&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            AVMutableCompositionTrack &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;AudioTrack &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;mixComposition addMutableTrackWithMediaType:AVMediaTypeAudio preferredTrackID:kCMPersistentTrackID_Invalid];
+            &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;AudioTrack insertTimeRange:CMTimeRangeMake&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;kCMTimeZero, firstAsset.duration&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; ofTrack:[[audioAsset tracksWithMediaType:AVMediaTypeAudio] objectAtIndex:0] atTime:kCMTimeZero error:nil];
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        
+        // 4 - Get path
+        NSURL &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;url &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;self fileURLForFilterMovieByName:mvFile];
+        &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;self removeFile:url];
+        mvFile ++;
+        // 5 - Create exporter
+        AVAssetExportSession &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;exporter &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[[&lt;/span&gt;AVAssetExportSession alloc] initWithAsset:mixComposition
+                                                                          presetName:AVAssetExportPresetHighestQuality];
+        exporter.outputURL&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;url;
+        exporter.outputFileType &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; AVFileTypeQuickTimeMovie;
+        exporter.shouldOptimizeForNetworkUse &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; YES;
+        exporter.videoComposition &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; mainCompositionInst; // 加
+        &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;exporter exportAsynchronouslyWithCompletionHandler:^&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            dispatch_async&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;dispatch_get_main_queue&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;, ^&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;self exportDidFinish:exporter];
+            &lt;span class=&quot;o&quot;&gt;})&lt;/span&gt;;
+        &lt;span class=&quot;o&quot;&gt;}]&lt;/span&gt;;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h1 id=&quot;section-11&quot;&gt;七、学习&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.jianshu.com/p/722d65bac58d&quot;&gt;GPUImage详细解析（六）-用视频做视频水印&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://blog.csdn.net/xiaolinyeyi/article/details/50878996&quot;&gt;AVAsset、AVMutableComposition系列类的理解及视频裁剪示例
+&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://blog.csdn.net/merrygoot/article/details/51804906&quot;&gt;iOS GPUImage之GPUImageFilterGroup组合滤镜（5）&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.tuicool.com/articles/FVnumu&quot;&gt;AVFoundation和GPUImage初探&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://blog.csdn.net/think_ma/article/details/43093331&quot;&gt;GPUImage.h简单说明&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+        <pubDate>Sat, 18 Mar 2017 01:43:12 +0800</pubDate>
+        <link>http://localhost:4000/2017/03/18/GPUImage%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/03/18/GPUImage%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/</guid>
+        
+        <category>Object-C</category>
+        
+        
+        <category>技术</category>
+        
+      </item>
+    
+      <item>
+        <title>二维码的识别与生成</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#iossdk&quot; id=&quot;markdown-toc-iossdk&quot;&gt;一、iOS原生SDK识别图片中的二维码&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;1.1 识别二维码的方法比较&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#avfoundation&quot; id=&quot;markdown-toc-avfoundation&quot;&gt;1.2 AVFoundation基本知识点&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#avfoundation-1&quot; id=&quot;markdown-toc-avfoundation-1&quot;&gt;1.3 用AVFoundation识别二维码实现&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;二、生成二维码&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;iossdk&quot;&gt;一、iOS原生SDK识别图片中的二维码&lt;/h1&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;1.1 识别二维码的方法比较&lt;/h2&gt;
+
+&lt;p&gt;在iOS中实现二维码和条形码扫描，我们所知的有，两大开源组件ZBar与ZXing. 这两大组件我们都有用过，这里总结下各自的缺点：
+- &lt;strong&gt;ZBar&lt;/strong&gt;
+ZBar在扫描的灵敏度上，和内存的使用上相对于ZXing上都是较优的，但是对于 “圆角二维码” 的扫描确很困难。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;ZXing&lt;/strong&gt;
+ZXing 是 Google Code上的一个开源的条形码扫描库，是用java设计的，连Google Glass 都在使用的。但有人为了追求更高效率以及可移植性，出现了c++ port. Github上的Objectivc-C port，其实就是用OC代码封装了一下而已，而且已经停止维护。这样效率非常低，在instrument下面可以看到CPU和内存疯涨，在内存小的机器上很容易崩溃。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;AVFoundation&lt;/strong&gt;
+AVFoundation无论在扫描灵敏度和性能上来说都是最优的，所以毫无疑问我们应该切换到AVFoundation，需要兼容iOS 7或之前的版本可以用zbar或zxing代替。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;avfoundation&quot;&gt;1.2 AVFoundation基本知识点&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;AVCaptureDevice必须要引入AVFoundation.framework。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;若是要检测装置是否提供该功能，可以透过下面方法来取得：&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;   -&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;BOOL&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;hasMediaType:&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;NSString &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;mediaType
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;取得摄像头后，我们可以透过下面属性来判断该摄像头是否有提供闪光灯：&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+property&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;nonatomic, &lt;span class=&quot;nb&quot;&gt;readonly&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; BOOL hasTorch；
+property&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;nonatomic, &lt;span class=&quot;nb&quot;&gt;readonly&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; BOOL hasFlash；
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;闪光灯模式：使用Torch Mode。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;相机设备在改变某些参数前必须先锁定，直到改变结束才能解锁:&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;lockForConfiguration跟unlockForConfiguration是配对的API。&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;avfoundation-1&quot;&gt;1.3 用AVFoundation识别二维码实现&lt;/h2&gt;
+
+&lt;p&gt;先保留着：&lt;a href=&quot;https://blog.cnbluebox.com/blog/2014/08/26/ioser-wei-ma-sao-miao/&quot;&gt;iOS二维码扫描,你需要注意的两件事&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    //1.获取选择的图片
+    UIImage &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;image &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; info[UIImagePickerControllerOriginalImage];
+    //2.初始化一个监测器
+    CIDetector&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;detector &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;CIDetector detectorOfType:CIDetectorTypeQRCode context:nil options:@&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; CIDetectorAccuracy : CIDetectorAccuracyHigh &lt;span class=&quot;o&quot;&gt;}]&lt;/span&gt;;
+    
+    &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;picker dismissViewControllerAnimated:YES completion:^&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        //监测到的结果数组
+        NSArray &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;features &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;detector featuresInImage:[CIImage imageWithCGImage:image.CGImage]];
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;features.count &amp;gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            /&lt;span class=&quot;k&quot;&gt;**&lt;/span&gt;结果对象 &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;/
+            CIQRCodeFeature &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;feature &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;features objectAtIndex:0];
+            NSString &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;scannedResult &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; feature.messageString;
+            UIAlertView &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; alertView &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[[&lt;/span&gt;UIAlertView alloc]initWithTitle:@&lt;span class=&quot;s2&quot;&gt;&quot;扫描结果&quot;&lt;/span&gt; message:scannedResult delegate:nil cancelButtonTitle:@&lt;span class=&quot;s2&quot;&gt;&quot;确定&quot;&lt;/span&gt; otherButtonTitles:nil, nil];
+            &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;alertView show];
+          
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            UIAlertView &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; alertView &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[[&lt;/span&gt;UIAlertView alloc]initWithTitle:@&lt;span class=&quot;s2&quot;&gt;&quot;提示&quot;&lt;/span&gt; message:@&lt;span class=&quot;s2&quot;&gt;&quot;该图片没有包含一个二维码！&quot;&lt;/span&gt; delegate:nil cancelButtonTitle:@&lt;span class=&quot;s2&quot;&gt;&quot;确定&quot;&lt;/span&gt; otherButtonTitles:nil, nil];
+            &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;alertView show];
+            
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}]&lt;/span&gt;;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h1 id=&quot;section-1&quot;&gt;二、生成二维码&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;ol&gt;
+      &lt;li&gt;导入CoreImage框架：&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#import &amp;lt;CoreImage/CoreImage.h&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;ol&gt;
+      &lt;li&gt;通过滤镜CIFilter生成二维码：&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/&lt;span class=&quot;k&quot;&gt;**&lt;/span&gt;
+ &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;  生成二维码
+ &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;/
+- &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;void&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;creatCIQRCodeImage
+&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    // 1.创建过滤器，这里的@&lt;span class=&quot;s2&quot;&gt;&quot;CIQRCodeGenerator&quot;&lt;/span&gt;是固定的
+    CIFilter &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;filter &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;CIFilter filterWithName:@&lt;span class=&quot;s2&quot;&gt;&quot;CIQRCodeGenerator&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;;
+
+    // 2.恢复默认设置
+    &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;filter setDefaults];
+
+    // 3. 给过滤器添加数据
+    NSString &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;dataString &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; @&lt;span class=&quot;s2&quot;&gt;&quot;二维码测试数据&quot;&lt;/span&gt;;
+    NSData &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;data &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;dataString dataUsingEncoding:NSUTF8StringEncoding];
+    // 注意，这里的value必须是NSData类型
+    &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;filter setValue:data forKeyPath:@&lt;span class=&quot;s2&quot;&gt;&quot;inputMessage&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;;
+
+    // 4. 生成二维码
+    CIImage &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;outputImage &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;filter outputImage];
+
+    // 5. 显示二维码
+    self.imageView.image &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;UIImage imageWithCIImage:outputImage];
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;通过上述方法生成的二维码图片比较模糊，第5步显示二维码的时候可以调用以下方法生成比较清晰的二维码。&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/&lt;span class=&quot;k&quot;&gt;**&lt;/span&gt;
+ &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;  根据CIImage生成指定大小的UIImage
+ &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;
+ &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;  @param image CIImage
+ &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;  @param size  图片宽度
+ &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;
+ &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;  @return 生成高清的UIImage
+ &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;/
+- &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;UIImage &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;creatNonInterpolatedUIImageFormCIImage:&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;CIImage &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;image withSize:&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;CGFloat&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;size
+&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    CGRect extent &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; CGRectIntegral&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;image.extent&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;;
+    CGFloat scale &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; MIN&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;size/CGRectGetWidth&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;extent&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;, size/CGRectGetHeight&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;extent&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;;
+
+    // 1. 创建bitmap
+    size_t width &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; CGRectGetWidth&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;extent&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; scale;
+    size_t height &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; CGRectGetHeight&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;extent&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; scale;
+    CGColorSpaceRef cs &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; CGColorSpaceCreateDeviceGray&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;;
+    CGContextRef bitmapRef &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; CGBitmapContextCreate&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;nil, width, height, 8, 0, cs, &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;CGBitmapInfo&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;kCGImageAlphaNone&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;;
+    CIContext &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;context &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;CIContext contextWithOptions:nil];
+    CGImageRef bitmapImage &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;context createCGImage:image fromRect:extent];
+    CGContextSetInterpolationQuality&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;bitmapRef, kCGInterpolationNone&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;;
+    CGContextScaleCTM&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;bitmapRef, scale, scale&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;;
+    CGContextDrawImage&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;bitmapRef, extent, bitmapImage&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;;
+
+    // 2.保存bitmap图片
+    CGImageRef scaledImage &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; CGBitmapContextCreateImage&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;bitmapRef&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;;
+    CGContextRelease&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;bitmapRef&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;;
+    CGImageRelease&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;bitmapImage&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;UIImage imageWithCGImage:scaledImage];
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+</description>
+        <pubDate>Tue, 07 Mar 2017 18:25:43 +0800</pubDate>
+        <link>http://localhost:4000/2017/03/07/%E4%BA%8C%E7%BB%B4%E7%A0%81%E7%9A%84%E8%AF%86%E5%88%AB%E4%B8%8E%E7%94%9F%E6%88%90/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/03/07/%E4%BA%8C%E7%BB%B4%E7%A0%81%E7%9A%84%E8%AF%86%E5%88%AB%E4%B8%8E%E7%94%9F%E6%88%90/</guid>
+        
+        <category>Object-C</category>
+        
+        
+        <category>技术</category>
+        
+      </item>
+    
+      <item>
+        <title>iOS动画笔记</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#uiviewanimationoptions&quot; id=&quot;markdown-toc-uiviewanimationoptions&quot;&gt;一、UIViewAnimationOptions枚举&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#coreanimation&quot; id=&quot;markdown-toc-coreanimation&quot;&gt;二、CoreAnimation&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;uiviewanimationoptions&quot;&gt;一、UIViewAnimationOptions枚举&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+enum &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+   //这部分是基础属性的设置
+   UIViewAnimationOptionLayoutSubviews            &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 1 &lt;span class=&quot;sh&quot;&gt;&amp;lt;&amp;lt;  0,//设置子视图随父视图展示动画
+   UIViewAnimationOptionAllowUserInteraction      = 1 &amp;lt;&amp;lt;  1,//允许在动画执行时用户与其进行交互
+   UIViewAnimationOptionBeginFromCurrentState     = 1 &amp;lt;&amp;lt;  2,//允许在动画执行时执行新的动画
+   UIViewAnimationOptionRepeat                    = 1 &amp;lt;&amp;lt;  3,//设置动画循环执行
+   UIViewAnimationOptionAutoreverse               = 1 &amp;lt;&amp;lt;  4,//设置动画反向执行，必须和重复执行一起使用
+   UIViewAnimationOptionOverrideInheritedDuration = 1 &amp;lt;&amp;lt;  5,//强制动画使用内层动画的时间值
+   UIViewAnimationOptionOverrideInheritedCurve    = 1 &amp;lt;&amp;lt;  6,//强制动画使用内层动画曲线值
+   UIViewAnimationOptionAllowAnimatedContent      = 1 &amp;lt;&amp;lt;  7,//设置动画视图实时刷新
+   UIViewAnimationOptionShowHideTransitionViews   = 1 &amp;lt;&amp;lt;  8,//设置视图切换时隐藏，而不是移除
+   UIViewAnimationOptionOverrideInheritedOptions  = 1 &amp;lt;&amp;lt;  9,//
+   //这部分属性设置动画播放的线性效果
+   UIViewAnimationOptionCurveEaseInOut            = 0 &amp;lt;&amp;lt; 16,//淡入淡出 首末减速
+   UIViewAnimationOptionCurveEaseIn               = 1 &amp;lt;&amp;lt; 16,//淡入 初始减速
+   UIViewAnimationOptionCurveEaseOut              = 2 &amp;lt;&amp;lt; 16,//淡出 末尾减速
+   UIViewAnimationOptionCurveLinear               = 3 &amp;lt;&amp;lt; 16,//线性 匀速执行   
+   //这部分设置UIView切换效果
+   UIViewAnimationOptionTransitionNone            = 0 &amp;lt;&amp;lt; 20,
+   UIViewAnimationOptionTransitionFlipFromLeft    = 1 &amp;lt;&amp;lt; 20,//从左边切入
+   UIViewAnimationOptionTransitionFlipFromRight   = 2 &amp;lt;&amp;lt; 20,//从右边切入
+   UIViewAnimationOptionTransitionCurlUp          = 3 &amp;lt;&amp;lt; 20,//从上面立体进入
+   UIViewAnimationOptionTransitionCurlDown        = 4 &amp;lt;&amp;lt; 20,//从下面立体进入
+   UIViewAnimationOptionTransitionCrossDissolve   = 5 &amp;lt;&amp;lt; 20,//溶解效果
+   UIViewAnimationOptionTransitionFlipFromTop     = 6 &amp;lt;&amp;lt; 20,//从上面切入
+   UIViewAnimationOptionTransitionFlipFromBottom  = 7 &amp;lt;&amp;lt; 20,//从下面切入
+};
+
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;提示：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;属性可以使用（Shift+\）(PS：因为格式问题输不出来就这样写了)进行多项合并。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;这类的动画可以进行嵌套，其中有一点需要注意，内层动画的执行时间和曲线模式会默认继承外层动的，若要强制使用新的参数，使用如下的两个参数：&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+UIViewAnimationOptionOverrideInheritedDuration &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 1 &lt;span class=&quot;sh&quot;&gt;&amp;lt;&amp;lt;  5,//强制动画使用内层动画的时间值
+
+UIViewAnimationOptionOverrideInheritedCurve    = 1 &amp;lt;&amp;lt;  6,//强制动画使用内层动画曲线值
+   
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h1 id=&quot;coreanimation&quot;&gt;二、CoreAnimation&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&quot;/source/iOS动画笔记/01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;接受的类型是 CAAnimation 类型，有下面这些子类：&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;CABasicAnimation&lt;/strong&gt;：可设定起始结束两个关键帧的信息。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;CAKeyframeAnimation&lt;/strong&gt;：除首尾外，还可添加多个中间关键点。&lt;/p&gt;
+
+&lt;p&gt;**CAAnimationGroup **：可组合多个动画，因为上面两种动画一次只能设置一个属性值。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;CATransition&lt;/strong&gt;：图层过渡动画，默认是淡入。比如修改一个 CALayer的背景色时，是从初始色慢慢淡入过渡到结束色。&lt;/p&gt;
+
+&lt;p&gt;可修改为新颜色把旧颜色顶出去等效果。还可使用 CIFilter 滤镜做过渡效果，一些开源 UIViewController 的过渡动画使用了这种方式。&lt;/p&gt;
+
+</description>
+        <pubDate>Sun, 22 Jan 2017 15:44:12 +0800</pubDate>
+        <link>http://localhost:4000/2017/01/22/iOS%E5%8A%A8%E7%94%BB%E7%AC%94%E8%AE%B0/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/01/22/iOS%E5%8A%A8%E7%94%BB%E7%AC%94%E8%AE%B0/</guid>
+        
+        <category>Object-C</category>
+        
+        
+        <category>技术</category>
+        
+      </item>
     
       <item>
         <title>如何使用我的博客作为Jekyll模版</title>
@@ -130,7 +992,7 @@ tag: 教程
 
 &lt;h1 id=&quot;section-8&quot;&gt;关于作者&lt;/h1&gt;
 
-&lt;p&gt;热爱开源，热爱折腾的iOS程序猿。更多个人信息和联系方式可以参照&lt;a href=&quot;http://www.LuckyCatHome.com/Resume/&quot;&gt;我的简介&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;热爱开源，热爱折腾的iOS程序猿。更多个人信息和联系方式可以参照&lt;a href=&quot;http://www.LuckyCatHome.com/Resume.io/&quot;&gt;我的简介&lt;/a&gt;。&lt;/p&gt;
 
 </description>
         <pubDate>Thu, 17 Nov 2016 15:22:09 +0800</pubDate>
@@ -841,88 +1703,280 @@ tag: 教程
       </item>
     
       <item>
-        <title>Cocoapods的安装和使用</title>
-        <description>
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;RubyGems&lt;/strong&gt;淘宝镜像已停更，本人现在使用&lt;strong&gt;Ruby China&lt;/strong&gt;提供的镜像。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;strong&gt;Step 1.&lt;/strong&gt; 查询现在使用的淘宝镜像：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/source/Cocoapods的安装和使用/Step1-01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Step 2.&lt;/strong&gt; 删除淘宝镜像，添加Ruby China镜像：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/source/Cocoapods的安装和使用/Step2-01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;失败原因：&lt;/strong&gt;苹果系统升级 OS X EL Capitan后命令加上&lt;strong&gt;sudo&lt;/strong&gt;（具体原因不懂）。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;strong&gt;加上sudo后重新操作&lt;/strong&gt;：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/source/Cocoapods的安装和使用/Step2-02.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;可以看到当前已经是Ruby China镜像。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Step 3.&lt;/strong&gt; 使用&lt;strong&gt;sudo gem update –system&lt;/strong&gt;更新RubyGems。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Step 4.&lt;/strong&gt; 查看版本信息：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/source/Cocoapods的安装和使用/Step4-01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Step 5.&lt;/strong&gt; 安装CocoaPods&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;**$ sudo gem install cocoapods **&lt;/li&gt;
+        <title>AVFoundation知识点：自定义相机</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;一、首先声明以下对象&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;二、初始化各个对象&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#section-2&quot; id=&quot;markdown-toc-section-2&quot;&gt;三、拍照拿到相应图片&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#section-3&quot; id=&quot;markdown-toc-section-3&quot;&gt;四、保存照片到相册&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#section-4&quot; id=&quot;markdown-toc-section-4&quot;&gt;五、前后置摄像头的切换&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#section-5&quot; id=&quot;markdown-toc-section-5&quot;&gt;六、相机的其它参数设置&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#section-6&quot; id=&quot;markdown-toc-section-6&quot;&gt;七、遇到的一些坑和解决办法&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#section-7&quot; id=&quot;markdown-toc-section-7&quot;&gt;八、写在最后&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;备注：&lt;/strong&gt;苹果系统升级 OS X EL Capitan 后改为 &lt;strong&gt;sudo gem install -n /usr/local/bin cocoapods&lt;/strong&gt;（我的是以前安装好了的，这次主要是更新Ruby China源，无安装Coapods截图）&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;手动调用iPhone的相机硬件，分为以下步骤：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/source/AVFoundation知识点：自定义相机/01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;section&quot;&gt;一、首先声明以下对象&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#import &amp;lt;AVFoundation/AVFoundation.h&amp;gt;&lt;/span&gt;
+//捕获设备，通常是前置摄像头，后置摄像头，麦克风（音频输入）
+property &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;nonatomic, strong&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; AVCaptureDevice &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;device;
+
+//AVCaptureDeviceInput 代表输入设备，他使用AVCaptureDevice 来初始化
+@property &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;nonatomic, strong&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; AVCaptureDeviceInput &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;input;
+
+//输出图片
+@property &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;nonatomic ,strong&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; AVCaptureStillImageOutput &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;imageOutput;
+
+//session：由他把输入输出结合在一起，并开始启动捕获设备（摄像头）
+@property &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;nonatomic, strong&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; AVCaptureSession &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;session;
+
+//图像预览层，实时显示捕获的图像
+@property &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;nonatomic ,strong&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; AVCaptureVideoPreviewLayer &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;previewLayer;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h1 id=&quot;section-1&quot;&gt;二、初始化各个对象&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;- &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;void&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;cameraDistrict
+&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+//    AVCaptureDevicePositionBack  后置摄像头
+//    AVCaptureDevicePositionFront 前置摄像头
+   self.device &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;self cameraWithPosition:AVCaptureDevicePositionFront];
+    self.input &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[[&lt;/span&gt;AVCaptureDeviceInput alloc] initWithDevice:self.device error:nil];
+
+    self.imageOutput &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[[&lt;/span&gt;AVCaptureStillImageOutput alloc] init];
+
+    self.session &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[[&lt;/span&gt;AVCaptureSession alloc] init];
+    //     拿到的图像的大小可以自行设定
+    //    AVCaptureSessionPreset320x240
+    //    AVCaptureSessionPreset352x288
+    //    AVCaptureSessionPreset640x480
+    //    AVCaptureSessionPreset960x540
+    //    AVCaptureSessionPreset1280x720
+    //    AVCaptureSessionPreset1920x1080
+    //    AVCaptureSessionPreset3840x2160
+    self.session.sessionPreset &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; AVCaptureSessionPreset640x480;
+    //输入输出设备结合
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;([&lt;/span&gt;self.session canAddInput:self.input]&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;self.session addInput:self.input];
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;([&lt;/span&gt;self.session canAddOutput:self.imageOutput]&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;self.session addOutput:self.imageOutput];
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    //预览层的生成
+    self.previewLayer &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[[&lt;/span&gt;AVCaptureVideoPreviewLayer alloc] initWithSession:self.session];
+    self.previewLayer.frame &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; CGRectMake&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;;
+    self.previewLayer.videoGravity &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; AVLayerVideoGravityResizeAspectFill;
+    &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;self.view.layer addSublayer:self.previewLayer];
+    //设备取景开始
+    &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;self.session startRunning];
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;([&lt;/span&gt;_device lockForConfiguration:nil]&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    //自动闪光灯，
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;([&lt;/span&gt;_device isFlashModeSupported:AVCaptureFlashModeAuto]&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;_device setFlashMode:AVCaptureFlashModeAuto];
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        //自动白平衡,但是好像一直都进不去
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;([&lt;/span&gt;_device isWhiteBalanceModeSupported:AVCaptureWhiteBalanceModeAutoWhiteBalance]&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;_device setWhiteBalanceMode:AVCaptureWhiteBalanceModeAutoWhiteBalance];
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;_device unlockForConfiguration];
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;根据前后置位置拿到相应的摄像头：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;- &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;AVCaptureDevice &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;cameraWithPosition:&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;AVCaptureDevicePosition&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;position&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    NSArray &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;devices &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo];
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; AVCaptureDevice &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;device &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;devices &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; device.position &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; position &lt;span class=&quot;o&quot;&gt;){&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;return &lt;/span&gt;device;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return &lt;/span&gt;nil;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h1 id=&quot;section-2&quot;&gt;三、拍照拿到相应图片&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;- &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;void&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;photoBtnDidClick
+&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    AVCaptureConnection &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;conntion &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;self.imageOutput connectionWithMediaType:AVMediaTypeVideo];
+      &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;!conntion&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+          NSLog&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;@&lt;span class=&quot;s2&quot;&gt;&quot;拍照失败!&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;;
+          &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;;
+          &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;self.imageOutput captureStillImageAsynchronouslyFromConnection:conntion completionHandler:^&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;CMSampleBufferRef imageDataSampleBuffer, NSError &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;error&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;imageDataSampleBuffer &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; nil&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; ;
+          &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        NSData &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;imageData &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
+        self.image &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;UIImage imageWithData:imageData];
+        &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;self.session stopRunning];
+        &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;self.view addSubview:self.cameraImageView];
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h1 id=&quot;section-3&quot;&gt;四、保存照片到相册&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#pragma - 保存至相册&lt;/span&gt;
+- &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;void&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;saveImageToPhotoAlbum:&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;UIImage&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;savedImage
+&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+    UIImageWriteToSavedPhotosAlbum&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;savedImage, self, @selector&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;image:didFinishSavingWithError:contextInfo:&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;, NULL&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;;
+
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+// 指定回调方法
+
+- &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;void&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;image: &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;UIImage &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; image didFinishSavingWithError: &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;NSError &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; error contextInfo: &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;void &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; contextInfo
+
+&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    NSString &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;msg &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; nil ;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;error !&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; NULL&lt;span class=&quot;o&quot;&gt;){&lt;/span&gt;
+        msg &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; @&lt;span class=&quot;s2&quot;&gt;&quot;保存图片失败&quot;&lt;/span&gt; ;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        msg &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; @&lt;span class=&quot;s2&quot;&gt;&quot;保存图片成功&quot;&lt;/span&gt; ;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    UIAlertView &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;alert &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[[&lt;/span&gt;UIAlertView alloc] initWithTitle:@&lt;span class=&quot;s2&quot;&gt;&quot;保存图片结果提示&quot;&lt;/span&gt;
+                                            message:msg
+                                            delegate:self
+                                          cancelButtonTitle:@&lt;span class=&quot;s2&quot;&gt;&quot;确定&quot;&lt;/span&gt;
+                                          otherButtonTitles:nil];
+    &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;alert show];
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h1 id=&quot;section-4&quot;&gt;五、前后置摄像头的切换&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;- &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;void&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;changeCamera&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    NSUInteger cameraCount &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[[&lt;/span&gt;AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo] count];
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;cameraCount &amp;gt; 1&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        NSError &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;error;
+        //给摄像头的切换添加翻转动画
+        CATransition &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;animation &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;CATransition animation]；
+        animation.duration &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; .5f；
+        animation.timingFunction &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+        animation.type &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; @&lt;span class=&quot;s2&quot;&gt;&quot;oglFlip&quot;&lt;/span&gt;;
+
+        AVCaptureDevice &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;newCamera &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; nil;
+        AVCaptureDeviceInput &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;newInput &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; nil;
+  //拿到另外一个摄像头位置
+        AVCaptureDevicePosition position &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[[&lt;/span&gt;_input device] position];
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;position &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; AVCaptureDevicePositionFront&lt;span class=&quot;o&quot;&gt;){&lt;/span&gt;
+            newCamera &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;self cameraWithPosition:AVCaptureDevicePositionBack];
+            animation.subtype &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; kCATransitionFromLeft;//动画翻转方向
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            newCamera &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;self cameraWithPosition:AVCaptureDevicePositionFront];
+            animation.subtype &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; kCATransitionFromRight;//动画翻转方向
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        //生成新的输入
+        newInput &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;AVCaptureDeviceInput deviceInputWithDevice:newCamera error:nil];
+        &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;self.previewLayer addAnimation:animation forKey:nil];
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;newInput !&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; nil&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;self.session beginConfiguration];
+            &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;self.session removeInput:self.input];
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;([&lt;/span&gt;self.session canAddInput:newInput]&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;self.session addInput:newInput];
+                self.input &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; newInput;
+
+            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;self.session addInput:self.input];
+            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;self.session commitConfiguration];
+
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;error&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            NSLog&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;@&lt;span class=&quot;s2&quot;&gt;&quot;toggle carema failed, error = %@&quot;&lt;/span&gt;, error&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h1 id=&quot;section-5&quot;&gt;六、相机的其它参数设置&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;//AVCaptureFlashMode  闪光灯
+//AVCaptureFocusMode  对焦
+//AVCaptureExposureMode  曝光
+//AVCaptureWhiteBalanceMode  白平衡
+//闪光灯和白平衡可以在生成相机时候设置
+//曝光要根据对焦点的光线状况而决定,所以和对焦一块写
+//point为点击的位置
+- &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;void&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;focusAtPoint:&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;CGPoint&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;point&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    CGSize size &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; self.view.bounds.size;
+    CGPoint focusPoint &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; CGPointMake&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; point.y /size.height ,1-point.x/size.width &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;;
+    NSError &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;error;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;([&lt;/span&gt;self.device lockForConfiguration:&amp;amp;error]&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        //对焦模式和对焦点
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;([&lt;/span&gt;self.device isFocusModeSupported:AVCaptureFocusModeAutoFocus]&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;self.device setFocusPointOfInterest:focusPoint];
+            &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;self.device setFocusMode:AVCaptureFocusModeAutoFocus];
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        //曝光模式和曝光点
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;([&lt;/span&gt;self.device isExposureModeSupported:AVCaptureExposureModeAutoExpose &lt;span class=&quot;o&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;self.device setExposurePointOfInterest:focusPoint];
+            &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;self.device setExposureMode:AVCaptureExposureModeAutoExpose];
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+        &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;self.device unlockForConfiguration];
+        //设置对焦动画
+        _focusView.center &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; point;
+        _focusView.hidden &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; NO;
+        &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;UIView animateWithDuration:0.3 animations:^&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            _focusView.transform &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; CGAffineTransformMakeScale&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;1.25, 1.25&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;completion:^&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;BOOL finished&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;UIView animateWithDuration:0.5 animations:^&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                _focusView.transform &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; CGAffineTransformIdentity;
+            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; completion:^&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;BOOL finished&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                _focusView.hidden &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; YES;
+            &lt;span class=&quot;o&quot;&gt;}]&lt;/span&gt;;
+        &lt;span class=&quot;o&quot;&gt;}]&lt;/span&gt;;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h1 id=&quot;section-6&quot;&gt;七、遇到的一些坑和解决办法&lt;/h1&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;$ pod setup&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;前后置摄像头的切换
+　　前后值不能切换，各种尝试找了半天没找到有原因。后来发现我在设置图片尺寸的时候设置为1080P [self.session canSetSessionPreset: AVCaptureSessionPreset1920x1080] ，前置摄像头并不支持这么大的尺寸，所以就不能切换前置摄像头。我验证了下 前置摄像头最高支持720P,720P以内可自由切换。　　当然也可以在前后置摄像头切换的时候，根据前后摄像头来设置不同的尺寸，这里不在赘述。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;焦点位置
+　　CGPoint focusPoint = CGPointMake( point.y /size.height ,1-point.x/size.width );
+setExposurePointOfInterest：focusPoint 函数后面Point取值范围是取景框左上角（0，0）到取景框右下角（1，1）之间。官方是这么写的：
+　　The value of this property is a CGPoint that determines the receiver’s focus point of interest, if it has one. A value of (0,0) indicates that the camera should focus on the top left corner of the image, while a value of (1,1) indicates that it should focus on the bottom right. The default value is (0.5,0.5).
+　　我也试了按这个来但位置就是不对，只能按上面的写法才可以。前面是点击位置的y/PreviewLayer的高度，后面是1-点击位置的x/PreviewLayer的宽度&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;对焦和曝光
+　　我在设置对焦是 先设置了模式setFocusMode，后设置对焦位置，就会导致很奇怪的现象，对焦位置是你上次点击的位置。所以一定要先设置位置，再设置对焦模式。
+　　曝光同上&lt;/p&gt;
+  &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;strong&gt;Step 6.&lt;/strong&gt; 新建工程，并在终端用cd指令到文件夹内：&lt;/p&gt;
+&lt;h1 id=&quot;section-7&quot;&gt;八、写在最后&lt;/h1&gt;
 
-&lt;p&gt;&lt;img src=&quot;/source/Cocoapods的安装和使用/Step6-01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Step 7.&lt;/strong&gt; 新建文件Podfile：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/source/Cocoapods的安装和使用/Step7-01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Step 8.&lt;/strong&gt; 编辑Podfile文件内容：&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;低版本：&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/source/Cocoapods的安装和使用/Step8-01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;高版本的cocoapods的Podfile文件必须添加target：&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/source/Cocoapods的安装和使用/Step8-02.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;提示：&lt;/strong&gt;编辑Podfile文件，按a或i可编辑，esc 退出编辑，“”：wq”可保存退出，“q!”直接退出不保存。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;strong&gt;Step 9.&lt;/strong&gt; 安装：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/source/Cocoapods的安装和使用/Step9-01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Step 10.&lt;/strong&gt; 到&lt;strong&gt;.xcodeproj&lt;/strong&gt;文件下查看，多了个&lt;strong&gt;.xcworkspace&lt;/strong&gt;，之后使用这个文件打开工程，即可看到已导入的库文件。&lt;/p&gt;
+&lt;p&gt;　　附上demo:https://github.com/nanshanyi/photographDemo
+　　常用到的基本就这么多，写的并不完善，有什么不对的，欢迎大家批评指正，共同学习。&lt;/p&gt;
 </description>
-        <pubDate>Tue, 14 Jul 2015 19:24:22 +0800</pubDate>
-        <link>http://localhost:4000/2015/07/14/Cocoapods%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/</link>
-        <guid isPermaLink="true">http://localhost:4000/2015/07/14/Cocoapods%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/</guid>
+        <pubDate>Wed, 05 Aug 2015 13:55:06 +0800</pubDate>
+        <link>http://localhost:4000/2015/08/05/AVFoundation%E7%9F%A5%E8%AF%86%E7%82%B9-%E8%87%AA%E5%AE%9A%E4%B9%89%E7%9B%B8%E6%9C%BA/</link>
+        <guid isPermaLink="true">http://localhost:4000/2015/08/05/AVFoundation%E7%9F%A5%E8%AF%86%E7%82%B9-%E8%87%AA%E5%AE%9A%E4%B9%89%E7%9B%B8%E6%9C%BA/</guid>
         
-        <category>工具</category>
+        <category>Object-C</category>
         
         
-        <category>文档</category>
+        <category>技术</category>
         
       </item>
     

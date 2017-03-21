@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>AVFoundation知识点：自定义相机</title>
+
+	<link rel="shortcut icon" href="/styles/images/favicon.jpg">
+	<link rel="icon" href="/styles/images/favicon.jpg">
+
+	<link rel="stylesheet" href="/styles/css/index.css">
+	<link rel="stylesheet" href="/styles/css/fontawesome/css/font-awesome.min.css">
+	<link rel="canonical" href="/2015/08/05/AVFoundation%E7%9F%A5%E8%AF%86%E7%82%B9-%E8%87%AA%E5%AE%9A%E4%B9%89%E7%9B%B8%E6%9C%BA/">
+	<link rel="alternate" type="application/rss+xml" title="LuckyCat's Blog" href="/feed.xml">
+	
+	<meta name="description" content="康志华;个人博客;学而不思则罔;思而不学则殆;生命不止;折腾不休">
+
+	<script src="/styles/js/jquery.min.js"></script>
+	<!--[if lt IE 9]>
+    	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  	<![endif]-->
+  	<script>
+		var _hmt = _hmt || [];
+		(function() {
+		  var hm = document.createElement("script");
+		  hm.src = "//hm.baidu.com/hm.js?94be4b0f9fc5d94cc0d0415ea6761ae9";
+		  var s = document.getElementsByTagName("script")[0]; 
+		  s.parentNode.insertBefore(hm, s);
+		})();
+	</script>
+  	<style type="text/css">
+	  	.docs-content{
+	  		margin-bottom: 10px;
+	  	}
+  	</style>
+</head>
+
+  <body class="index">
+
+    <header class="navbar navbar-inverse navbar-fixed-top docs-nav" role="banner">
+  <div class="container">
+    <div class="navbar-header">
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="/" class="navbar-brand">
+        <img src="/styles/images/logo.jpg">
+      </a>
+    </div>
+    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+      <ul class="nav navbar-nav">    
+        <li>
+          <a href="/">Home</a>
+        </li>
+        <li>
+          <a href="/categories/">大类分解</a>
+        </li>
+        <li>
+          <a href="/tag">小类内聚</a>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <!-- <li>
+          <a href="/donate/"><strong>打赏</strong></a>
+        </li> -->
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">关于<b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a rel="nofollow" target="_blank" href="https://github.com/LuckyCat7848/">Github</a></li>
+            <li><a rel="nofollow" target="_blank" href="http://www.luckycathome.com/Resume/">关于作者</a></li>
+            <li><a rel="nofollow" href="/books">我的书单</a></li>
+            <li><a rel="nofollow" href="/reference">推荐博客</a></li>
+            <!-- <li><a href="/feed.xml">RSS订阅</a></li> -->
+            <li class="divider"></li>
+            <li><a rel="nofollow" target="_blank" href="https://github.com/LuckyCat7848/LuckyCat7848.github.io">本项目</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+    <div class="docs-header" id="content">
+  <div class="container">
+  	
+  		<!--
+		    <h1>AVFoundation知识点：自定义相机</h1>
+		    <p>Post on Aug 05, 2015 by <a href="/about">LuckyCat</a></p>
+		-->
+		    <h1>Everything is well !</h1>
+    
+  </div>
+</div>
+    
+      
+<div class="banner">
+  <div class="container">
+  	
+    	<a href="/categories/#技术-ref">技术</a>	/
+    	<a href="/tag/#Object-C-ref">Object-C</a>
+    
+  </div>
+</div>
+
+    
+
+    <div class="container docs-container">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="sidebar hidden-print" role="complementary">
+        <div id="navigation">
+  <h1>目录</h1>
+  <ul class="nav sidenav">
+<!--
+    
+      
+      
+      
+      
+
+      
+        <li><a href="#year_2017">2017</a>
+          <ul class="nav">
+            <li><a href="#month_2017_March">March</a></li>
+      
+
+      
+            
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+              <li><a href="#month_2017_January">January</a></li>
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+        
+            </ul>
+          </li>
+          <li><a href="#year_2016">2016</a>
+            <ul class="nav">
+              <li><a href="#month_2016_November">November</a></li>
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+              <li><a href="#month_2016_September">September</a></li>
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+              <li><a href="#month_2016_February">February</a></li>
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+              <li><a href="#month_2016_January">January</a></li>
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+        
+            </ul>
+          </li>
+          <li><a href="#year_2015">2015</a>
+            <ul class="nav">
+              <li><a href="#month_2015_August">August</a></li>
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+              <li><a href="#month_2015_July">July</a></li>
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+              <li><a href="#month_2015_June">June</a></li>
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+              <li><a href="#month_2015_February">February</a></li>
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+              <li><a href="#month_2015_January">January</a></li>
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            </ul>
+          </li>
+      
+    
+-->
+  </ul>
+</div> 
+      </div>
+    </div>
+    <div class="col-md-9" role="main">
+      <div class="panel docs-content">
+        <div class="wrapper">
+            <header class="post-header">
+              <h1 class="post-title">AVFoundation知识点：自定义相机</h1>
+              <!--
+                <p class="post-meta">Aug 5, 2015</p>
+              -->
+              <div class="meta">Posted on <span class="postdate">Aug 05, 2015</span> By <a target="_blank" href="http://localhost:4000">LuckyCat</a></div>
+              <br />
+            </header>
+            <article class="post-content">
+              <ul id="markdown-toc">
+  <li><a href="#section" id="markdown-toc-section">一、首先声明以下对象</a></li>
+  <li><a href="#section-1" id="markdown-toc-section-1">二、初始化各个对象</a></li>
+  <li><a href="#section-2" id="markdown-toc-section-2">三、拍照拿到相应图片</a></li>
+  <li><a href="#section-3" id="markdown-toc-section-3">四、保存照片到相册</a></li>
+  <li><a href="#section-4" id="markdown-toc-section-4">五、前后置摄像头的切换</a></li>
+  <li><a href="#section-5" id="markdown-toc-section-5">六、相机的其它参数设置</a></li>
+  <li><a href="#section-6" id="markdown-toc-section-6">七、遇到的一些坑和解决办法</a></li>
+  <li><a href="#section-7" id="markdown-toc-section-7">八、写在最后</a></li>
+</ul>
+
+<p>手动调用iPhone的相机硬件，分为以下步骤：</p>
+
+<p><img src="/source/AVFoundation知识点：自定义相机/01.png" alt="" /></p>
+
+<h1 id="section">一、首先声明以下对象</h1>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c">#import &lt;AVFoundation/AVFoundation.h&gt;</span>
+//捕获设备，通常是前置摄像头，后置摄像头，麦克风（音频输入）
+property <span class="o">(</span>nonatomic, strong<span class="o">)</span> AVCaptureDevice <span class="k">*</span>device;
+
+//AVCaptureDeviceInput 代表输入设备，他使用AVCaptureDevice 来初始化
+@property <span class="o">(</span>nonatomic, strong<span class="o">)</span> AVCaptureDeviceInput <span class="k">*</span>input;
+
+//输出图片
+@property <span class="o">(</span>nonatomic ,strong<span class="o">)</span> AVCaptureStillImageOutput <span class="k">*</span>imageOutput;
+
+//session：由他把输入输出结合在一起，并开始启动捕获设备（摄像头）
+@property <span class="o">(</span>nonatomic, strong<span class="o">)</span> AVCaptureSession <span class="k">*</span>session;
+
+//图像预览层，实时显示捕获的图像
+@property <span class="o">(</span>nonatomic ,strong<span class="o">)</span> AVCaptureVideoPreviewLayer <span class="k">*</span>previewLayer;
+</code></pre>
+</div>
+
+<h1 id="section-1">二、初始化各个对象</h1>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>- <span class="o">(</span>void<span class="o">)</span>cameraDistrict
+<span class="o">{</span>
+//    AVCaptureDevicePositionBack  后置摄像头
+//    AVCaptureDevicePositionFront 前置摄像头
+   self.device <span class="o">=</span> <span class="o">[</span>self cameraWithPosition:AVCaptureDevicePositionFront];
+    self.input <span class="o">=</span> <span class="o">[[</span>AVCaptureDeviceInput alloc] initWithDevice:self.device error:nil];
+
+    self.imageOutput <span class="o">=</span> <span class="o">[[</span>AVCaptureStillImageOutput alloc] init];
+
+    self.session <span class="o">=</span> <span class="o">[[</span>AVCaptureSession alloc] init];
+    //     拿到的图像的大小可以自行设定
+    //    AVCaptureSessionPreset320x240
+    //    AVCaptureSessionPreset352x288
+    //    AVCaptureSessionPreset640x480
+    //    AVCaptureSessionPreset960x540
+    //    AVCaptureSessionPreset1280x720
+    //    AVCaptureSessionPreset1920x1080
+    //    AVCaptureSessionPreset3840x2160
+    self.session.sessionPreset <span class="o">=</span> AVCaptureSessionPreset640x480;
+    //输入输出设备结合
+    <span class="k">if</span> <span class="o">([</span>self.session canAddInput:self.input]<span class="o">)</span> <span class="o">{</span>
+        <span class="o">[</span>self.session addInput:self.input];
+    <span class="o">}</span>
+    <span class="k">if</span> <span class="o">([</span>self.session canAddOutput:self.imageOutput]<span class="o">)</span> <span class="o">{</span>
+        <span class="o">[</span>self.session addOutput:self.imageOutput];
+    <span class="o">}</span>
+    //预览层的生成
+    self.previewLayer <span class="o">=</span> <span class="o">[[</span>AVCaptureVideoPreviewLayer alloc] initWithSession:self.session];
+    self.previewLayer.frame <span class="o">=</span> CGRectMake<span class="o">(</span>0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64<span class="o">)</span>;
+    self.previewLayer.videoGravity <span class="o">=</span> AVLayerVideoGravityResizeAspectFill;
+    <span class="o">[</span>self.view.layer addSublayer:self.previewLayer];
+    //设备取景开始
+    <span class="o">[</span>self.session startRunning];
+    <span class="k">if</span> <span class="o">([</span>_device lockForConfiguration:nil]<span class="o">)</span> <span class="o">{</span>
+    //自动闪光灯，
+        <span class="k">if</span> <span class="o">([</span>_device isFlashModeSupported:AVCaptureFlashModeAuto]<span class="o">)</span> <span class="o">{</span>
+            <span class="o">[</span>_device setFlashMode:AVCaptureFlashModeAuto];
+        <span class="o">}</span>
+        //自动白平衡,但是好像一直都进不去
+        <span class="k">if</span> <span class="o">([</span>_device isWhiteBalanceModeSupported:AVCaptureWhiteBalanceModeAutoWhiteBalance]<span class="o">)</span> <span class="o">{</span>
+            <span class="o">[</span>_device setWhiteBalanceMode:AVCaptureWhiteBalanceModeAutoWhiteBalance];
+        <span class="o">}</span>
+        <span class="o">[</span>_device unlockForConfiguration];
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>根据前后置位置拿到相应的摄像头：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>- <span class="o">(</span>AVCaptureDevice <span class="k">*</span><span class="o">)</span>cameraWithPosition:<span class="o">(</span>AVCaptureDevicePosition<span class="o">)</span>position<span class="o">{</span>
+    NSArray <span class="k">*</span>devices <span class="o">=</span> <span class="o">[</span>AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo];
+    <span class="k">for</span> <span class="o">(</span> AVCaptureDevice <span class="k">*</span>device <span class="k">in </span>devices <span class="o">)</span>
+        <span class="k">if</span> <span class="o">(</span> device.position <span class="o">==</span> position <span class="o">){</span>
+            <span class="k">return </span>device;
+        <span class="o">}</span>
+    <span class="k">return </span>nil;
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<h1 id="section-2">三、拍照拿到相应图片</h1>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>- <span class="o">(</span>void<span class="o">)</span>photoBtnDidClick
+<span class="o">{</span>
+    AVCaptureConnection <span class="k">*</span>conntion <span class="o">=</span> <span class="o">[</span>self.imageOutput connectionWithMediaType:AVMediaTypeVideo];
+      <span class="k">if</span> <span class="o">(</span>!conntion<span class="o">)</span> <span class="o">{</span>
+          NSLog<span class="o">(</span>@<span class="s2">"拍照失败!"</span><span class="o">)</span>;
+          <span class="k">return</span>;
+          <span class="o">}</span>
+    <span class="o">[</span>self.imageOutput captureStillImageAsynchronouslyFromConnection:conntion completionHandler:^<span class="o">(</span>CMSampleBufferRef imageDataSampleBuffer, NSError <span class="k">*</span>error<span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span>imageDataSampleBuffer <span class="o">==</span> nil<span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> ;
+          <span class="o">}</span>
+        NSData <span class="k">*</span>imageData <span class="o">=</span> <span class="o">[</span>AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
+        self.image <span class="o">=</span> <span class="o">[</span>UIImage imageWithData:imageData];
+        <span class="o">[</span>self.session stopRunning];
+        <span class="o">[</span>self.view addSubview:self.cameraImageView];
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<h1 id="section-3">四、保存照片到相册</h1>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c">#pragma - 保存至相册</span>
+- <span class="o">(</span>void<span class="o">)</span>saveImageToPhotoAlbum:<span class="o">(</span>UIImage<span class="k">*</span><span class="o">)</span>savedImage
+<span class="o">{</span>
+
+    UIImageWriteToSavedPhotosAlbum<span class="o">(</span>savedImage, self, @selector<span class="o">(</span>image:didFinishSavingWithError:contextInfo:<span class="o">)</span>, NULL<span class="o">)</span>;
+
+<span class="o">}</span>
+// 指定回调方法
+
+- <span class="o">(</span>void<span class="o">)</span>image: <span class="o">(</span>UIImage <span class="k">*</span><span class="o">)</span> image didFinishSavingWithError: <span class="o">(</span>NSError <span class="k">*</span><span class="o">)</span> error contextInfo: <span class="o">(</span>void <span class="k">*</span><span class="o">)</span> contextInfo
+
+<span class="o">{</span>
+    NSString <span class="k">*</span>msg <span class="o">=</span> nil ;
+    <span class="k">if</span><span class="o">(</span>error !<span class="o">=</span> NULL<span class="o">){</span>
+        msg <span class="o">=</span> @<span class="s2">"保存图片失败"</span> ;
+    <span class="o">}</span><span class="k">else</span><span class="o">{</span>
+        msg <span class="o">=</span> @<span class="s2">"保存图片成功"</span> ;
+    <span class="o">}</span>
+    UIAlertView <span class="k">*</span>alert <span class="o">=</span> <span class="o">[[</span>UIAlertView alloc] initWithTitle:@<span class="s2">"保存图片结果提示"</span>
+                                            message:msg
+                                            delegate:self
+                                          cancelButtonTitle:@<span class="s2">"确定"</span>
+                                          otherButtonTitles:nil];
+    <span class="o">[</span>alert show];
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<h1 id="section-4">五、前后置摄像头的切换</h1>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>- <span class="o">(</span>void<span class="o">)</span>changeCamera<span class="o">{</span>
+    NSUInteger cameraCount <span class="o">=</span> <span class="o">[[</span>AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo] count];
+    <span class="k">if</span> <span class="o">(</span>cameraCount &gt; 1<span class="o">)</span> <span class="o">{</span>
+        NSError <span class="k">*</span>error;
+        //给摄像头的切换添加翻转动画
+        CATransition <span class="k">*</span>animation <span class="o">=</span> <span class="o">[</span>CATransition animation]；
+        animation.duration <span class="o">=</span> .5f；
+        animation.timingFunction <span class="o">=</span> <span class="o">[</span>CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+        animation.type <span class="o">=</span> @<span class="s2">"oglFlip"</span>;
+
+        AVCaptureDevice <span class="k">*</span>newCamera <span class="o">=</span> nil;
+        AVCaptureDeviceInput <span class="k">*</span>newInput <span class="o">=</span> nil;
+  //拿到另外一个摄像头位置
+        AVCaptureDevicePosition position <span class="o">=</span> <span class="o">[[</span>_input device] position];
+        <span class="k">if</span> <span class="o">(</span>position <span class="o">==</span> AVCaptureDevicePositionFront<span class="o">){</span>
+            newCamera <span class="o">=</span> <span class="o">[</span>self cameraWithPosition:AVCaptureDevicePositionBack];
+            animation.subtype <span class="o">=</span> kCATransitionFromLeft;//动画翻转方向
+        <span class="o">}</span>
+        <span class="k">else</span> <span class="o">{</span>
+            newCamera <span class="o">=</span> <span class="o">[</span>self cameraWithPosition:AVCaptureDevicePositionFront];
+            animation.subtype <span class="o">=</span> kCATransitionFromRight;//动画翻转方向
+        <span class="o">}</span>
+        //生成新的输入
+        newInput <span class="o">=</span> <span class="o">[</span>AVCaptureDeviceInput deviceInputWithDevice:newCamera error:nil];
+        <span class="o">[</span>self.previewLayer addAnimation:animation forKey:nil];
+        <span class="k">if</span> <span class="o">(</span>newInput !<span class="o">=</span> nil<span class="o">)</span> <span class="o">{</span>
+            <span class="o">[</span>self.session beginConfiguration];
+            <span class="o">[</span>self.session removeInput:self.input];
+            <span class="k">if</span> <span class="o">([</span>self.session canAddInput:newInput]<span class="o">)</span> <span class="o">{</span>
+                <span class="o">[</span>self.session addInput:newInput];
+                self.input <span class="o">=</span> newInput;
+
+            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+                <span class="o">[</span>self.session addInput:self.input];
+            <span class="o">}</span>
+            <span class="o">[</span>self.session commitConfiguration];
+
+        <span class="o">}</span> <span class="k">else if</span> <span class="o">(</span>error<span class="o">)</span> <span class="o">{</span>
+            NSLog<span class="o">(</span>@<span class="s2">"toggle carema failed, error = %@"</span>, error<span class="o">)</span>;
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<h1 id="section-5">六、相机的其它参数设置</h1>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>//AVCaptureFlashMode  闪光灯
+//AVCaptureFocusMode  对焦
+//AVCaptureExposureMode  曝光
+//AVCaptureWhiteBalanceMode  白平衡
+//闪光灯和白平衡可以在生成相机时候设置
+//曝光要根据对焦点的光线状况而决定,所以和对焦一块写
+//point为点击的位置
+- <span class="o">(</span>void<span class="o">)</span>focusAtPoint:<span class="o">(</span>CGPoint<span class="o">)</span>point<span class="o">{</span>
+    CGSize size <span class="o">=</span> self.view.bounds.size;
+    CGPoint focusPoint <span class="o">=</span> CGPointMake<span class="o">(</span> point.y /size.height ,1-point.x/size.width <span class="o">)</span>;
+    NSError <span class="k">*</span>error;
+    <span class="k">if</span> <span class="o">([</span>self.device lockForConfiguration:&amp;error]<span class="o">)</span> <span class="o">{</span>
+        //对焦模式和对焦点
+        <span class="k">if</span> <span class="o">([</span>self.device isFocusModeSupported:AVCaptureFocusModeAutoFocus]<span class="o">)</span> <span class="o">{</span>
+            <span class="o">[</span>self.device setFocusPointOfInterest:focusPoint];
+            <span class="o">[</span>self.device setFocusMode:AVCaptureFocusModeAutoFocus];
+        <span class="o">}</span>
+        //曝光模式和曝光点
+        <span class="k">if</span> <span class="o">([</span>self.device isExposureModeSupported:AVCaptureExposureModeAutoExpose <span class="o">])</span> <span class="o">{</span>
+            <span class="o">[</span>self.device setExposurePointOfInterest:focusPoint];
+            <span class="o">[</span>self.device setExposureMode:AVCaptureExposureModeAutoExpose];
+        <span class="o">}</span>
+
+        <span class="o">[</span>self.device unlockForConfiguration];
+        //设置对焦动画
+        _focusView.center <span class="o">=</span> point;
+        _focusView.hidden <span class="o">=</span> NO;
+        <span class="o">[</span>UIView animateWithDuration:0.3 animations:^<span class="o">{</span>
+            _focusView.transform <span class="o">=</span> CGAffineTransformMakeScale<span class="o">(</span>1.25, 1.25<span class="o">)</span>;
+        <span class="o">}</span>completion:^<span class="o">(</span>BOOL finished<span class="o">)</span> <span class="o">{</span>
+            <span class="o">[</span>UIView animateWithDuration:0.5 animations:^<span class="o">{</span>
+                _focusView.transform <span class="o">=</span> CGAffineTransformIdentity;
+            <span class="o">}</span> completion:^<span class="o">(</span>BOOL finished<span class="o">)</span> <span class="o">{</span>
+                _focusView.hidden <span class="o">=</span> YES;
+            <span class="o">}]</span>;
+        <span class="o">}]</span>;
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<h1 id="section-6">七、遇到的一些坑和解决办法</h1>
+
+<ul>
+  <li>
+    <p>前后置摄像头的切换
+　　前后值不能切换，各种尝试找了半天没找到有原因。后来发现我在设置图片尺寸的时候设置为1080P [self.session canSetSessionPreset: AVCaptureSessionPreset1920x1080] ，前置摄像头并不支持这么大的尺寸，所以就不能切换前置摄像头。我验证了下 前置摄像头最高支持720P,720P以内可自由切换。　　当然也可以在前后置摄像头切换的时候，根据前后摄像头来设置不同的尺寸，这里不在赘述。</p>
+  </li>
+  <li>
+    <p>焦点位置
+　　CGPoint focusPoint = CGPointMake( point.y /size.height ,1-point.x/size.width );
+setExposurePointOfInterest：focusPoint 函数后面Point取值范围是取景框左上角（0，0）到取景框右下角（1，1）之间。官方是这么写的：
+　　The value of this property is a CGPoint that determines the receiver’s focus point of interest, if it has one. A value of (0,0) indicates that the camera should focus on the top left corner of the image, while a value of (1,1) indicates that it should focus on the bottom right. The default value is (0.5,0.5).
+　　我也试了按这个来但位置就是不对，只能按上面的写法才可以。前面是点击位置的y/PreviewLayer的高度，后面是1-点击位置的x/PreviewLayer的宽度</p>
+  </li>
+  <li>
+    <p>对焦和曝光
+　　我在设置对焦是 先设置了模式setFocusMode，后设置对焦位置，就会导致很奇怪的现象，对焦位置是你上次点击的位置。所以一定要先设置位置，再设置对焦模式。
+　　曝光同上</p>
+  </li>
+</ul>
+
+<h1 id="section-7">八、写在最后</h1>
+
+<p>　　附上demo:https://github.com/nanshanyi/photographDemo
+　　常用到的基本就这么多，写的并不完善，有什么不对的，欢迎大家批评指正，共同学习。</p>
+
+            </article>
+        </div>
+      </div>
+      <div class="panel docs-content">
+        <article class="post-content">
+          <div class="wrapper">
+            
+
+
+  <div id="uyan_frame"></div>
+<script type="text/javascript">
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://v2.uyan.cc/code/uyan.js?uid=2119519';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+
+
+
+
+
+ 
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+    <footer class="footer" role="contentinfo">
+	<div class="container">
+		<p class="copyright">Copyright &copy; 2016-2017 <a href="http://www.luckycathome.com/Resume/"><code>LuckyCat</code></a>.</p>
+		<p>Powered by <a href="http://jekyllrb.com">Jekyll</a>, theme from <a href="https://github.com/luoyan35714/LessOrMore">LessOrMore</a></p>
+	</div>
+</footer>
+
+<script src="/styles/js/jquery.min.js"></script>
+<script src="/styles/js/bootstrap.min.js"></script>
+<script src="/styles/js/holder.min.js"></script>
+<script src="/styles/js/application.js"></script>
+<script src="/styles/js/lessismore.js"></script>
+
+  </body>
+</html>

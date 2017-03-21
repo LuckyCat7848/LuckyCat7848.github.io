@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>iOS基础：Category和Extension</title>
+
+	<link rel="shortcut icon" href="/styles/images/favicon.jpg">
+	<link rel="icon" href="/styles/images/favicon.jpg">
+
+	<link rel="stylesheet" href="/styles/css/index.css">
+	<link rel="stylesheet" href="/styles/css/fontawesome/css/font-awesome.min.css">
+	<link rel="canonical" href="/2015/06/02/iOS%E5%9F%BA%E7%A1%80-Category%E5%92%8CExtension/">
+	<link rel="alternate" type="application/rss+xml" title="LuckyCat's Blog" href="/feed.xml">
+	
+	<meta name="description" content="康志华;个人博客;学而不思则罔;思而不学则殆;生命不止;折腾不休">
+
+	<script src="/styles/js/jquery.min.js"></script>
+	<!--[if lt IE 9]>
+    	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  	<![endif]-->
+  	<script>
+		var _hmt = _hmt || [];
+		(function() {
+		  var hm = document.createElement("script");
+		  hm.src = "//hm.baidu.com/hm.js?94be4b0f9fc5d94cc0d0415ea6761ae9";
+		  var s = document.getElementsByTagName("script")[0]; 
+		  s.parentNode.insertBefore(hm, s);
+		})();
+	</script>
+  	<style type="text/css">
+	  	.docs-content{
+	  		margin-bottom: 10px;
+	  	}
+  	</style>
+</head>
+
+  <body class="index">
+
+    <header class="navbar navbar-inverse navbar-fixed-top docs-nav" role="banner">
+  <div class="container">
+    <div class="navbar-header">
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="/" class="navbar-brand">
+        <img src="/styles/images/logo.jpg">
+      </a>
+    </div>
+    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+      <ul class="nav navbar-nav">    
+        <li>
+          <a href="/">Home</a>
+        </li>
+        <li>
+          <a href="/categories/">大类分解</a>
+        </li>
+        <li>
+          <a href="/tag">小类内聚</a>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <!-- <li>
+          <a href="/donate/"><strong>打赏</strong></a>
+        </li> -->
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">关于<b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a rel="nofollow" target="_blank" href="https://github.com/LuckyCat7848/">Github</a></li>
+            <li><a rel="nofollow" target="_blank" href="http://www.luckycathome.com/Resume/">关于作者</a></li>
+            <li><a rel="nofollow" href="/books">我的书单</a></li>
+            <li><a rel="nofollow" href="/reference">推荐博客</a></li>
+            <!-- <li><a href="/feed.xml">RSS订阅</a></li> -->
+            <li class="divider"></li>
+            <li><a rel="nofollow" target="_blank" href="https://github.com/LuckyCat7848/LuckyCat7848.github.io">本项目</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+    <div class="docs-header" id="content">
+  <div class="container">
+  	
+  		<!--
+		    <h1>iOS基础：Category和Extension</h1>
+		    <p>Post on Jun 02, 2015 by <a href="/about">LuckyCat</a></p>
+		-->
+		    <h1>Everything is well !</h1>
+    
+  </div>
+</div>
+    
+      
+<div class="banner">
+  <div class="container">
+  	
+    	<a href="/categories/#技术-ref">技术</a>	/
+    	<a href="/tag/#Object-C-ref">Object-C</a>
+    
+  </div>
+</div>
+
+    
+
+    <div class="container docs-container">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="sidebar hidden-print" role="complementary">
+        <div id="navigation">
+  <h1>目录</h1>
+  <ul class="nav sidenav">
+<!--
+    
+      
+      
+      
+      
+
+      
+        <li><a href="#year_2017">2017</a>
+          <ul class="nav">
+            <li><a href="#month_2017_March">March</a></li>
+      
+
+      
+            
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+              <li><a href="#month_2017_January">January</a></li>
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+        
+            </ul>
+          </li>
+          <li><a href="#year_2016">2016</a>
+            <ul class="nav">
+              <li><a href="#month_2016_November">November</a></li>
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+              <li><a href="#month_2016_September">September</a></li>
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+              <li><a href="#month_2016_February">February</a></li>
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+              <li><a href="#month_2016_January">January</a></li>
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+        
+            </ul>
+          </li>
+          <li><a href="#year_2015">2015</a>
+            <ul class="nav">
+              <li><a href="#month_2015_August">August</a></li>
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+              <li><a href="#month_2015_July">July</a></li>
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+              <li><a href="#month_2015_June">June</a></li>
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+              <li><a href="#month_2015_February">February</a></li>
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+              <li><a href="#month_2015_January">January</a></li>
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            </ul>
+          </li>
+      
+    
+-->
+  </ul>
+</div> 
+      </div>
+    </div>
+    <div class="col-md-9" role="main">
+      <div class="panel docs-content">
+        <div class="wrapper">
+            <header class="post-header">
+              <h1 class="post-title">iOS基础：Category和Extension</h1>
+              <!--
+                <p class="post-meta">Jun 2, 2015</p>
+              -->
+              <div class="meta">Posted on <span class="postdate">Jun 02, 2015</span> By <a target="_blank" href="http://localhost:4000">LuckyCat</a></div>
+              <br />
+            </header>
+            <article class="post-content">
+              <ul id="markdown-toc">
+  <li><a href="#category" id="markdown-toc-category">一、什么是Category</a></li>
+  <li><a href="#category-1" id="markdown-toc-category-1">二、Category的用途</a></li>
+  <li><a href="#category-2" id="markdown-toc-category-2">三、Category的用法</a>    <ul>
+      <li><a href="#category-3" id="markdown-toc-category-3">3.1 声明Category</a></li>
+      <li><a href="#category-4" id="markdown-toc-category-4">3.2 实现Category</a></li>
+    </ul>
+  </li>
+  <li><a href="#section" id="markdown-toc-section">四、代码组织</a></li>
+  <li><a href="#category-vs" id="markdown-toc-category-vs">五、Category VS添加子类</a></li>
+  <li><a href="#category-" id="markdown-toc-category-">六、Category 不添加成员变量</a></li>
+  <li><a href="#category-5" id="markdown-toc-category-5">七、给Category添加属性</a>    <ul>
+      <li><a href="#section-1" id="markdown-toc-section-1">7.1 引入运行时头文件</a></li>
+      <li><a href="#extension" id="markdown-toc-extension">7.2 在匿名分类（扩展Extension）或者头文件中添加属性</a></li>
+      <li><a href="#gettersetter" id="markdown-toc-gettersetter">7.3 在实现里面写要添加属性的getter、setter方法</a></li>
+      <li><a href="#section-2" id="markdown-toc-section-2">7.4 完成后的整体代码如下</a></li>
+    </ul>
+  </li>
+  <li><a href="#extension-1" id="markdown-toc-extension-1">八、延展（Extension）</a></li>
+</ul>
+
+<hr />
+
+<h1 id="category">一、什么是Category</h1>
+
+<p>Category模式用于向已经存在的类添加方法从而达到扩展已有类的目的，在很多情形下Category也是比创建子类更优的选择。新添加的方法同样也会被被扩展的类的所有子类自动继承。当知道已有类中某个方法有BUG，但是这个类是以库的形式存在的，我们无法直接修改源代码的时候，Category也可以用于替代这个已有类中某个方法的实体，从而达到修复BUG的目的。然而却没有什么便捷的途径可以去调用已有类中原有的那个被替换掉方法实体了。需要注意的是，当准备有Category来替换某一个方法的时候，一定要保证实现原来方法的所有功能，否则这种替代就是没有意义而且会引起新的BUG。和子类不同的是，Category不能用于向被扩展类添加实例变量。Category通常作为一种组织框架代码的工具来使用。</p>
+
+<h1 id="category-1">二、Category的用途</h1>
+
+<ol>
+  <li>
+    <p>在不创建继承类的情况下实现对已有类的扩展；</p>
+  </li>
+  <li>
+    <p>简化类的开发工作（当一个类需要多个程序员协同发的时候，Category可以将同一个类根据用途分别放在不同的源文件中，从而便于程序员独立开发相应的方法集合）；</p>
+  </li>
+  <li>
+    <p>将常用的相关的方法分组；</p>
+  </li>
+  <li>
+    <p>在没有源代码的情况下可以用来修复BUG。</p>
+  </li>
+</ol>
+
+<h1 id="category-2">三、Category的用法</h1>
+
+<p>在Obj-C中，声明某一个已有类的Category扩展的方法如下：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>interface ClassName <span class="o">(</span>CategoryName<span class="o">)</span>
+- <span class="o">(</span>void<span class="o">)</span>methodName1;
+- <span class="o">(</span>void<span class="o">)</span>methodName2;
+end
+</code></pre>
+</div>
+
+<p>上面的声明通常是在.h文件中，然后我们在.m文件中实现这些方法：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>implementation ClassName <span class="o">(</span>CategoryName<span class="o">)</span>
+- <span class="o">(</span>void<span class="o">)</span>methodName1;
+- <span class="o">(</span>void<span class="o">)</span>methodName2;
+end
+</code></pre>
+</div>
+
+<p>我们创建一个iOS Single View Applciation名为CategoryExample。然后为创建一个NSString类的category扩展。<strong>File-&gt;New-&gt;File然后选择 Cocoa Touch Objective-C-&gt;category</strong>，命名为ReverseNSString。系统会自动生成一个固定格式ClassName+CategoryName的.h和.m文件。</p>
+
+<h2 id="category-3">3.1 声明Category</h2>
+
+<p>打开NSString+ReverseNSString.h文件，在里面添加如下代码：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>import &lt;Foundation/Foundation.h&gt;  
+interface NSString <span class="o">(</span>ReverseNSString<span class="o">)</span>  
++ <span class="o">(</span>NSString<span class="k">*</span><span class="o">)</span> reverseString:<span class="o">(</span>NSString<span class="k">*</span><span class="o">)</span>strSrc;  
+end  
+</code></pre>
+</div>
+
+<h2 id="category-4">3.2 实现Category</h2>
+
+<p>NSString+ReverseNSString.m文件中实现reverseString方法：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>import<span class="s2">"NSString+ReverseNSString.h"</span>  
+implementation NSString <span class="o">(</span>ReverseNSString<span class="o">)</span>  
++ <span class="o">(</span>NSString<span class="k">*</span><span class="o">)</span>reverseString:<span class="o">(</span>NSString<span class="k">*</span><span class="o">)</span>strSrc;  
+<span class="o">{</span>  
+    NSMutableString <span class="k">*</span>reversedString <span class="o">=[[</span>NSMutableString alloc]init];  
+    NSInteger charIndex <span class="o">=</span> <span class="o">[</span>strSrc length];  
+    <span class="k">while</span> <span class="o">(</span>charIndex &gt; 0<span class="o">)</span> <span class="o">{</span>  
+        charIndex--;  
+        NSRange subStrRange <span class="o">=</span>NSMakeRange<span class="o">(</span>charIndex, 1<span class="o">)</span>;  
+        <span class="o">[</span>reversedString appendString:[strSrcsubstringWithRange:subStrRange]];  
+    <span class="o">}</span>  
+    <span class="k">return </span>reversedString;  
+<span class="o">}</span>  
+@end  
+</code></pre>
+</div>
+
+<p>剩下的工作就是验证我们的Category了，在view中添加一个按钮ReverseString,并设置相应的action方法为reverseString.在view上再添加一个label，命名为myString，默认值是”HelloCategory Design Pattern!”。点击按钮反转这个字符串。主要代码如下：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>-<span class="o">(</span>IBAction<span class="o">)</span>reverseString:<span class="o">(</span>id<span class="o">)</span>sender <span class="o">{</span>  
+    NSString <span class="k">*</span><span class="nb">test</span> <span class="o">=</span> <span class="o">[</span>NSStringreverseString:_myString.text];  
+    _myString.text <span class="o">=</span> <span class="nb">test</span>;     
+<span class="o">}</span>  
+</code></pre>
+</div>
+
+<h1 id="section">四、代码组织</h1>
+
+<p>Category用于大型类有效分解。通常一个大型类的方法可以根据某种逻辑或是相关性分解为不同的组，一个类的代码量越大，将这个类分解到不同的文件中就显得越有用，每个文件中分别是这个类的某些相关方法的集合。</p>
+
+<p>当有多个开发者共同完成一个项目时，每个人所承担的是单独的cagegory的开发和维护。这样就版本控制就更加简单了，因为开发人员之间的工作冲突更少了。</p>
+
+<h1 id="category-vs">五、Category VS添加子类</h1>
+
+<p>并没有什么界限分明的判定标准来作为何时用Category何时用添加子类的方法的指导。但是有以下几个指导性的建议：</p>
+
+<ol>
+  <li>
+    <p>如果需要添加一个新的变量，则需添加子类；</p>
+  </li>
+  <li>
+    <p>如果只是添加一个新的方法，用Category是比较好的选择；</p>
+  </li>
+  <li>
+    <p>在分类中增加的方法，会被子类所继承，而且在运行时跟其他方法没有区别；</p>
+  </li>
+  <li>
+    <p>一般不要在分类中覆盖现有类中的方法。</p>
+  </li>
+</ol>
+
+<h1 id="category-">六、Category 不添加成员变量</h1>
+
+<p><strong>@property 声明的属性只会自动生成get，set方法，并不能生成下划线的成员属性。</strong></p>
+
+<h1 id="category-5">七、给Category添加属性</h1>
+
+<p>OC的分类允许给分类添加属性，但不会自动生成getter、setter方法。解决方案是通过运行时建立关联引用。接下来以添加一个这样的属性为例：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>@property <span class="o">(</span>nonatomic, copy<span class="o">)</span> NSString <span class="k">*</span>str;
+</code></pre>
+</div>
+
+<h2 id="section-1">7.1 引入运行时头文件</h2>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>import &lt;objc/runtime.h&gt;
+</code></pre>
+</div>
+
+<h2 id="extension">7.2 在匿名分类（扩展Extension）或者头文件中添加属性</h2>
+
+<p>区别是：匿名分类中添加的是私有属性，只在本类中可以使用，类的实例中不可以使用。头文件中添加的在类的实例中也可以使用。</p>
+
+<p>分类的头文件：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>@interface ClassName <span class="o">(</span>CategoryName<span class="o">)</span>
+//我要添加一个实例也可以访问的变量所以就写在这里了
+@property <span class="o">(</span>nonatomic, strong<span class="o">)</span> NSString <span class="k">*</span>str;
+@end
+</code></pre>
+</div>
+
+<p>匿名分类（扩展Extension）：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>@interface ClassName <span class="o">()</span>
+@end
+</code></pre>
+</div>
+
+<h2 id="gettersetter">7.3 在实现里面写要添加属性的getter、setter方法</h2>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>@implementation ClassName <span class="o">(</span>CategoryName<span class="o">)</span> 
+
+-<span class="o">(</span>void<span class="o">)</span>setStr:<span class="o">(</span>NSString <span class="k">*</span><span class="o">)</span>str  
+<span class="o">{</span>  
+    objc_setAssociatedObject<span class="o">(</span>self, &amp;strKey, str, OBJC_ASSOCIATION_COPY<span class="o">)</span>;  
+<span class="o">}</span>  
+
+-<span class="o">(</span>NSString <span class="k">*</span><span class="o">)</span>str  
+<span class="o">{</span>  
+    <span class="k">return </span>objc_getAssociatedObject<span class="o">(</span>self, &amp;strKey<span class="o">)</span>;  
+<span class="o">}</span>
+@end
+</code></pre>
+</div>
+
+<p>在setStr:方法中使用了一个objc_setAssociatedObject的方法，这个方法有四个参数，分别是：源对象，关联时的用来标记是哪一个属性的key（因为你可能要添加很多属性），关联的对象和一个关联策略。</p>
+
+<p>用来标记是哪一个属性的key常见有三种写法，但代码效果是一样的，如下：</p>
+
+<p>// 利用静态变量地址唯一不变的特性</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>1、static void <span class="k">*</span>strKey <span class="o">=</span> &amp;strKey;
+2、static NSString <span class="k">*</span>strKey <span class="o">=</span> @<span class="s2">"strKey"</span>; 
+3、static char strKey;
+</code></pre>
+</div>
+
+<p>关联策略是个枚举值，解释如下：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>enum <span class="o">{</span>
+    OBJC_ASSOCIATION_ASSIGN <span class="o">=</span> 0, //关联对象的属性是弱引用 
+
+    OBJC_ASSOCIATION_RETAIN_NONATOMIC <span class="o">=</span> 1, //关联对象的属性是强引用并且关联对象不使用原子性
+
+    OBJC_ASSOCIATION_COPY_NONATOMIC <span class="o">=</span> 3, //关联对象的属性是copy并且关联对象不使用原子性
+
+    OBJC_ASSOCIATION_RETAIN <span class="o">=</span> 01401, //关联对象的属性是copy并且关联对象使用原子性
+
+    OBJC_ASSOCIATION_COPY <span class="o">=</span> 01403 //关联对象的属性是copy并且关联对象使用原子性
+<span class="o">}</span>;
+</code></pre>
+</div>
+
+<h2 id="section-2">7.4 完成后的整体代码如下</h2>
+
+<p>// 分类的头文件 .h</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>@interface ClassName <span class="o">(</span>CategoryName<span class="o">)</span>
+@property <span class="o">(</span>nonatomic, strong<span class="o">)</span> NSString <span class="k">*</span>str;
+@end
+</code></pre>
+</div>
+
+<p>// 实现文件 .m</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>import <span class="s2">"ClassName + CategoryName.h"</span>
+import &lt;objc/runtime.h&gt;
+
+static void <span class="k">*</span>strKey <span class="o">=</span> &amp;strKey;
+
+@implementation ClassName <span class="o">(</span>CategoryName<span class="o">)</span> 
+-<span class="o">(</span>void<span class="o">)</span>setStr:<span class="o">(</span>NSString <span class="k">*</span><span class="o">)</span>str  
+<span class="o">{</span>  
+    objc_setAssociatedObject<span class="o">(</span>self, &amp; strKey, str, OBJC_ASSOCIATION_COPY<span class="o">)</span>;  
+<span class="o">}</span>  
+
+-<span class="o">(</span>NSString <span class="k">*</span><span class="o">)</span>str  
+<span class="o">{</span>  
+    <span class="k">return </span>objc_getAssociatedObject<span class="o">(</span>self, &amp;strKey<span class="o">)</span>;  
+<span class="o">}</span>
+@end
+</code></pre>
+</div>
+
+<h1 id="extension-1">八、延展（Extension）</h1>
+
+<ol>
+  <li>
+    <p>类的延展就如同时“匿名”的分类，延展中声明的方法在类本身的@implementation和它对应的@end之间实现；</p>
+  </li>
+  <li>
+    <p>类又是需要方法只有自己所见，我们可以通过延展的方式定义类的私有方法。</p>
+  </li>
+</ol>
+
+<p><img src="/source/iOS基础：Category和Extension/01.png" alt="" /></p>
+
+
+            </article>
+        </div>
+      </div>
+      <div class="panel docs-content">
+        <article class="post-content">
+          <div class="wrapper">
+            
+
+
+  <div id="uyan_frame"></div>
+<script type="text/javascript">
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://v2.uyan.cc/code/uyan.js?uid=2119519';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+
+
+
+
+
+ 
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+    <footer class="footer" role="contentinfo">
+	<div class="container">
+		<p class="copyright">Copyright &copy; 2016-2017 <a href="http://www.luckycathome.com/Resume/"><code>LuckyCat</code></a>.</p>
+		<p>Powered by <a href="http://jekyllrb.com">Jekyll</a>, theme from <a href="https://github.com/luoyan35714/LessOrMore">LessOrMore</a></p>
+	</div>
+</footer>
+
+<script src="/styles/js/jquery.min.js"></script>
+<script src="/styles/js/bootstrap.min.js"></script>
+<script src="/styles/js/holder.min.js"></script>
+<script src="/styles/js/application.js"></script>
+<script src="/styles/js/lessismore.js"></script>
+
+  </body>
+</html>

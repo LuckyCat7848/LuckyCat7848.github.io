@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>iOS基础：KVC的用法</title>
+
+	<link rel="shortcut icon" href="/styles/images/favicon.jpg">
+	<link rel="icon" href="/styles/images/favicon.jpg">
+
+	<link rel="stylesheet" href="/styles/css/index.css">
+	<link rel="stylesheet" href="/styles/css/fontawesome/css/font-awesome.min.css">
+	<link rel="canonical" href="/2015/06/14/iOS%E5%9F%BA%E7%A1%80-KVC%E7%9A%84%E7%94%A8%E6%B3%95/">
+	<link rel="alternate" type="application/rss+xml" title="LuckyCat's Blog" href="/feed.xml">
+	
+	<meta name="description" content="康志华;个人博客;学而不思则罔;思而不学则殆;生命不止;折腾不休">
+
+	<script src="/styles/js/jquery.min.js"></script>
+	<!--[if lt IE 9]>
+    	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  	<![endif]-->
+  	<script>
+		var _hmt = _hmt || [];
+		(function() {
+		  var hm = document.createElement("script");
+		  hm.src = "//hm.baidu.com/hm.js?94be4b0f9fc5d94cc0d0415ea6761ae9";
+		  var s = document.getElementsByTagName("script")[0]; 
+		  s.parentNode.insertBefore(hm, s);
+		})();
+	</script>
+  	<style type="text/css">
+	  	.docs-content{
+	  		margin-bottom: 10px;
+	  	}
+  	</style>
+</head>
+
+  <body class="index">
+
+    <header class="navbar navbar-inverse navbar-fixed-top docs-nav" role="banner">
+  <div class="container">
+    <div class="navbar-header">
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="/" class="navbar-brand">
+        <img src="/styles/images/logo.jpg">
+      </a>
+    </div>
+    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+      <ul class="nav navbar-nav">    
+        <li>
+          <a href="/">Home</a>
+        </li>
+        <li>
+          <a href="/categories/">大类分解</a>
+        </li>
+        <li>
+          <a href="/tag">小类内聚</a>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <!-- <li>
+          <a href="/donate/"><strong>打赏</strong></a>
+        </li> -->
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">关于<b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a rel="nofollow" target="_blank" href="https://github.com/LuckyCat7848/">Github</a></li>
+            <li><a rel="nofollow" target="_blank" href="http://www.luckycathome.com/Resume/">关于作者</a></li>
+            <li><a rel="nofollow" href="/books">我的书单</a></li>
+            <li><a rel="nofollow" href="/reference">推荐博客</a></li>
+            <!-- <li><a href="/feed.xml">RSS订阅</a></li> -->
+            <li class="divider"></li>
+            <li><a rel="nofollow" target="_blank" href="https://github.com/LuckyCat7848/LuckyCat7848.github.io">本项目</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+    <div class="docs-header" id="content">
+  <div class="container">
+  	
+  		<!--
+		    <h1>iOS基础：KVC的用法</h1>
+		    <p>Post on Jun 14, 2015 by <a href="/about">LuckyCat</a></p>
+		-->
+		    <h1>Everything is well !</h1>
+    
+  </div>
+</div>
+    
+      
+<div class="banner">
+  <div class="container">
+  	
+    	<a href="/categories/#技术-ref">技术</a>	/
+    	<a href="/tag/#Object-C-ref">Object-C</a>
+    
+  </div>
+</div>
+
+    
+
+    <div class="container docs-container">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="sidebar hidden-print" role="complementary">
+        <div id="navigation">
+  <h1>目录</h1>
+  <ul class="nav sidenav">
+<!--
+    
+      
+      
+      
+      
+
+      
+        <li><a href="#year_2017">2017</a>
+          <ul class="nav">
+            <li><a href="#month_2017_March">March</a></li>
+      
+
+      
+            
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+              <li><a href="#month_2017_January">January</a></li>
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+        
+            </ul>
+          </li>
+          <li><a href="#year_2016">2016</a>
+            <ul class="nav">
+              <li><a href="#month_2016_November">November</a></li>
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+              <li><a href="#month_2016_September">September</a></li>
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+              <li><a href="#month_2016_February">February</a></li>
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+              <li><a href="#month_2016_January">January</a></li>
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+        
+            </ul>
+          </li>
+          <li><a href="#year_2015">2015</a>
+            <ul class="nav">
+              <li><a href="#month_2015_August">August</a></li>
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+              <li><a href="#month_2015_July">July</a></li>
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+              <li><a href="#month_2015_June">June</a></li>
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+              <li><a href="#month_2015_February">February</a></li>
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+              <li><a href="#month_2015_January">January</a></li>
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            </ul>
+          </li>
+      
+    
+-->
+  </ul>
+</div> 
+      </div>
+    </div>
+    <div class="col-md-9" role="main">
+      <div class="panel docs-content">
+        <div class="wrapper">
+            <header class="post-header">
+              <h1 class="post-title">iOS基础：KVC的用法</h1>
+              <!--
+                <p class="post-meta">Jun 14, 2015</p>
+              -->
+              <div class="meta">Posted on <span class="postdate">Jun 14, 2015</span> By <a target="_blank" href="http://localhost:4000">LuckyCat</a></div>
+              <br />
+            </header>
+            <article class="post-content">
+              <ul id="markdown-toc">
+  <li><a href="#section" id="markdown-toc-section">一、基本赋值取值</a></li>
+  <li><a href="#section-1" id="markdown-toc-section-1">二、使用路径</a></li>
+  <li><a href="#section-2" id="markdown-toc-section-2">三、自动装箱拆箱</a></li>
+  <li><a href="#section-3" id="markdown-toc-section-3">四、对集合的操作能力</a></li>
+  <li><a href="#section-4" id="markdown-toc-section-4">五、对集合做运算</a></li>
+  <li><a href="#section-5" id="markdown-toc-section-5">六、更多用法</a></li>
+</ul>
+
+<hr />
+
+<h1 id="section">一、基本赋值取值</h1>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>interface Book : NSObject <span class="o">{</span> 
+    NString <span class="k">*</span>name;
+<span class="o">}</span>
+@end
+
+<span class="c">#import "Book.h"</span>
+@implementation Book
+@end
+</code></pre>
+</div>
+
+<p>这个Book类太简单了，只有一个实例变量name。而且，按照以前掌握的技术，没有办法给这个变量赋值了。下面KVC登场：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Book <span class="k">*</span><span class="nv">book</span><span class="o">=[[</span>Book alloc] init]; 
+<span class="o">[</span>book setValue:@<span class="s2">"《Objective-C入门》"</span> forKey:@<span class="s2">"name"</span><span class="o">]</span>; 
+NSString <span class="k">*</span><span class="nv">name</span><span class="o">=[</span>book valueForKey:@<span class="s2">"name"</span><span class="o">]</span>; 
+</code></pre>
+</div>
+
+<h1 id="section-1">二、使用路径</h1>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>@interface Author : NSObject <span class="o">{</span> 
+    NSString <span class="k">*</span>name; 
+<span class="o">}</span>
+@end
+
+<span class="c">#import "Author.h"</span>
+@implementation Author
+@end
+
+@class Author;
+@interface Book : NSObject <span class="o">{</span> 
+    NSString <span class="k">*</span>name; 
+    Author <span class="k">*</span>author; 
+<span class="o">}</span>
+@end
+
+<span class="c">#import "Book.h"</span>
+@implementation Book
+@end
+
+Book <span class="k">*</span><span class="nv">book</span><span class="o">=[[[</span>Book alloc] init] autorelease]; 
+<span class="o">[</span>book setValue:@<span class="s2">"《Objective-C入门》"</span> forKey:@<span class="s2">"name"</span><span class="o">]</span>; 
+NSString <span class="k">*</span><span class="nv">name</span><span class="o">=[</span>book valueForKey:@<span class="s2">"name"</span><span class="o">]</span>; 
+    
+Author <span class="k">*</span><span class="nv">author</span><span class="o">=[[[</span>Author alloc] init] autorelease]; 
+<span class="o">[</span>author setValue:@<span class="s2">"Marshal Wu"</span> forKey:@<span class="s2">"name"</span><span class="o">]</span>; 
+<span class="o">[</span>book setValue:author forKey:@<span class="s2">"author"</span><span class="o">]</span>; 
+NSString <span class="k">*</span><span class="nv">authorName</span><span class="o">=[</span>book valueForKeyPath:@<span class="s2">"author.name"</span><span class="o">]</span>; 
+</code></pre>
+</div>
+
+<h1 id="section-2">三、自动装箱拆箱</h1>
+
+<p>KVC还有一个很重要的特点，自动装箱拆箱功能。这在ObjC中是仅有的，其他情况下均需要使用比如NSNumber来手动拆装箱的。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>@class Author;
+@interface Book : NSObject <span class="o">{</span> 
+    NSString <span class="k">*</span>name; 
+    Author <span class="k">*</span>author; 
+    float price; 
+<span class="o">}</span>
+@end
+</code></pre>
+</div>
+
+<p>实现文件没有动。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Book <span class="k">*</span><span class="nv">book</span><span class="o">=[[[</span>Book alloc] init] autorelease]; 
+Author <span class="k">*</span><span class="nv">author</span><span class="o">=[[[</span>Author alloc] init] autorelease]; 
+<span class="o">[</span>book setValue:author forKey:@<span class="s2">"author"</span><span class="o">]</span>; 
+<span class="o">[</span>book setValue:@<span class="s2">"zhangsan"</span> forKeyPath:@<span class="s2">"author.name"</span><span class="o">]</span>; 
+<span class="o">[</span>book setValue:@<span class="s2">"10.4"</span> forKey:@<span class="s2">"price"</span><span class="o">]</span>; 
+NSLog<span class="o">(</span>@<span class="s2">"book price is %@"</span>,[book valueForKey:@<span class="s2">"price"</span><span class="o">])</span>;
+</code></pre>
+</div>
+
+<p>可以看到给price输入的是NSString类型，但是没有问题，因为KVC方式会根据字符串自动转型为适当的数值。再看打印price属性，%@是打印对象，而price属性是float基本型，这里KVC肯定做</p>
+
+<p>了自动装箱的处理，将基本型转为NSNumber对象。</p>
+
+<h1 id="section-3">四、对集合的操作能力</h1>
+
+<p>KVC还具备对集合的操作能力。比如，图书可以有相关图书，这是个1对多的关系。可以用集合来表示，这里用NSArray表示，在Book类的头文件中改动：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>@class Author;
+@interface Book : NSObject <span class="o">{</span> 
+    NSString <span class="k">*</span>name; 
+    Author <span class="k">*</span>author; 
+    float price; 
+    NSArray <span class="k">*</span>relativeBooks; 
+<span class="o">}</span>
+@end
+</code></pre>
+</div>
+<p>如果想得到相关图书的价格NSArray，可以使用KVC方式，见main方法：
+<code class="highlighter-rouge">bash
+Book *book =[[[Book alloc] init] autorelease]; 
+Book *book1=[[[Book alloc] init] autorelease]; 
+[book1 setValue:@"5.0" forKey:@"price"]; 
+Book *book2=[[[Book alloc] init] autorelease]; 
+[book2 setValue:@"4.0" forKey:@"price"]; 
+NSArray *books=[NSArray arrayWithObjects:book1,book2,nil]; 
+[book setValue:books forKey:@"relativeBooks"]; 
+NSLog(@"relative books price: %@",[book valueForKeyPath:@"relativeBooks.price"]);
+</code></p>
+
+<p>日志将打印出相关图书的价格列表：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>2011-05-26 19:27:57.463 ReleaseMemoDemo[10042:a0f] relative books price: <span class="o">(</span> 
+    5, 
+    4 
+<span class="o">)</span>
+</code></pre>
+</div>
+
+<h1 id="section-4">五、对集合做运算</h1>
+
+<p>KVC还能对集合做运算，比如想得到相关图书的个数、相关图书的价格总和、相关图书的平均价格、价格的最大值和价格的最小值，见下面的代码：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>NSArray <span class="k">*</span><span class="nv">books</span><span class="o">=[</span>NSArray arrayWithObjects:book1,book2,nil]; 
+<span class="o">[</span>book setValue:books forKey:@<span class="s2">"relativeBooks"</span><span class="o">]</span>; 
+NSLog<span class="o">(</span>@<span class="s2">"relative books price: %@"</span>,[book valueForKeyPath:@<span class="s2">"relativeBooks.price"</span><span class="o">])</span>; 
+NSLog<span class="o">(</span>@<span class="s2">"relative books count: %@"</span>,[book valueForKeyPath:@<span class="s2">"relativeBooks.@count"</span><span class="o">])</span>; 
+NSLog<span class="o">(</span>@<span class="s2">"relative books price sum: %@"</span>,[book valueForKeyPath:@<span class="s2">"relativeBooks.@sum.price"</span><span class="o">])</span>; 
+NSLog<span class="o">(</span>@<span class="s2">"relative books price avg: %@"</span>,[book valueForKeyPath:@<span class="s2">"relativeBooks.@avg.price"</span><span class="o">])</span>; 
+NSLog<span class="o">(</span>@<span class="s2">"relative books price avg: %@"</span>,[book valueForKeyPath:@<span class="s2">"relativeBooks.@max.price"</span><span class="o">])</span>;
+NSLog<span class="o">(</span>@<span class="s2">"relative books price avg: %@"</span>,[book valueForKeyPath:@relativeBooks.@min.price]<span class="o">)</span>;
+</code></pre>
+</div>
+
+<p>另外，如果想获得没有重复的价格集合，可以这样：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>NSLog<span class="o">(</span>@<span class="s2">"relative books distinct price: %@"</span>,[book valueForKeyPath:@<span class="s2">"relativeBooks.@distinctUnionOfObjects.price"</span><span class="o">])</span>;
+</code></pre>
+</div>
+
+<p>在使用@distinctUnionOfObjects后，发现效果是消除重复的价格。</p>
+
+<h1 id="section-5">六、更多用法</h1>
+
+<p>KVC还可以在一个语句中为实例的多个属性赋值：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Book <span class="k">*</span><span class="nv">book4</span><span class="o">=[[</span>Book alloc] init]; 
+NSArray <span class="k">*</span><span class="nv">bookProperties</span><span class="o">=[</span>NSArray arrayWithObjects:@<span class="s2">"name"</span>,@<span class="s2">"price"</span>,nil]; 
+NSDictionary <span class="k">*</span><span class="nv">bookPropertiesDictionary</span><span class="o">=[</span>book4 dictionaryWithValuesForKeys:bookProperties]; 
+NSLog<span class="o">(</span>@<span class="s2">"book values: %@"</span>,bookPropertiesDictionary<span class="o">)</span>;
+NSDictionary <span class="k">*</span><span class="nv">newBookPropertiesDictionary</span><span class="o">=[</span>NSDictionary dictionaryWithObjectsAndKeys:@<span class="s2">"《Objective C入门》"</span>,@<span class="s2">"name"</span>, @<span class="s2">"20.5"</span>,@<span class="s2">"price"</span>,nil]; 
+<span class="o">[</span>book4 setValuesForKeysWithDictionary:newBookPropertiesDictionary]; 
+NSLog<span class="o">(</span>@<span class="s2">"book with new values: %@"</span>,[book4 dictionaryWithValuesForKeys:bookProperties]<span class="o">)</span>;
+</code></pre>
+</div>
+
+<p>另外，还有两个比较高级的内容：nil和覆盖setNilValueForKey方法，覆盖valueForUndefinedKey方法，可自行看reference了解。</p>
+
+            </article>
+        </div>
+      </div>
+      <div class="panel docs-content">
+        <article class="post-content">
+          <div class="wrapper">
+            
+
+
+  <div id="uyan_frame"></div>
+<script type="text/javascript">
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://v2.uyan.cc/code/uyan.js?uid=2119519';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+
+
+
+
+
+ 
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+    <footer class="footer" role="contentinfo">
+	<div class="container">
+		<p class="copyright">Copyright &copy; 2016-2017 <a href="http://www.luckycathome.com/Resume/"><code>LuckyCat</code></a>.</p>
+		<p>Powered by <a href="http://jekyllrb.com">Jekyll</a>, theme from <a href="https://github.com/luoyan35714/LessOrMore">LessOrMore</a></p>
+	</div>
+</footer>
+
+<script src="/styles/js/jquery.min.js"></script>
+<script src="/styles/js/bootstrap.min.js"></script>
+<script src="/styles/js/holder.min.js"></script>
+<script src="/styles/js/application.js"></script>
+<script src="/styles/js/lessismore.js"></script>
+
+  </body>
+</html>

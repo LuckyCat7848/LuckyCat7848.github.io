@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>iOS基础：如何正确使用const,static,extern</title>
+
+	<link rel="shortcut icon" href="/styles/images/favicon.jpg">
+	<link rel="icon" href="/styles/images/favicon.jpg">
+
+	<link rel="stylesheet" href="/styles/css/index.css">
+	<link rel="stylesheet" href="/styles/css/fontawesome/css/font-awesome.min.css">
+	<link rel="canonical" href="/2015/06/06/iOS%E5%9F%BA%E7%A1%80-%E5%A6%82%E4%BD%95%E6%AD%A3%E7%A1%AE%E4%BD%BF%E7%94%A8const,static,extern/">
+	<link rel="alternate" type="application/rss+xml" title="LuckyCat's Blog" href="/feed.xml">
+	
+	<meta name="description" content="康志华;个人博客;学而不思则罔;思而不学则殆;生命不止;折腾不休">
+
+	<script src="/styles/js/jquery.min.js"></script>
+	<!--[if lt IE 9]>
+    	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  	<![endif]-->
+  	<script>
+		var _hmt = _hmt || [];
+		(function() {
+		  var hm = document.createElement("script");
+		  hm.src = "//hm.baidu.com/hm.js?94be4b0f9fc5d94cc0d0415ea6761ae9";
+		  var s = document.getElementsByTagName("script")[0]; 
+		  s.parentNode.insertBefore(hm, s);
+		})();
+	</script>
+  	<style type="text/css">
+	  	.docs-content{
+	  		margin-bottom: 10px;
+	  	}
+  	</style>
+</head>
+
+  <body class="index">
+
+    <header class="navbar navbar-inverse navbar-fixed-top docs-nav" role="banner">
+  <div class="container">
+    <div class="navbar-header">
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="/" class="navbar-brand">
+        <img src="/styles/images/logo.jpg">
+      </a>
+    </div>
+    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+      <ul class="nav navbar-nav">    
+        <li>
+          <a href="/">Home</a>
+        </li>
+        <li>
+          <a href="/categories/">大类分解</a>
+        </li>
+        <li>
+          <a href="/tag">小类内聚</a>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <!-- <li>
+          <a href="/donate/"><strong>打赏</strong></a>
+        </li> -->
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">关于<b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a rel="nofollow" target="_blank" href="https://github.com/LuckyCat7848/">Github</a></li>
+            <li><a rel="nofollow" target="_blank" href="http://www.luckycathome.com/Resume/">关于作者</a></li>
+            <li><a rel="nofollow" href="/books">我的书单</a></li>
+            <li><a rel="nofollow" href="/reference">推荐博客</a></li>
+            <!-- <li><a href="/feed.xml">RSS订阅</a></li> -->
+            <li class="divider"></li>
+            <li><a rel="nofollow" target="_blank" href="https://github.com/LuckyCat7848/LuckyCat7848.github.io">本项目</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+    <div class="docs-header" id="content">
+  <div class="container">
+  	
+  		<!--
+		    <h1>iOS基础：如何正确使用const,static,extern</h1>
+		    <p>Post on Jun 06, 2015 by <a href="/about">LuckyCat</a></p>
+		-->
+		    <h1>Everything is well !</h1>
+    
+  </div>
+</div>
+    
+      
+<div class="banner">
+  <div class="container">
+  	
+    	<a href="/categories/#技术-ref">技术</a>	/
+    	<a href="/tag/#Object-C-ref">Object-C</a>
+    
+  </div>
+</div>
+
+    
+
+    <div class="container docs-container">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="sidebar hidden-print" role="complementary">
+        <div id="navigation">
+  <h1>目录</h1>
+  <ul class="nav sidenav">
+<!--
+    
+      
+      
+      
+      
+
+      
+        <li><a href="#year_2017">2017</a>
+          <ul class="nav">
+            <li><a href="#month_2017_March">March</a></li>
+      
+
+      
+            
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+              <li><a href="#month_2017_January">January</a></li>
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+        
+            </ul>
+          </li>
+          <li><a href="#year_2016">2016</a>
+            <ul class="nav">
+              <li><a href="#month_2016_November">November</a></li>
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+              <li><a href="#month_2016_September">September</a></li>
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+              <li><a href="#month_2016_February">February</a></li>
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+              <li><a href="#month_2016_January">January</a></li>
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+        
+            </ul>
+          </li>
+          <li><a href="#year_2015">2015</a>
+            <ul class="nav">
+              <li><a href="#month_2015_August">August</a></li>
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+              <li><a href="#month_2015_July">July</a></li>
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+              <li><a href="#month_2015_June">June</a></li>
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+              <li><a href="#month_2015_February">February</a></li>
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+              <li><a href="#month_2015_January">January</a></li>
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            </ul>
+          </li>
+      
+    
+-->
+  </ul>
+</div> 
+      </div>
+    </div>
+    <div class="col-md-9" role="main">
+      <div class="panel docs-content">
+        <div class="wrapper">
+            <header class="post-header">
+              <h1 class="post-title">iOS基础：如何正确使用const,static,extern</h1>
+              <!--
+                <p class="post-meta">Jun 6, 2015</p>
+              -->
+              <div class="meta">Posted on <span class="postdate">Jun 06, 2015</span> By <a target="_blank" href="http://localhost:4000">LuckyCat</a></div>
+              <br />
+            </header>
+            <article class="post-content">
+              <ul id="markdown-toc">
+  <li><a href="#const" id="markdown-toc-const">一、const与宏的区别（面试题）:</a></li>
+  <li><a href="#const-1" id="markdown-toc-const-1">二、const作用：限制类型</a></li>
+  <li><a href="#const-2" id="markdown-toc-const-2">三、const开发中使用场景</a></li>
+  <li><a href="#staticextern" id="markdown-toc-staticextern">四、static和extern简单使用(要使用一个东西，先了解其作用)</a>    <ul>
+      <li><a href="#static" id="markdown-toc-static">4.1 static作用</a></li>
+      <li><a href="#extern" id="markdown-toc-extern">4.2 extern作用</a></li>
+    </ul>
+  </li>
+  <li><a href="#staticconst" id="markdown-toc-staticconst">五、static与const联合使用</a></li>
+  <li><a href="#externconst" id="markdown-toc-externconst">六、extern与const联合使用</a></li>
+</ul>
+
+<hr />
+
+<p>转自：<a href="http://www.jianshu.com/p/2fd58ed2cf55">【如何正确使用const,static,extern】那些人追的干货</a></p>
+
+<h1 id="const">一、const与宏的区别（面试题）:</h1>
+
+<p><strong>const简介：</strong>之前常用的字符串常量，一般是抽成宏，但是苹果不推荐我们抽成宏，推荐我们使用const常量。</p>
+
+<p><strong>编译时刻：</strong>宏是预编译（编译之前处理），const是编译阶段。</p>
+
+<p><strong>编译检查：</strong>宏不做检查，不会报编译错误，只是替换，const会编译检查，会报编译错误。</p>
+
+<p><strong>宏的好处：</strong>宏能定义一些函数，方法。 const不能。</p>
+
+<p><strong>宏的坏处：</strong>使用大量宏，容易造成编译时间久，每次都需要重新替换。</p>
+
+<p>注意：很多Blog都说使用宏，会消耗很多内存，我这验证并不会生成很多内存，宏定义的是常量，常量都放在常量区，只会生成一份内存。</p>
+
+<p><img src="/source/iOS基础：如何正确使用const,static,extern/01.png" alt="" /></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>// 常见的常量：抽成宏
+<span class="c">#define XMGAccount @"account"</span>
+
+<span class="c">#define XMGUserDefault [NSUserDefaults standardUserDefaults]</span>
+
+// 字符串常量
+static NSString <span class="k">*</span> const account <span class="o">=</span> @<span class="s2">"account"</span>;
+
+- <span class="o">(</span>void<span class="o">)</span>viewDidLoad <span class="o">{</span>
+    <span class="o">[</span>super viewDidLoad];
+
+    // 偏好设置存储
+    // 使用宏
+    <span class="o">[</span>XMGUserDefault setValue:@<span class="s2">"123"</span> forKey:XMGAccount];
+
+    // 使用const常量
+    <span class="o">[[</span>NSUserDefaults standardUserDefaults] setValue:@<span class="s2">"123"</span> forKey:account];
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<h1 id="const-1">二、const作用：限制类型</h1>
+
+<ol>
+  <li>
+    <p>const仅仅用来修饰右边的变量（基本数据变量p，指针变量*p）；</p>
+  </li>
+  <li>
+    <p>被const修饰的变量是只读的；</p>
+  </li>
+  <li>
+    <p>const基本使用：</p>
+  </li>
+</ol>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>- <span class="o">(</span>void<span class="o">)</span>viewDidLoad <span class="o">{</span>
+    <span class="o">[</span>super viewDidLoad];
+
+    // 定义变量
+    int a <span class="o">=</span> 1;
+
+    // 允许修改值
+    a <span class="o">=</span> 20;
+
+    // const两种用法
+    // const:修饰基本变量p
+    // 这两种写法是一样的，const只修饰右边的基本变量b
+    const int b <span class="o">=</span> 20; // b:只读变量
+    int const b <span class="o">=</span> 20; // b:只读变量
+
+    // 不允许修改值
+    b <span class="o">=</span> 1;
+
+    // const:修饰指针变量<span class="k">*</span>p，带<span class="k">*</span>的变量，就是指针变量.
+    // 定义一个指向int类型的指针变量，指向a的地址
+    int <span class="k">*</span>p <span class="o">=</span> &amp;a;
+
+    int c <span class="o">=</span> 10;
+
+    p <span class="o">=</span> &amp;c;
+
+    // 允许修改p指向的地址，
+    // 允许修改p访问内存空间的值
+    <span class="k">*</span>p <span class="o">=</span> 20;
+
+    // const修饰指针变量访问的内存空间，修饰的是右边<span class="k">*</span>p1，
+    // 两种方式一样
+    const int <span class="k">*</span>p1; // <span class="k">*</span>p1：常量 p1:变量
+    int const <span class="k">*</span>p1; // <span class="k">*</span>p1：常量 p1:变量
+
+    // const修饰指针变量p1
+    int <span class="k">*</span> const p1; // <span class="k">*</span>p1:变量 p1:常量
+
+
+    // 第一个const修饰<span class="k">*</span>p1 第二个const修饰 p1
+    // 两种方式一样
+    const int <span class="k">*</span> const p1; // <span class="k">*</span>p1：常量 p1：常量
+
+    int const <span class="k">*</span> const p1;  // <span class="k">*</span>p1：常量 p1：常量
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<h1 id="const-2">三、const开发中使用场景</h1>
+
+<p>需求1：提供一个方法，这个方法的参数是地址，里面只能通过地址读取值,不能通过地址修改值</p>
+
+<p>需求2：提供一个方法，这个方法的参数是地址，里面不能修改参数的地址。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>implementation ViewController
+
+// const放<span class="k">*</span>前面约束参数，表示<span class="k">*</span>a只读
+// 只能修改地址a,不能通过a修改访问的内存空间
+- <span class="o">(</span>void<span class="o">)</span><span class="nb">test</span>:<span class="o">(</span>const int <span class="k">*</span> <span class="o">)</span>a
+<span class="o">{</span>
+//    <span class="k">*</span>a <span class="o">=</span> 20;
+<span class="o">}</span>
+
+// const放<span class="k">*</span>后面约束参数，表示a只读
+// 不能修改a的地址，只能修改a访问的值
+- <span class="o">(</span>void<span class="o">)</span>test1:<span class="o">(</span>int <span class="k">*</span> const<span class="o">)</span>a
+<span class="o">{</span>
+    int b;
+    // 会报错
+    a <span class="o">=</span> &amp;b;
+
+    <span class="k">*</span>a <span class="o">=</span> 2;
+<span class="o">}</span>
+
+- <span class="o">(</span>void<span class="o">)</span>viewDidLoad <span class="o">{</span>
+    <span class="o">[</span>super viewDidLoad];
+    // Do any additional setup after loading the view, typically from a nib.
+
+    int a <span class="o">=</span> 10;
+
+    // 需求1:提供一个方法，这个方法的参数是地址，里面只能通过地址读取值,不能通过地址修改值。
+
+    // 这时候就需要使用const，约束方法的参数只读.
+    <span class="o">[</span>self <span class="nb">test</span>:&amp;a];
+
+    // 需求2:提供一个方法，这个方法的参数是地址，里面不能修改参数的地址。
+    <span class="o">[</span>self test1:&amp;a];
+<span class="o">}</span>
+@end
+</code></pre>
+</div>
+
+<h1 id="staticextern">四、static和extern简单使用(要使用一个东西，先了解其作用)</h1>
+
+<h2 id="static">4.1 static作用</h2>
+
+<p><strong>修饰局部变量：</strong></p>
+
+<ol>
+  <li>
+    <p>延长局部变量的生命周期,程序结束才会销毁；</p>
+  </li>
+  <li>
+    <p>局部变量只会生成一份内存,只会初始化一次；</p>
+  </li>
+  <li>
+    <p>改变局部变量的作用域。</p>
+  </li>
+</ol>
+
+<p><strong>修饰全局变量：</strong></p>
+
+<ol>
+  <li>
+    <p>只能在本文件中访问,修改全局变量的作用域,生命周期不会改</p>
+  </li>
+  <li>
+    <p>避免重复定义全局变量</p>
+  </li>
+</ol>
+
+<h2 id="extern">4.2 extern作用</h2>
+
+<ol>
+  <li>
+    <p>只是用来获取全局变量(包括全局静态变量)的值，不能用于定义变量</p>
+  </li>
+  <li>
+    <p><strong>extern工作原理：</strong>先在当前文件查找有没有全局变量，没有找到，才会去其他文件查找。</p>
+  </li>
+</ol>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>// 全局变量：只有一份内存，所有文件共享，与extern联合使用。
+int a <span class="o">=</span> 20;
+
+// static修饰全局变量
+static int age <span class="o">=</span> 20;
+
+- <span class="o">(</span>void<span class="o">)</span><span class="nb">test</span>
+<span class="o">{</span>
+    // static修饰局部变量
+    static int age <span class="o">=</span> 0;
+    age++;
+    NSLog<span class="o">(</span>@<span class="s2">"%d"</span>,age<span class="o">)</span>;
+<span class="o">}</span>
+
+- <span class="o">(</span>void<span class="o">)</span>viewDidLoad <span class="o">{</span>
+    <span class="o">[</span>super viewDidLoad];
+    // Do any additional setup after loading the view, typically from a nib.
+
+
+    <span class="o">[</span>self <span class="nb">test</span><span class="o">]</span>;
+    <span class="o">[</span>self <span class="nb">test</span><span class="o">]</span>;
+
+    extern int age;
+    NSLog<span class="o">(</span>@<span class="s2">"%d"</span>,age<span class="o">)</span>;
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<h1 id="staticconst">五、static与const联合使用</h1>
+<ol>
+  <li>
+    <p>static与const作用：声明一个只读的静态变量；</p>
+  </li>
+  <li>
+    <p>开发使用场景：在一个文件中经常使用的字符串常量，可以使用static与const组合。</p>
+  </li>
+</ol>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>// 开发中常用static修饰全局变量,只改变作用域
+
+// 为什么要改变全局变量作用域，防止重复声明全局变量。
+
+// 开发中声明的全局变量，有些不希望外界改动，只允许读取。
+
+// 比如一个基本数据类型不希望别人改动
+
+// 声明一个静态的全局只读常量
+static const int a <span class="o">=</span> 20;
+
+// staic和const联合的作用:声明一个静态的全局只读常量
+
+// iOS中staic和const常用使用场景，是用来代替宏，把一个经常使用的字符串常量，定义成静态全局只读变量.
+
+// 开发中经常拿到key修改值，因此用const修饰key,表示key只读，不允许修改。
+static  NSString <span class="k">*</span> const key <span class="o">=</span> @<span class="s2">"name"</span>;
+
+// 如果 const修饰 <span class="k">*</span>key1,表示<span class="k">*</span>key1只读，key1还是能改变。
+
+static  NSString const <span class="k">*</span>key1 <span class="o">=</span> @<span class="s2">"name"</span>;
+</code></pre>
+</div>
+
+<h1 id="externconst">六、extern与const联合使用</h1>
+<ol>
+  <li>
+    <p>开发中使用场景：在多个文件中经常使用的同一个字符串常量，可以使用extern与const组合。</p>
+  </li>
+  <li>
+    <p>原因：
+static与const组合：在每个文件都需要定义一份静态全局变量。
+extern与const组合：只需要定义一份全局变量，多个文件共享。</p>
+  </li>
+  <li>
+    <p>全局常量正规写法:开发中便于管理所有的全局变量，通常搞一个GlobeConst文件，里面专门定义全局变量，统一管理，要不然项目文件多不好找。</p>
+  </li>
+</ol>
+
+<p><em>GlobeConst.h</em></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>/<span class="k">*******************************</span>首页<span class="k">****************************</span>/
+
+extern NSString <span class="k">*</span> const nameKey <span class="o">=</span> @<span class="s2">"name"</span>;
+
+/<span class="k">*******************************</span>首页<span class="k">****************************</span>/
+</code></pre>
+</div>
+<p><em>GlobeConst.m</em></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c">#import &lt;Foundation/Foundation.h&gt;</span>
+
+/<span class="k">*******************************</span>首页<span class="k">****************************</span>/
+
+NSString <span class="k">*</span> const nameKey <span class="o">=</span> @<span class="s2">"name"</span>;
+
+/<span class="k">*******************************</span>首页<span class="k">****************************</span>/
+</code></pre>
+</div>
+
+            </article>
+        </div>
+      </div>
+      <div class="panel docs-content">
+        <article class="post-content">
+          <div class="wrapper">
+            
+
+
+  <div id="uyan_frame"></div>
+<script type="text/javascript">
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://v2.uyan.cc/code/uyan.js?uid=2119519';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+
+
+
+
+
+ 
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+    <footer class="footer" role="contentinfo">
+	<div class="container">
+		<p class="copyright">Copyright &copy; 2016-2017 <a href="http://www.luckycathome.com/Resume/"><code>LuckyCat</code></a>.</p>
+		<p>Powered by <a href="http://jekyllrb.com">Jekyll</a>, theme from <a href="https://github.com/luoyan35714/LessOrMore">LessOrMore</a></p>
+	</div>
+</footer>
+
+<script src="/styles/js/jquery.min.js"></script>
+<script src="/styles/js/bootstrap.min.js"></script>
+<script src="/styles/js/holder.min.js"></script>
+<script src="/styles/js/application.js"></script>
+<script src="/styles/js/lessismore.js"></script>
+
+  </body>
+</html>

@@ -5,14 +5,14 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>赞助方式</title>
+	<title>iOS基础：@synthesize和@dynamic区别</title>
 
 	<link rel="shortcut icon" href="/styles/images/favicon.jpg">
 	<link rel="icon" href="/styles/images/favicon.jpg">
 
 	<link rel="stylesheet" href="/styles/css/index.css">
 	<link rel="stylesheet" href="/styles/css/fontawesome/css/font-awesome.min.css">
-	<link rel="canonical" href="/donate/method/">
+	<link rel="canonical" href="/2015/02/10/iOS%E5%9F%BA%E7%A1%80-@synthesize%E5%92%8C@dynamic%E5%8C%BA%E5%88%AB/">
 	<link rel="alternate" type="application/rss+xml" title="LuckyCat's Blog" href="/feed.xml">
 	
 	<meta name="description" content="康志华;个人博客;学而不思则罔;思而不学则殆;生命不止;折腾不休">
@@ -87,8 +87,8 @@
   <div class="container">
   	
   		<!--
-		    <h1>赞助方式</h1>
-		    <p>Post on  by <a href="/about">LuckyCat</a></p>
+		    <h1>iOS基础：@synthesize和@dynamic区别</h1>
+		    <p>Post on Feb 10, 2015 by <a href="/about">LuckyCat</a></p>
 		-->
 		    <h1>Everything is well !</h1>
     
@@ -99,7 +99,8 @@
 <div class="banner">
   <div class="container">
   	
-    	学而不思则罔，思而不学则殆。
+    	<a href="/categories/#技术-ref">技术</a>	/
+    	<a href="/tag/#Object-C-ref">Object-C</a>
     
   </div>
 </div>
@@ -359,42 +360,31 @@
       <div class="panel docs-content">
         <div class="wrapper">
             <header class="post-header">
-              <h1 class="post-title">赞助方式</h1>
+              <h1 class="post-title">iOS基础：@synthesize和@dynamic区别</h1>
               <!--
-                <p class="post-meta"></p>
+                <p class="post-meta">Feb 10, 2015</p>
               -->
-              <div class="meta">Posted on <span class="postdate"></span> By <a target="_blank" href="http://localhost:4000">LuckyCat</a></div>
+              <div class="meta">Posted on <span class="postdate">Feb 10, 2015</span> By <a target="_blank" href="http://localhost:4000">LuckyCat</a></div>
               <br />
             </header>
             <article class="post-content">
-              <h1 id="section">您的支持是作者写作最大的动力！</h1>
+              <ul id="markdown-toc">
+  <li><a href="#synthesize" id="markdown-toc-synthesize">synthesize</a></li>
+  <li><a href="#dynamic" id="markdown-toc-dynamic">dynamic</a></li>
+</ul>
 
-<hr />
+<p>在声明property属性后，有2种实现选择：</p>
 
-<h2 id="section-1">赞助方式一：<code class="highlighter-rouge">支付宝二维码付款</code></h2>
+<h1 id="synthesize">synthesize</h1>
 
-<hr />
+<p>编译器期间，让编译器自动生成getter/setter方法。
+当有自定义的存或取方法时，自定义会屏蔽自动生成该方法</p>
 
-<p>您可以选择手机支付宝扫一扫</p>
+<h1 id="dynamic">dynamic</h1>
 
-<p><img src="/styles/images/zhifubao.PNG" alt="支付宝二维码付款给Freud" width="310" /></p>
+<p>告诉编译器，不自动生成getter/setter方法，避免编译期间产生警告，然后由自己实现存取方法。</p>
 
-<p><br />
-<br /></p>
-
-<h2 id="section-2">赞助方式二：<code class="highlighter-rouge">微信扫一扫</code></h2>
-
-<hr />
-
-<p>您可以选择手机微信扫一扫</p>
-
-<p><img src="/styles/images/weixin.png" alt="微信二维码付款给Freud" /></p>
-
-<p><br />
-<br /></p>
-
-<hr />
-
+<p>或存取方法在运行时动态创建绑定：主要使用在CoreData的实现NSManagedObject子类时使用，<strong>CoreData会在运行时动态为所有Category中的属性生成实现代码。</strong></p>
 
             </article>
         </div>
