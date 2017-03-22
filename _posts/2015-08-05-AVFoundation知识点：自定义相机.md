@@ -251,18 +251,33 @@ property (nonatomic, strong) AVCaptureDevice *device;
 七、遇到的一些坑和解决办法
 ======
 
-- 前后置摄像头的切换
-　　前后值不能切换，各种尝试找了半天没找到有原因。后来发现我在设置图片尺寸的时候设置为1080P [self.session canSetSessionPreset: AVCaptureSessionPreset1920x1080] ，前置摄像头并不支持这么大的尺寸，所以就不能切换前置摄像头。我验证了下 前置摄像头最高支持720P,720P以内可自由切换。　　当然也可以在前后置摄像头切换的时候，根据前后摄像头来设置不同的尺寸，这里不在赘述。
+7.1 前后置摄像头的切换
+-------------
+　　
+前后值不能切换，各种尝试找了半天没找到有原因。后来发现我在设置图片尺寸的时候设置为1080P [self.session canSetSessionPreset: AVCaptureSessionPreset1920x1080] ，前置摄像头并不支持这么大的尺寸，所以就不能切换前置摄像头。我验证了下 前置摄像头最高支持720P,720P以内可自由切换。　　
 
-- 焦点位置
-　　CGPoint focusPoint = CGPointMake( point.y /size.height ,1-point.x/size.width );
+当然也可以在前后置摄像头切换的时候，根据前后摄像头来设置不同的尺寸，这里不在赘述。
+
+7.2 焦点位置
+---------
+
+CGPoint focusPoint = CGPointMake( point.y /size.height ,1-point.x/size.width );
 setExposurePointOfInterest：focusPoint 函数后面Point取值范围是取景框左上角（0，0）到取景框右下角（1，1）之间。官方是这么写的：
-　　The value of this property is a CGPoint that determines the receiver's focus point of interest, if it has one. A value of (0,0) indicates that the camera should focus on the top left corner of the image, while a value of (1,1) indicates that it should focus on the bottom right. The default value is (0.5,0.5).
-　　我也试了按这个来但位置就是不对，只能按上面的写法才可以。前面是点击位置的y/PreviewLayer的高度，后面是1-点击位置的x/PreviewLayer的宽度
 
-- 对焦和曝光
-　　我在设置对焦是 先设置了模式setFocusMode，后设置对焦位置，就会导致很奇怪的现象，对焦位置是你上次点击的位置。所以一定要先设置位置，再设置对焦模式。
-　　曝光同上
+　　
+The value of this property is a CGPoint that determines the receiver's focus point of interest, if it has one. A value of (0,0) indicates that the camera should focus on the top left corner of the image, while a value of (1,1) indicates that it should focus on the bottom right. The default value is (0.5,0.5).
+　　
+
+我也试了按这个来但位置就是不对，只能按上面的写法才可以。前面是点击位置的y/PreviewLayer的高度，后面是1-点击位置的x/PreviewLayer的宽度
+
+7.3 对焦和曝光
+-----------
+　　
+我在设置对焦是 先设置了模式setFocusMode，后设置对焦位置，就会导致很奇怪的现象，对焦位置是你上次点击的位置。所以一定要先设置位置，再设置对焦模式。
+
+
+曝光同上。
+
 
 八、写在最后
 ======

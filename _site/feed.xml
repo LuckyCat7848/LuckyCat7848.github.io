@@ -5,8 +5,8 @@
     <description>Everything is well !</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 21 Mar 2017 23:33:52 +0800</pubDate>
-    <lastBuildDate>Tue, 21 Mar 2017 23:33:52 +0800</lastBuildDate>
+    <pubDate>Wed, 22 Mar 2017 15:34:58 +0800</pubDate>
+    <lastBuildDate>Wed, 22 Mar 2017 15:34:58 +0800</lastBuildDate>
     <generator>Jekyll v3.3.0</generator>
     
       <item>
@@ -40,11 +40,16 @@
 &lt;p&gt;使用GPUImage处理图片比Core Image更简单，只需要将过滤器赋给图片对象即可，不用考虑context或者设备等其他问题。GPUImage提供了除高斯模糊外的其他几种不同效果的模糊，虽然Core Image也提供了几种模糊效果，但目前在iOS上能用的就只有高斯模糊，而GPUImage可用的有FastBlur, GaussianBlur, GaussianSelectiveBlur 和 BoxBlur。此外，作为开源框架的GPUImage还支持自定义的过滤器。&lt;/p&gt;
 
 &lt;h1 id=&quot;section-1&quot;&gt;二、内置滤镜&lt;/h1&gt;
-&lt;p&gt;共125个滤镜, 分为四类
-Color adjustments: 31 filters, 颜色处理相关
-Image processing: 40 filters, 图像处理相关.
-Blending modes: 29 filters, 混合模式相关.
-Visual effects: 25 filters, 视觉效果相关.&lt;/p&gt;
+
+&lt;p&gt;共125个滤镜, 分为四类：&lt;/p&gt;
+
+&lt;p&gt;Color adjustments: 31 filters, 颜色处理相关&lt;/p&gt;
+
+&lt;p&gt;Image processing: 40 filters, 图像处理相关.&lt;/p&gt;
+
+&lt;p&gt;Blending modes: 29 filters, 混合模式相关.&lt;/p&gt;
+
+&lt;p&gt;Visual effects: 25 filters, 视觉效果相关.&lt;/p&gt;
 
 &lt;h1 id=&quot;section-2&quot;&gt;三、分段录制&lt;/h1&gt;
 &lt;p&gt;参考&lt;a href=&quot;http://www.tuicool.com/articles/FVnumu&quot;&gt;AVFoundation和GPUImage初探&lt;/a&gt;。&lt;/p&gt;
@@ -604,20 +609,25 @@ _movieFile.audioEncodingTarget &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; _m
 
 &lt;h2 id=&quot;section&quot;&gt;1.1 识别二维码的方法比较&lt;/h2&gt;
 
-&lt;p&gt;在iOS中实现二维码和条形码扫描，我们所知的有，两大开源组件ZBar与ZXing. 这两大组件我们都有用过，这里总结下各自的缺点：
-- &lt;strong&gt;ZBar&lt;/strong&gt;
-ZBar在扫描的灵敏度上，和内存的使用上相对于ZXing上都是较优的，但是对于 “圆角二维码” 的扫描确很困难。&lt;/p&gt;
+&lt;p&gt;在iOS中实现二维码和条形码扫描，我们所知的有，两大开源组件ZBar与ZXing. 这两大组件我们都有用过，这里总结下各自的缺点：&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;ZXing&lt;/strong&gt;
-ZXing 是 Google Code上的一个开源的条形码扫描库，是用java设计的，连Google Glass 都在使用的。但有人为了追求更高效率以及可移植性，出现了c++ port. Github上的Objectivc-C port，其实就是用OC代码封装了一下而已，而且已经停止维护。这样效率非常低，在instrument下面可以看到CPU和内存疯涨，在内存小的机器上很容易崩溃。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;AVFoundation&lt;/strong&gt;
-AVFoundation无论在扫描灵敏度和性能上来说都是最优的，所以毫无疑问我们应该切换到AVFoundation，需要兼容iOS 7或之前的版本可以用zbar或zxing代替。&lt;/p&gt;
-  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;ZBar&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;p&gt;ZBar在扫描的灵敏度上，和内存的使用上相对于ZXing上都是较优的，但是对于 “圆角二维码” 的扫描确很困难。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;ZXing&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;ZXing 是 Google Code上的一个开源的条形码扫描库，是用java设计的，连Google Glass 都在使用的。但有人为了追求更高效率以及可移植性，出现了c++ port. Github上的Objectivc-C port，其实就是用OC代码封装了一下而已，而且已经停止维护。这样效率非常低，在instrument下面可以看到CPU和内存疯涨，在内存小的机器上很容易崩溃。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;AVFoundation&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;AVFoundation无论在扫描灵敏度和性能上来说都是最优的，所以毫无疑问我们应该切换到AVFoundation，需要兼容iOS 7或之前的版本可以用zbar或zxing代替。&lt;/p&gt;
 
 &lt;h2 id=&quot;avfoundation&quot;&gt;1.2 AVFoundation基本知识点&lt;/h2&gt;
 
@@ -853,7 +863,7 @@ UIViewAnimationOptionOverrideInheritedCurve    = 1 &amp;lt;&amp;lt;  6,//强制�
 
 &lt;p&gt;&lt;strong&gt;CAKeyframeAnimation&lt;/strong&gt;：除首尾外，还可添加多个中间关键点。&lt;/p&gt;
 
-&lt;p&gt;**CAAnimationGroup **：可组合多个动画，因为上面两种动画一次只能设置一个属性值。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;CAAnimationGroup&lt;/strong&gt;：可组合多个动画，因为上面两种动画一次只能设置一个属性值。&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;CATransition&lt;/strong&gt;：图层过渡动画，默认是淡入。比如修改一个 CALayer的背景色时，是从初始色慢慢淡入过渡到结束色。&lt;/p&gt;
 
@@ -1711,8 +1721,13 @@ tag: 教程
   &lt;li&gt;&lt;a href=&quot;#section-3&quot; id=&quot;markdown-toc-section-3&quot;&gt;四、保存照片到相册&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#section-4&quot; id=&quot;markdown-toc-section-4&quot;&gt;五、前后置摄像头的切换&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#section-5&quot; id=&quot;markdown-toc-section-5&quot;&gt;六、相机的其它参数设置&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#section-6&quot; id=&quot;markdown-toc-section-6&quot;&gt;七、遇到的一些坑和解决办法&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#section-7&quot; id=&quot;markdown-toc-section-7&quot;&gt;八、写在最后&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#section-6&quot; id=&quot;markdown-toc-section-6&quot;&gt;七、遇到的一些坑和解决办法&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-7&quot; id=&quot;markdown-toc-section-7&quot;&gt;7.1 前后置摄像头的切换&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-8&quot; id=&quot;markdown-toc-section-8&quot;&gt;7.2 焦点位置&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-9&quot; id=&quot;markdown-toc-section-9&quot;&gt;7.3 对焦和曝光&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#section-10&quot; id=&quot;markdown-toc-section-10&quot;&gt;八、写在最后&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;手动调用iPhone的相机硬件，分为以下步骤：&lt;/p&gt;
@@ -1945,26 +1960,30 @@ property &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;nonatomic, strong&lt;span
 
 &lt;h1 id=&quot;section-6&quot;&gt;七、遇到的一些坑和解决办法&lt;/h1&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;前后置摄像头的切换
-　　前后值不能切换，各种尝试找了半天没找到有原因。后来发现我在设置图片尺寸的时候设置为1080P [self.session canSetSessionPreset: AVCaptureSessionPreset1920x1080] ，前置摄像头并不支持这么大的尺寸，所以就不能切换前置摄像头。我验证了下 前置摄像头最高支持720P,720P以内可自由切换。　　当然也可以在前后置摄像头切换的时候，根据前后摄像头来设置不同的尺寸，这里不在赘述。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;焦点位置
-　　CGPoint focusPoint = CGPointMake( point.y /size.height ,1-point.x/size.width );
-setExposurePointOfInterest：focusPoint 函数后面Point取值范围是取景框左上角（0，0）到取景框右下角（1，1）之间。官方是这么写的：
-　　The value of this property is a CGPoint that determines the receiver’s focus point of interest, if it has one. A value of (0,0) indicates that the camera should focus on the top left corner of the image, while a value of (1,1) indicates that it should focus on the bottom right. The default value is (0.5,0.5).
-　　我也试了按这个来但位置就是不对，只能按上面的写法才可以。前面是点击位置的y/PreviewLayer的高度，后面是1-点击位置的x/PreviewLayer的宽度&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;对焦和曝光
-　　我在设置对焦是 先设置了模式setFocusMode，后设置对焦位置，就会导致很奇怪的现象，对焦位置是你上次点击的位置。所以一定要先设置位置，再设置对焦模式。
-　　曝光同上&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
+&lt;h2 id=&quot;section-7&quot;&gt;7.1 前后置摄像头的切换&lt;/h2&gt;
+&lt;p&gt;　　
+前后值不能切换，各种尝试找了半天没找到有原因。后来发现我在设置图片尺寸的时候设置为1080P [self.session canSetSessionPreset: AVCaptureSessionPreset1920x1080] ，前置摄像头并不支持这么大的尺寸，所以就不能切换前置摄像头。我验证了下 前置摄像头最高支持720P,720P以内可自由切换。　　&lt;/p&gt;
 
-&lt;h1 id=&quot;section-7&quot;&gt;八、写在最后&lt;/h1&gt;
+&lt;p&gt;当然也可以在前后置摄像头切换的时候，根据前后摄像头来设置不同的尺寸，这里不在赘述。&lt;/p&gt;
+
+&lt;h2 id=&quot;section-8&quot;&gt;7.2 焦点位置&lt;/h2&gt;
+
+&lt;p&gt;CGPoint focusPoint = CGPointMake( point.y /size.height ,1-point.x/size.width );
+setExposurePointOfInterest：focusPoint 函数后面Point取值范围是取景框左上角（0，0）到取景框右下角（1，1）之间。官方是这么写的：&lt;/p&gt;
+
+&lt;p&gt;　　
+The value of this property is a CGPoint that determines the receiver’s focus point of interest, if it has one. A value of (0,0) indicates that the camera should focus on the top left corner of the image, while a value of (1,1) indicates that it should focus on the bottom right. The default value is (0.5,0.5).
+　　&lt;/p&gt;
+
+&lt;p&gt;我也试了按这个来但位置就是不对，只能按上面的写法才可以。前面是点击位置的y/PreviewLayer的高度，后面是1-点击位置的x/PreviewLayer的宽度&lt;/p&gt;
+
+&lt;h2 id=&quot;section-9&quot;&gt;7.3 对焦和曝光&lt;/h2&gt;
+&lt;p&gt;　　
+我在设置对焦是 先设置了模式setFocusMode，后设置对焦位置，就会导致很奇怪的现象，对焦位置是你上次点击的位置。所以一定要先设置位置，再设置对焦模式。&lt;/p&gt;
+
+&lt;p&gt;曝光同上。&lt;/p&gt;
+
+&lt;h1 id=&quot;section-10&quot;&gt;八、写在最后&lt;/h1&gt;
 
 &lt;p&gt;　　附上demo:https://github.com/nanshanyi/photographDemo
 　　常用到的基本就这么多，写的并不完善，有什么不对的，欢迎大家批评指正，共同学习。&lt;/p&gt;
