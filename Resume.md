@@ -12,5 +12,6 @@ permalink: /Resume/
 
 ![]({{ '/source/Resume/Resume-01.png'}})
 ![]({{ '/source/Resume/Resume-02.png'}})
+![]({{ '/source/Resume/Resume-03.png'}})
 
 
