@@ -5,9 +5,452 @@
     <description>Everything is well !</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 03 May 2017 17:44:55 +0800</pubDate>
-    <lastBuildDate>Wed, 03 May 2017 17:44:55 +0800</lastBuildDate>
+    <pubDate>Wed, 03 May 2017 18:16:32 +0800</pubDate>
+    <lastBuildDate>Wed, 03 May 2017 18:16:32 +0800</lastBuildDate>
     <generator>Jekyll v3.3.0</generator>
+    
+      <item>
+        <title>iOS面试总结（持续更新中）</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;一、面试题&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;二、基础常识&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-2&quot; id=&quot;markdown-toc-section-2&quot;&gt;2.1 进程&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-3&quot; id=&quot;markdown-toc-section-3&quot;&gt;2.2 沙盒文件夹&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#section-4&quot; id=&quot;markdown-toc-section-4&quot;&gt;三、基础知识点&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#uiviewcontroller&quot; id=&quot;markdown-toc-uiviewcontroller&quot;&gt;3.1 UIViewController的生命周期&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#uiviewlayousubviewsdrawrect&quot; id=&quot;markdown-toc-uiviewlayousubviewsdrawrect&quot;&gt;3.2 UIView的LayouSubviews和drawRect&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#nscoding&quot; id=&quot;markdown-toc-nscoding&quot;&gt;3.3 NSCoding&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#core-data&quot; id=&quot;markdown-toc-core-data&quot;&gt;3.4 Core Data&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#ocprotocolcategory&quot; id=&quot;markdown-toc-ocprotocolcategory&quot;&gt;3.5  oc中protocol、category和继承的区别&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-5&quot; id=&quot;markdown-toc-section-5&quot;&gt;3.6 事件分发机制&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#block&quot; id=&quot;markdown-toc-block&quot;&gt;四、Block&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#reactivecocoa&quot; id=&quot;markdown-toc-reactivecocoa&quot;&gt;五、ReactiveCocoa&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#section-6&quot; id=&quot;markdown-toc-section-6&quot;&gt;六、多线程&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#runtime&quot; id=&quot;markdown-toc-runtime&quot;&gt;七、Runtime&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#runloop&quot; id=&quot;markdown-toc-runloop&quot;&gt;八、RunLoop&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#httptcpipsocket&quot; id=&quot;markdown-toc-httptcpipsocket&quot;&gt;九、HTTP、TCP/IP、Socket&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#section-7&quot; id=&quot;markdown-toc-section-7&quot;&gt;十、直播&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#section-8&quot; id=&quot;markdown-toc-section-8&quot;&gt;十一、动画&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#section-9&quot; id=&quot;markdown-toc-section-9&quot;&gt;十二、性能优化&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#section-10&quot; id=&quot;markdown-toc-section-10&quot;&gt;十三、工具&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#swift&quot; id=&quot;markdown-toc-swift&quot;&gt;十四、Swift&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#react-native&quot; id=&quot;markdown-toc-react-native&quot;&gt;十五、React Native&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;section&quot;&gt;一、面试题&lt;/h1&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;http://www.jianshu.com/p/ee15c1cf9c16&quot;&gt;让 BAT 的 Offer 不再难拿&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;http://www.jianshu.com/p/530939374c10&quot;&gt;[iOS]关于面试，做一次整理吧（包含BAT面试题目）&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;http://www.jianshu.com/p/5d2163640e26#&quot;&gt;iOS,面试必看，最全梳理&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://github.com/ChenYilong/iOSInterviewQuestions/blob/master/01%E3%80%8A%E6%8B%9B%E8%81%98%E4%B8%80%E4%B8%AA%E9%9D%A0%E8%B0%B1%E7%9A%84iOS%E3%80%8B%E9%9D%A2%E8%AF%95%E9%A2%98%E5%8F%82%E8%80%83%E7%AD%94%E6%A1%88/%E3%80%8A%E6%8B%9B%E8%81%98%E4%B8%80%E4%B8%AA%E9%9D%A0%E8%B0%B1%E7%9A%84iOS%E3%80%8B%E9%9D%A2%E8%AF%95%E9%A2%98%E5%8F%82%E8%80%83%E7%AD%94%E6%A1%88%EF%BC%88%E4%B8%8A%EF%BC%89.md&quot;&gt;《招聘一个靠谱的 iOS》—参考答案（上）&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://github.com/ChenYilong/iOSInterviewQuestions/blob/master/01%E3%80%8A%E6%8B%9B%E8%81%98%E4%B8%80%E4%B8%AA%E9%9D%A0%E8%B0%B1%E7%9A%84iOS%E3%80%8B%E9%9D%A2%E8%AF%95%E9%A2%98%E5%8F%82%E8%80%83%E7%AD%94%E6%A1%88/%E3%80%8A%E6%8B%9B%E8%81%98%E4%B8%80%E4%B8%AA%E9%9D%A0%E8%B0%B1%E7%9A%84iOS%E3%80%8B%E9%9D%A2%E8%AF%95%E9%A2%98%E5%8F%82%E8%80%83%E7%AD%94%E6%A1%88%EF%BC%88%E4%B8%8B%EF%BC%89.md#28-runloop%E5%92%8C%E7%BA%BF%E7%A8%8B%E6%9C%89%E4%BB%80%E4%B9%88%E5%85%B3%E7%B3%BB&quot;&gt;《招聘一个靠谱的 iOS》—参考答案（下）&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h1 id=&quot;section-1&quot;&gt;二、基础常识&lt;/h1&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;2.1 进程&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;http://www.ruanyifeng.com/blog/2013/04/processes_and_threads.html&quot;&gt;进程与线程的一个简单解释&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;http://www.ruanyifeng.com/blog/2016/06/dns.html&quot;&gt;DNS 原理入门&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;http://www.ruanyifeng.com/blog/2013/02/booting.html&quot;&gt;计算机是如何启动的？&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section-3&quot;&gt;2.2 沙盒文件夹&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://blog.csdn.net/melissa_htt/article/details/52248019&quot;&gt;沙盒文件夹的存取操作&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;应用沙盒结构分析沙盒文件的结构:(三个文件夹,Document,Library,tmp)。&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;应用程序包&lt;/code&gt;：包含了所有的资源文件和可执行文件&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Documents&lt;/code&gt;：保存应用运行时生成的需要持久化的数据，iTunes同步设备时会备份该目录。例如，游戏应用可将游戏存档保存在该目录[NSBundle mainBundle]&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;tmp&lt;/code&gt;：保存应用运行时所需的临时数据，使用完毕后再将相应的文件从该目录删除。应用没有运行时，系统也可能会清除该目录下的文件。iTunes同步设备时不会备份该目录&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Library/Caches&lt;/code&gt;：保存应用运行时生成的需要持久化的数据，iTunes同步设备时不会备份该目录。一般存储体积大、不需要备份的非重要数据&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Library/Preference&lt;/code&gt;：保存应用的所有偏好设置，iOS的Settings(设置)应用会在该目录中查找应用的设置信息。iTunes同步设备时会备份该目录(NSUserDefault plist生成的文件)&lt;/p&gt;
+
+&lt;p&gt;2.3 Base-64编码&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://segmentfault.com/a/1190000004533485?_ea=657625&quot;&gt;Base-64编码保证了二进制数据的安全&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Base-64编码可以将任意一组字节转换为较长的常见文本字符序列，从而可以合法地作为首部字段值。Base-64编码将用户输入或二进制数据，打包成一种安全格式，将其作为HTTP首部字段的值发送出去，而无须担心其中包含会破坏HTTP分析程序的冒号、换行符或二进制值。Base-64编码是作为MIME多媒体电子邮件标准的一部分开发的，这样MIME就可以在不同的合法电子邮件网关之间传输富文本和任意的二进制数据里。Base-64编码与将二进制数据文本化表示的uuencode和BinHex标准在本质上类似，但空间效率更高。&lt;/p&gt;
+
+&lt;h1 id=&quot;section-4&quot;&gt;三、基础知识点&lt;/h1&gt;
+
+&lt;h2 id=&quot;uiviewcontroller&quot;&gt;3.1 UIViewController的生命周期&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://bestswifter.com/uiviewlifetime/&quot;&gt;UIViewController的生命周期总结&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;http://blog.csdn.net/lhenjoy/article/details/51924648&quot;&gt;关于iOS 中UIViewController的生命周期以及相关视图（View）的探讨&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;http://blog.sina.com.cn/s/blog_8dabcad30101htan.html&quot;&gt;UIViewController的生命周期&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;ViewController出现后，push出BViewController，BViewController返回d奥ViewController。两个ViewController生命周期如下：
+&lt;img src=&quot;./A50144A9-8594-4911-9A60-456A4040D2A4.png&quot; alt=&quot;Alt text&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;uiviewlayousubviewsdrawrect&quot;&gt;3.2 UIView的LayouSubviews和drawRect&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://justsee.iteye.com/blog/1886463&quot;&gt;UIView的layoutSubviews和drawRect&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;nscoding&quot;&gt;3.3 NSCoding&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://nshipster.cn/nscoding/&quot;&gt;NSCoding / NSKeyed​Archiver&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;·Archiving non-NSCoding-compatible Classes：根据面向对象设计原则，对象应该可以被编码和解码成一种序列化的格式。但是如果一个类不是内置遵循NSCoding，你可以后续让这个类遵循NSCoding来达到目的。&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;NSCoding&lt;/code&gt;是一个简单的协议，有两个方法： &lt;code class=&quot;highlighter-rouge&quot;&gt;-initWithCoder: &lt;/code&gt;和 &lt;code class=&quot;highlighter-rouge&quot;&gt;-encodeWithCoder:&lt;/code&gt;。遵循NSCoding协议的类可以被序列化和反序列化，这样可以归档到磁盘上或分发到网络上。
+&lt;code class=&quot;highlighter-rouge&quot;&gt;NSKeyedArchiver&lt;/code&gt; 和&lt;code class=&quot;highlighter-rouge&quot;&gt;NSKeyedUnarchiver&lt;/code&gt;提供了很方便的API把对象读取/写入磁盘。&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;NSCoding&lt;/code&gt;跟其他存储方式略有不同，他可以存储对象
+对象存储的条件是： 对象需要遵守 NSCoding 协议
+存储的时候需要 调用 encodeWithCoder 方法
+读取的时候需要调用initWithCoder 方法&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;NSKeyedArchiver archiveRootObject:stu toFile:path]; // 存储 
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;NSKeyedUnarchiver unarchiveObjectWithFile:path]; // 读取
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;——NSCoder的具体子类使用NSCoder抽象类的接口在内存和其他格式之间转换对象和其他数据值，NSCoder可以提供基本的归档——把对象和数据存储在磁盘上，和分配——在不同进程和线程之间复制对象和其他数据。在Foundation框架中会提供NSCoder具体的子类，如：NSArchiver、NSUnarchiver、NSKeyedArchiver、NSKeyUnarchiver和NSPortCoder。NSCoder具体的子类统一称作：编码器类，他们的实例化对象则成为编码器对象，一个编码器对象如果只编码就称做：编码对象，一个编码器对象如果只解码就称作解码对象。
+——概述
+——NSCoder可以操作对象、标量、C数组、结构体和字符串，还有这些类型的指针。它不能操作的类型是那些跨平台执行的变量，例如：union、void *、函数指针和长链表的指针。
+——一个编码器对象储存object类型的信息连同object的数据，因此，一个从字节流解码的对象通常跟最初编码的对象是同一个类。然而，一个对象可以在编码的时候改变它的类；这是描述归档文件和序列化的编程指南。&lt;/p&gt;
+
+&lt;h2 id=&quot;core-data&quot;&gt;3.4 Core Data&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;http://blog.csdn.net/q199109106q/article/details/8563438/&quot;&gt;Core Data入门&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;http://blog.csdn.net/ruglcc/article/details/50557344&quot;&gt;iphone数据存储之－－ Core Data的使用（一）&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Core Data&lt;/code&gt;是数据持久化存储的最佳方式。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;数据最终的存储类型可以是：SQLite数据库，XML，二进制，内存里，或自定义数据类型。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;好处：能够合理管理内存，避免使用sql的麻烦，高效&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;构成：&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;（1）&lt;code class=&quot;highlighter-rouge&quot;&gt;NSManagedObjectContext&lt;/code&gt;（被管理的数据上下文）
+操作实际内容（操作持久层）。&lt;/p&gt;
+
+&lt;p&gt;作用：插入数据，查询数据，删除数据&lt;/p&gt;
+
+&lt;p&gt;（2）&lt;code class=&quot;highlighter-rouge&quot;&gt;NSManagedObjectModel&lt;/code&gt;（被管理的数据模型）
+数据库所有表格或数据结构，包含各实体的定义信息。&lt;/p&gt;
+
+&lt;p&gt;作用：添加实体的属性，建立属性之间的关系。&lt;/p&gt;
+
+&lt;p&gt;操作方法：视图编辑器，或代码。&lt;/p&gt;
+
+&lt;p&gt;（3）&lt;code class=&quot;highlighter-rouge&quot;&gt;NSPersistentStoreCoordinator&lt;/code&gt;（持久化存储助理）
+相当于数据库的连接器。&lt;/p&gt;
+
+&lt;p&gt;作用：设置数据存储的名字，位置，存储方式，和存储时机。&lt;/p&gt;
+
+&lt;p&gt;（4）&lt;code class=&quot;highlighter-rouge&quot;&gt;NSManagedObject&lt;/code&gt;（被管理的数据记录）
+相当于数据库中的表格记录。&lt;/p&gt;
+
+&lt;p&gt;（5）&lt;code class=&quot;highlighter-rouge&quot;&gt;NSFetchRequest（&lt;/code&gt;获取数据的请求）
+相当于查询语句。&lt;/p&gt;
+
+&lt;p&gt;（6）&lt;code class=&quot;highlighter-rouge&quot;&gt;NSEntityDescription&lt;/code&gt;（实体结构）
+相当于表格结构。&lt;/p&gt;
+
+&lt;p&gt;（7）后缀为&lt;code class=&quot;highlighter-rouge&quot;&gt;.xcdatamodeld&lt;/code&gt;的包
+里面是.xcdatamodel文件，用数据模型编辑器编辑，
+编译后为.momd或.mom文件。&lt;/p&gt;
+
+&lt;h2 id=&quot;ocprotocolcategory&quot;&gt;3.5  oc中protocol、category和继承的区别&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://bbs.itheima.com/thread-117162-1-1.html&quot;&gt;oc中protocol、category和继承的区别&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section-5&quot;&gt;3.6 事件分发机制&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.th7.cn/Program/IOS/201601/748606.shtml&quot;&gt;iOS开发系列——UIView专题之四：事件分发机制篇【整理，部分原创】&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;block&quot;&gt;四、Block&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://www.zybuluo.com/MicroCai/note/51116&quot;&gt;block没那么难（一）：block的实现&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://www.zybuluo.com/MicroCai/note/57603&quot;&gt;block没那么难（二）：block和变量的内存管理&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://www.zybuluo.com/MicroCai/note/58470&quot;&gt;block没那么难（三）：block和对象的内存管理&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;reactivecocoa&quot;&gt;五、ReactiveCocoa&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;http://www.jianshu.com/p/87ef6720a096#&quot;&gt;最快让你上手ReactiveCocoa之基础篇&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;http://www.jianshu.com/p/e10e5ca413b7&quot;&gt;最快让你上手ReactiveCocoa之进阶篇&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;响应式编程思想：不需要考虑调用顺序，只需要知道考虑结果，类似于蝴蝶效应，产生一个事件，会影响很多东西，这些事件像流一样的传播出去，然后影响结果，借用面向对象的一句话，万物皆是流。
+代表：KVO运用。&lt;/p&gt;
+
+&lt;p&gt;MVVM介绍:
+模型(M):保存视图数据。
+视图+控制器(V):展示内容 + 如何展示
+视图模型(VM):处理展示的业务逻辑，包括按钮的点击，数据的请求和解析等等。&lt;/p&gt;
+
+&lt;p&gt;ReactiveCocoa常见宏：
+1. RAC(TARGET, [KEYPATH, [NIL_VALUE]]):用于给某个对象的某个属性绑定。
+&lt;code class=&quot;highlighter-rouge&quot;&gt;bash  
+ // 只要文本框文字改变，就会修改label的文字
+RAC(self.labelView,text) = _textField.rac_textSignal; 
+&lt;/code&gt;
+2. RACObserve(self, name):监听某个对象的某个属性,返回的是信号。
+&lt;code class=&quot;highlighter-rouge&quot;&gt;bash  
+[RACObserve(self.view, center) subscribeNext:^(id x) {
+	NSLog(@&quot;%@&quot;,x);
+}];
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;section-6&quot;&gt;六、多线程&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://bestswifter.com/multithreadconclusion/&quot;&gt;《iOS多线程编程——GCD与NSOperation总结》&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;在使用GCD的过程中，如果向当前串行队列中同步派发一个任务，就会导致死锁。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.jianshu.com/p/c74e0eb574d6&quot;&gt;GCD(六)dispatch_semaphore_t signal信号量学习总结.&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;看书-PDF：《多线程编程指南》《iOS并发编程指南》&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.jianshu.com/p/0c050af6c5ee&quot;&gt;选择 GCD 还是 NSTimer ？&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;runtime&quot;&gt;七、Runtime&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.jianshu.com/p/e071206103a4&quot;&gt;让你快速上手Runtime&lt;/a&gt;
+简介：
+RunTime简称运行时。OC就是运行时机制，也就是在运行时候的一些机制，其中最主要的是消息机制。
+对于C语言，函数的调用在编译的时候会决定调用哪个函数。
+对于OC的函数，属于动态调用过程，在编译的时候并不能决定真正调用哪个函数，只有在真正运行的时候才会根据函数的名称找到对应的函数来调用。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;作用：发送消息；交换方法；动态添加方法；给分类添加属性；字典转模型。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;http://southpeak.github.io/categories/objectivec/&quot;&gt;Objective-C Runtime &lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;http://southpeak.github.io/2014/10/25/objective-c-runtime-1/&quot;&gt;Objective-C Runtime 运行时之一：类与对象&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;http://southpeak.github.io/2014/10/30/objective-c-runtime-2/&quot;&gt;Objective-C Runtime 运行时之二：成员变量与属性&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;http://southpeak.github.io/2014/11/03/objective-c-runtime-3/&quot;&gt;Objective-C Runtime 运行时之三：方法与消息&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;http://southpeak.github.io/2014/11/06/objective-c-runtime-4/&quot;&gt;Objective-C Runtime 运行时之四：Method Swizzling&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;http://southpeak.github.io/2014/11/08/objective-c-runtime-5/&quot;&gt;Objective-C Runtime 运行时之五：协议与分类&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;http://southpeak.github.io/2014/11/09/objective-c-runtime-6/&quot;&gt;Objective-C Runtime 运行时之六：拾遗&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.cocoachina.com/ios/20160523/16386.html&quot;&gt;Runtime全方位装逼指南&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;runloop&quot;&gt;八、RunLoop&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://blog.ibireme.com/2015/05/18/runloop/#more-41710&quot;&gt;深入理解RunLoop&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;XNU 内核的内环被称作 Mach，其作为一个微内核，仅提供了诸如处理器调度、IPC (进程间通信)等非常少量的基础服务。
+RunLoop 的核心是基于 mach port 的，其进入休眠时调用的函数是 mach_msg()。
+RunLoop 的核心就是一个 mach_msg() (见上面代码的第7步)，RunLoop 调用这个函数去接收消息，如果没有别人发送 port 消息过来，内核会将线程置于等待状态。&lt;/p&gt;
+
+&lt;p&gt;苹果用 RunLoop 实现的功能：
+AutoreleasePool；事件响应；手势识别；界面更新；定时器；PerformSelecter；关于GCD；关于网络请求。&lt;/p&gt;
+
+&lt;p&gt;RunLoop 的实际应用举例：AFNetworking；AsyncDisplayKit。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.cnblogs.com/ioshe/p/5489112.html&quot;&gt;iOS开发-Runloop详解&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;httptcpipsocket&quot;&gt;九、HTTP、TCP/IP、Socket&lt;/h1&gt;
+
+&lt;p&gt;我的博客：&lt;a href=&quot;http://luckycathome.com/2017/05/03/TCP-IP-Http-Socket%E4%BB%A5%E5%8F%8AUDP/&quot;&gt;TCP/IP、Http、Socket以及UDP&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;section-7&quot;&gt;十、直播&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;http://www.jianshu.com/p/bd42bacbe4cc&quot;&gt;【如何快速的开发一个完整的iOS直播app】&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;http://www.jianshu.com/p/c71bfda055fa&quot;&gt;【如何快速的开发一个完整的iOS直播app】(采集篇)&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;http://www.jianshu.com/p/4646894245ba&quot;&gt;【如何快速的开发一个完整的iOS直播app】(美颜篇)&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;http://www.jianshu.com/p/6e7fb61c25e1&quot;&gt;【如何快速的开发一个完整的iOS直播app】(搭建Socket即时通讯服务器)&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;http://www.jianshu.com/p/53059be61546&quot;&gt;【如何快速的开发一个完整的iOS直播app】(推流篇)&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;http://www.jianshu.com/p/7b2f1df74420&quot;&gt;【如何快速的开发一个完整的iOS直播app】(播放篇)&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;http://www.jianshu.com/p/d11b1685ce86&quot;&gt;【如何快速的开发一个完整的iOS直播app】(编解码原理)&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;http://www.jianshu.com/p/63cf6ffef58b&quot;&gt;直播预览层添加滤镜效果(CIFilter使用场景)&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;section-8&quot;&gt;十一、动画&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://zsisme.gitbooks.io/ios-/content/index.html&quot;&gt;ios核心动画高级技巧&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;http://www.cnblogs.com/kenshincui/p/3972100.html&quot;&gt;iOS开发系列–让你的应用“动”起来&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;./34265F35-1B4F-467D-9D5D-413ACE7B4459.png&quot; alt=&quot;Alt text&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;CAAnimation&lt;/code&gt;&lt;/strong&gt;：核心动画的基础类，不能直接使用，负责动画运行时间、速度的控制，本身实现了&lt;code class=&quot;highlighter-rouge&quot;&gt;CAMediaTiming&lt;/code&gt;协议。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;CAPropertyAnimation&lt;/code&gt;&lt;/strong&gt;：属性动画的基类（通过属性进行动画设置，注意是可动画属性），不能直接使用。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;CAAnimationGroup&lt;/code&gt;&lt;/strong&gt;：动画组，动画组是一种组合模式设计，可以通过动画组来进行所有动画行为的统一控制，组中所有动画效果可以并发执行。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;CATransition&lt;/code&gt;&lt;/strong&gt;：转场动画，主要通过滤镜进行动画效果设置。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;CABasicAnimation&lt;/code&gt;&lt;/strong&gt;：基础动画，通过属性修改进行动画参数控制，只有初始状态和结束状态。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;CAKeyframeAnimation&lt;/code&gt;&lt;/strong&gt;：关键帧动画，同样是通过属性进行动画参数控制，但是同基础动画不同的是它可以有多个状态控制。&lt;/p&gt;
+
+&lt;p&gt;基础动画、关键帧动画都属于属性动画，就是通过修改属性值产生动画效果，开发人员只需要设置初始值和结束值，中间的过程动画（又叫“补间动画”）由系统自动计算产生。和基础动画不同的是关键帧动画可以设置多个属性值，每两个属性中间的补间动画由系统自动完成，因此从这个角度而言基础动画又可以看成是有两个关键帧的关键帧动画。&lt;/p&gt;
+
+&lt;h1 id=&quot;section-9&quot;&gt;十二、性能优化&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://wereadteam.github.io/2016/05/03/WeRead-Performance/&quot;&gt;微信读书 iOS 性能优化总结&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;section-10&quot;&gt;十三、工具&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.runoob.com/git/git-tutorial.html&quot;&gt;Git 教程&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;swift&quot;&gt;十四、Swift&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://wiki.jikexueyuan.com/project/swift/&quot;&gt;The Swift Programming Language 中文版&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;（我是下载在本地用iBooks看，方便标注）&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.infoq.com/cn/search.action?queryString=swift&amp;amp;page=1&amp;amp;searchOrder=&amp;amp;sst=QXnAHsRiZocwzGlo&quot;&gt;InfoQ Swift&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;react-native&quot;&gt;十五、React Native&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://reactnative.cn/docs/0.44/getting-started.html&quot;&gt;React Native学习&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Wed, 03 May 2017 18:15:12 +0800</pubDate>
+        <link>http://localhost:4000/2017/05/03/iOS%E9%9D%A2%E8%AF%95%E6%80%BB%E7%BB%93-%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%E4%B8%AD/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/05/03/iOS%E9%9D%A2%E8%AF%95%E6%80%BB%E7%BB%93-%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%E4%B8%AD/</guid>
+        
+        <category>Object-C</category>
+        
+        
+        <category>技术</category>
+        
+      </item>
     
       <item>
         <title>TCP/IP、Http、Socket以及UDP</title>
@@ -55,10 +498,13 @@
 
 &lt;p&gt;&lt;strong&gt;网络由下往上分为：物理层、数据链路层、网络层、传输层、会话层、表示层和应用层。&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;　　&lt;code class=&quot;highlighter-rouge&quot;&gt;IP协议&lt;/code&gt;：网络层；
-　　&lt;code class=&quot;highlighter-rouge&quot;&gt;TCP协议&lt;/code&gt;：传输层；
-　　&lt;code class=&quot;highlighter-rouge&quot;&gt;HTTP协议&lt;/code&gt;：应用层；
-　　&lt;code class=&quot;highlighter-rouge&quot;&gt;Socket&lt;/code&gt;：对TCP/IP协议的封装和应用(程序员层面上)。&lt;/p&gt;
+&lt;p&gt;　　&lt;code class=&quot;highlighter-rouge&quot;&gt;IP协议&lt;/code&gt;：网络层；&lt;/p&gt;
+
+&lt;p&gt;　　&lt;code class=&quot;highlighter-rouge&quot;&gt;TCP协议&lt;/code&gt;：传输层；&lt;/p&gt;
+
+&lt;p&gt;　　&lt;code class=&quot;highlighter-rouge&quot;&gt;HTTP协议&lt;/code&gt;：应用层；&lt;/p&gt;
+
+&lt;p&gt;　　&lt;code class=&quot;highlighter-rouge&quot;&gt;Socket&lt;/code&gt;：对TCP/IP协议的封装和应用(程序员层面上)。&lt;/p&gt;
 
 &lt;p&gt;四者从本质上来说没有可比性。也可以说，TPC/IP协议是传输层协议，主要解决数据如何在网络中传输；而HTTP是应用层协议，主要解决如何包装数据。&lt;/p&gt;
 
@@ -156,11 +602,11 @@
 
 &lt;p&gt;经典的三次握手示意图：&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/source/TCP/IP、Http、Socket以及UDP/01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/source/TCP、IP、Http、Socket以及UDP/01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;经典的四次握手关闭图：&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/source/TCP/IP、Http、Socket以及UDP/02.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/source/TCP、IP、Http、Socket以及UDP/02.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;ol&gt;
   &lt;li&gt;TCP短连接&lt;/li&gt;
@@ -200,45 +646,72 @@
 
 &lt;p&gt;Socket可以支持不同的传输层协议（TCP或UDP），当使用TCP协议进行连接时，该Socket连接就是一个TCP连接,UDP连接同理。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/source/TCP/IP、Http、Socket以及UDP/03.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/source/TCP、IP、Http、Socket以及UDP/03.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;socket使用的库函数&lt;/p&gt;
 
-&lt;p&gt;1.创建套接字
-&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
-Socket(af,type,protocol)//建立地址和套接字的联系
-bind(sockid, local addr, addrlen)//服务器端侦听客户端的请求
-listen( Sockid ,quenlen)//建立服务器/客户端的连接 (面向连接TCP）
-&lt;/code&gt;&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;创建套接字&lt;/li&gt;
+&lt;/ol&gt;
 
-&lt;p&gt;2.客户端请求连接
-&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
-Connect(sockid, destaddr, addrlen)//服务器端等待从编号为Sockid的Socket上接收客户连接请求
-newsockid=accept(Sockid，Clientaddr, paddrlen)//发送/接收数据
-&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+Socket&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;af,type,protocol&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;//建立地址和套接字的联系
+&lt;span class=&quot;nb&quot;&gt;bind&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;sockid, &lt;span class=&quot;nb&quot;&gt;local &lt;/span&gt;addr, addrlen&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;//服务器端侦听客户端的请求
+listen&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; Sockid ,quenlen&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;//建立服务器/客户端的连接 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;面向连接TCP）
 
-&lt;p&gt;3.面向连接：
-&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
-send(sockid, buff, bufflen)
-recv()
-&lt;/code&gt;&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
-&lt;p&gt;4.面向无连接：
-&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
-sendto(sockid,buff,…,addrlen)
-recvfrom()
-&lt;/code&gt;&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;客户端请求连接&lt;/li&gt;
+&lt;/ol&gt;
 
-&lt;p&gt;5.释放套接字
-&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
-close(socked)
-&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+Connect&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;sockid, destaddr, addrlen&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;//服务器端等待从编号为Sockid的Socket上接收客户连接请求
+&lt;span class=&quot;nv&quot;&gt;newsockid&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;accept&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Sockid，Clientaddr, paddrlen&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;//发送/接收数据
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;面向连接：&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+send&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;sockid, buff, bufflen&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+recv&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;面向无连接：&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+sendto&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;sockid,buff,…,addrlen&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+recvfrom&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;释放套接字&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+close&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;socked&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;在iOS中以NSStream(流)来发送和接收数据,可以设置流的代理，对流状态的变化做出相应的动作(连接建立，接收到数据，连接关闭）。&lt;/p&gt;
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;NSStream&lt;/code&gt;：数据流的父类，用于定义抽象特性，例如：打开、关闭代理，NSStream继承自CFStream(CoreFoundation)
-&lt;code class=&quot;highlighter-rouge&quot;&gt;NSInputStream&lt;/code&gt;：NSStream的子类，用于读取输入
-&lt;code class=&quot;highlighter-rouge&quot;&gt;NSOutputStream&lt;/code&gt;：NSSTream的子类，用于写输出。&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;NSStream&lt;/code&gt;：数据流的父类，用于定义抽象特性，例如：打开、关闭代理，NSStream继承自CFStream(CoreFoundation)。&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;NSInputStream&lt;/code&gt;：NSStream的子类，用于读取输入。&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;NSOutputStream&lt;/code&gt;：NSSTream的子类，用于写输出。&lt;/p&gt;
 </description>
         <pubDate>Wed, 03 May 2017 17:42:12 +0800</pubDate>
         <link>http://localhost:4000/2017/05/03/TCP-IP-Http-Socket%E4%BB%A5%E5%8F%8AUDP/</link>
@@ -2149,85 +2622,6 @@ tag: 教程
         
         
         <category>实用技能</category>
-        
-      </item>
-    
-      <item>
-        <title>将Excel表格转化为plist文件（中国省份和城市信息）</title>
-        <description>
-&lt;p&gt;将图1的Excel表格转换成图2的.plist文件，两张图如下：&lt;/p&gt;
-
-&lt;p&gt;图1：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/source/将Excel表格转化为plist文件（中国省份和城市信息）/1479312936089.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;图2：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/source/将Excel表格转化为plist文件（中国省份和城市信息）/1479312949609.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;strong&gt;1.&lt;/strong&gt; 先把Excel表格另存为.csv格式：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/source/将Excel表格转化为plist文件（中国省份和城市信息）/1479312967213.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;2.&lt;/strong&gt; 将.csv文件内容复制粘贴到新的.txt文件中;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;3.&lt;/strong&gt; 将.txt文件拖拽到工程中，用代码读取.txt文件内容写入到.plist文件。&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;NSString&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;path&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NSBundle&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mainBundle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pathForResource&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;ProvincesAndCities&quot;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ofType&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;txt&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;NSString&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;contents&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NSString&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;alloc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;initWithContentsOfFile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;path&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;encoding&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NSUTF8StringEncoding&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;获取到&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;excel&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;中&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;行的数组&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;NSArray&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;contentsArray&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;contents&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;componentsSeparatedByCharactersInSet&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NSCharacterSet&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;newlineCharacterSet&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]];&lt;/span&gt;
-
-    &lt;span class=&quot;n&quot;&gt;NSString&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;savePath&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NSHomeDirectory&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stringByAppendingPathComponent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Documents/ProvincesAndCities.plist&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-    &lt;span class=&quot;n&quot;&gt;NSMutableArray&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;allArr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NSMutableArray&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;contentsArray&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;NSString&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lineStr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;contentsArray&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;将一行数据转为数组格式，对其遍历，获取单个格里的内容&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;NSArray&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lineArr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lineStr&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;componentsSeparatedByCharactersInSet&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NSCharacterSet&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;controlCharacterSet&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]];&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lineArr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;NSString&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;oneStr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lineArr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NSString&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;strIsNilOrEmpty&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;oneStr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-                &lt;span class=&quot;n&quot;&gt;NSMutableDictionary&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rowDic&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-                &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-                    &lt;span class=&quot;o&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;第一行是省份名称&lt;/span&gt;
-                    &lt;span class=&quot;n&quot;&gt;rowDic&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NSMutableDictionary&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;alloc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;init&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-                    &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rowDic&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;setObject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lineArr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;forKey&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;province&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-                    &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;allArr&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;addObject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rowDic&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-                &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-                &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-                    &lt;span class=&quot;o&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;城市按每列存在数组中，再保存到每列信息里&lt;/span&gt;
-                    &lt;span class=&quot;n&quot;&gt;rowDic&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NSMutableDictionary&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dictionaryWithDictionary&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;allArr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]];&lt;/span&gt;
-                    &lt;span class=&quot;n&quot;&gt;NSMutableArray&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;citiesArr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NSMutableArray&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;arrayWithArray&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rowDic&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;cities&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]];&lt;/span&gt;
-                    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;citiesArr&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;containsObject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;oneStr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-                        &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;citiesArr&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;addObject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;oneStr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-                    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-                    &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rowDic&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;setObject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;citiesArr&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;forKey&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;cities&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-                    &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;allArr&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;replaceObjectAtIndex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;withObject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rowDic&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-                &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-            &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;写入到&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;plist&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;文件&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;allArr&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;writeToFile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;savePath&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;atomically&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;YES&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;4.&lt;/strong&gt; 最后，就可以直接在工程里删除.txt，使用.plist文件了。&lt;/p&gt;
-
-</description>
-        <pubDate>Mon, 22 Feb 2016 13:45:23 +0800</pubDate>
-        <link>http://localhost:4000/2016/02/22/%E5%B0%86Excel%E8%A1%A8%E6%A0%BC%E8%BD%AC%E5%8C%96%E4%B8%BAplist%E6%96%87%E4%BB%B6-%E4%B8%AD%E5%9B%BD%E7%9C%81%E4%BB%BD%E5%92%8C%E5%9F%8E%E5%B8%82%E4%BF%A1%E6%81%AF/</link>
-        <guid isPermaLink="true">http://localhost:4000/2016/02/22/%E5%B0%86Excel%E8%A1%A8%E6%A0%BC%E8%BD%AC%E5%8C%96%E4%B8%BAplist%E6%96%87%E4%BB%B6-%E4%B8%AD%E5%9B%BD%E7%9C%81%E4%BB%BD%E5%92%8C%E5%9F%8E%E5%B8%82%E4%BF%A1%E6%81%AF/</guid>
-        
-        <category>Object-C</category>
-        
-        
-        <category>技术</category>
         
       </item>
     

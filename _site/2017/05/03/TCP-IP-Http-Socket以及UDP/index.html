@@ -143,6 +143,19 @@
       
             
           
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
               <li><a href="#month_2017_March">March</a></li>
           
         
@@ -440,10 +453,13 @@
 
 <p><strong>网络由下往上分为：物理层、数据链路层、网络层、传输层、会话层、表示层和应用层。</strong></p>
 
-<p>　　<code class="highlighter-rouge">IP协议</code>：网络层；
-　　<code class="highlighter-rouge">TCP协议</code>：传输层；
-　　<code class="highlighter-rouge">HTTP协议</code>：应用层；
-　　<code class="highlighter-rouge">Socket</code>：对TCP/IP协议的封装和应用(程序员层面上)。</p>
+<p>　　<code class="highlighter-rouge">IP协议</code>：网络层；</p>
+
+<p>　　<code class="highlighter-rouge">TCP协议</code>：传输层；</p>
+
+<p>　　<code class="highlighter-rouge">HTTP协议</code>：应用层；</p>
+
+<p>　　<code class="highlighter-rouge">Socket</code>：对TCP/IP协议的封装和应用(程序员层面上)。</p>
 
 <p>四者从本质上来说没有可比性。也可以说，TPC/IP协议是传输层协议，主要解决数据如何在网络中传输；而HTTP是应用层协议，主要解决如何包装数据。</p>
 
@@ -541,11 +557,11 @@
 
 <p>经典的三次握手示意图：</p>
 
-<p><img src="/source/TCP/IP、Http、Socket以及UDP/01.png" alt="" /></p>
+<p><img src="/source/TCP、IP、Http、Socket以及UDP/01.png" alt="" /></p>
 
 <p>经典的四次握手关闭图：</p>
 
-<p><img src="/source/TCP/IP、Http、Socket以及UDP/02.png" alt="" /></p>
+<p><img src="/source/TCP、IP、Http、Socket以及UDP/02.png" alt="" /></p>
 
 <ol>
   <li>TCP短连接</li>
@@ -585,45 +601,72 @@
 
 <p>Socket可以支持不同的传输层协议（TCP或UDP），当使用TCP协议进行连接时，该Socket连接就是一个TCP连接,UDP连接同理。</p>
 
-<p><img src="/source/TCP/IP、Http、Socket以及UDP/03.png" alt="" /></p>
+<p><img src="/source/TCP、IP、Http、Socket以及UDP/03.png" alt="" /></p>
 
 <p>socket使用的库函数</p>
 
-<p>1.创建套接字
-<code class="highlighter-rouge">bash
-Socket(af,type,protocol)//建立地址和套接字的联系
-bind(sockid, local addr, addrlen)//服务器端侦听客户端的请求
-listen( Sockid ,quenlen)//建立服务器/客户端的连接 (面向连接TCP）
-</code></p>
+<ol>
+  <li>创建套接字</li>
+</ol>
 
-<p>2.客户端请求连接
-<code class="highlighter-rouge">bash
-Connect(sockid, destaddr, addrlen)//服务器端等待从编号为Sockid的Socket上接收客户连接请求
-newsockid=accept(Sockid，Clientaddr, paddrlen)//发送/接收数据
-</code></p>
+<div class="highlighter-rouge"><pre class="highlight"><code>
+Socket<span class="o">(</span>af,type,protocol<span class="o">)</span>//建立地址和套接字的联系
+<span class="nb">bind</span><span class="o">(</span>sockid, <span class="nb">local </span>addr, addrlen<span class="o">)</span>//服务器端侦听客户端的请求
+listen<span class="o">(</span> Sockid ,quenlen<span class="o">)</span>//建立服务器/客户端的连接 <span class="o">(</span>面向连接TCP）
 
-<p>3.面向连接：
-<code class="highlighter-rouge">bash
-send(sockid, buff, bufflen)
-recv()
-</code></p>
+</code></pre>
+</div>
 
-<p>4.面向无连接：
-<code class="highlighter-rouge">bash
-sendto(sockid,buff,…,addrlen)
-recvfrom()
-</code></p>
+<ol>
+  <li>客户端请求连接</li>
+</ol>
 
-<p>5.释放套接字
-<code class="highlighter-rouge">bash
-close(socked)
-</code></p>
+<div class="highlighter-rouge"><pre class="highlight"><code>
+Connect<span class="o">(</span>sockid, destaddr, addrlen<span class="o">)</span>//服务器端等待从编号为Sockid的Socket上接收客户连接请求
+<span class="nv">newsockid</span><span class="o">=</span>accept<span class="o">(</span>Sockid，Clientaddr, paddrlen<span class="o">)</span>//发送/接收数据
+
+</code></pre>
+</div>
+
+<ol>
+  <li>面向连接：</li>
+</ol>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+send<span class="o">(</span>sockid, buff, bufflen<span class="o">)</span>
+recv<span class="o">()</span>
+
+</code></pre>
+</div>
+
+<ol>
+  <li>面向无连接：</li>
+</ol>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+sendto<span class="o">(</span>sockid,buff,…,addrlen<span class="o">)</span>
+recvfrom<span class="o">()</span>
+
+</code></pre>
+</div>
+
+<ol>
+  <li>释放套接字</li>
+</ol>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+close<span class="o">(</span>socked<span class="o">)</span>
+
+</code></pre>
+</div>
 
 <p>在iOS中以NSStream(流)来发送和接收数据,可以设置流的代理，对流状态的变化做出相应的动作(连接建立，接收到数据，连接关闭）。</p>
 
-<p><code class="highlighter-rouge">NSStream</code>：数据流的父类，用于定义抽象特性，例如：打开、关闭代理，NSStream继承自CFStream(CoreFoundation)
-<code class="highlighter-rouge">NSInputStream</code>：NSStream的子类，用于读取输入
-<code class="highlighter-rouge">NSOutputStream</code>：NSSTream的子类，用于写输出。</p>
+<p><code class="highlighter-rouge">NSStream</code>：数据流的父类，用于定义抽象特性，例如：打开、关闭代理，NSStream继承自CFStream(CoreFoundation)。</p>
+
+<p><code class="highlighter-rouge">NSInputStream</code>：NSStream的子类，用于读取输入。</p>
+
+<p><code class="highlighter-rouge">NSOutputStream</code>：NSSTream的子类，用于写输出。</p>
 
             </article>
         </div>

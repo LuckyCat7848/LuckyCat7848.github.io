@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>iOS面试总结（持续更新中）</title>
+
+	<link rel="shortcut icon" href="/styles/images/favicon.jpg">
+	<link rel="icon" href="/styles/images/favicon.jpg">
+
+	<link rel="stylesheet" href="/styles/css/index.css">
+	<link rel="stylesheet" href="/styles/css/fontawesome/css/font-awesome.min.css">
+	<link rel="canonical" href="/2017/05/03/iOS%E9%9D%A2%E8%AF%95%E6%80%BB%E7%BB%93-%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%E4%B8%AD/">
+	<link rel="alternate" type="application/rss+xml" title="LuckyCat's Blog" href="/feed.xml">
+	
+	<meta name="description" content="康志华;个人博客;学而不思则罔;思而不学则殆;生命不止;折腾不休">
+
+	<script src="/styles/js/jquery.min.js"></script>
+	<!--[if lt IE 9]>
+    	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  	<![endif]-->
+  	<script>
+		var _hmt = _hmt || [];
+		(function() {
+		  var hm = document.createElement("script");
+		  hm.src = "//hm.baidu.com/hm.js?94be4b0f9fc5d94cc0d0415ea6761ae9";
+		  var s = document.getElementsByTagName("script")[0]; 
+		  s.parentNode.insertBefore(hm, s);
+		})();
+	</script>
+  	<style type="text/css">
+	  	.docs-content{
+	  		margin-bottom: 10px;
+	  	}
+  	</style>
+</head>
+
+  <body class="index">
+
+    <header class="navbar navbar-inverse navbar-fixed-top docs-nav" role="banner">
+  <div class="container">
+    <div class="navbar-header">
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="/" class="navbar-brand">
+        <img src="/styles/images/logo.jpg">
+      </a>
+    </div>
+    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+      <ul class="nav navbar-nav">    
+        <li>
+          <a href="/">Home</a>
+        </li>
+        <li>
+          <a href="/categories/">大类分解</a>
+        </li>
+        <li>
+          <a href="/tag">小类内聚</a>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <!-- <li>
+          <a href="/donate/"><strong>打赏</strong></a>
+        </li> -->
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">关于<b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a rel="nofollow" target="_blank" href="https://github.com/LuckyCat7848/">Github</a></li>
+            <li><a rel="nofollow" target="_blank" href="http://www.luckycathome.com/Resume/">关于作者</a></li>
+            <li><a rel="nofollow" href="/books">我的书单</a></li>
+            <li><a rel="nofollow" href="/reference">推荐博客</a></li>
+            <!-- <li><a href="/feed.xml">RSS订阅</a></li> -->
+            <li class="divider"></li>
+            <li><a rel="nofollow" target="_blank" href="https://github.com/LuckyCat7848/LuckyCat7848.github.io">本项目</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+    <div class="docs-header" id="content">
+  <div class="container">
+  	
+  		<!--
+		    <h1>iOS面试总结（持续更新中）</h1>
+		    <p>Post on May 03, 2017 by <a href="/about">LuckyCat</a></p>
+		-->
+		    <h1>Everything is well !</h1>
+    
+  </div>
+</div>
+    
+      
+<div class="banner">
+  <div class="container">
+  	
+    	<a href="/categories/#技术-ref">技术</a>	/
+    	<a href="/tag/#Object-C-ref">Object-C</a>
+    
+  </div>
+</div>
+
+    
+
+    <div class="container docs-container">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="sidebar hidden-print" role="complementary">
+        <div id="navigation">
+  <h1>目录</h1>
+  <ul class="nav sidenav">
+<!--
+    
+      
+      
+      
+      
+
+      
+        <li><a href="#year_2017">2017</a>
+          <ul class="nav">
+            <li><a href="#month_2017_May">May</a></li>
+      
+
+      
+            
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+              <li><a href="#month_2017_March">March</a></li>
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+              <li><a href="#month_2017_January">January</a></li>
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+        
+            </ul>
+          </li>
+          <li><a href="#year_2016">2016</a>
+            <ul class="nav">
+              <li><a href="#month_2016_November">November</a></li>
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+              <li><a href="#month_2016_September">September</a></li>
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+              <li><a href="#month_2016_February">February</a></li>
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+              <li><a href="#month_2016_January">January</a></li>
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+        
+            </ul>
+          </li>
+          <li><a href="#year_2015">2015</a>
+            <ul class="nav">
+              <li><a href="#month_2015_August">August</a></li>
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+              <li><a href="#month_2015_July">July</a></li>
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+              <li><a href="#month_2015_June">June</a></li>
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+              <li><a href="#month_2015_February">February</a></li>
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            
+          
+              <li><a href="#month_2015_January">January</a></li>
+          
+        
+      
+    
+      
+      
+      
+      
+
+      
+
+      
+            </ul>
+          </li>
+      
+    
+-->
+  </ul>
+</div> 
+      </div>
+    </div>
+    <div class="col-md-9" role="main">
+      <div class="panel docs-content">
+        <div class="wrapper">
+            <header class="post-header">
+              <h1 class="post-title">iOS面试总结（持续更新中）</h1>
+              <!--
+                <p class="post-meta">May 3, 2017</p>
+              -->
+              <div class="meta">Posted on <span class="postdate">May 03, 2017</span> By <a target="_blank" href="http://localhost:4000">LuckyCat</a></div>
+              <br />
+            </header>
+            <article class="post-content">
+              <ul id="markdown-toc">
+  <li><a href="#section" id="markdown-toc-section">一、面试题</a></li>
+  <li><a href="#section-1" id="markdown-toc-section-1">二、基础常识</a>    <ul>
+      <li><a href="#section-2" id="markdown-toc-section-2">2.1 进程</a></li>
+      <li><a href="#section-3" id="markdown-toc-section-3">2.2 沙盒文件夹</a></li>
+    </ul>
+  </li>
+  <li><a href="#section-4" id="markdown-toc-section-4">三、基础知识点</a>    <ul>
+      <li><a href="#uiviewcontroller" id="markdown-toc-uiviewcontroller">3.1 UIViewController的生命周期</a></li>
+      <li><a href="#uiviewlayousubviewsdrawrect" id="markdown-toc-uiviewlayousubviewsdrawrect">3.2 UIView的LayouSubviews和drawRect</a></li>
+      <li><a href="#nscoding" id="markdown-toc-nscoding">3.3 NSCoding</a></li>
+      <li><a href="#core-data" id="markdown-toc-core-data">3.4 Core Data</a></li>
+      <li><a href="#ocprotocolcategory" id="markdown-toc-ocprotocolcategory">3.5  oc中protocol、category和继承的区别</a></li>
+      <li><a href="#section-5" id="markdown-toc-section-5">3.6 事件分发机制</a></li>
+    </ul>
+  </li>
+  <li><a href="#block" id="markdown-toc-block">四、Block</a></li>
+  <li><a href="#reactivecocoa" id="markdown-toc-reactivecocoa">五、ReactiveCocoa</a></li>
+  <li><a href="#section-6" id="markdown-toc-section-6">六、多线程</a></li>
+  <li><a href="#runtime" id="markdown-toc-runtime">七、Runtime</a></li>
+  <li><a href="#runloop" id="markdown-toc-runloop">八、RunLoop</a></li>
+  <li><a href="#httptcpipsocket" id="markdown-toc-httptcpipsocket">九、HTTP、TCP/IP、Socket</a></li>
+  <li><a href="#section-7" id="markdown-toc-section-7">十、直播</a></li>
+  <li><a href="#section-8" id="markdown-toc-section-8">十一、动画</a></li>
+  <li><a href="#section-9" id="markdown-toc-section-9">十二、性能优化</a></li>
+  <li><a href="#section-10" id="markdown-toc-section-10">十三、工具</a></li>
+  <li><a href="#swift" id="markdown-toc-swift">十四、Swift</a></li>
+  <li><a href="#react-native" id="markdown-toc-react-native">十五、React Native</a></li>
+</ul>
+
+<hr />
+
+<h1 id="section">一、面试题</h1>
+
+<ol>
+  <li>
+    <p><a href="http://www.jianshu.com/p/ee15c1cf9c16">让 BAT 的 Offer 不再难拿</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.jianshu.com/p/530939374c10">[iOS]关于面试，做一次整理吧（包含BAT面试题目）</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.jianshu.com/p/5d2163640e26#">iOS,面试必看，最全梳理</a></p>
+  </li>
+  <li>
+    <p><a href="https://github.com/ChenYilong/iOSInterviewQuestions/blob/master/01%E3%80%8A%E6%8B%9B%E8%81%98%E4%B8%80%E4%B8%AA%E9%9D%A0%E8%B0%B1%E7%9A%84iOS%E3%80%8B%E9%9D%A2%E8%AF%95%E9%A2%98%E5%8F%82%E8%80%83%E7%AD%94%E6%A1%88/%E3%80%8A%E6%8B%9B%E8%81%98%E4%B8%80%E4%B8%AA%E9%9D%A0%E8%B0%B1%E7%9A%84iOS%E3%80%8B%E9%9D%A2%E8%AF%95%E9%A2%98%E5%8F%82%E8%80%83%E7%AD%94%E6%A1%88%EF%BC%88%E4%B8%8A%EF%BC%89.md">《招聘一个靠谱的 iOS》—参考答案（上）</a></p>
+  </li>
+  <li>
+    <p><a href="https://github.com/ChenYilong/iOSInterviewQuestions/blob/master/01%E3%80%8A%E6%8B%9B%E8%81%98%E4%B8%80%E4%B8%AA%E9%9D%A0%E8%B0%B1%E7%9A%84iOS%E3%80%8B%E9%9D%A2%E8%AF%95%E9%A2%98%E5%8F%82%E8%80%83%E7%AD%94%E6%A1%88/%E3%80%8A%E6%8B%9B%E8%81%98%E4%B8%80%E4%B8%AA%E9%9D%A0%E8%B0%B1%E7%9A%84iOS%E3%80%8B%E9%9D%A2%E8%AF%95%E9%A2%98%E5%8F%82%E8%80%83%E7%AD%94%E6%A1%88%EF%BC%88%E4%B8%8B%EF%BC%89.md#28-runloop%E5%92%8C%E7%BA%BF%E7%A8%8B%E6%9C%89%E4%BB%80%E4%B9%88%E5%85%B3%E7%B3%BB">《招聘一个靠谱的 iOS》—参考答案（下）</a></p>
+  </li>
+</ol>
+
+<h1 id="section-1">二、基础常识</h1>
+
+<h2 id="section-2">2.1 进程</h2>
+
+<ul>
+  <li>
+    <p><a href="http://www.ruanyifeng.com/blog/2013/04/processes_and_threads.html">进程与线程的一个简单解释</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.ruanyifeng.com/blog/2016/06/dns.html">DNS 原理入门</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.ruanyifeng.com/blog/2013/02/booting.html">计算机是如何启动的？</a></p>
+  </li>
+</ul>
+
+<h2 id="section-3">2.2 沙盒文件夹</h2>
+
+<ul>
+  <li><a href="http://blog.csdn.net/melissa_htt/article/details/52248019">沙盒文件夹的存取操作</a></li>
+</ul>
+
+<p>应用沙盒结构分析沙盒文件的结构:(三个文件夹,Document,Library,tmp)。</p>
+
+<p><code class="highlighter-rouge">应用程序包</code>：包含了所有的资源文件和可执行文件</p>
+
+<p><code class="highlighter-rouge">Documents</code>：保存应用运行时生成的需要持久化的数据，iTunes同步设备时会备份该目录。例如，游戏应用可将游戏存档保存在该目录[NSBundle mainBundle]</p>
+
+<p><code class="highlighter-rouge">tmp</code>：保存应用运行时所需的临时数据，使用完毕后再将相应的文件从该目录删除。应用没有运行时，系统也可能会清除该目录下的文件。iTunes同步设备时不会备份该目录</p>
+
+<p><code class="highlighter-rouge">Library/Caches</code>：保存应用运行时生成的需要持久化的数据，iTunes同步设备时不会备份该目录。一般存储体积大、不需要备份的非重要数据</p>
+
+<p><code class="highlighter-rouge">Library/Preference</code>：保存应用的所有偏好设置，iOS的Settings(设置)应用会在该目录中查找应用的设置信息。iTunes同步设备时会备份该目录(NSUserDefault plist生成的文件)</p>
+
+<p>2.3 Base-64编码</p>
+
+<ul>
+  <li><a href="https://segmentfault.com/a/1190000004533485?_ea=657625">Base-64编码保证了二进制数据的安全</a></li>
+</ul>
+
+<p>Base-64编码可以将任意一组字节转换为较长的常见文本字符序列，从而可以合法地作为首部字段值。Base-64编码将用户输入或二进制数据，打包成一种安全格式，将其作为HTTP首部字段的值发送出去，而无须担心其中包含会破坏HTTP分析程序的冒号、换行符或二进制值。Base-64编码是作为MIME多媒体电子邮件标准的一部分开发的，这样MIME就可以在不同的合法电子邮件网关之间传输富文本和任意的二进制数据里。Base-64编码与将二进制数据文本化表示的uuencode和BinHex标准在本质上类似，但空间效率更高。</p>
+
+<h1 id="section-4">三、基础知识点</h1>
+
+<h2 id="uiviewcontroller">3.1 UIViewController的生命周期</h2>
+
+<ul>
+  <li>
+    <p><a href="https://bestswifter.com/uiviewlifetime/">UIViewController的生命周期总结</a></p>
+  </li>
+  <li>
+    <p><a href="http://blog.csdn.net/lhenjoy/article/details/51924648">关于iOS 中UIViewController的生命周期以及相关视图（View）的探讨</a></p>
+  </li>
+  <li>
+    <p><a href="http://blog.sina.com.cn/s/blog_8dabcad30101htan.html">UIViewController的生命周期</a></p>
+  </li>
+</ul>
+
+<p>ViewController出现后，push出BViewController，BViewController返回d奥ViewController。两个ViewController生命周期如下：
+<img src="./A50144A9-8594-4911-9A60-456A4040D2A4.png" alt="Alt text" /></p>
+
+<h2 id="uiviewlayousubviewsdrawrect">3.2 UIView的LayouSubviews和drawRect</h2>
+
+<ul>
+  <li><a href="http://justsee.iteye.com/blog/1886463">UIView的layoutSubviews和drawRect</a></li>
+</ul>
+
+<h2 id="nscoding">3.3 NSCoding</h2>
+
+<ul>
+  <li><a href="http://nshipster.cn/nscoding/">NSCoding / NSKeyed​Archiver</a></li>
+</ul>
+
+<p>·Archiving non-NSCoding-compatible Classes：根据面向对象设计原则，对象应该可以被编码和解码成一种序列化的格式。但是如果一个类不是内置遵循NSCoding，你可以后续让这个类遵循NSCoding来达到目的。</p>
+
+<p><code class="highlighter-rouge">NSCoding</code>是一个简单的协议，有两个方法： <code class="highlighter-rouge">-initWithCoder: </code>和 <code class="highlighter-rouge">-encodeWithCoder:</code>。遵循NSCoding协议的类可以被序列化和反序列化，这样可以归档到磁盘上或分发到网络上。
+<code class="highlighter-rouge">NSKeyedArchiver</code> 和<code class="highlighter-rouge">NSKeyedUnarchiver</code>提供了很方便的API把对象读取/写入磁盘。</p>
+
+<p><code class="highlighter-rouge">NSCoding</code>跟其他存储方式略有不同，他可以存储对象
+对象存储的条件是： 对象需要遵守 NSCoding 协议
+存储的时候需要 调用 encodeWithCoder 方法
+读取的时候需要调用initWithCoder 方法</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="o">[</span>NSKeyedArchiver archiveRootObject:stu toFile:path]; // 存储 
+<span class="o">[</span>NSKeyedUnarchiver unarchiveObjectWithFile:path]; // 读取
+</code></pre>
+</div>
+
+<p>——NSCoder的具体子类使用NSCoder抽象类的接口在内存和其他格式之间转换对象和其他数据值，NSCoder可以提供基本的归档——把对象和数据存储在磁盘上，和分配——在不同进程和线程之间复制对象和其他数据。在Foundation框架中会提供NSCoder具体的子类，如：NSArchiver、NSUnarchiver、NSKeyedArchiver、NSKeyUnarchiver和NSPortCoder。NSCoder具体的子类统一称作：编码器类，他们的实例化对象则成为编码器对象，一个编码器对象如果只编码就称做：编码对象，一个编码器对象如果只解码就称作解码对象。
+——概述
+——NSCoder可以操作对象、标量、C数组、结构体和字符串，还有这些类型的指针。它不能操作的类型是那些跨平台执行的变量，例如：union、void *、函数指针和长链表的指针。
+——一个编码器对象储存object类型的信息连同object的数据，因此，一个从字节流解码的对象通常跟最初编码的对象是同一个类。然而，一个对象可以在编码的时候改变它的类；这是描述归档文件和序列化的编程指南。</p>
+
+<h2 id="core-data">3.4 Core Data</h2>
+
+<ul>
+  <li>
+    <p><a href="http://blog.csdn.net/q199109106q/article/details/8563438/">Core Data入门</a></p>
+  </li>
+  <li>
+    <p><a href="http://blog.csdn.net/ruglcc/article/details/50557344">iphone数据存储之－－ Core Data的使用（一）</a></p>
+  </li>
+</ul>
+
+<ol>
+  <li>
+    <p><code class="highlighter-rouge">Core Data</code>是数据持久化存储的最佳方式。</p>
+  </li>
+  <li>
+    <p>数据最终的存储类型可以是：SQLite数据库，XML，二进制，内存里，或自定义数据类型。</p>
+  </li>
+  <li>
+    <p>好处：能够合理管理内存，避免使用sql的麻烦，高效</p>
+  </li>
+  <li>
+    <p>构成：</p>
+  </li>
+</ol>
+
+<p>（1）<code class="highlighter-rouge">NSManagedObjectContext</code>（被管理的数据上下文）
+操作实际内容（操作持久层）。</p>
+
+<p>作用：插入数据，查询数据，删除数据</p>
+
+<p>（2）<code class="highlighter-rouge">NSManagedObjectModel</code>（被管理的数据模型）
+数据库所有表格或数据结构，包含各实体的定义信息。</p>
+
+<p>作用：添加实体的属性，建立属性之间的关系。</p>
+
+<p>操作方法：视图编辑器，或代码。</p>
+
+<p>（3）<code class="highlighter-rouge">NSPersistentStoreCoordinator</code>（持久化存储助理）
+相当于数据库的连接器。</p>
+
+<p>作用：设置数据存储的名字，位置，存储方式，和存储时机。</p>
+
+<p>（4）<code class="highlighter-rouge">NSManagedObject</code>（被管理的数据记录）
+相当于数据库中的表格记录。</p>
+
+<p>（5）<code class="highlighter-rouge">NSFetchRequest（</code>获取数据的请求）
+相当于查询语句。</p>
+
+<p>（6）<code class="highlighter-rouge">NSEntityDescription</code>（实体结构）
+相当于表格结构。</p>
+
+<p>（7）后缀为<code class="highlighter-rouge">.xcdatamodeld</code>的包
+里面是.xcdatamodel文件，用数据模型编辑器编辑，
+编译后为.momd或.mom文件。</p>
+
+<h2 id="ocprotocolcategory">3.5  oc中protocol、category和继承的区别</h2>
+
+<ul>
+  <li><a href="http://bbs.itheima.com/thread-117162-1-1.html">oc中protocol、category和继承的区别</a></li>
+</ul>
+
+<h2 id="section-5">3.6 事件分发机制</h2>
+
+<ul>
+  <li><a href="http://www.th7.cn/Program/IOS/201601/748606.shtml">iOS开发系列——UIView专题之四：事件分发机制篇【整理，部分原创】</a></li>
+</ul>
+
+<h1 id="block">四、Block</h1>
+
+<ul>
+  <li>
+    <p><a href="https://www.zybuluo.com/MicroCai/note/51116">block没那么难（一）：block的实现</a></p>
+  </li>
+  <li>
+    <p><a href="https://www.zybuluo.com/MicroCai/note/57603">block没那么难（二）：block和变量的内存管理</a></p>
+  </li>
+  <li>
+    <p><a href="https://www.zybuluo.com/MicroCai/note/58470">block没那么难（三）：block和对象的内存管理</a></p>
+  </li>
+</ul>
+
+<h1 id="reactivecocoa">五、ReactiveCocoa</h1>
+
+<ul>
+  <li>
+    <p><a href="http://www.jianshu.com/p/87ef6720a096#">最快让你上手ReactiveCocoa之基础篇</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.jianshu.com/p/e10e5ca413b7">最快让你上手ReactiveCocoa之进阶篇</a></p>
+  </li>
+</ul>
+
+<p>响应式编程思想：不需要考虑调用顺序，只需要知道考虑结果，类似于蝴蝶效应，产生一个事件，会影响很多东西，这些事件像流一样的传播出去，然后影响结果，借用面向对象的一句话，万物皆是流。
+代表：KVO运用。</p>
+
+<p>MVVM介绍:
+模型(M):保存视图数据。
+视图+控制器(V):展示内容 + 如何展示
+视图模型(VM):处理展示的业务逻辑，包括按钮的点击，数据的请求和解析等等。</p>
+
+<p>ReactiveCocoa常见宏：
+1. RAC(TARGET, [KEYPATH, [NIL_VALUE]]):用于给某个对象的某个属性绑定。
+<code class="highlighter-rouge">bash  
+ // 只要文本框文字改变，就会修改label的文字
+RAC(self.labelView,text) = _textField.rac_textSignal; 
+</code>
+2. RACObserve(self, name):监听某个对象的某个属性,返回的是信号。
+<code class="highlighter-rouge">bash  
+[RACObserve(self.view, center) subscribeNext:^(id x) {
+	NSLog(@"%@",x);
+}];
+</code></p>
+
+<h1 id="section-6">六、多线程</h1>
+
+<ul>
+  <li><a href="https://bestswifter.com/multithreadconclusion/">《iOS多线程编程——GCD与NSOperation总结》</a></li>
+</ul>
+
+<blockquote>
+  <p>在使用GCD的过程中，如果向当前串行队列中同步派发一个任务，就会导致死锁。</p>
+</blockquote>
+
+<ul>
+  <li><a href="http://www.jianshu.com/p/c74e0eb574d6">GCD(六)dispatch_semaphore_t signal信号量学习总结.</a></li>
+</ul>
+
+<p>看书-PDF：《多线程编程指南》《iOS并发编程指南》</p>
+
+<ul>
+  <li><a href="http://www.jianshu.com/p/0c050af6c5ee">选择 GCD 还是 NSTimer ？</a></li>
+</ul>
+
+<h1 id="runtime">七、Runtime</h1>
+<ul>
+  <li><a href="http://www.jianshu.com/p/e071206103a4">让你快速上手Runtime</a>
+简介：
+RunTime简称运行时。OC就是运行时机制，也就是在运行时候的一些机制，其中最主要的是消息机制。
+对于C语言，函数的调用在编译的时候会决定调用哪个函数。
+对于OC的函数，属于动态调用过程，在编译的时候并不能决定真正调用哪个函数，只有在真正运行的时候才会根据函数的名称找到对应的函数来调用。</li>
+</ul>
+
+<p>作用：发送消息；交换方法；动态添加方法；给分类添加属性；字典转模型。</p>
+
+<ul>
+  <li>
+    <p><a href="http://southpeak.github.io/categories/objectivec/">Objective-C Runtime </a></p>
+  </li>
+  <li>
+    <p><a href="http://southpeak.github.io/2014/10/25/objective-c-runtime-1/">Objective-C Runtime 运行时之一：类与对象</a></p>
+  </li>
+  <li>
+    <p><a href="http://southpeak.github.io/2014/10/30/objective-c-runtime-2/">Objective-C Runtime 运行时之二：成员变量与属性</a></p>
+  </li>
+  <li>
+    <p><a href="http://southpeak.github.io/2014/11/03/objective-c-runtime-3/">Objective-C Runtime 运行时之三：方法与消息</a></p>
+  </li>
+  <li>
+    <p><a href="http://southpeak.github.io/2014/11/06/objective-c-runtime-4/">Objective-C Runtime 运行时之四：Method Swizzling</a></p>
+  </li>
+  <li>
+    <p><a href="http://southpeak.github.io/2014/11/08/objective-c-runtime-5/">Objective-C Runtime 运行时之五：协议与分类</a></p>
+  </li>
+  <li>
+    <p><a href="http://southpeak.github.io/2014/11/09/objective-c-runtime-6/">Objective-C Runtime 运行时之六：拾遗</a></p>
+  </li>
+</ul>
+
+<hr />
+<ul>
+  <li><a href="http://www.cocoachina.com/ios/20160523/16386.html">Runtime全方位装逼指南</a></li>
+</ul>
+
+<h1 id="runloop">八、RunLoop</h1>
+
+<ul>
+  <li><a href="http://blog.ibireme.com/2015/05/18/runloop/#more-41710">深入理解RunLoop</a></li>
+</ul>
+
+<p>XNU 内核的内环被称作 Mach，其作为一个微内核，仅提供了诸如处理器调度、IPC (进程间通信)等非常少量的基础服务。
+RunLoop 的核心是基于 mach port 的，其进入休眠时调用的函数是 mach_msg()。
+RunLoop 的核心就是一个 mach_msg() (见上面代码的第7步)，RunLoop 调用这个函数去接收消息，如果没有别人发送 port 消息过来，内核会将线程置于等待状态。</p>
+
+<p>苹果用 RunLoop 实现的功能：
+AutoreleasePool；事件响应；手势识别；界面更新；定时器；PerformSelecter；关于GCD；关于网络请求。</p>
+
+<p>RunLoop 的实际应用举例：AFNetworking；AsyncDisplayKit。</p>
+
+<hr />
+
+<ul>
+  <li><a href="http://www.cnblogs.com/ioshe/p/5489112.html">iOS开发-Runloop详解</a></li>
+</ul>
+
+<h1 id="httptcpipsocket">九、HTTP、TCP/IP、Socket</h1>
+
+<p>我的博客：<a href="http://luckycathome.com/2017/05/03/TCP-IP-Http-Socket%E4%BB%A5%E5%8F%8AUDP/">TCP/IP、Http、Socket以及UDP</a></p>
+
+<h1 id="section-7">十、直播</h1>
+
+<ul>
+  <li>
+    <p><a href="http://www.jianshu.com/p/bd42bacbe4cc">【如何快速的开发一个完整的iOS直播app】</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.jianshu.com/p/c71bfda055fa">【如何快速的开发一个完整的iOS直播app】(采集篇)</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.jianshu.com/p/4646894245ba">【如何快速的开发一个完整的iOS直播app】(美颜篇)</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.jianshu.com/p/6e7fb61c25e1">【如何快速的开发一个完整的iOS直播app】(搭建Socket即时通讯服务器)</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.jianshu.com/p/53059be61546">【如何快速的开发一个完整的iOS直播app】(推流篇)</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.jianshu.com/p/7b2f1df74420">【如何快速的开发一个完整的iOS直播app】(播放篇)</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.jianshu.com/p/d11b1685ce86">【如何快速的开发一个完整的iOS直播app】(编解码原理)</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.jianshu.com/p/63cf6ffef58b">直播预览层添加滤镜效果(CIFilter使用场景)</a></p>
+  </li>
+</ul>
+
+<h1 id="section-8">十一、动画</h1>
+
+<ul>
+  <li>
+    <p><a href="https://zsisme.gitbooks.io/ios-/content/index.html">ios核心动画高级技巧</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.cnblogs.com/kenshincui/p/3972100.html">iOS开发系列–让你的应用“动”起来</a></p>
+  </li>
+</ul>
+
+<p><img src="./34265F35-1B4F-467D-9D5D-413ACE7B4459.png" alt="Alt text" /></p>
+
+<p><strong><code class="highlighter-rouge">CAAnimation</code></strong>：核心动画的基础类，不能直接使用，负责动画运行时间、速度的控制，本身实现了<code class="highlighter-rouge">CAMediaTiming</code>协议。</p>
+
+<p><strong><code class="highlighter-rouge">CAPropertyAnimation</code></strong>：属性动画的基类（通过属性进行动画设置，注意是可动画属性），不能直接使用。</p>
+
+<p><strong><code class="highlighter-rouge">CAAnimationGroup</code></strong>：动画组，动画组是一种组合模式设计，可以通过动画组来进行所有动画行为的统一控制，组中所有动画效果可以并发执行。</p>
+
+<p><strong><code class="highlighter-rouge">CATransition</code></strong>：转场动画，主要通过滤镜进行动画效果设置。</p>
+
+<p><strong><code class="highlighter-rouge">CABasicAnimation</code></strong>：基础动画，通过属性修改进行动画参数控制，只有初始状态和结束状态。</p>
+
+<p><strong><code class="highlighter-rouge">CAKeyframeAnimation</code></strong>：关键帧动画，同样是通过属性进行动画参数控制，但是同基础动画不同的是它可以有多个状态控制。</p>
+
+<p>基础动画、关键帧动画都属于属性动画，就是通过修改属性值产生动画效果，开发人员只需要设置初始值和结束值，中间的过程动画（又叫“补间动画”）由系统自动计算产生。和基础动画不同的是关键帧动画可以设置多个属性值，每两个属性中间的补间动画由系统自动完成，因此从这个角度而言基础动画又可以看成是有两个关键帧的关键帧动画。</p>
+
+<h1 id="section-9">十二、性能优化</h1>
+
+<ul>
+  <li><a href="http://wereadteam.github.io/2016/05/03/WeRead-Performance/">微信读书 iOS 性能优化总结</a></li>
+</ul>
+
+<h1 id="section-10">十三、工具</h1>
+
+<ul>
+  <li><a href="http://www.runoob.com/git/git-tutorial.html">Git 教程</a></li>
+</ul>
+
+<h1 id="swift">十四、Swift</h1>
+
+<ul>
+  <li><a href="http://wiki.jikexueyuan.com/project/swift/">The Swift Programming Language 中文版</a></li>
+</ul>
+
+<p>（我是下载在本地用iBooks看，方便标注）</p>
+
+<ul>
+  <li><a href="http://www.infoq.com/cn/search.action?queryString=swift&amp;page=1&amp;searchOrder=&amp;sst=QXnAHsRiZocwzGlo">InfoQ Swift</a></li>
+</ul>
+
+<h1 id="react-native">十五、React Native</h1>
+
+<ul>
+  <li><a href="http://reactnative.cn/docs/0.44/getting-started.html">React Native学习</a></li>
+</ul>
+
+            </article>
+        </div>
+      </div>
+      <div class="panel docs-content">
+        <article class="post-content">
+          <div class="wrapper">
+            
+
+
+  <div id="uyan_frame"></div>
+<script type="text/javascript">
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://v2.uyan.cc/code/uyan.js?uid=2119519';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+
+
+
+
+
+ 
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+    <footer class="footer" role="contentinfo">
+	<div class="container">
+		<p class="copyright">Copyright &copy; 2016-2017 <a href="http://www.luckycathome.com/Resume/"><code>LuckyCat</code></a>.</p>
+		<p>Powered by <a href="http://jekyllrb.com">Jekyll</a>, theme from <a href="https://github.com/luoyan35714/LessOrMore">LessOrMore</a></p>
+	</div>
+</footer>
+
+<script src="/styles/js/jquery.min.js"></script>
+<script src="/styles/js/bootstrap.min.js"></script>
+<script src="/styles/js/holder.min.js"></script>
+<script src="/styles/js/application.js"></script>
+<script src="/styles/js/lessismore.js"></script>
+
+  </body>
+</html>
