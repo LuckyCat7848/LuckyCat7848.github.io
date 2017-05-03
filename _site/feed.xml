@@ -5,8 +5,8 @@
     <description>Everything is well !</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 03 May 2017 18:16:32 +0800</pubDate>
-    <lastBuildDate>Wed, 03 May 2017 18:16:32 +0800</lastBuildDate>
+    <pubDate>Wed, 03 May 2017 18:24:52 +0800</pubDate>
+    <lastBuildDate>Wed, 03 May 2017 18:24:52 +0800</lastBuildDate>
     <generator>Jekyll v3.3.0</generator>
     
       <item>
@@ -121,8 +121,9 @@
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;ViewController出现后，push出BViewController，BViewController返回d奥ViewController。两个ViewController生命周期如下：
-&lt;img src=&quot;./A50144A9-8594-4911-9A60-456A4040D2A4.png&quot; alt=&quot;Alt text&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;ViewController出现后，push出BViewController，BViewController返回d奥ViewController。两个ViewController生命周期如下：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/source/iOS面试总结（持续更新中）/01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;uiviewlayousubviewsdrawrect&quot;&gt;3.2 UIView的LayouSubviews和drawRect&lt;/h2&gt;
 
@@ -395,7 +396,7 @@ AutoreleasePool；事件响应；手势识别；界面更新；定时器；Perfo
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&quot;./34265F35-1B4F-467D-9D5D-413ACE7B4459.png&quot; alt=&quot;Alt text&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/source/iOS面试总结（持续更新中）/02.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;CAAnimation&lt;/code&gt;&lt;/strong&gt;：核心动画的基础类，不能直接使用，负责动画运行时间、速度的控制，本身实现了&lt;code class=&quot;highlighter-rouge&quot;&gt;CAMediaTiming&lt;/code&gt;协议。&lt;/p&gt;
 
